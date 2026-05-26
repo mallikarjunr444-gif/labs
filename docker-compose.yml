@@ -1,0 +1,82 @@
+# Medicus Labs Docker Configuration
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=postgresql://medicuslabs:medicuslabs@db:5432/medicuslabs
+      - HF_API_TOKEN=${HF_API_TOKEN}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+    depends_on:
+      - db
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - medicuslabs-network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=medicuslabs
+      - POSTGRES_PASSWORD=medicuslabs
+      - POSTGRES_DB=medicuslabs
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    restart: unless-stopped
+    networks:
+      - medicuslabs-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medicuslabs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Frontend Service (optional)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://backend:5000
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - medicuslabs-network
+
+  # Nginx Reverse Proxy (optional)
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+    networks:
+      - medicuslabs-network
+
+volumes:
+  postgres_data:
+
+networks:
+  medicuslabs-network:
+    driver: bridge
