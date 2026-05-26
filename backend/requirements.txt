@@ -1,0 +1,51 @@
+# Backend requirements for Medicus Labs™ FastAPI
+# Install with: pip install -r requirements.txt
+
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.4.2
+
+# Database
+sqlalchemy==2.0.23
+alembic==1.12.1
+psycopg2-binary==2.9.9
+
+# Authentication
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+PyJWT==2.8.1
+
+# API & HTTP
+httpx==0.25.0
+aiofiles==23.2.1
+
+# Environment
+python-dotenv==1.0.0
+
+# Image Processing
+Pillow==10.0.1
+opencv-python==4.8.1.78
+
+# Email
+python-multipart==0.0.6
+aiosmtplib==3.0.0
+
+# Email validation
+email-validator==2.1.0
+
+# Report Generation
+reportlab==4.0.7
+WeasyPrint==59.3
+
+# Database migrations
+alembic==1.12.1
+
+# Async
+aiofiles==23.2.1
+asyncpg==0.29.0
+
+# Optional: For ML model integration
+# torch==2.1.0
+# transformers==4.34.0
+# huggingface-hub==0.17.3

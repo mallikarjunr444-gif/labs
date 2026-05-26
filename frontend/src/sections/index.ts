@@ -1,0 +1,10 @@
+export { HeroSection } from './HeroSection';
+export { AboutSection } from './AboutSection';
+export { WorkflowSection } from './WorkflowSection';
+export { SupportedConditionsSection } from './SupportedConditionsSection';
+export { FeaturesSection } from './FeaturesSection';
+export { UploadDashboard } from './UploadDashboard';
+export { ResultDashboard } from './ResultDashboard';
+export { FAQSection } from './FAQSection';
+export { ContactSection } from './ContactSection';
+export { PremiumFooter } from './PremiumFooter';

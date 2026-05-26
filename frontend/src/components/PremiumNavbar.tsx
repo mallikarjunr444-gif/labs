@@ -1,116 +1,154 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 
-const PremiumNavbar = () => {
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Features', href: '/features' },
+  { name: 'Analysis', href: '/analysis' },
+  { name: 'Dashboard', href: '/dashboard' },
+  { name: 'FAQ', href: '/faq' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const PremiumNavbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Features', href: '#features' },
-    { name: 'Analysis', href: '/analysis' },
-    { name: 'Dashboard', href: '#dashboard' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-deep-blue/40 backdrop-blur-xl border-b border-light-cyan/20 shadow-glow-sm'
-          : 'bg-transparent'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <motion.div
-            className="relative w-10 h-10 bg-gradient-to-br from-cyan-glow to-light-cyan rounded-lg flex items-center justify-center shadow-lg shadow-cyan-glow/30"
-            whileHover={{ scale: 1.1, boxShadow: '0 0 30px rgba(0, 240, 255, 0.8)' }}
+    <>
+      <motion.nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'py-3 bg-white shadow-glow-md border-b border-gray-100'
+            : 'py-5 bg-white/80 backdrop-blur-md border-b border-transparent'
+        }`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          {/* Logo - use a single large brand image (place your full logo at /logo.svg or /medicus-logo.png in frontend/public) */}
+          <Link to="/" className="flex items-center gap-3 group relative z-10">
+            <img
+              src="/logo.svg"
+              alt="Medicus Labs"
+              className="w-44 h-auto object-contain"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            />
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center">
+            <div className="flex items-center gap-1 px-2 py-1.5 rounded-full bg-gray-100 border border-gray-200">
+              {navItems.map((item) => (
+                <Link key={item.name} to={item.href} className="relative px-4 py-2 group rounded-full">
+                  <span className="relative z-10 text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors duration-300">
+                    {item.name}
+                  </span>
+                  <span className="absolute inset-0 rounded-full bg-accent-light scale-0 group-hover:scale-100 transition-transform duration-300 ease-out" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="hidden lg:flex items-center gap-4">
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                to="/analysis"
+                className="relative group inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm overflow-hidden"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-blue to-cyan-glow" />
+                <span className="absolute inset-0 bg-gradient-to-r from-accent-blue/90 to-cyan-glow/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="relative z-10 text-white font-bold flex items-center gap-2">
+                  <Sparkles size={14} />
+                  Start Analysis
+                  <ArrowRight className="group-hover:translate-x-0.5 transition-transform" size={15} />
+                </span>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            className="lg:hidden relative z-10 w-10 h-10 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-text-primary hover:bg-gray-200 transition"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            <span className="text-white font-bold text-xl">M</span>
-          </motion.div>
-          <span className="text-white font-bold text-xl hidden sm:inline bg-gradient-to-r from-cyan-glow to-light-cyan bg-clip-text text-transparent">
-            Medicus Labs
-          </span>
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <motion.a
-              key={item.name}
-              href={item.href}
-              className="text-gray-300 hover:text-cyan-glow transition relative text-sm font-medium group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {item.name}
-              <motion.div
-                className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-glow to-light-cyan group-hover:w-full transition-all duration-300"
-              />
-            </motion.a>
-          ))}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <motion.a
-            href="/analysis"
-            className="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-glow to-light-cyan text-medical-blue font-bold text-sm shadow-lg shadow-cyan-glow/40 hover:shadow-glow-md transition-all duration-300 animate-pulse-glow"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Start Analysis
-          </motion.a>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
-      </div>
+      </motion.nav>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          className="md:hidden bg-deep-blue/50 backdrop-blur-xl border-t border-light-cyan/20 py-4 px-6 space-y-4"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          {navItems.map((item) => (
-            <motion.a
-              key={item.name}
-              href={item.href}
-              className="block text-gray-300 hover:text-cyan-glow font-medium"
-              whileHover={{ x: 10 }}
-            >
-              {item.name}
-            </motion.a>
-          ))}
-          <motion.a
-            href="/analysis"
-            className="block w-full px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-glow to-light-cyan text-medical-blue font-bold text-center shadow-lg shadow-cyan-glow/40"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-40 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            Start Analysis
-          </motion.a>
-        </motion.div>
-      )}
-    </motion.nav>
+            {/* backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-white/95 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            <motion.div
+              className="relative pt-28 px-8 flex flex-col gap-1"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.05 * i }}
+                >
+                  <Link
+                    to={item.href}
+                    className="block py-4 text-2xl font-semibold text-text-primary hover:text-accent-blue transition border-b border-gray-200"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                className="pt-8"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link
+                  to="/analysis"
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-gradient-to-r from-accent-blue to-cyan-glow text-white font-bold text-lg shadow-glow-md"
+                >
+                  <Sparkles size={18} />
+                  Start Analysis
+                  <ArrowRight size={18} />
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

@@ -1,245 +1,582 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root {
+  --color-primary: #0EA5E9;
+  --color-deep: #FFFFFF;
+  --color-surface: #F9FAFB;
+  --color-accent: #0369A1;
+  --color-glow: rgba(3, 105, 161, 0.1);
+}
 
 * {
   font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+body {
+  background-color: #FFFFFF;
+  color: #111827;
+  overflow-x: hidden;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(34, 211, 238, 0.5);
-  border-radius: 5px;
+  background: rgba(3, 105, 161, 0.3);
+  border-radius: 999px;
 }
+::-webkit-scrollbar-thumb:hover { background: rgba(3, 105, 161, 0.5); }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 211, 238, 0.8);
-}
-
-/* Gradient text animation */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease infinite;
-}
-
-/* Floating animation */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Glow animation */
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3), 0 0 40px rgba(34, 211, 238, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), 0 0 60px rgba(34, 211, 238, 0.3);
-  }
-}
-
-.animate-glow {
-  animation: glow 3s ease-in-out infinite;
-}
-
-/* Pulse glow */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(34, 211, 238, 0);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-/* Selection highlight */
+/* Selection */
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
-  color: white;
+  background: rgba(3, 105, 161, 0.2);
+  color: #111827;
 }
 
-/* Placeholder styling */
-::placeholder {
-  color: rgba(156, 163, 175, 0.8);
+/* Typography */
+.font-display {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  letter-spacing: -0.03em;
 }
 
-/* Input focus styling */
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1), 0 0 0 1px rgba(34, 211, 238, 0.5);
+.gradient-text {
+  background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Smooth transitions */
-button,
-a,
-input,
-select {
+.gradient-text-purple {
+  background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan-blue {
+  background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Clean Cards */
+.glass {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.75rem;
+}
+
+.glass-light {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.75rem;
+}
+
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.75rem;
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card-hover:hover {
+  border-color: #0EA5E9;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  background: #FFFFFF;
+}
+
+.glass-nav {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+/* Glow effects */
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,240,255,0.4), transparent 50%, rgba(34,211,238,0.4));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.glow-border:hover::before { opacity: 1; }
+
+.glow-sm { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+.glow-md { box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+.glow-lg { box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1); }
+
+/* Animations */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7); }
+  50% { box-shadow: 0 0 0 14px rgba(0, 240, 255, 0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+@keyframes dash-border {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -40; }
+}
+
+@keyframes border-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.animate-gradient { background-size: 200% 200%; animation: gradient-shift 6s ease infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-shimmer { background-size: 200% 100%; animation: shimmer 2s linear infinite; }
+.animate-orbit { animation: orbit 20s linear infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 24s linear infinite; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-blob { animation: blob 8s ease-in-out infinite; }
+.animate-scan { animation: scan-line 3s ease-in-out infinite; }
+.animate-dash { animation: dash-border 2s linear infinite; }
+.animate-border-pulse { animation: border-pulse 3s ease-in-out infinite; }
+
+/* Noise texture overlay */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Grid pattern */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.grid-pattern-fine {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Radial gradient masks */
+.radial-mask {
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Form styling */
+input, select, textarea {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Prose styling for rich text */
-.prose {
-  color: #e5e7eb;
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(0, 240, 255, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.08), 0 0 20px rgba(0, 240, 255, 0.12);
 }
 
-.prose h1 {
-  color: #f3f4f6;
-  font-weight: 700;
+input[type='text'], input[type='email'], input[type='tel'],
+input[type='number'], input[type='password'], select, textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #000000;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15px;
 }
 
-.prose h2 {
-  color: #f3f4f6;
-  font-weight: 700;
+/* Icon + input alignment helpers */
+.relative.group svg {
+  pointer-events: none;
+  z-index: 20;
 }
 
-.prose h3 {
-  color: #f3f4f6;
+.relative.group input,
+.relative.group select,
+.relative.group textarea {
+  padding-left: 3.5rem; /* ensure room for left icon */
+}
+
+input[type='checkbox'] { accent-color: #00F0FF; }
+input[type='radio'] { accent-color: #00F0FF; }
+
+/* Button base */
+button, a { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Premium divider */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+}
+
+.divider-subtle {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* Section padding */
+.section-padding { padding: clamp(80px, 12vw, 160px) clamp(16px, 5vw, 48px); }
+
+/* Ring progress */
+.ring-progress {
+  transform: rotate(-90deg);
+}
+
+/* Premium link hover */
+.link-hover {
+  position: relative;
+}
+.link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #00F0FF, #22D3EE);
+  transition: width 0.3s ease;
+}
+.link-hover:hover::after { width: 100%; }
+
+/* Animated border gradient */
+@keyframes border-rotate {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-border {
+  position: relative;
+}
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle), transparent 70%, #00F0FF 100%);
+  animation: border-rotate 4s linear infinite;
+  z-index: -1;
+}
+
+/* Scanning overlay */
+.scan-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.scan-overlay::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.8), transparent);
+  animation: scan-line 3s ease-in-out infinite;
+}
+
+/* Upload dashed border animation */
+.upload-dash {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 240, 255, 0.3) 0,
+    rgba(0, 240, 255, 0.3) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-size: 20px 2px;
+  background-repeat: repeat-x;
+  animation: dash-border 1s linear infinite;
+}
+
+/* Utility: clip path hexagon */
+.clip-hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Premium button */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full
+         bg-gradient-to-r from-cyan-glow to-blue-500 text-[#020617] font-bold
+         shadow-glow-md hover:shadow-glow-lg transition-all duration-300;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full
+         border border-white/10 text-white font-semibold
+         hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300;
+}
+
+/* Text gradient animation */
+@keyframes text-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-text-gradient {
+  background-size: 200% auto;
+  animation: text-gradient 4s linear infinite;
+}
+
+/* International Phone Input Styling */
+.phone-input-container {
+  position: relative;
+}
+
+.phone-input-button {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+  border-right: none !important;
+  border-radius: 12px 0 0 12px !important;
+  padding: 10px 8px !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.phone-input-button:hover {
+  background-color: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+
+.phone-input-button:focus,
+.phone-input-button.open {
+  border-color: #0284c7 !important;
+  background-color: #f0f9ff !important;
+}
+
+.phone-input-button .flag {
+  width: 24px !important;
+  height: 16px !important;
+  border-radius: 2px;
+}
+
+.phone-input-button .arrow {
+  margin-left: 4px;
+  color: #475569 !important;
+  transition: transform 0.2s;
+}
+
+.phone-input-button.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Phone Input Dropdown */
+.phone-input-dropdown {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  z-index: 1000 !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  margin-top: 4px !important;
+}
+
+.phone-input-dropdown .country {
+  padding: 10px 12px !important;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none !important;
+  text-align: left;
+}
+
+.phone-input-dropdown .country:hover {
+  background-color: #f0f9ff !important;
+}
+
+.phone-input-dropdown .country.selected {
+  background-color: #e0f2fe !important;
+  color: #0284c7 !important;
   font-weight: 600;
 }
 
-.prose p {
-  color: #d1d5db;
+.phone-input-dropdown .country-name {
+  color: #000000 !important;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.prose a {
-  color: #22d3ee;
+.phone-input-dropdown .dial-code {
+  color: #64748b !important;
+  font-size: 13px;
+  margin-left: 8px;
 }
 
-.prose a:hover {
-  color: #06b6d4;
+.phone-input-dropdown .search-box {
+  padding: 10px 12px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
 }
 
-.prose strong {
-  color: #f3f4f6;
-  font-weight: 600;
+.phone-input-dropdown .search-box input {
+  width: 100% !important;
+  padding: 8px !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-size: 14px !important;
 }
 
-.prose code {
-  background: rgba(34, 211, 238, 0.1);
-  color: #22d3ee;
-  border-radius: 4px;
-  padding: 2px 6px;
+.phone-input-dropdown .search-box input:focus {
+  outline: none;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1) !important;
 }
 
-.prose ul {
-  color: #d1d5db;
+.phone-input-dropdown .search-box input::placeholder {
+  color: #94a3b8 !important;
 }
 
-.prose ul li {
-  color: #d1d5db;
+/* React Phone Input 2 Container */
+.react-phone-number-input {
+  position: relative;
 }
 
-.prose ol {
-  color: #d1d5db;
+.react-phone-number-input--focus {
+  outline: none;
 }
 
-.prose ol li {
-  color: #d1d5db;
+.react-phone-number-input input {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+  color: #000000 !important;
+  padding: 10px 14px 10px 50px !important;
+  font-size: 15px !important;
+  border-radius: 0 12px 12px 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark mode for forms */
-input[type='text'],
-input[type='email'],
-input[type='tel'],
-input[type='number'],
-input[type='password'],
-select,
-textarea {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: white;
+.react-phone-number-input input:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.1) !important;
+  outline: none;
 }
 
-input[type='text']:focus,
-input[type='email']:focus,
-input[type='tel']:focus,
-input[type='number']:focus,
-input[type='password']:focus,
-select:focus,
-textarea:focus {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(34, 211, 238, 0.5);
+.react-phone-number-input input::placeholder {
+  color: #94a3b8 !important;
 }
 
-/* Checkbox styling */
-input[type='checkbox'] {
-  accent-color: #22d3ee;
+/* Flag styling */
+.react-phone-number-input .country-flag {
+  width: 24px !important;
+  height: 16px !important;
+  border-radius: 2px;
 }
 
-input[type='radio'] {
-  accent-color: #22d3ee;
+/* Tweak react-phone-input-2 container alignment */
+.phone-input-container {
+  display: block;
+}
+.phone-input-container .form-control,
+.phone-input-container input.react-tel-input,
+.phone-input-container .form-control {
+  padding-left: 72px !important; /* room for flag + dropdown */
+  height: 48px !important;
+  line-height: 1.2 !important;
+  color: #000000 !important;
+}
+.phone-input-container .flag-dropdown {
+  position: absolute !important;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 30 !important;
+}
+.phone-input-container .selected-flag {
+  padding-left: 6px !important;
+}
+.phone-input-container .selected-flag .dial-code {
+  color: #000000 !important;
+}
+.phone-input-container .form-control:focus {
+  box-shadow: none !important;
 }
 
-/* Animation delays */
-.delay-75 {
-  animation-delay: 75ms;
+/* Scrollbar for dropdown */
+.phone-input-dropdown::-webkit-scrollbar {
+  width: 6px;
 }
 
-.delay-100 {
-  animation-delay: 100ms;
+.phone-input-dropdown::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.delay-150 {
-  animation-delay: 150ms;
+.phone-input-dropdown::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
 }
 
-.delay-200 {
-  animation-delay: 200ms;
-}
-
-.delay-300 {
-  animation-delay: 300ms;
-}
-
-.delay-500 {
-  animation-delay: 500ms;
-}
-
-.delay-700 {
-  animation-delay: 700ms;
-}
-
-.delay-1000 {
-  animation-delay: 1000ms;
+.phone-input-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

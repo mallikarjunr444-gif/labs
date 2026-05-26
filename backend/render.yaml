@@ -1,0 +1,36 @@
+api_subdomain: medicus-labs
+build:
+  builder: python
+  spec:
+    python_version: "3.11"
+
+services:
+  - type: web
+    name: medicus-labs-api
+    env: python
+    buildCommand: bash build.sh
+    startCommand: bash start.sh
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        value: ${DATABASE_URL}
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        value: "https://your-app.vercel.app"
+      - key: HUGGING_FACE_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+
+databases:
+  - name: medicusdb
+    engine: postgresql
+    version: "15"
+    primaryRegion: us-east
+    region: us-east
