@@ -14,7 +14,7 @@ psycopg2-binary==2.9.9
 # Authentication
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
-PyJWT==2.8.1
+PyJWT==2.8.0
 
 # API & HTTP
 httpx==0.25.0

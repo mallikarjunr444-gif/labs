@@ -8,6 +8,7 @@ import logging
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from datetime import datetime
@@ -52,6 +53,14 @@ app = FastAPI(
     openapi_url="/api/openapi.json",
     lifespan=lifespan,
 )
+
+# Serve built frontend (if available) — assets + SPA fallback
+FRONTEND_DIST = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+if FRONTEND_DIST.exists():
+    assets_dir = FRONTEND_DIST / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
 
 # ============================================================================
 # CORS MIDDLEWARE
@@ -327,7 +336,14 @@ async def validate_image(file: UploadFile = File(...)):
 
 @app.get("/")
 async def root():
-    """Root endpoint"""
+    """Root endpoint — serve SPA index if built, else JSON"""
+    try:
+        index_file = FRONTEND_DIST / "index.html"
+        if index_file.exists():
+            return FileResponse(str(index_file), media_type="text/html")
+    except Exception:
+        pass
+
     return {
         "message": "Welcome to Medicus Labs API",
         "docs": "/api/docs",
@@ -364,6 +380,20 @@ async def general_exception_handler(request, exc):
             "timestamp": datetime.now().isoformat(),
         },
     )
+
+
+# SPA fallback for non-API routes: return index.html so client-side routing works
+@app.get("/{full_path:path}")
+async def spa_fallback(full_path: str):
+    # Let API routes be handled by existing endpoints
+    if full_path.startswith("api"):
+        raise HTTPException(status_code=404)
+
+    index_file = FRONTEND_DIST / "index.html"
+    if index_file.exists():
+        return FileResponse(str(index_file), media_type="text/html")
+
+    raise HTTPException(status_code=404, detail="Not found")
 
 
 # ============================================================================
