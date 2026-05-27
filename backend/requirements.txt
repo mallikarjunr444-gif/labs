@@ -23,20 +23,12 @@ aiofiles==23.2.1
 # Environment
 python-dotenv==1.0.0
 
-# Image Processing
-Pillow==10.0.1
-opencv-python==4.8.1.78
-
 # Email
 python-multipart==0.0.6
 aiosmtplib==3.0.0
 
 # Email validation
 email-validator==2.1.0
-
-# Report Generation
-reportlab==4.0.7
-WeasyPrint==59.3
 
 # Database migrations
 alembic==1.12.1
