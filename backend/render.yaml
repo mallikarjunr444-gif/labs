@@ -20,7 +20,7 @@ services:
       - key: DEBUG
         value: "false"
       - key: ALLOWED_ORIGINS
-        value: "https://your-app.vercel.app"
+        value: "https://celebrated-licorice-ed91ea.netlify.app"
       - key: HUGGING_FACE_API_KEY
         sync: false
       - key: SUPABASE_URL
