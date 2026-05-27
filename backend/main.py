@@ -66,14 +66,9 @@ if FRONTEND_DIST.exists():
 # CORS MIDDLEWARE
 # ============================================================================
 
-FRONTEND_URL = os.getenv(
-    "FRONTEND_URL",
-    "https://celebrated-licorice-ed91ea.netlify.app",
-)
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_URL],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
