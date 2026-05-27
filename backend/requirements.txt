@@ -1,3 +1,5 @@
+setuptools<70
+
 # Backend requirements for Medicus Labs™ FastAPI
 # Install with: pip install -r requirements.txt
 
