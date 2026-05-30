@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PremiumNavbar from '../components/PremiumNavbar';
 import VideoCtaSection from '../components/VideoCtaSection';
 import { PremiumFooter } from '../sections';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
 const Home: React.FC = () => {
   const features = [
@@ -77,13 +78,14 @@ const Home: React.FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/analysis"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-2 group"
-                >
-                  Start Free Analysis
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                </Link>
+                <LiquidButton asChild size="lg" className="w-full sm:w-auto text-white">
+                  <Link to="/analysis" className="!text-white">
+                    <span className="inline-flex items-center gap-2 font-bold">
+                      Start Free Analysis
+                      <ArrowRight className="transition-transform" size={18} />
+                    </span>
+                  </Link>
+                </LiquidButton>
                 <Link
                   to="/features"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-slate-200 text-slate-900 font-bold hover:border-sky-300 hover:bg-sky-50 transition-all"

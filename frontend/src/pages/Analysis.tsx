@@ -280,8 +280,8 @@ const Analysis: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ maxWidth: 900, margin: '0 auto 40px', padding: '0 24px', overflowX: 'auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 600 }}>
+        <div style={{ maxWidth: 900, margin: '0 auto 40px', padding: '0 16px', overflowX: 'auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', minWidth: 'max-content', padding: '0 8px' }}>
             {STEPS.map((s, i) => {
               const isActive = step === s.id;
               const isDone = step > s.id;
@@ -356,14 +356,14 @@ const Analysis: React.FC = () => {
               margin: '0 auto',
               padding: '0 24px',
               display: 'grid',
-              gridTemplateColumns: '1fr 380px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
               gap: 24,
             }}
           >
             <div style={{ background: '#fff', borderRadius: 20, padding: 32, border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', margin: '0 0 24px' }}>Patient Information</h2>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
                 <div style={{ gridColumn: '1 / -1' }}>
                   <AnalysisInputField label="Full Name" name="fullName" form={form} setForm={setForm} errors={errors} required placeholder="Dr. John Smith" />
                 </div>
@@ -629,7 +629,7 @@ function ResultCard({
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
         <div style={{ background: '#fff', borderRadius: 16, padding: 24, border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
           <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Patient Details</h3>
           {[
