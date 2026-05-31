@@ -298,6 +298,9 @@ npm i -g netlify-cli
 netlify deploy
 ```
 
+In the Netlify site settings, set `VITE_API_URL` to your backend base URL, for example `https://your-api.onrender.com`.
+The app already includes `frontend/netlify.toml` with SPA routing enabled, so direct refreshes on client-side routes will resolve correctly.
+
 ### Option 3: Docker
 ```bash
 # Build Docker image
