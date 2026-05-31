@@ -18,6 +18,9 @@ from pathlib import Path
 # Load environment variables
 load_dotenv()
 
+# Import Grok Vision Service
+from grok_service import grok_service, CONDITIONS_DB
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -126,8 +129,27 @@ async def start_analysis(
 
         logger.info(f"✅ File saved: {file_path}")
 
-        # TODO: Integrate with HuggingFace API for predictions
-        # prediction = await hf_predictor.predict(file_path)
+        # ======================================================
+        # GROK VISION AI ANALYSIS
+        # ======================================================
+        logger.info(f"[{fullName}] Running Grok Vision AI analysis...")
+
+        ai_result = await grok_service.analyze_skin_image(str(file_path))
+
+        condition = ai_result.get("condition", "Healthy Skin")
+        confidence = ai_result.get("confidence", 50.0)
+        severity = ai_result.get("severity", "Mild")
+        severity_level = ai_result.get("severity_level", "low")
+        description = ai_result.get("description", "")
+        key_findings = ai_result.get("key_findings", [])
+        symptoms = ai_result.get("symptoms", {})
+        differential_diagnoses = ai_result.get("differential_diagnoses", [])
+        recommendations = ai_result.get("recommendations", [])
+        precautions = ai_result.get("precautions", [])
+        is_urgent = severity_level == "high"
+        is_fallback = ai_result.get("fallback", False)
+
+        logger.info(f"✅ AI Analysis: {condition} ({confidence}%) - Severity: {severity}")
 
         analysis_result = {
             "status": "success",
@@ -141,18 +163,20 @@ async def start_analysis(
             },
             "image_path": str(file_path),
             "prediction": {
-                "disease": "Melanoma Risk Assessment",
-                "confidence": 0.85,
-                "probability": {
-                    "benign": 0.12,
-                    "suspicious": 0.88,
-                },
+                "disease": condition,
+                "confidence": round(confidence / 100, 2),
+                "confidence_percentage": round(confidence, 1),
+                "severity": severity,
+                "severity_level": severity_level,
+                "urgent": is_urgent,
+                "description": description,
+                "key_findings": key_findings,
+                "symptoms": symptoms,
+                "differential_diagnoses": differential_diagnoses,
             },
-            "recommendations": [
-                "Consult with a dermatologist immediately",
-                "Avoid sun exposure",
-                "Monitor for changes",
-            ],
+            "recommendations": recommendations,
+            "precautions": precautions,
+            "powered_by": "Grok Vision AI" if not is_fallback else "Heuristic Analysis (Grok unavailable)",
             "timestamp": datetime.now().isoformat(),
         }
 

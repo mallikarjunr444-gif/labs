@@ -19,6 +19,14 @@ type AnalysisResult = {
   confidence: number;
   reportId: string;
   precautions: string[];
+  severity?: string;
+  severityLevel?: string;
+  urgent?: boolean;
+  description?: string;
+  keyFindings?: string[];
+  symptoms?: Record<string, number>;
+  differentialDiagnoses?: Array<{ condition: string; probability: number }>;
+  poweredBy?: string;
   disclaimer?: string;
 };
 
@@ -218,12 +226,20 @@ const Analysis: React.FC = () => {
       }
 
       const data = await res.json();
-      const confidenceRaw = Number(data?.prediction?.confidence ?? 0);
+      const confidenceRaw = Number(data?.prediction?.confidence_percentage ?? data?.prediction?.confidence ?? 0);
       const normalized: AnalysisResult = {
         condition: data?.prediction?.disease || 'Dermatology Assessment',
         confidence: Math.max(0, Math.min(100, Math.round(confidenceRaw <= 1 ? confidenceRaw * 100 : confidenceRaw))),
         reportId: data?.analysis_id || `AN-${Date.now()}`,
         precautions: Array.isArray(data?.recommendations) ? data.recommendations : [],
+        severity: data?.prediction?.severity || 'Unknown',
+        severityLevel: data?.prediction?.severity_level || 'low',
+        urgent: data?.prediction?.urgent ?? false,
+        description: data?.prediction?.description || '',
+        keyFindings: Array.isArray(data?.prediction?.key_findings) ? data.prediction.key_findings : [],
+        symptoms: data?.prediction?.symptoms || {},
+        differentialDiagnoses: Array.isArray(data?.prediction?.differential_diagnoses) ? data.prediction.differential_diagnoses : [],
+        poweredBy: data?.powered_by || 'Grok Vision AI',
         disclaimer: 'This AI analysis is not a substitute for professional medical diagnosis.',
       };
 
@@ -454,7 +470,7 @@ const Analysis: React.FC = () => {
 
               <div className="lg:col-span-2 rounded-2xl bg-white border border-slate-200 shadow-md px-5 py-4 flex flex-wrap items-center justify-center gap-4">
                 <span className="text-xs font-bold uppercase tracking-[0.08em] text-slate-400">Powered by</span>
-                {['ISIC Dermatology Validation', 'Hugging Face Medical Vision', 'Secure Clinical Database'].map((t) => (
+                {['ISIC Dermatology Validation', 'Grok Vision AI', 'Secure Clinical Database'].map((t) => (
                   <span key={t} className="text-sm font-semibold text-sky-700">
                     {t}
                   </span>
@@ -511,16 +527,21 @@ function ResultCard({
   imagePreview: string | null;
   onDownload: () => Promise<void>;
 }) {
-  const isUrgent = result.condition.toLowerCase().includes('melanoma');
+  const isUrgent = result.urgent || result.severityLevel === 'high';
   const confidence = result.confidence || 0;
+
+  // Color based on severity
+  const headerGradient = isUrgent
+    ? 'linear-gradient(135deg, #ef4444, #dc2626)'
+    : result.severityLevel === 'medium'
+    ? 'linear-gradient(135deg, #f97316, #ea580c)'
+    : 'linear-gradient(135deg, #0ea5e9, #6366f1)';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <div
         style={{
-          background: isUrgent
-            ? 'linear-gradient(135deg, #ef4444, #dc2626)'
-            : 'linear-gradient(135deg, #0ea5e9, #6366f1)',
+          background: headerGradient,
           borderRadius: 20,
           padding: 32,
           color: '#fff',
@@ -549,6 +570,11 @@ function ResultCard({
             </div>
           )}
           <h2 style={{ margin: '0 0 6px', fontSize: 28, fontWeight: 800 }}>{result.condition}</h2>
+          {result.severity && (
+            <span style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', borderRadius: 100, padding: '3px 12px', fontSize: 11, fontWeight: 700, marginBottom: 8 }}>
+              Severity: {result.severity}
+            </span>
+          )}
           <p style={{ margin: 0, fontSize: 15, opacity: 0.85 }}>
             Report ID: {result.reportId} - {new Date().toLocaleDateString()}
           </p>
@@ -597,14 +623,28 @@ function ResultCard({
 
         <div style={{ background: '#fff', borderRadius: 16, padding: 24, border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
           <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Clinical Guidance</h3>
+          {result.description && (
+            <p style={{ margin: '0 0 12px', fontSize: 13, color: '#475569', lineHeight: 1.5 }}>{result.description}</p>
+          )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {(result.precautions || []).slice(0, 4).map((p, i) => (
+            {(result.precautions || []).slice(0, 5).map((p, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, fontSize: 13, color: '#374151' }}>
                 <span style={{ color: '#0ea5e9', flexShrink: 0 }}>-</span>
                 {p}
               </div>
             ))}
           </div>
+          {result.keyFindings && result.keyFindings.length > 0 && (
+            <div style={{ marginTop: 12 }}>
+              <h4 style={{ margin: '0 0 8px', fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Key Findings</h4>
+              {result.keyFindings.map((f, i) => (
+                <div key={i} style={{ display: 'flex', gap: 6, fontSize: 12, color: '#475569', marginBottom: 4 }}>
+                  <span style={{ color: '#6366f1', flexShrink: 0 }}>*</span>
+                  {f}
+                </div>
+              ))}
+            </div>
+          )}
           <div style={{ marginTop: 16, padding: 12, background: '#fef9c3', borderRadius: 10, fontSize: 12, color: '#854d0e', lineHeight: 1.6 }}>
             {result.disclaimer || 'This AI analysis is not a substitute for professional medical diagnosis.'}
           </div>
@@ -626,6 +666,12 @@ function ResultCard({
       <p style={{ textAlign: 'center', fontSize: 13, color: '#94a3b8' }}>
         Official healthcare report can be delivered to {patient.email}.
       </p>
+
+      {result.poweredBy && (
+        <p style={{ textAlign: 'center', fontSize: 11, color: '#cbd5e1' }}>
+          Powered by {result.poweredBy}
+        </p>
+      )}
 
       <style>{`
         @media (max-width: 768px) {
