@@ -19,22 +19,25 @@ import Analysis from './pages/Analysis';
 import Dashboard from './pages/Dashboard';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
+import { AuthProvider } from './context/AuthContext';
 import './styles/globals.css';
 
 function App() {
   return (
-    <Router>
-      <div className="bg-white min-h-screen">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/analysis" element={<Analysis />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="bg-white min-h-screen">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/analysis" element={<Analysis />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

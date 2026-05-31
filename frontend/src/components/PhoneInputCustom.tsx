@@ -140,7 +140,7 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
             fontSize: 15,
             fontWeight: 600,
             color: '#1e293b',
-            minWidth: 90,
+            minWidth: 76,
           }}
         >
           <span style={{ fontSize: 20 }}>{selected.flag}</span>
@@ -180,7 +180,7 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
             border: '1.5px solid #e2e8f0',
             borderRadius: 12,
             boxShadow: '0 16px 48px rgba(0,0,0,0.14)',
-            width: 280,
+            width: 'min(280px, calc(100vw - 24px))',
             maxHeight: 320,
             display: 'flex',
             flexDirection: 'column',

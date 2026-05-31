@@ -79,37 +79,17 @@ const Features: React.FC = () => {
     <div className="min-h-screen bg-white text-slate-900">
       <PremiumNavbar />
 
-      <main className="relative pt-28 pb-20 px-4 sm:px-6">
-        {/* Background effects */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute -top-40 -left-48 w-96 h-96 rounded-full opacity-10"
-            style={{ background: 'radial-gradient(circle, #0EA5E9 0%, transparent 60%)' }}
-          />
-          <div
-            className="absolute -bottom-40 -right-48 w-96 h-96 rounded-full opacity-10"
-            style={{ background: 'radial-gradient(circle, #38BDF8 0%, transparent 60%)' }}
-          />
-        </div>
-
+      <main className="relative pt-28 pb-20 px-4 sm:px-6 bg-white">
         <div className="relative z-10 max-w-7xl mx-auto">
-          {/* Header */}
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block text-xs font-bold text-sky-600 tracking-[0.2em] uppercase mb-3">
-              Technology Platform
-            </span>
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-4">
-              Advanced <span className="bg-gradient-to-r from-sky-500 to-cyan-400 bg-clip-text text-transparent">AI Features</span>
-            </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Discover the cutting-edge technology behind Medicus Labs' dermatological analysis platform
-            </p>
-          </motion.div>
+          <div className="relative w-full rounded-2xl overflow-hidden mb-12" style={{ paddingTop: '6rem' }}>
+            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-black/65" />
+            <div className="relative z-10 px-4 py-14 text-center sm:px-6 sm:py-20">
+              <span className="inline-block text-xs font-bold text-white/85 tracking-[0.2em] uppercase mb-3">Technology Platform</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">Advanced <span className="gradient-text">AI Features</span></h1>
+              <p className="text-lg text-white/95 max-w-2xl mx-auto">Discover the cutting-edge technology behind Medicus Labs' dermatological analysis platform</p>
+            </div>
+          </div>
 
           {/* Features Grid */}
           <motion.div

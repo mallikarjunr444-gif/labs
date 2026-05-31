@@ -87,7 +87,7 @@ const AnalysisInputField: React.FC<AnalysisInputFieldProps> = ({
           fontFamily: 'inherit',
           appearance: 'none',
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E\")",
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E)\"",
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'right 14px center',
           paddingRight: 40,
@@ -176,6 +176,7 @@ const Analysis: React.FC = () => {
     const errs = validate();
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
+
     if (!image) {
       setErrors((p) => ({ ...p, image: 'Please upload a skin image.' }));
       return;
@@ -249,297 +250,244 @@ const Analysis: React.FC = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0f9ff 0%, #f8fafc 50%, #f0fdf4 100%)' }}>
+    <div className="min-h-screen bg-white text-slate-900">
       <PremiumNavbar />
 
-      <main style={{ paddingTop: 96, paddingBottom: 60 }}>
-        <div style={{ textAlign: 'center', padding: '40px 24px 32px' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              background: 'rgba(14,165,233,0.1)',
-              border: '1px solid rgba(14,165,233,0.2)',
-              borderRadius: 100,
-              padding: '6px 16px',
-              fontSize: 13,
-              fontWeight: 600,
-              color: '#0284c7',
-              marginBottom: 16,
-              letterSpacing: '0.02em',
-            }}
-          >
-            Clinical AI Dermatology Analysis
+      <main className="relative pt-28 pb-20 px-4 sm:px-6 bg-white">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="relative w-full rounded-2xl overflow-hidden mb-12 shadow-2xl" style={{ paddingTop: '6rem' }}>
+            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-black/65" />
+            <div className="relative z-10 px-4 py-14 text-center sm:px-6 sm:py-20">
+              <span className="inline-block text-xs font-bold text-white/85 tracking-[0.2em] uppercase mb-3">Clinical AI Workflow</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+                Start Your <span className="gradient-text">Skin Analysis</span>
+              </h1>
+              <p className="text-lg text-white/95 max-w-2xl mx-auto">
+                Follow the workflow for a comprehensive clinical assessment with ISIC-style validation and confidence scoring.
+              </p>
+            </div>
           </div>
-          <h1 style={{ fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 800, color: '#0f172a', margin: '0 0 12px', letterSpacing: '-0.03em' }}>
-            Start Your Skin Analysis
-          </h1>
-          <p style={{ color: '#64748b', fontSize: 16, maxWidth: 500, margin: '0 auto' }}>
-            Follow the workflow for a comprehensive clinical assessment.
-          </p>
-        </div>
 
-        <div style={{ maxWidth: 900, margin: '0 auto 40px', padding: '0 16px', overflowX: 'auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', minWidth: 'max-content', padding: '0 8px' }}>
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-sky-700 shadow-sm">
+              Clinical AI Dermatology Analysis
+            </div>
+          </div>
+
+          <div className="analysis-stepper-shell max-w-6xl mx-auto mb-10 px-2 overflow-x-auto">
+            <div className="analysis-stepper-track flex items-center justify-start min-w-max px-2">
             {STEPS.map((s, i) => {
               const isActive = step === s.id;
               const isDone = step > s.id;
               return (
-                <div key={s.id} style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <div key={s.id} className="flex items-center">
+                  <div className="flex flex-col items-center gap-2">
                     <div
+                      className="flex h-11 w-11 items-center justify-center rounded-full font-bold transition-all duration-300"
                       style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
                         background: isActive ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : isDone ? '#22c55e' : '#e2e8f0',
                         color: isActive || isDone ? '#fff' : '#94a3b8',
-                        fontWeight: 700,
                         boxShadow: isActive ? '0 4px 16px rgba(14,165,233,0.35)' : 'none',
-                        transform: isActive ? 'scale(1.15)' : 'scale(1)',
-                        transition: 'all 0.4s ease',
+                        transform: isActive ? 'scale(1.08)' : 'scale(1)',
                       }}
                     >
                       {isDone ? 'OK' : s.icon}
                     </div>
-                    <span style={{ fontSize: 11, fontWeight: isActive ? 700 : 500, color: isActive ? '#0284c7' : isDone ? '#16a34a' : '#94a3b8', whiteSpace: 'nowrap' }}>
+                    <span className="whitespace-nowrap text-[11px]" style={{ fontWeight: isActive ? 700 : 500, color: isActive ? '#0284c7' : isDone ? '#16a34a' : '#94a3b8' }}>
                       {s.label}
                     </span>
                   </div>
                   {i < STEPS.length - 1 && (
-                    <div style={{ width: 60, height: 2, background: step > s.id ? '#22c55e' : '#e2e8f0', margin: '0 4px 20px', transition: 'background 0.4s ease' }} />
+                    <div className="analysis-stepper-connector mx-1 mb-5 h-0.5 w-14 transition-colors duration-300" style={{ background: step > s.id ? '#22c55e' : '#e2e8f0' }} />
                   )}
                 </div>
               );
             })}
           </div>
-        </div>
+          </div>
 
-        {loading && (
-          <div
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: 'rgba(0,0,0,0.75)',
-              backdropFilter: 'blur(8px)',
-              zIndex: 9999,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 24,
-            }}
-          >
-            <div style={{ width: 64, height: 64, border: '4px solid rgba(255,255,255,0.15)', borderTopColor: '#0ea5e9', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-            <div style={{ textAlign: 'center' }}>
-              <p style={{ color: '#fff', fontSize: 18, fontWeight: 600, margin: '0 0 8px' }}>Processing Analysis</p>
-              <p style={{ color: '#94a3b8', fontSize: 14, margin: 0 }}>{loadingStep}</p>
+          {loading && (
+            <div
+              className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 backdrop-blur-md"
+              style={{ background: 'rgba(0,0,0,0.75)' }}
+            >
+              <div className="h-16 w-16 rounded-full border-4 border-white/15 border-t-sky-400" style={{ animation: 'spin 0.8s linear infinite' }} />
+              <div className="text-center">
+                <p className="mb-2 text-lg font-semibold text-white">Processing Analysis</p>
+                <p className="text-sm text-slate-300">{loadingStep}</p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {result && !loading && (
-          <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px' }}>
-            <ResultCard result={result} patient={form} imagePreview={imagePreview} onDownload={downloadPDF} />
-          </div>
-        )}
+          {result && !loading && (
+            <div className="max-w-6xl mx-auto px-2">
+              <ResultCard result={result} patient={form} imagePreview={imagePreview} onDownload={downloadPDF} />
+            </div>
+          )}
 
-        {!result && !loading && (
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              maxWidth: 900,
-              margin: '0 auto',
-              padding: '0 24px',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: 24,
-            }}
-          >
-            <div style={{ background: '#fff', borderRadius: 20, padding: 32, border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', margin: '0 0 24px' }}>Patient Information</h2>
+          {!result && !loading && (
+            <form onSubmit={handleSubmit} className="max-w-6xl mx-auto px-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-lg p-8">
+                <h2 className="text-lg font-bold text-slate-900 mb-6">Patient Information</h2>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
-                <div style={{ gridColumn: '1 / -1' }}>
-                  <AnalysisInputField label="Full Name" name="fullName" form={form} setForm={setForm} errors={errors} required placeholder="Dr. John Smith" />
-                </div>
-                <AnalysisInputField label="Email Address" name="email" form={form} setForm={setForm} errors={errors} type="email" required placeholder="patient@example.com" />
-                <AnalysisInputField
-                  label="Age"
-                  name="age"
-                  form={form}
-                  setForm={setForm}
-                  errors={errors}
-                  type="select"
-                  required
-                  placeholder="Select age"
-                  options={AGES.map((a) => ({ value: String(a), label: String(a) }))}
-                />
-
-                <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ fontSize: 13, fontWeight: 600, color: '#374151', display: 'flex', alignItems: 'center', gap: 4, marginBottom: 6 }}>
-                    Phone Number <span style={{ color: '#ef4444' }}>*</span>
-                  </label>
-                  <PhoneInputCustom value={form.phone} onChange={(val) => setForm((p) => ({ ...p, phone: val }))} required />
-                  {errors.phone && (
-                    <span style={{ fontSize: 12, color: '#ef4444', marginTop: 4, display: 'block' }}>! {errors.phone}</span>
-                  )}
-                </div>
-
-                <div style={{ gridColumn: '1 / -1' }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="md:col-span-2">
+                    <AnalysisInputField label="Full Name" name="fullName" form={form} setForm={setForm} errors={errors} required placeholder="Dr. John Smith" />
+                  </div>
+                  <AnalysisInputField label="Email Address" name="email" form={form} setForm={setForm} errors={errors} type="email" required placeholder="patient@example.com" />
                   <AnalysisInputField
-                    label="Gender"
-                    name="gender"
+                    label="Age"
+                    name="age"
                     form={form}
                     setForm={setForm}
                     errors={errors}
                     type="select"
                     required
-                    placeholder="Select gender"
-                    options={[
-                      { value: 'Male', label: 'Male' },
-                      { value: 'Female', label: 'Female' },
-                      { value: 'Other', label: 'Other / Prefer not to say' },
-                    ]}
+                    placeholder="Select age"
+                    options={AGES.map((a) => ({ value: String(a), label: String(a) }))}
                   />
+
+                  <div className="md:col-span-2">
+                    <label className="mb-1.5 flex items-center gap-1 text-sm font-semibold text-slate-700">
+                      Phone Number <span className="text-red-500">*</span>
+                    </label>
+                    <PhoneInputCustom value={form.phone} onChange={(val) => setForm((p) => ({ ...p, phone: val }))} required />
+                    {errors.phone && <span className="mt-1 block text-xs text-red-500">! {errors.phone}</span>}
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <AnalysisInputField
+                      label="Gender"
+                      name="gender"
+                      form={form}
+                      setForm={setForm}
+                      errors={errors}
+                      type="select"
+                      required
+                      placeholder="Select gender"
+                      options={[
+                        { value: 'Male', label: 'Male' },
+                        { value: 'Female', label: 'Female' },
+                        { value: 'Other', label: 'Other / Prefer not to say' },
+                      ]}
+                    />
+                  </div>
                 </div>
+
+                {errors.submit && <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">! {errors.submit}</div>}
               </div>
 
-              {errors.submit && (
-                <div style={{ marginTop: 16, padding: '12px 16px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 10, color: '#dc2626', fontSize: 14 }}>
-                  ! {errors.submit}
-                </div>
-              )}
-            </div>
+              <div className="flex flex-col gap-5">
+                <div className="rounded-2xl bg-white border border-slate-200 shadow-lg p-6">
+                  <h3 className="text-base font-bold text-slate-900 mb-4">Image Upload</h3>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <div style={{ background: '#fff', borderRadius: 20, padding: 24, border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', margin: '0 0 16px' }}>Image Upload</h3>
-
-                <div
-                  onClick={() => fileRef.current?.click()}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setDragOver(true);
-                  }}
-                  onDragLeave={() => setDragOver(false)}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setDragOver(false);
-                    handleFileSelect(e.dataTransfer.files[0] || null);
-                  }}
-                  style={{
-                    border: `2px dashed ${dragOver ? '#0ea5e9' : imagePreview ? '#22c55e' : '#cbd5e1'}`,
-                    borderRadius: 14,
-                    padding: 20,
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    background: dragOver ? '#f0f9ff' : imagePreview ? '#f0fdf4' : '#f8fafc',
-                    transition: 'all 0.2s',
-                    minHeight: 160,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 10,
-                  }}
-                >
+                  <div
+                    onClick={() => fileRef.current?.click()}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      setDragOver(true);
+                    }}
+                    onDragLeave={() => setDragOver(false)}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setDragOver(false);
+                      handleFileSelect(e.dataTransfer.files[0] || null);
+                    }}
+                    className="flex min-h-[180px] cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-6 text-center transition-all"
+                    style={{
+                      borderColor: dragOver ? '#0ea5e9' : imagePreview ? '#22c55e' : '#cbd5e1',
+                      background: dragOver ? '#f0f9ff' : imagePreview ? '#f0fdf4' : '#f8fafc',
+                    }}
+                  >
                   {imagePreview ? (
                     <>
-                      <img src={imagePreview} alt="Preview" style={{ maxHeight: 140, maxWidth: '100%', borderRadius: 10, objectFit: 'cover', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }} />
-                      <span style={{ fontSize: 12, color: '#16a34a', fontWeight: 600 }}>Image ready - click to change</span>
+                      <img src={imagePreview} alt="Preview" className="max-h-36 w-full rounded-xl object-cover shadow-md" />
+                      <span className="text-xs font-semibold text-emerald-600">Image ready - click to change</span>
                     </>
                   ) : (
                     <>
-                      <div style={{ fontSize: 36 }}>IMG</div>
-                      <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: '#374151' }}>Drop image here or click to upload</p>
-                      <p style={{ margin: 0, fontSize: 12, color: '#94a3b8' }}>JPG, PNG, WEBP - Max 10MB</p>
+                      <div className="text-4xl">IMG</div>
+                      <p className="m-0 text-sm font-semibold text-slate-700">Drop image here or click to upload</p>
+                      <p className="m-0 text-xs text-slate-400">JPG, PNG, WEBP - Max 10MB</p>
                     </>
                   )}
+                  </div>
+
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    className="hidden"
+                    onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
+                  />
+                  {errors.image && <p className="mt-2 text-xs text-red-500">! {errors.image}</p>}
                 </div>
 
-                <input
-                  ref={fileRef}
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
-                />
-                {errors.image && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 8 }}>! {errors.image}</p>}
+                <div className="rounded-2xl bg-white border border-slate-200 shadow-lg p-5">
+                  <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.05em] text-slate-500">Validation Status</h4>
+                  {[
+                    { label: 'Image Validation', ready: !!imagePreview },
+                    { label: 'Patient Info', ready: !!(form.fullName && form.email && form.phone && form.age && form.gender) },
+                    { label: 'ISIC Ready', ready: false },
+                  ].map((item) => (
+                    <div key={item.label} className="mb-2 flex items-center justify-between">
+                      <span className="text-sm text-slate-600">{item.label}</span>
+                      <span
+                        className="rounded-full px-3 py-1 text-xs font-semibold"
+                        style={{ background: item.ready ? '#dcfce7' : '#f1f5f9', color: item.ready ? '#16a34a' : '#94a3b8' }}
+                      >
+                        {item.ready ? 'Ready' : 'Waiting'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  type="submit"
+                  className="rounded-2xl px-5 py-4 text-base font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+                  style={{ background: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)' }}
+                >
+                  Start AI Analysis
+                </button>
               </div>
 
-              <div style={{ background: '#fff', borderRadius: 16, padding: '16px 20px', border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
-                <h4 style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Validation Status
-                </h4>
-                {[
-                  { label: 'Image Validation', ready: !!imagePreview },
-                  { label: 'Patient Info', ready: !!(form.fullName && form.email && form.phone && form.age && form.gender) },
-                  { label: 'ISIC Ready', ready: false },
-                ].map((item) => (
-                  <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <span style={{ fontSize: 13, color: '#475569' }}>{item.label}</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, padding: '3px 10px', borderRadius: 100, background: item.ready ? '#dcfce7' : '#f1f5f9', color: item.ready ? '#16a34a' : '#94a3b8' }}>
-                      {item.ready ? 'Ready' : 'Waiting'}
-                    </span>
-                  </div>
+              <div className="lg:col-span-2 rounded-2xl bg-white border border-slate-200 shadow-md px-5 py-4 flex flex-wrap items-center justify-center gap-4">
+                <span className="text-xs font-bold uppercase tracking-[0.08em] text-slate-400">Powered by</span>
+                {['ISIC Dermatology Validation', 'Hugging Face Medical Vision', 'Secure Clinical Database'].map((t) => (
+                  <span key={t} className="text-sm font-semibold text-sky-700">
+                    {t}
+                  </span>
                 ))}
               </div>
+            </form>
+          )}
 
-              <button
-                type="submit"
-                style={{
-                  padding: 16,
-                  borderRadius: 14,
-                  border: 'none',
-                  background: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
-                  color: '#fff',
-                  fontSize: 16,
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  letterSpacing: '-0.01em',
-                  boxShadow: '0 8px 24px rgba(14,165,233,0.35)',
-                }}
-              >
-                Start AI Analysis
-              </button>
-            </div>
-
-            <div
-              style={{
-                gridColumn: '1 / -1',
-                background: '#fff',
-                borderRadius: 14,
-                padding: '14px 20px',
-                border: '1px solid #e2e8f0',
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 24,
-              }}
-            >
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                Powered by
-              </span>
-              {['ISIC Dermatology Validation', 'Hugging Face Medical Vision', 'Secure Clinical Database'].map((t) => (
-                <span key={t} style={{ fontSize: 13, fontWeight: 600, color: '#0284c7' }}>
-                  - {t}
-                </span>
-              ))}
-            </div>
-          </form>
-        )}
+        </div>
 
         <style>{`
           @keyframes spin {
             to { transform: rotate(360deg); }
           }
           @media (max-width: 768px) {
+            .analysis-stepper-shell {
+              overflow-x: visible;
+            }
+            .analysis-stepper-track {
+              display: grid !important;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              gap: 12px;
+              min-width: 0 !important;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+            }
+            .analysis-stepper-track > div {
+              width: 100%;
+              justify-content: center;
+            }
+            .analysis-stepper-connector {
+              display: none;
+            }
             form[style*='grid-template-columns'] {
               grid-template-columns: 1fr !important;
             }

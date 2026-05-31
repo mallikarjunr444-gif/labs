@@ -47,40 +47,40 @@ const FAQ: React.FC = () => {
       <PremiumNavbar />
 
       <main className="relative pt-28 pb-20 px-4 sm:px-6">
-        {/* Background effects */}
+        {/* Background effects: hero image like Home */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute -top-40 -left-48 w-80 h-80 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] rounded-full opacity-10"
-            style={{ background: 'radial-gradient(circle, rgba(3, 105, 161, 0.08) 0%, transparent 60%)' }}
-          />
-          <div
-            className="absolute -bottom-40 -right-48 w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full opacity-10"
-            style={{ background: 'radial-gradient(circle, rgba(3, 105, 161, 0.06) 0%, transparent 60%)' }}
-          />
+          <div className="absolute inset-0">
+            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="w-full h-full object-cover opacity-40" />
+          </div>
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          {/* Header */}
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block text-[11px] font-bold text-accent-blue tracking-[0.2em] uppercase mb-3">
+          <div className="relative w-full rounded-2xl overflow-hidden mb-12">
+            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/55" />
+            <div className="relative z-10 py-20 px-6 text-center">
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+              <span className="inline-block text-[11px] font-bold text-white/80 tracking-[0.2em] uppercase mb-3">
               Help & Support
             </span>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-text-primary mb-3">
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-3">
               Frequently Asked <span className="gradient-text">Questions</span>
             </h1>
-            <p className="text-gray-500 text-base max-w-xl mx-auto">
+            <p className="text-white/90 text-base max-w-xl mx-auto">
               Find answers to common questions about Medicus Labs, how to use our platform, and more.
             </p>
           </motion.div>
+            </div>
+          </div>
 
           {/* FAQ Accordion */}
           <motion.div
-            className="space-y-4"
+            className="space-y-4 mt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}

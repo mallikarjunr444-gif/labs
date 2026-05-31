@@ -518,7 +518,6 @@ npm run build
 
 ### Deploy Options
 - **Vercel** - Drag & drop, automatic deployments
-- **Netlify** - Git integration, preview deploys
 - **Docker** - See Dockerfile for containerization
 - **Nginx** - Static file serving (see nginx.conf)
 

@@ -72,6 +72,14 @@ const Dashboard: React.FC = () => {
 
       <main className="relative pt-28 pb-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
+          <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ paddingTop: '6rem' }}>
+            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/70" />
+            <div className="relative z-10 px-4 py-14 text-center sm:px-6 sm:py-20" style={{ borderRadius: 24 }}>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">Analytics Dashboard</h1>
+              <p className="mt-4 text-white/95 text-lg max-w-3xl mx-auto">Track your scans, reports, and AI insights</p>
+            </div>
+          </div>
           {/* Header */}
           <motion.div
             className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
@@ -84,12 +92,12 @@ const Dashboard: React.FC = () => {
               <p className="text-slate-600">Track your scans, reports, and AI insights</p>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex w-full flex-wrap gap-2 md:w-auto md:justify-end">
               {['week', 'month', 'year'].map((period) => (
                 <button
                   key={period}
                   onClick={() => setSelectedPeriod(period)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`min-w-[88px] px-4 py-2 rounded-lg font-medium transition-all ${
                     selectedPeriod === period
                       ? 'bg-gradient-to-r from-sky-500 to-cyan-400 text-white shadow-lg'
                       : 'bg-white border border-slate-200 text-slate-700 hover:border-sky-300'
