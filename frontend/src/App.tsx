@@ -19,6 +19,7 @@ import Analysis from './pages/Analysis';
 import Dashboard from './pages/Dashboard';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
+import PublicInfoPage from './pages/PublicInfoPage';
 import { AuthProvider } from './context/AuthContext';
 import './styles/globals.css';
 
@@ -34,6 +35,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<PublicInfoPage type="about" />} />
+            <Route path="/privacy-policy" element={<PublicInfoPage type="privacy" />} />
+            <Route path="/terms-conditions" element={<PublicInfoPage type="terms" />} />
+            <Route path="/disclaimer" element={<PublicInfoPage type="disclaimer" />} />
           </Routes>
         </div>
       </Router>

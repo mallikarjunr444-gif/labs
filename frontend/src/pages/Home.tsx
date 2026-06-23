@@ -17,7 +17,9 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import VideoCtaSection from '../components/VideoCtaSection';
+import BrandLogo from '../components/BrandLogo';
 import { PremiumFooter } from '../sections';
+import { publicInfoLinks } from './PublicInfoPage';
 import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
 const Home: React.FC = () => {
@@ -115,19 +117,20 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: -18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mx-auto flex w-full max-w-6xl items-center justify-between rounded-full border border-white/25 bg-white/6 px-4 py-3 backdrop-blur-2xl shadow-2xl sm:px-6 liquid-panel"
+            className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 rounded-full border border-white/25 bg-white/6 px-3 py-3 backdrop-blur-2xl shadow-2xl sm:px-5 liquid-panel"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <Link to="/" className="text-2xl font-semibold tracking-tight text-white/95">
-              Medicus Labs
+            <Link to="/" className="inline-flex items-center" aria-label="Medicus Labs home">
+              <BrandLogo tone="light" />
             </Link>
-            <div className="hidden items-center gap-8 text-sm text-white/85 md:flex">
+            <div className="hidden items-center gap-8 text-sm text-white/85 lg:flex">
+              <Link to="/about" className="hover:text-white">About</Link>
               <Link to="/features" className="hover:text-white">Features</Link>
               <Link to="/analysis" className="hover:text-white">Analysis</Link>
               <Link to="/dashboard" className="hover:text-white">Dashboard</Link>
               <Link to="/faq" className="hover:text-white">FAQ</Link>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <Link to="/contact" className="!text-white">
                 <LiquidButton size="sm" className="text-white">
                   <span className="inline-flex items-center gap-2">
@@ -140,7 +143,7 @@ const Home: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white backdrop-blur-sm md:hidden"
+              className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white backdrop-blur-sm lg:hidden"
               aria-label="Toggle navigation menu"
             >
               {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -154,9 +157,10 @@ const Home: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="mx-auto mt-3 w-full max-w-6xl rounded-3xl border border-white/20 bg-black/55 px-4 py-4 backdrop-blur-xl shadow-2xl md:hidden"
+                className="mx-auto mt-3 w-full max-w-6xl rounded-3xl border border-white/20 bg-black/55 px-4 py-4 backdrop-blur-xl shadow-2xl lg:hidden"
               >
                 <div className="grid gap-2 text-sm text-white/90">
+                  <Link to="/about" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">About</Link>
                   <Link to="/features" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">Features</Link>
                   <Link to="/analysis" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">Analysis</Link>
                   <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">Dashboard</Link>
@@ -181,10 +185,10 @@ const Home: React.FC = () => {
               #1 Skin AI Companion
             </span>
             <h1
-              className="mx-auto max-w-3xl text-balance text-[clamp(2rem,8vw,4.5rem)] font-semibold leading-[1.03] text-white animate-text-gradient font-display sm:text-5xl lg:text-7xl"
+              className="mx-auto max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.03] text-white animate-text-gradient sm:text-5xl lg:text-7xl"
               style={{ transform: `translateZ(40px) rotateX(0.8deg)` }}
             >
-              Medicus Labs a health companion
+              Medicus Labs a health companion{' '}
               <br className="hidden sm:block" />
               that actually knows your skin
             </h1>
@@ -316,6 +320,58 @@ const Home: React.FC = () => {
               >
                 <p className="font-bold text-slate-900 mb-1 group-hover:text-sky-600 transition-colors">{condition.name}</p>
                 <p className="text-sm font-semibold text-sky-600">{condition.accuracy} Accuracy</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Public Information */}
+      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            className="mb-12 max-w-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Public Information</p>
+            <h2 className="text-4xl font-bold text-slate-900 md:text-5xl">Important pages for every visitor</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600 md:text-lg">
+              About Us, Contact Us, Privacy Policy, Terms & Conditions, and Disclaimer are available publicly from the home page.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {publicInfoLinks.map((item, index) => (
+              <motion.div
+                key={item.to}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <Link
+                  to={item.to}
+                  className="group flex h-full min-h-[180px] flex-col rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-1 hover:border-sky-300 hover:bg-white hover:shadow-lg"
+                >
+                  <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sky-100 text-sky-700 transition group-hover:bg-sky-600 group-hover:text-white">
+                    <item.icon size={21} />
+                  </span>
+                  <span className="text-lg font-bold text-slate-950">{item.label}</span>
+                  <span className="mt-2 flex-1 text-sm leading-6 text-slate-600">{item.description}</span>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sky-700">
+                    View page
+                    <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+                  </span>
+                </Link>
               </motion.div>
             ))}
           </motion.div>

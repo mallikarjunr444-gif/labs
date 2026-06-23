@@ -40,38 +40,51 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'support@mediluslabs.com',
+      value: 'support@medicuslabs.com',
       description: 'Get support within 24 hours',
     },
     {
       icon: Phone,
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      description: 'Monday to Friday, 9AM-6PM EST',
+      title: 'Support Hours',
+      value: 'Monday to Friday',
+      description: 'General support for platform questions',
     },
     {
       icon: MapPin,
-      title: 'Location',
-      value: 'San Francisco, CA',
-      description: 'Headquarters and support center',
+      title: 'Service Area',
+      value: 'Online',
+      description: 'Public users can contact us from anywhere',
     },
+  ];
+
+  const supportTopics = [
+    'Questions about using the skin image analysis workflow',
+    'Help with uploaded image quality, report access, or result interpretation',
+    'Privacy questions, data deletion requests, and account support',
+    'Feedback from students, users, healthcare workers, and reviewers',
+  ];
+
+  const publicNotes = [
+    'This contact page is public and can be viewed without logging in.',
+    'Please do not send emergency medical requests through this form.',
+    'For urgent symptoms, contact a doctor, dermatologist, clinic, or local emergency service.',
   ];
 
   return (
     <div className="min-h-screen bg-white text-text-primary">
       <PremiumNavbar />
 
-      <main className="relative pt-28 pb-20 px-4 sm:px-6">
+      <main className="relative px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28">
         {/* Background effects: use navbar screenshot as subtle backdrop */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover opacity-10" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto">
-          <div className="relative w-full rounded-2xl overflow-hidden mb-12">
+          <div className="relative mb-10 w-full overflow-hidden rounded-2xl sm:mb-12">
             <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/45" />
-            <div className="relative z-10 py-20 px-6 text-center">
+            <div className="relative z-10 px-4 py-14 text-center sm:px-6 sm:py-20">
               <motion.div
                 className="text-center"
                 initial={{ opacity: 0, y: 30 }}
@@ -79,18 +92,20 @@ const Contact: React.FC = () => {
                 transition={{ duration: 0.8 }}
               >
                 <span className="inline-block text-[11px] font-bold text-white/85 tracking-[0.2em] uppercase mb-3">Get in Touch</span>
-                <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-3">Contact <span className="gradient-text">Our Team</span></h1>
-                <p className="text-white/95 text-base max-w-xl mx-auto">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                <h1 className="font-display mb-3 text-3xl font-bold text-white sm:text-4xl md:text-5xl">Contact <span className="gradient-text">Our Team</span></h1>
+                <p className="text-white/95 text-base max-w-2xl mx-auto">
+                  Have a question about Medicus Labs, privacy, reports, or the AI skin-analysis workflow? Send a message and our team will review it as soon as possible.
+                </p>
               </motion.div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-8 lg:mb-16">
             {/* Contact Info Cards */}
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
-                className="p-8 rounded-2xl bg-white border border-white/[0.08] hover:border-cyan-glow/30 transition-all duration-300"
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-cyan-glow/30 sm:p-6 lg:p-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
@@ -106,6 +121,50 @@ const Contact: React.FC = () => {
             ))}
           </div>
 
+          <div className="mb-12 grid grid-cols-1 gap-5 lg:mb-16 lg:grid-cols-2 lg:gap-8">
+            <motion.section
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:p-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl font-bold text-slate-950 mb-3">How we can help</h2>
+              <p className="text-slate-600 leading-7 mb-5">
+                Medicus Labs support is for platform questions, product feedback, privacy requests, and general help with public pages. We cannot diagnose, prescribe, or replace a licensed dermatologist.
+              </p>
+              <ul className="space-y-3">
+                {supportTopics.map((topic) => (
+                  <li key={topic} className="flex gap-3 text-slate-600">
+                    <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-sky-500" />
+                    <span className="leading-7">{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.section>
+
+            <motion.section
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6 lg:p-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl font-bold text-slate-950 mb-3">Before you contact us</h2>
+              <p className="text-slate-600 leading-7 mb-5">
+                For the fastest response, include the page you were using, the device or browser, and a short description of the issue. Do not include more health information than needed for support.
+              </p>
+              <ul className="space-y-3">
+                {publicNotes.map((note) => (
+                  <li key={note} className="flex gap-3 text-slate-600">
+                    <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-slate-400" />
+                    <span className="leading-7">{note}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.section>
+          </div>
+
           {/* Contact Form */}
           <motion.div
             className="max-w-2xl mx-auto"
@@ -114,7 +173,7 @@ const Contact: React.FC = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="p-8 md:p-10 rounded-3xl bg-white border border-white/[0.08]">
+            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8 md:p-10">
               {submitted && (
                 <motion.div
                   className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center gap-3"
@@ -206,7 +265,7 @@ const Contact: React.FC = () => {
 
           {/* Map Section (placeholder) */}
           <motion.div
-            className="mt-16 p-8 rounded-2xl bg-gradient-to-br from-accent-blue/5 to-cyan-glow/5 border border-white/[0.08] h-80 flex items-center justify-center"
+            className="mt-12 flex h-64 items-center justify-center rounded-2xl border border-slate-200 bg-gradient-to-br from-accent-blue/5 to-cyan-glow/5 p-5 sm:mt-16 sm:h-80 sm:p-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}

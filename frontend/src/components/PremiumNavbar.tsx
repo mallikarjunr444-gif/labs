@@ -3,9 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import BrandLogo from './BrandLogo';
 
 const navItems = [
   { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
   { name: 'Features', href: '/features' },
   { name: 'Analysis', href: '/analysis' },
   { name: 'Dashboard', href: '/dashboard' },
@@ -45,10 +47,9 @@ const PremiumNavbar: React.FC = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center" style={{ transformStyle: 'preserve-3d' }}>
-          {/* Brand text (matches Home header) */}
-          <Link to="/" className={`text-2xl font-semibold tracking-tight relative z-10 ${isHeroPage ? 'text-white/95' : 'text-slate-900'}`}>
-            Medicus Labs
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6" style={{ transformStyle: 'preserve-3d' }}>
+          <Link to="/" className="relative z-10 inline-flex items-center" aria-label="Medicus Labs home">
+            <BrandLogo tone={isHeroPage ? 'light' : 'dark'} />
           </Link>
 
           {/* Desktop Menu (glass style) */}
@@ -100,8 +101,9 @@ const PremiumNavbar: React.FC = () => {
             </button>
           )}
           <button
-            className="lg:hidden relative z-10 w-10 h-10 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-text-primary hover:bg-gray-200 transition"
+            className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-gray-100 text-text-primary transition hover:bg-gray-200 lg:hidden"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle navigation menu"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -112,7 +114,7 @@ const PremiumNavbar: React.FC = () => {
       <AnimatePresence>
         {isOpen && isMobile && (
           <motion.div
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -126,7 +128,7 @@ const PremiumNavbar: React.FC = () => {
             />
 
             <motion.div
-              className="relative pt-28 px-8 flex flex-col gap-1"
+              className="relative flex min-h-screen flex-col gap-1 px-5 pb-8 pt-24 sm:px-8 sm:pt-28"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
@@ -141,7 +143,7 @@ const PremiumNavbar: React.FC = () => {
                 >
                   <Link
                     to={item.href}
-                    className="block py-4 text-2xl font-semibold text-text-primary hover:text-accent-blue transition border-b border-gray-200"
+                    className="block border-b border-gray-200 py-3.5 text-xl font-semibold text-text-primary transition hover:text-accent-blue sm:py-4 sm:text-2xl"
                   >
                     {item.name}
                   </Link>

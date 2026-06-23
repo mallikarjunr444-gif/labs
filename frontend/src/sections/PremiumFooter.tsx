@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getApiBaseUrl } from '../lib/apiBase';
+import BrandLogo from '../components/BrandLogo';
 
 type FooterLink = { label: string; to: string };
 
@@ -10,37 +11,25 @@ const FOOTER_LINKS: Record<string, FooterLink[]> = {
     { label: 'Features', to: '/features' },
     { label: 'Analysis', to: '/analysis' },
     { label: 'Dashboard', to: '/dashboard' },
-    { label: 'How It Works', to: '/#how-it-works' },
-    { label: 'Pricing', to: '/#pricing' },
+    { label: 'FAQ', to: '/faq' },
   ],
   COMPANY: [
     { label: 'About Us', to: '/about' },
-    { label: 'Careers', to: '/careers' },
-    { label: 'Press', to: '/press' },
-    { label: 'Blog', to: '/blog' },
-    { label: 'Partners', to: '/partners' },
+    { label: 'Contact Us', to: '/contact' },
   ],
   LEGAL: [
-    { label: 'Privacy Policy', to: '/privacy' },
-    { label: 'Terms of Service', to: '/terms' },
-    { label: 'Cookie Policy', to: '/cookies' },
-    { label: 'Compliance', to: '/compliance' },
-    { label: 'HIPAA Notice', to: '/hipaa' },
+    { label: 'Privacy Policy', to: '/privacy-policy' },
+    { label: 'Terms & Conditions', to: '/terms-conditions' },
+    { label: 'Disclaimer', to: '/disclaimer' },
   ],
   SUPPORT: [
     { label: 'Contact Us', to: '/contact' },
-    { label: 'Documentation', to: '/docs' },
     { label: 'FAQ', to: '/faq' },
-    { label: 'Help Center', to: '/help' },
     { label: 'Report an Issue', to: '/report' },
   ],
 };
 
-const PLACEHOLDER_PATHS = [
-  '/about', '/careers', '/press', '/blog', '/partners', '/privacy', '/terms',
-  '/cookies', '/compliance', '/hipaa', '/docs', '/help', '/report',
-  '/#how-it-works', '/#pricing',
-];
+const PLACEHOLDER_PATHS = ['/report'];
 
 const LINKEDIN_PROFILE_URL = 'https://www.linkedin.com/in/mallikarjun-r-a85685367/';
 
@@ -351,7 +340,7 @@ export const PremiumFooter: React.FC = () => {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                <span style={{ fontSize: 18, fontWeight: 700, color: '#f8fafc' }}>Medicus Labs™</span>
+                <BrandLogo tone="light" />
               </div>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: '#94a3b8', maxWidth: 260 }}>
                 Advancing Intelligent Dermatology Assistance & Preventive Healthcare through AI innovation.
@@ -476,9 +465,9 @@ export const PremiumFooter: React.FC = () => {
             </span>
             <div className="footer-legal-links" style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
               {[
-                { label: 'Privacy Policy', to: '/privacy' },
-                { label: 'Terms of Service', to: '/terms' },
-                { label: 'Cookie Policy', to: '/cookies' },
+                { label: 'Privacy Policy', to: '/privacy-policy' },
+                { label: 'Terms & Conditions', to: '/terms-conditions' },
+                { label: 'Disclaimer', to: '/disclaimer' },
               ].map((item) => (
                 <Link
                   key={item.label}
