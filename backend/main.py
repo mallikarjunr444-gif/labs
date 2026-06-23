@@ -19,7 +19,7 @@ from pathlib import Path
 load_dotenv()
 
 # Import Grok Vision Service
-from grok_service import grok_service, CONDITIONS_DB
+from .grok_service import grok_service, CONDITIONS_DB
 
 # Configure logging
 logging.basicConfig(
