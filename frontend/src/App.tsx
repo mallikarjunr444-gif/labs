@@ -1,53 +1,46 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PremiumNavbar from './components/PremiumNavbar';
-import {
-  HeroSection,
-  AboutSection,
-  WorkflowSection,
-  SupportedConditionsSection,
-  FeaturesSection,
-  UploadDashboard,
-  ResultDashboard,
-  FAQSection,
-  ContactSection,
-  PremiumFooter,
-} from './sections';
-import Home from './pages/Home';
-import Features from './pages/Features';
-import Analysis from './pages/Analysis';
-import Dashboard from './pages/Dashboard';
-import FAQ from './pages/FAQ';
-import Contact from './pages/Contact';
-import PublicInfoPage from './pages/PublicInfoPage';
-import Profile from './pages/Profile';
-import { AuthProvider } from './contexts/AuthContext';
-import './styles/globals.css';
 
-function App() {
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+
+// Force redeploy
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Features = lazy(() => import('./pages/Features'));
+const Analysis = lazy(() => import('./pages/Analysis'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Profile = lazy(() => import('./pages/Profile'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+import PremiumNavbar from './components/PremiumNavbar';
+import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
+import PageLoader from './components/PageLoader';
+
+const App = () => {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="bg-white min-h-screen">
-          <PremiumNavbar />
+    <Router>
+      <AuthProvider>
+        <PremiumNavbar />
+        <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/features" element={<Features />} />
             <Route path="/analysis" element={<Analysis />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<PublicInfoPage type="about" />} />
-            <Route path="/privacy-policy" element={<PublicInfoPage type="privacy" />} />
-            <Route path="/terms-conditions" element={<PublicInfoPage type="terms" />} />
-            <Route path="/disclaimer" element={<PublicInfoPage type="disclaimer" />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-          <PremiumFooter />
-        </div>
-      </Router>
-    </AuthProvider>
+        </Suspense>
+        <Footer />
+      </AuthProvider>
+    </Router>
   );
-}
+};
 
 export default App;
