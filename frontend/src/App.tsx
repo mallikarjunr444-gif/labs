@@ -20,7 +20,10 @@ import Dashboard from './pages/Dashboard';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import PublicInfoPage from './pages/PublicInfoPage';
-import { AuthProvider } from './context/AuthContext';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Profile from './pages/Profile';
+import { AuthProvider } from './contexts/AuthContext';
 import './styles/globals.css';
 
 function App() {
@@ -28,6 +31,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="bg-white min-h-screen">
+          <PremiumNavbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/features" element={<Features />} />
@@ -39,7 +43,11 @@ function App() {
             <Route path="/privacy-policy" element={<PublicInfoPage type="privacy" />} />
             <Route path="/terms-conditions" element={<PublicInfoPage type="terms" />} />
             <Route path="/disclaimer" element={<PublicInfoPage type="disclaimer" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
+          <PremiumFooter />
         </div>
       </Router>
     </AuthProvider>
