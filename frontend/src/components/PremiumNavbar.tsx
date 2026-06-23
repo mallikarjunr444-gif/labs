@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, Sparkles, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import BrandLogo from './BrandLogo';
+import AuthModal from './AuthModal';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -18,6 +19,7 @@ const navItems = [
 const PremiumNavbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const location = useLocation();
   const heroPaths = ['/'];
@@ -81,8 +83,8 @@ const PremiumNavbar: React.FC = () => {
               </>
             ) : (
               <>
-                <Link to="/login" className="text-sm font-semibold text-slate-700 hover:text-slate-900 transition">Login</Link>
-                <Link to="/signup" className="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition">Sign Up</Link>
+                <button onClick={() => setShowAuthModal(true)} className="text-sm font-semibold text-slate-700 hover:text-slate-900 transition">Login</button>
+                <button onClick={() => setShowAuthModal(true)} className="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition">Sign Up</button>
               </>
             )}
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -161,8 +163,8 @@ const PremiumNavbar: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <Link to="/login" className="flex items-center justify-center w-full py-4 rounded-lg bg-slate-100 text-text-primary font-bold text-lg mb-4">Login</Link>
-                    <Link to="/signup" className="flex items-center justify-center w-full py-4 rounded-lg bg-indigo-600 text-white font-bold text-lg">Sign Up</Link>
+                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-4 rounded-lg bg-slate-100 text-text-primary font-bold text-lg mb-4">Login</button>
+                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-4 rounded-lg bg-indigo-600 text-white font-bold text-lg">Sign Up</button>
                   </>
                 )}
               </div>
@@ -185,6 +187,8 @@ const PremiumNavbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
     </>
   );
 };

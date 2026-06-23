@@ -20,8 +20,6 @@ import Dashboard from './pages/Dashboard';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import PublicInfoPage from './pages/PublicInfoPage';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import { AuthProvider } from './contexts/AuthContext';
 import './styles/globals.css';
@@ -43,8 +41,6 @@ function App() {
             <Route path="/privacy-policy" element={<PublicInfoPage type="privacy" />} />
             <Route path="/terms-conditions" element={<PublicInfoPage type="terms" />} />
             <Route path="/disclaimer" element={<PublicInfoPage type="disclaimer" />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
           <PremiumFooter />
