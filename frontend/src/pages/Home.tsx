@@ -113,66 +113,9 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,0,0,0.58),rgba(0,0,0,0)_55%)]" />
 
         <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-12 pt-6 sm:px-6 lg:px-8">
-            <motion.nav
-            initial={{ opacity: 0, y: -18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 rounded-full border border-white/25 bg-white/6 px-3 py-3 backdrop-blur-2xl shadow-2xl sm:px-5 liquid-panel"
-            style={{ transformStyle: 'preserve-3d' }}
-          >
-            <Link to="/" className="inline-flex items-center" aria-label="Medicus Labs home">
-              <BrandLogo tone="light" />
-            </Link>
-            <div className="hidden items-center gap-8 text-sm text-white/85 lg:flex">
-              <Link to="/about" className="hover:text-white">About</Link>
-              <Link to="/features" className="hover:text-white">Features</Link>
-              <Link to="/analysis" className="hover:text-white">Analysis</Link>
-              <Link to="/dashboard" className="hover:text-white">Dashboard</Link>
-              <Link to="/faq" className="hover:text-white">FAQ</Link>
-            </div>
-            <div className="hidden lg:block">
-              <Link to="/contact" className="!text-white">
-                <LiquidButton size="sm" className="text-white">
-                  <span className="inline-flex items-center gap-2">
-                    <MessageCircle size={14} />
-                    Talk to Medicus
-                  </span>
-                </LiquidButton>
-              </Link>
-            </div>
-            <button
-              type="button"
-              onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white backdrop-blur-sm lg:hidden"
-              aria-label="Toggle navigation menu"
-            >
-              {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </motion.nav>
+            
 
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="mx-auto mt-3 w-full max-w-6xl rounded-3xl border border-white/20 bg-black/55 px-4 py-4 backdrop-blur-xl shadow-2xl lg:hidden"
-              >
-                <div className="grid gap-2 text-sm text-white/90">
-                  <Link to="/about" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">About</Link>
-                  <Link to="/features" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">Features</Link>
-                  <Link to="/analysis" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">Analysis</Link>
-                  <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">Dashboard</Link>
-                  <Link to="/faq" onClick={() => setIsMenuOpen(false)} className="rounded-xl px-4 py-3 hover:bg-white/10">FAQ</Link>
-                  <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 font-semibold text-slate-900">
-                    <MessageCircle size={14} />
-                    Talk to Medicus
-                  </Link>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          
 
             <motion.div
             initial={{ opacity: 0, y: 24 }}

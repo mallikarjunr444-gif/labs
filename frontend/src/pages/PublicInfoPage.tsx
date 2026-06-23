@@ -26,72 +26,64 @@ type PublicInfoContent = {
 const content: Record<PublicInfoPageType, PublicInfoContent> = {
   about: {
     eyebrow: 'About Us',
-    title: 'Medicus Labs',
+    title: 'About Medicus Labs',
     summary:
-      'Medicus Labs is a public-facing AI dermatology assistance platform built to help people understand skin concerns early, organize their health information, and know when to seek qualified medical care.',
+      'Medicus Labs is a healthcare technology project focused on making AI-powered dermatological assistance accessible to everyone. Our goal is to provide a reliable, user-friendly tool for preliminary skin health guidance, available directly from your browser with no app installation required.',
     icon: Users,
-    updated: 'June 23, 2026',
+    updated: 'June 23, 2024',
     highlights: [
-      'Academic project from DSATM, Bengaluru',
-      'Built around public, browser-based access',
+      'Pioneering AI for accessible skin health',
+      'Public, browser-based access with no app install',
       'AI assistance for skin images, symptoms, and reports',
     ],
     sections: [
       {
-        title: 'Who we are',
+        title: 'Our Mission',
         body:
-          'Medicus Labs is a student-built healthcare technology project focused on accessible AI dermatology assistance. The project report identifies the work as "MEDICUS LABS: A Multi-Modal AI Framework for Skin Disease Detection" under the theme "Enhancing Dermatological Care Through AI Innovation" at Dayananda Sagar Academy of Technology and Management, Bengaluru.',
+          'Our mission is to make preliminary skin-health guidance accessible to everyone. We believe that by providing a clear, reliable, and user-friendly first-contact tool, we can empower individuals to act early, stay informed, and engage more effectively with healthcare professionals. Medicus Labs works directly from your browser, putting powerful AI assistance in your hands without forcing you to install a separate app.',
+        bullets: [],
+      },
+      {
+        title: 'The Challenge We Address',
+        body:
+          'Access to specialized dermatological support is often unevenly distributed. Consultations can be expensive, and many people face long waits for specialist care, allowing concerns to worsen. Medicus Labs is designed to bridge this gap, helping users organize their symptoms, skin images, and report information so they are better prepared when they speak with a qualified healthcare professional.',
+        bullets: [],
+      },
+      {
+        title: 'Core Contributors',
+        body: 'Medicus Labs was brought to life by a dedicated team of engineers and researchers committed to enhancing dermatological care through AI innovation. The project\'s development was guided by the Department of Computer Science and Engineering.',
         bullets: [
-          'Project contributors listed in the report include Mallikarjun R, Mallanagowda, Nigam Patel H, and Mohammed Adil.',
-          'The project was guided by Dr. Shiva Sumanth Reddy, Associate Professor, Department of Computer Science and Engineering.',
-          'The goal is to make preliminary skin-health guidance easier to access from a browser without forcing users to install a separate app.',
+          '<a href="https://www.linkedin.com/in/mallikarjun-r-a85685367?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Mallikarjun R.</a>',
+          '<a href="https://www.linkedin.com/in/nigam-patel-h-19668b383?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Nigam Patel H</a>',
+          '<a href="https://www.linkedin.com/in/mallanagouda-m-93b52938b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Mallanagouda M.</a>',
+          '<a href="https://www.linkedin.com/in/mohammed-adil-b737ab388?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">Mohammed Adil</a>',
         ],
       },
       {
-        title: 'Why Medicus Labs exists',
+        title: 'What We Provide',
         body:
-          'The project documentation highlights a real healthcare access gap: dermatology support is unevenly distributed, consultations can be expensive, and rural or semi-urban users may wait weeks for specialist care. Medicus Labs is designed as a first-contact awareness tool that helps users organize symptoms, skin images, and report information before they speak with a qualified healthcare professional.',
+          'Medicus Labs provides AI-assisted skin image review, symptom-based information support, and downloadable health-report workflows. Our goal is to help users understand possible next steps and prepare better questions for doctors.',
         bullets: [
-          'The reports cite dermatological disorders as a major public-health burden affecting large populations worldwide.',
-          'The platform is designed for students, general users, rural patients, and healthcare workers who need quick preliminary screening support.',
-          'The service focuses on clarity, affordability, and low-friction access rather than replacing clinical care.',
+          'Skin image analysis for supported categories such as acne, eczema, psoriasis, melanoma, and more.',
+          'Plain-language explanations and confidence scoring to help users understand uncertainty.',
+          'Downloadable reports that can be shared with a doctor, clinic, or care provider.',
+        ],
+      },
+       {
+        title: 'Technology Foundation',
+        body:
+          'Medicus Labs is built on a multi-modal architecture combining computer vision and large language models. Our technology stack includes a React and TypeScript frontend, FastAPI AI services, and secure cloud infrastructure.',
+        bullets: [
+          'Our training corpus combines public dermatology datasets including HAM10000, ISIC, and DermNet.',
+          'The underlying models achieved a high weighted F1-score of 0.913 across seven skin-disease classes during evaluation.',
+          'The platform is optimized for fast response times, with core workflows performing in under 3 seconds.',
         ],
       },
       {
-        title: 'What we provide',
-        body:
-          'Medicus Labs provides AI-assisted skin image review, symptom-based information support, medical report interpretation concepts, confidence indicators, practical care suggestions, and downloadable health-report workflows. The website is meant to help users understand possible next steps and prepare better questions for doctors.',
-        bullets: [
-          'Skin image analysis for supported categories such as acne, eczema, psoriasis, melanoma, vitiligo, ringworm or fungal infection, and normal skin.',
-          'Plain-language explanations, severity awareness, and confidence scoring so users understand uncertainty.',
-          'Downloadable report concepts that can be shared with a doctor, clinic, parent, guardian, or care provider.',
-          'A responsive public website intended to work across desktop and mobile browsers.',
-        ],
-      },
-      {
-        title: 'Technology foundation',
-        body:
-          'The project reports describe a multi-modal architecture combining computer vision, large language models, natural language processing, and a structured medical knowledge base. The documented stack includes a React and TypeScript frontend, FastAPI AI services, cloud deployment, Supabase/PostgreSQL storage concepts, and secure file-handling practices.',
-        bullets: [
-          'The documented training corpus combines public dermatology datasets including HAM10000, ISIC, and DermNet-style clinical imagery.',
-          'The academic report describes a 160,000-image corpus and YOLOv8m-cls evaluation with a weighted F1-score of 0.913 across seven skin-disease classes.',
-          'The report also describes response-performance goals below 3 seconds for core workflows under test conditions.',
-        ],
-      },
-      {
-        title: 'Design and testing approach',
-        body:
-          'Medicus Labs was shaped through a design-thinking process: empathize, define, ideate, prototype, and test. The report describes feedback from 45 participants, including students, general users, and healthcare professionals, to evaluate navigation, upload flow, result interpretation, report usefulness, and trust.',
-        bullets: [
-          'The reported System Usability Scale score was 82.4 out of 100, categorized as excellent in the project report.',
-          'The reported task completion rate was 93.3 percent during the prototype evaluation.',
-          'User feedback emphasized quick guidance, privacy, mobile access, and simple report sharing.',
-        ],
-      },
-      {
-        title: 'Our care standard',
+        title: 'Our Care Standard',
         body:
           'Medicus Labs is built with responsible AI boundaries. It is not a diagnosis engine, not an emergency service, and not a replacement for a dermatologist. If a skin spot is changing, painful, bleeding, spreading quickly, or causing serious concern, users should contact a licensed medical professional promptly.',
+          bullets: [],
       },
     ],
   },
@@ -132,7 +124,7 @@ const content: Record<PublicInfoPageType, PublicInfoContent> = {
       {
         title: 'Cookies, analytics, and Google AdSense',
         body:
-          'Medicus Labs may use cookies, local storage, analytics tools, and advertising services to keep the site functional, measure traffic, and support future monetization. If Google AdSense or other Google advertising products are enabled, third parties including Google may place and read cookies on users browsers, use web beacons, IP addresses, or other identifiers, and collect information as a result of ad serving on this website.',
+          'Medicus Labs may use cookies, local storage, analytics tools, and advertising services to keep the site functional, measure traffic, and. If Google AdSense or other Google advertising products are enabled, third parties including Google may place and read cookies on users browsers, use web beacons, IP addresses, or other identifiers, and collect information as a result of ad serving on this website.',
         bullets: [
           'Users can manage cookies through browser settings and Google ad personalization controls.',
           'We do not intentionally use health images or medical details to target personalized advertising.',
@@ -363,7 +355,7 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
                       {section.bullets.map((bullet) => (
                         <li key={bullet} className="flex gap-3">
                           <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-sky-500" />
-                          <span className="leading-7">{bullet}</span>
+                          <span className="leading-7" dangerouslySetInnerHTML={{ __html: bullet }}></span>
                         </li>
                       ))}
                     </ul>

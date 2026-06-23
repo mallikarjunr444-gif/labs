@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -5,6 +6,7 @@ import { Menu, X, ArrowRight, Sparkles, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import BrandLogo from './BrandLogo';
 import AuthModal from './AuthModal';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -44,7 +46,7 @@ const PremiumNavbar: React.FC = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'} ${isHeroPage ? 'bg-white/6 backdrop-blur-2xl text-white liquid-panel' : 'bg-white shadow-glow-md text-slate-900 border-b'}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'} ${isHeroPage ? 'bg-transparent text-white' : 'bg-white shadow-glow-md text-slate-900 border-b'}`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -83,17 +85,16 @@ const PremiumNavbar: React.FC = () => {
               </>
             ) : (
               <>
-                <button onClick={() => setShowAuthModal(true)} className="text-sm font-semibold text-slate-700 hover:text-slate-900 transition">Login</button>
-                <button onClick={() => setShowAuthModal(true)} className="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition">Sign Up</button>
+                <LiquidButton onClick={() => setShowAuthModal(true)} className={`text-sm font-semibold ${isHeroPage ? 'text-white' : 'text-slate-900'}`}>
+                  Login / Sign Up
+                </LiquidButton>
               </>
             )}
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/analysis"
-                className="relative group inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm overflow-hidden"
+                className="relative group inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm overflow-hidden bg-sky-500"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-accent-blue to-cyan-glow" />
-                <span className="absolute inset-0 bg-gradient-to-r from-accent-blue/90 to-cyan-glow/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 text-white font-bold flex items-center gap-2">
                   <Sparkles size={14} />
                   Start Analysis
@@ -163,8 +164,7 @@ const PremiumNavbar: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-4 rounded-lg bg-slate-100 text-text-primary font-bold text-lg mb-4">Login</button>
-                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-4 rounded-lg bg-indigo-600 text-white font-bold text-lg">Sign Up</button>
+                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-4 rounded-lg bg-slate-100 text-text-primary font-bold text-lg mb-4">Login / Sign Up</button>
                   </>
                 )}
               </div>
@@ -176,7 +176,7 @@ const PremiumNavbar: React.FC = () => {
               >
                 <Link
                   to="/analysis"
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-gradient-to-r from-accent-blue to-cyan-glow text-white font-bold text-lg shadow-glow-md"
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-sky-500 text-white font-bold text-lg shadow-glow-md"
                 >
                   <Sparkles size={18} />
                   Start Analysis
