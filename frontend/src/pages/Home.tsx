@@ -140,7 +140,21 @@ const Home: React.FC = () => {
               and connect with care when needed.
             </p>
 
-            {/* App Store / Google Play removed per request */}
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center" style={{ transform: 'translateZ(30px)' }}>
+              <Link
+                to="/analysis"
+                className="uiverse-btn inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-bold text-base shadow-lg shadow-sky-500/20"
+              >
+                Start Skin Analysis
+                <ArrowRight size={18} className="ml-2" />
+              </Link>
+              <Link
+                to="/features"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-base hover:bg-white/20 transition-all backdrop-blur-md"
+              >
+                Explore Features
+              </Link>
+            </div>
 
             <div className="mt-5 flex flex-col items-center gap-3 text-sm text-white/80 sm:mt-6 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-5" style={{ transform: 'translateZ(20px)' }}>
               <div className="inline-flex items-center gap-2">
@@ -212,7 +226,7 @@ const Home: React.FC = () => {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="p-6 rounded-2xl glass-card glass-card-hover border-transparent hover:border-sky-300 transition-all group"
+                className="uiverse-card p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-sky-300 transition-all duration-300 group flex flex-col"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -255,7 +269,7 @@ const Home: React.FC = () => {
             {conditions.map((condition, index) => (
               <motion.div
                 key={index}
-                className="p-4 rounded-2xl glass-card glass-card-hover hover:border-sky-300 transition-all text-center group"
+                className="uiverse-card p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-sky-300 transition-all duration-300 text-center group"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05, duration: 0.4 }}
@@ -303,7 +317,7 @@ const Home: React.FC = () => {
               >
                 <Link
                   to={item.to}
-                  className="group flex h-full min-h-[180px] flex-col rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-1 hover:border-sky-300 hover:bg-white hover:shadow-lg"
+                  className="uiverse-card group flex h-full min-h-[180px] flex-col rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:border-sky-300 hover:shadow-md"
                 >
                   <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sky-100 text-sky-700 transition group-hover:bg-sky-600 group-hover:text-white">
                     <item.icon size={21} />

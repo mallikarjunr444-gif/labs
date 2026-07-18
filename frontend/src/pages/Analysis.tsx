@@ -1,4 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  User, UploadCloud, ShieldCheck, Cpu, Brain, FileText, Mail, 
+  ChevronDown, AlertTriangle, ShieldAlert, CheckCircle, Download, RefreshCw,
+  Clock, ArrowRight, Shield
+} from 'lucide-react';
 import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import PhoneInputCustom from '../components/PhoneInputCustom';
@@ -30,16 +36,6 @@ type AnalysisResult = {
   disclaimer?: string;
 };
 
-const STEPS = [
-  { id: 1, label: 'Patient Info', icon: 'P' },
-  { id: 2, label: 'Image Upload', icon: 'I' },
-  { id: 3, label: 'ISIC Validation', icon: 'V' },
-  { id: 4, label: 'AI Analysis', icon: 'A' },
-  { id: 5, label: 'Prediction', icon: 'R' },
-  { id: 6, label: 'Report', icon: 'D' },
-  { id: 7, label: 'Delivery', icon: 'M' },
-] as const;
-
 const AGES = Array.from({ length: 100 }, (_, i) => i + 1);
 
 type AnalysisInputFieldProps = {
@@ -65,50 +61,29 @@ const AnalysisInputField: React.FC<AnalysisInputFieldProps> = ({
   options,
   placeholder,
 }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-    <label
-      style={{
-        fontSize: 13,
-        fontWeight: 600,
-        color: '#374151',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 4,
-      }}
-    >
-      {label} {required && <span style={{ color: '#ef4444' }}>*</span>}
+  <div className="flex flex-col gap-2">
+    <label className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+      {label} {required && <span className="text-red-500">*</span>}
     </label>
     {type === 'select' ? (
-      <select
-        value={form[name]}
-        onChange={(e) => setForm((p) => ({ ...p, [name]: e.target.value }))}
-        required={required}
-        style={{
-          padding: '12px 14px',
-          borderRadius: 10,
-          border: `1.5px solid ${errors[name] ? '#ef4444' : '#e2e8f0'}`,
-          background: '#f8fafc',
-          fontSize: 15,
-          color: form[name] ? '#1e293b' : '#94a3b8',
-          outline: 'none',
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-          appearance: 'none',
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E)\"",
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right 14px center',
-          paddingRight: 40,
-          transition: 'border-color 0.2s, box-shadow 0.2s',
-        }}
-      >
-        <option value="">{placeholder || `Select ${label}`}</option>
-        {(options || []).map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          value={form[name]}
+          onChange={(e) => setForm((p) => ({ ...p, [name]: e.target.value }))}
+          required={required}
+          className={`w-full px-4 py-3 rounded-xl bg-slate-50/50 border text-slate-900 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-500/5 transition font-semibold text-sm sm:text-base appearance-none outline-none cursor-pointer ${
+            errors[name] ? 'border-red-400' : 'border-slate-200'
+          } ${form[name] ? 'text-slate-900' : 'text-slate-400'}`}
+        >
+          <option value="" className="text-slate-400">{placeholder || `Select ${label}`}</option>
+          {(options || []).map((opt) => (
+            <option key={opt.value} value={opt.value} className="text-slate-900 font-semibold">
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
+      </div>
     ) : (
       <input
         type={type}
@@ -116,20 +91,12 @@ const AnalysisInputField: React.FC<AnalysisInputFieldProps> = ({
         onChange={(e) => setForm((p) => ({ ...p, [name]: e.target.value }))}
         required={required}
         placeholder={placeholder}
-        style={{
-          padding: '12px 14px',
-          borderRadius: 10,
-          border: `1.5px solid ${errors[name] ? '#ef4444' : '#e2e8f0'}`,
-          background: '#f8fafc',
-          fontSize: 15,
-          color: '#1e293b',
-          outline: 'none',
-          fontFamily: 'inherit',
-          transition: 'border-color 0.2s, box-shadow 0.2s',
-        }}
+        className={`w-full px-4 py-3 rounded-xl bg-slate-50/50 border text-slate-900 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-500/5 transition font-semibold text-sm sm:text-base outline-none ${
+          errors[name] ? 'border-red-400' : 'border-slate-200'
+        }`}
       />
     )}
-    {errors[name] && <span style={{ fontSize: 12, color: '#ef4444', marginTop: 2 }}>! {errors[name]}</span>}
+    {errors[name] && <span className="text-xs text-red-500 font-bold mt-0.5">! {errors[name]}</span>}
   </div>
 );
 
@@ -150,6 +117,16 @@ const Analysis: React.FC = () => {
   const [loadingStep, setLoadingStep] = useState('');
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const fileRef = useRef<HTMLInputElement | null>(null);
+
+  const steps = [
+    { id: 1, label: 'Patient Info', icon: User },
+    { id: 2, label: 'Image Upload', icon: UploadCloud },
+    { id: 3, label: 'ISIC Validation', icon: ShieldCheck },
+    { id: 4, label: 'AI Analysis', icon: Cpu },
+    { id: 5, label: 'Prediction', icon: Brain },
+    { id: 6, label: 'Report', icon: FileText },
+    { id: 7, label: 'Delivery', icon: Mail },
+  ] as const;
 
   const validate = useCallback((): FormErrors => {
     const e: FormErrors = {};
@@ -266,92 +243,135 @@ const Analysis: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-slate-50/50 text-slate-900 selection:bg-sky-500/10 selection:text-sky-900">
       <PremiumNavbar />
 
-      <main className="relative pt-28 pb-20 px-4 sm:px-6 bg-white">
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="relative w-full rounded-2xl overflow-hidden mb-12 shadow-2xl" style={{ paddingTop: '6rem' }}>
-            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-black/65" />
-            <div className="relative z-10 px-4 py-14 text-center sm:px-6 sm:py-20">
-              <span className="inline-block text-xs font-bold text-white/85 tracking-[0.2em] uppercase mb-3">Clinical AI Workflow</span>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
-                Start Your <span className="gradient-text">Skin Analysis</span>
-              </h1>
-              <p className="text-lg text-white/95 max-w-2xl mx-auto">
-                Follow the workflow for a comprehensive clinical assessment with ISIC-style validation and confidence scoring.
-              </p>
+      <main className="relative pt-32 pb-24 px-4 sm:px-6">
+        {/* Ambient page background glow */}
+        <div className="absolute top-[10%] right-[10%] w-[450px] h-[450px] bg-gradient-to-br from-sky-400/5 to-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-6xl mx-auto">
+          {/* Header Banner */}
+          <div className="relative w-full rounded-3xl overflow-hidden mb-12 shadow-xl border border-slate-200/60">
+            <div className="absolute inset-0">
+              <img src="/media/hero-man-bench.jpg" alt="Clinical AI Diagnostics" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
+            </div>
+            <div className="relative z-10 py-16 px-8 text-center sm:px-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-xs font-semibold text-sky-300 tracking-wider uppercase mb-4">
+                  Clinical AI Workflow
+                </span>
+                <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+                  Skin Pathology <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">Analysis Engine</span>
+                </h1>
+                <p className="text-slate-300 text-base max-w-2xl mx-auto font-medium">
+                  Follow our secure pipeline for automated classifications, ISIC validation, and instant reporting.
+                </p>
+              </motion.div>
             </div>
           </div>
 
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-sky-700 shadow-sm">
-              Clinical AI Dermatology Analysis
-            </div>
-          </div>
+          {/* Stepper Widget */}
+          <div className="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto">
+            <div className="flex justify-between items-center min-w-[760px] px-4">
+              {steps.map((s, i) => {
+                const Icon = s.icon;
+                const isActive = step === s.id;
+                const isDone = step > s.id;
 
-          <div className="analysis-stepper-shell max-w-6xl mx-auto mb-10 px-2 overflow-x-auto">
-            <div className="analysis-stepper-track flex items-center justify-start min-w-max px-2">
-            {STEPS.map((s, i) => {
-              const isActive = step === s.id;
-              const isDone = step > s.id;
-              return (
-                <div key={s.id} className="flex items-center">
-                  <div className="flex flex-col items-center gap-2">
-                    <div
-                      className="flex h-11 w-11 items-center justify-center rounded-full font-bold transition-all duration-300"
-                      style={{
-                        background: isActive ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : isDone ? '#22c55e' : '#e2e8f0',
-                        color: isActive || isDone ? '#fff' : '#94a3b8',
-                        boxShadow: isActive ? '0 4px 16px rgba(14,165,233,0.35)' : 'none',
-                        transform: isActive ? 'scale(1.08)' : 'scale(1)',
-                      }}
-                    >
-                      {isDone ? 'OK' : s.icon}
+                return (
+                  <div key={s.id} className="flex items-center flex-1 last:flex-initial">
+                    <div className="flex flex-col items-center gap-2">
+                      <div
+                        className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+                          isActive
+                            ? 'bg-sky-500 border-sky-500 text-white shadow-lg shadow-sky-500/25 scale-110'
+                            : isDone
+                            ? 'bg-emerald-500 border-emerald-500 text-white'
+                            : 'bg-slate-50 border-slate-200 text-slate-400'
+                        }`}
+                      >
+                        {isDone ? <CheckCircle size={16} /> : <Icon size={16} />}
+                      </div>
+                      <span
+                        className={`text-[10px] sm:text-xs font-bold tracking-wide transition-colors ${
+                          isActive ? 'text-sky-600' : isDone ? 'text-emerald-600' : 'text-slate-400'
+                        }`}
+                      >
+                        {s.label}
+                      </span>
                     </div>
-                    <span className="whitespace-nowrap text-[11px]" style={{ fontWeight: isActive ? 700 : 500, color: isActive ? '#0284c7' : isDone ? '#16a34a' : '#94a3b8' }}>
-                      {s.label}
-                    </span>
+
+                    {i < steps.length - 1 && (
+                      <div
+                        className={`h-0.5 flex-1 mx-4 transition-colors duration-300 ${
+                          step > s.id ? 'bg-emerald-500' : 'bg-slate-100'
+                        }`}
+                      />
+                    )}
                   </div>
-                  {i < STEPS.length - 1 && (
-                    <div className="analysis-stepper-connector mx-1 mb-5 h-0.5 w-14 transition-colors duration-300" style={{ background: step > s.id ? '#22c55e' : '#e2e8f0' }} />
-                  )}
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Artificial Loading overlay */}
+          <AnimatePresence>
+            {loading && (
+              <motion.div
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-slate-950/80 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-full border-4 border-slate-800 border-t-sky-500 animate-spin" />
+                  <Clock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sky-400" size={20} />
                 </div>
-              );
-            })}
-          </div>
-          </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold text-white mb-1">Analyzing Patient Specimen</p>
+                  <p className="text-slate-400 text-sm font-semibold">{loadingStep}</p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {loading && (
-            <div
-              className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 backdrop-blur-md"
-              style={{ background: 'rgba(0,0,0,0.75)' }}
-            >
-              <div className="h-16 w-16 rounded-full border-4 border-white/15 border-t-sky-400" style={{ animation: 'spin 0.8s linear infinite' }} />
-              <div className="text-center">
-                <p className="mb-2 text-lg font-semibold text-white">Processing Analysis</p>
-                <p className="text-sm text-slate-300">{loadingStep}</p>
-              </div>
-            </div>
-          )}
+          {/* Results Output Section */}
+          <AnimatePresence>
+            {result && !loading && (
+              <motion.div 
+                className="mb-10"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+              >
+                <ResultCard result={result} patient={form} imagePreview={imagePreview} onDownload={downloadPDF} />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {result && !loading && (
-            <div className="max-w-6xl mx-auto px-2">
-              <ResultCard result={result} patient={form} imagePreview={imagePreview} onDownload={downloadPDF} />
-            </div>
-          )}
-
+          {/* Form and Upload Screen */}
           {!result && !loading && (
-            <form onSubmit={handleSubmit} className="max-w-6xl mx-auto px-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="rounded-2xl bg-white border border-slate-200 shadow-lg p-8">
-                <h2 className="text-lg font-bold text-slate-900 mb-6">Patient Information</h2>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Form panel */}
+              <div className="uiverse-card bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm space-y-6">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-800 mb-1">Patient Details</h2>
+                  <p className="text-slate-500 text-xs sm:text-sm font-medium">Input baseline clinical metadata required for diagnostics</p>
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="md:col-span-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="sm:col-span-2">
                     <AnalysisInputField label="Full Name" name="fullName" form={form} setForm={setForm} errors={errors} required placeholder="Dr. John Smith" />
                   </div>
+                  
                   <AnalysisInputField label="Email Address" name="email" form={form} setForm={setForm} errors={errors} type="email" required placeholder="patient@example.com" />
+                  
                   <AnalysisInputField
                     label="Age"
                     name="age"
@@ -364,15 +384,15 @@ const Analysis: React.FC = () => {
                     options={AGES.map((a) => ({ value: String(a), label: String(a) }))}
                   />
 
-                  <div className="md:col-span-2">
-                    <label className="mb-1.5 flex items-center gap-1 text-sm font-semibold text-slate-700">
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <PhoneInputCustom value={form.phone} onChange={(val) => setForm((p) => ({ ...p, phone: val }))} required />
-                    {errors.phone && <span className="mt-1 block text-xs text-red-500">! {errors.phone}</span>}
+                    {errors.phone && <span className="text-xs text-red-500 font-bold mt-1 block">! {errors.phone}</span>}
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div className="sm:col-span-2">
                     <AnalysisInputField
                       label="Gender"
                       name="gender"
@@ -391,12 +411,19 @@ const Analysis: React.FC = () => {
                   </div>
                 </div>
 
-                {errors.submit && <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">! {errors.submit}</div>}
+                {errors.submit && (
+                  <div className="p-4 rounded-xl bg-red-50 border border-red-200 flex items-center gap-3">
+                    <ShieldAlert className="text-red-500 flex-shrink-0" size={20} />
+                    <p className="text-red-700 text-xs sm:text-sm font-semibold">! {errors.submit}</p>
+                  </div>
+                )}
               </div>
 
-              <div className="flex flex-col gap-5">
-                <div className="rounded-2xl bg-white border border-slate-200 shadow-lg p-6">
-                  <h3 className="text-base font-bold text-slate-900 mb-4">Image Upload</h3>
+              {/* Upload panel */}
+              <div className="flex flex-col gap-6">
+                {/* Upload box */}
+                <div className="uiverse-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-slate-800 mb-4">Patient Image</h3>
 
                   <div
                     onClick={() => fileRef.current?.click()}
@@ -410,24 +437,32 @@ const Analysis: React.FC = () => {
                       setDragOver(false);
                       handleFileSelect(e.dataTransfer.files[0] || null);
                     }}
-                    className="flex min-h-[180px] cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-6 text-center transition-all"
-                    style={{
-                      borderColor: dragOver ? '#0ea5e9' : imagePreview ? '#22c55e' : '#cbd5e1',
-                      background: dragOver ? '#f0f9ff' : imagePreview ? '#f0fdf4' : '#f8fafc',
-                    }}
+                    className={`flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-300 ${
+                      dragOver 
+                        ? 'border-sky-500 bg-sky-50/50' 
+                        : imagePreview 
+                        ? 'border-emerald-300 bg-emerald-50/[0.05]' 
+                        : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300'
+                    }`}
                   >
-                  {imagePreview ? (
-                    <>
-                      <img src={imagePreview} alt="Preview" className="max-h-36 w-full rounded-xl object-cover shadow-md" />
-                      <span className="text-xs font-semibold text-emerald-600">Image ready - click to change</span>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-4xl">IMG</div>
-                      <p className="m-0 text-sm font-semibold text-slate-700">Drop image here or click to upload</p>
-                      <p className="m-0 text-xs text-slate-400">JPG, PNG, WEBP - Max 10MB</p>
-                    </>
-                  )}
+                    {imagePreview ? (
+                      <div className="w-full space-y-4">
+                        <img src={imagePreview} alt="Preview" className="max-h-40 w-full rounded-xl object-cover shadow-sm border border-slate-100" />
+                        <span className="inline-block text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+                          File loaded — Click to change
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200">
+                          <UploadCloud size={24} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-slate-700 mb-1">Drop patient photograph here or click to browse</p>
+                          <p className="text-slate-400 text-xs font-medium">JPEG, PNG, or WEBP up to 10MB</p>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <input
@@ -437,78 +472,57 @@ const Analysis: React.FC = () => {
                     className="hidden"
                     onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
                   />
-                  {errors.image && <p className="mt-2 text-xs text-red-500">! {errors.image}</p>}
+                  {errors.image && <p className="mt-2 text-xs text-red-500 font-bold">! {errors.image}</p>}
                 </div>
 
-                <div className="rounded-2xl bg-white border border-slate-200 shadow-lg p-5">
-                  <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.05em] text-slate-500">Validation Status</h4>
-                  {[
-                    { label: 'Image Validation', ready: !!imagePreview },
-                    { label: 'Patient Info', ready: !!(form.fullName && form.email && form.phone && form.age && form.gender) },
-                    { label: 'ISIC Ready', ready: false },
-                  ].map((item) => (
-                    <div key={item.label} className="mb-2 flex items-center justify-between">
-                      <span className="text-sm text-slate-600">{item.label}</span>
-                      <span
-                        className="rounded-full px-3 py-1 text-xs font-semibold"
-                        style={{ background: item.ready ? '#dcfce7' : '#f1f5f9', color: item.ready ? '#16a34a' : '#94a3b8' }}
-                      >
-                        {item.ready ? 'Ready' : 'Waiting'}
-                      </span>
-                    </div>
-                  ))}
+                {/* Validation checklist */}
+                <div className="uiverse-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Pipeline Status</h3>
+                  
+                  <div className="space-y-3">
+                    {[
+                      { label: 'Patient Information Profile', ready: !!(form.fullName && form.email && form.phone && form.age && form.gender) },
+                      { label: 'High Resolution Image Uploaded', ready: !!imagePreview },
+                      { label: 'ISIC Archive Cross Reference', ready: false },
+                    ].map((item) => (
+                      <div key={item.label} className="flex justify-between items-center py-1">
+                        <span className="text-xs sm:text-sm font-semibold text-slate-600">{item.label}</span>
+                        <span
+                          className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border ${
+                            item.ready
+                              ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                              : 'bg-slate-50 text-slate-400 border-slate-200'
+                          }`}
+                        >
+                          {item.ready ? 'Ready' : 'Pending'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
+                {/* Submit trigger */}
                 <button
                   type="submit"
-                  className="rounded-2xl px-5 py-4 text-base font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
-                  style={{ background: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)' }}
+                  className="uiverse-btn w-full py-4 rounded-2xl bg-slate-900 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10"
                 >
-                  Start AI Analysis
+                  Initialize Diagnostic Engine
+                  <ArrowRight size={16} />
                 </button>
               </div>
 
-              <div className="lg:col-span-2 rounded-2xl bg-white border border-slate-200 shadow-md px-5 py-4 flex flex-wrap items-center justify-center gap-4">
-                <span className="text-xs font-bold uppercase tracking-[0.08em] text-slate-400">Powered by</span>
-                {['ISIC Dermatology Validation', 'Grok Vision AI', 'Secure Clinical Database'].map((t) => (
-                  <span key={t} className="text-sm font-semibold text-sky-700">
+              {/* Powered by partners badge */}
+              <div className="lg:col-span-2 rounded-2xl bg-white border border-slate-200/80 px-6 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 shadow-sm">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Integrated Standards:</span>
+                {['ISIC Classification Standard', 'Grok Vision ML V3', 'HIPAA Secure DB'].map((t) => (
+                  <span key={t} className="text-xs sm:text-sm font-bold text-sky-600">
                     {t}
                   </span>
                 ))}
               </div>
             </form>
           )}
-
         </div>
-
-        <style>{`
-          @keyframes spin {
-            to { transform: rotate(360deg); }
-          }
-          @media (max-width: 768px) {
-            .analysis-stepper-shell {
-              overflow-x: visible;
-            }
-            .analysis-stepper-track {
-              display: grid !important;
-              grid-template-columns: repeat(2, minmax(0, 1fr));
-              gap: 12px;
-              min-width: 0 !important;
-              padding-left: 0 !important;
-              padding-right: 0 !important;
-            }
-            .analysis-stepper-track > div {
-              width: 100%;
-              justify-content: center;
-            }
-            .analysis-stepper-connector {
-              display: none;
-            }
-            form[style*='grid-template-columns'] {
-              grid-template-columns: 1fr !important;
-            }
-          }
-        `}</style>
       </main>
 
       <PremiumFooter />
@@ -530,156 +544,172 @@ function ResultCard({
   const isUrgent = result.urgent || result.severityLevel === 'high';
   const confidence = result.confidence || 0;
 
-  // Color based on severity
-  const headerGradient = isUrgent
-    ? 'linear-gradient(135deg, #ef4444, #dc2626)'
+  // Severity color coding
+  const theme = isUrgent
+    ? {
+        bg: 'from-red-600 to-red-700 shadow-red-500/10 border-red-500/20',
+        badge: 'bg-white/20 text-white border-white/25',
+        text: 'text-red-100',
+        glow: 'text-red-400'
+      }
     : result.severityLevel === 'medium'
-    ? 'linear-gradient(135deg, #f97316, #ea580c)'
-    : 'linear-gradient(135deg, #0ea5e9, #6366f1)';
+    ? {
+        bg: 'from-amber-500 to-amber-600 shadow-amber-500/10 border-amber-500/20',
+        badge: 'bg-white/20 text-white border-white/25',
+        text: 'text-amber-100',
+        glow: 'text-amber-400'
+      }
+    : {
+        bg: 'from-slate-900 to-slate-950 shadow-slate-900/10 border-slate-800',
+        badge: 'bg-sky-500/10 text-sky-300 border-sky-500/20',
+        text: 'text-slate-400',
+        glow: 'text-sky-400'
+      };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-      <div
-        style={{
-          background: headerGradient,
-          borderRadius: 20,
-          padding: 32,
-          color: '#fff',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          flexWrap: 'wrap',
-          gap: 20,
-        }}
-      >
-        <div>
+    <div className="flex flex-col gap-6 max-w-5xl mx-auto">
+      {/* Header Result card */}
+      <div className={`p-6 sm:p-8 rounded-3xl bg-gradient-to-br border shadow-xl text-white relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6 ${theme.bg}`}>
+        <div className="relative z-10 space-y-4">
           {isUrgent && (
-            <div
-              style={{
-                background: 'rgba(255,255,255,0.2)',
-                borderRadius: 100,
-                padding: '4px 14px',
-                fontSize: 12,
-                fontWeight: 700,
-                marginBottom: 12,
-                display: 'inline-block',
-                letterSpacing: '0.1em',
-              }}
-            >
-              URGENT - SEEK MEDICAL ATTENTION
-            </div>
-          )}
-          <h2 style={{ margin: '0 0 6px', fontSize: 28, fontWeight: 800 }}>{result.condition}</h2>
-          {result.severity && (
-            <span style={{ display: 'inline-block', background: 'rgba(255,255,255,0.2)', borderRadius: 100, padding: '3px 12px', fontSize: 11, fontWeight: 700, marginBottom: 8 }}>
-              Severity: {result.severity}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] font-extrabold tracking-wider uppercase">
+              <ShieldAlert size={12} />
+              Urgent - Seek Dermatology Consultation
             </span>
           )}
-          <p style={{ margin: 0, fontSize: 15, opacity: 0.85 }}>
-            Report ID: {result.reportId} - {new Date().toLocaleDateString()}
+          
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1.5">{result.condition}</h2>
+            {result.severity && (
+              <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${theme.badge}`}>
+                Severity: {result.severity}
+              </span>
+            )}
+          </div>
+          
+          <p className={`text-xs sm:text-sm font-semibold ${theme.text}`}>
+            Scan ID: {result.reportId} — {new Date().toLocaleDateString()}
           </p>
         </div>
 
-        <div style={{ textAlign: 'center' }}>
-          <svg width="80" height="80" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="8" />
+        {/* Circular Confidence Gauge */}
+        <div className="relative z-10 flex flex-col items-center self-center md:self-auto bg-white/5 border border-white/10 p-4 rounded-2xl backdrop-blur-md">
+          <svg width="76" height="76" viewBox="0 0 80 80" className="rotate-[-90deg]">
+            <circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="6.5" />
             <circle
               cx="40"
               cy="40"
               r="32"
               fill="none"
-              stroke="#fff"
-              strokeWidth="8"
+              stroke="#0ea5e9"
+              strokeWidth="6.5"
               strokeLinecap="round"
               strokeDasharray={`${(confidence / 100) * 201} 201`}
-              transform="rotate(-90 40 40)"
-              style={{ transition: 'stroke-dasharray 1s ease' }}
+              className="transition-all duration-1000"
             />
-            <text x="40" y="45" textAnchor="middle" fill="#fff" fontSize="16" fontWeight="800">
-              {confidence}%
-            </text>
           </svg>
-          <p style={{ margin: '4px 0 0', fontSize: 12, opacity: 0.8 }}>Confidence</p>
+          <div className="absolute top-8 text-center">
+            <span className="text-base font-extrabold text-white block leading-none">{confidence}%</span>
+          </div>
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-300 mt-2 block">Confidence</span>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-        <div style={{ background: '#fff', borderRadius: 16, padding: 24, border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
-          <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Patient Details</h3>
-          {[
-            ['Name', patient.fullName],
-            ['Email', patient.email],
-            ['Phone', patient.phone],
-            ['Age', patient.age],
-            ['Gender', patient.gender],
-          ].map(([k, v]) => (
-            <div key={k} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 14 }}>
-              <span style={{ color: '#64748b' }}>{k}</span>
-              <span style={{ fontWeight: 600, color: '#0f172a' }}>{v}</span>
-            </div>
-          ))}
-          {imagePreview && <img src={imagePreview} alt="Uploaded" style={{ width: '100%', borderRadius: 10, marginTop: 16, maxHeight: 160, objectFit: 'cover' }} />}
-        </div>
-
-        <div style={{ background: '#fff', borderRadius: 16, padding: 24, border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
-          <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#0f172a' }}>Clinical Guidance</h3>
-          {result.description && (
-            <p style={{ margin: '0 0 12px', fontSize: 13, color: '#475569', lineHeight: 1.5 }}>{result.description}</p>
-          )}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {(result.precautions || []).slice(0, 5).map((p, i) => (
-              <div key={i} style={{ display: 'flex', gap: 8, fontSize: 13, color: '#374151' }}>
-                <span style={{ color: '#0ea5e9', flexShrink: 0 }}>-</span>
-                {p}
+      {/* Grid details */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Patient specs */}
+        <div className="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-sm flex flex-col justify-between">
+          <h3 className="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-50">Patient Reference Profile</h3>
+          
+          <div className="space-y-3 mb-6">
+            {[
+              ['Full Name', patient.fullName],
+              ['Email Address', patient.email],
+              ['Contact Mobile', patient.phone],
+              ['Patient Age', `${patient.age} years old`],
+              ['Gender Identity', patient.gender],
+            ].map(([k, v]) => (
+              <div key={k} className="flex justify-between items-center py-1">
+                <span className="text-xs sm:text-sm font-semibold text-slate-500">{k}</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-800">{v}</span>
               </div>
             ))}
           </div>
-          {result.keyFindings && result.keyFindings.length > 0 && (
-            <div style={{ marginTop: 12 }}>
-              <h4 style={{ margin: '0 0 8px', fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Key Findings</h4>
-              {result.keyFindings.map((f, i) => (
-                <div key={i} style={{ display: 'flex', gap: 6, fontSize: 12, color: '#475569', marginBottom: 4 }}>
-                  <span style={{ color: '#6366f1', flexShrink: 0 }}>*</span>
-                  {f}
+
+          {imagePreview && (
+            <div className="mt-auto pt-4 border-t border-slate-50">
+              <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block mb-2">Submitted photograph</span>
+              <img src={imagePreview} alt="Uploaded Specimen" className="w-full h-36 rounded-xl object-cover border border-slate-100 shadow-sm" />
+            </div>
+          )}
+        </div>
+
+        {/* Clinical findings */}
+        <div className="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 className="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-50">Clinical Guidance & Findings</h3>
+            
+            {result.description && (
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 font-semibold">{result.description}</p>
+            )}
+
+            <div className="space-y-2 mb-4">
+              {(result.precautions || []).slice(0, 5).map((p, i) => (
+                <div key={i} className="flex gap-2 text-xs sm:text-sm font-medium text-slate-600 leading-relaxed">
+                  <CheckCircle className="text-sky-500 mt-1 flex-shrink-0" size={14} />
+                  <span>{p}</span>
                 </div>
               ))}
             </div>
-          )}
-          <div style={{ marginTop: 16, padding: 12, background: '#fef9c3', borderRadius: 10, fontSize: 12, color: '#854d0e', lineHeight: 1.6 }}>
-            {result.disclaimer || 'This AI analysis is not a substitute for professional medical diagnosis.'}
+
+            {result.keyFindings && result.keyFindings.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-slate-50">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Key Assessment Indicators</h4>
+                {result.keyFindings.map((f, i) => (
+                  <div key={i} className="flex gap-2 text-xs text-slate-500 font-semibold mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-1.5 flex-shrink-0" />
+                    <span>{f}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 flex gap-3 text-xs sm:text-sm font-medium leading-relaxed">
+            <AlertTriangle className="text-amber-500 flex-shrink-0 mt-0.5" size={16} />
+            <p>{result.disclaimer || 'This AI analysis is not a substitute for professional medical diagnosis.'}</p>
           </div>
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-        <button onClick={onDownload} style={{ flex: 1, padding: 14, borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #0ea5e9, #6366f1)', color: '#fff', fontSize: 15, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+      {/* Button Triggers */}
+      <div className="flex gap-4 flex-wrap">
+        <button 
+          onClick={onDownload} 
+          className="flex-1 min-w-[200px] py-4 rounded-2xl bg-slate-900 hover:bg-slate-950 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 transition-all"
+        >
+          <Download size={18} />
           Download PDF Report
         </button>
+        
         <button
           onClick={() => window.location.reload()}
-          style={{ flex: 1, padding: 14, borderRadius: 12, border: '1.5px solid #e2e8f0', background: '#fff', color: '#374151', fontSize: 15, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}
+          className="flex-1 min-w-[200px] py-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition"
         >
+          <RefreshCw size={16} />
           New Analysis
         </button>
       </div>
 
-      <p style={{ textAlign: 'center', fontSize: 13, color: '#94a3b8' }}>
-        Official healthcare report can be delivered to {patient.email}.
+      <p className="text-center text-xs font-medium text-slate-400 mt-2">
+        A clinical summary and report delivery confirmation has been sent to <span className="font-bold text-slate-500">{patient.email}</span>.
       </p>
 
       {result.poweredBy && (
-        <p style={{ textAlign: 'center', fontSize: 11, color: '#cbd5e1' }}>
+        <p className="text-center text-[10px] font-extrabold uppercase tracking-wider text-slate-300">
           Powered by {result.poweredBy}
         </p>
       )}
-
-      <style>{`
-        @media (max-width: 768px) {
-          div[style*='grid-template-columns: 1fr 1fr'] {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

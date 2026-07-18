@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   BarChart3, TrendingUp, Activity, Download, Calendar, ArrowRight,
-  User, Clock, CheckCircle, AlertCircle
+  User, Clock, CheckCircle, AlertCircle, Edit2, ShieldAlert, Users
 } from 'lucide-react';
 import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
@@ -67,40 +67,57 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50/50 text-slate-900 selection:bg-sky-500/10 selection:text-sky-900">
       <PremiumNavbar />
 
-      <main className="relative pt-28 pb-20 px-4 sm:px-6">
+      <main className="relative pt-32 pb-24 px-4 sm:px-6">
+        {/* Ambient page glow */}
+        <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-gradient-to-br from-sky-400/5 to-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
+        
         <div className="max-w-7xl mx-auto">
-          <div className="relative w-full rounded-2xl overflow-hidden mb-8" style={{ paddingTop: '6rem' }}>
-            <img src="/media/hero-man-bench.jpg" alt="Scenic wellness background" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/70" />
-            <div className="relative z-10 px-4 py-14 text-center sm:px-6 sm:py-20" style={{ borderRadius: 24 }}>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">Analytics Dashboard</h1>
-              <p className="mt-4 text-white/95 text-lg max-w-3xl mx-auto">Track your scans, reports, and AI insights</p>
+          {/* Header Banner */}
+          <div className="relative w-full rounded-3xl overflow-hidden mb-10 shadow-xl border border-slate-200/60">
+            <div className="absolute inset-0">
+              <img src="/media/hero-man-bench.jpg" alt="Clinical Analytics" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
+            </div>
+            <div className="relative z-10 py-16 px-8 text-center sm:px-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-tight">
+                  Analytics & <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">Patient Dashboard</span>
+                </h1>
+                <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto font-medium">
+                  Monitor classification accuracy models, audit clinical report downloads, and manage patient profiles.
+                </p>
+              </motion.div>
             </div>
           </div>
-          {/* Header */}
+
+          {/* Controls Bar */}
           <motion.div
-            className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
+            className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200/80 p-4 rounded-2xl shadow-sm"
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ delay: 0.05, duration: 0.5 }}
           >
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">Analytics Dashboard</h1>
-              <p className="text-slate-600">Track your scans, reports, and AI insights</p>
+              <h2 className="text-lg font-bold text-slate-800">Diagnostic Summary</h2>
+              <p className="text-slate-500 text-xs sm:text-sm font-medium">Overview of automated skin screenings</p>
             </div>
 
-            <div className="flex w-full flex-wrap gap-2 md:w-auto md:justify-end">
+            <div className="flex gap-1.5 bg-slate-100 p-1 rounded-xl">
               {['week', 'month', 'year'].map((period) => (
                 <button
                   key={period}
                   onClick={() => setSelectedPeriod(period)}
-                  className={`min-w-[88px] px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-4 py-2 rounded-lg font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-300 ${
                     selectedPeriod === period
-                      ? 'bg-gradient-to-r from-sky-500 to-cyan-400 text-white shadow-lg'
-                      : 'bg-white border border-slate-200 text-slate-700 hover:border-sky-300'
+                      ? 'bg-white text-slate-900 shadow-sm'
+                      : 'text-slate-500 hover:text-slate-900'
                   }`}
                 >
                   {period.charAt(0).toUpperCase() + period.slice(1)}
@@ -111,66 +128,74 @@ const Dashboard: React.FC = () => {
 
           {/* Statistics Grid */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="p-6 rounded-2xl bg-white border border-slate-200 hover:border-sky-300 hover:shadow-lg transition-all"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-slate-600 font-medium text-sm">{stat.label}</h3>
-                  <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      stat.color === 'sky'
-                        ? 'bg-sky-100 text-sky-600'
-                        : stat.color === 'cyan'
-                        ? 'bg-cyan-100 text-cyan-600'
-                        : stat.color === 'blue'
-                        ? 'bg-blue-100 text-blue-600'
-                        : 'bg-emerald-100 text-emerald-600'
-                    }`}
-                  >
-                    <stat.icon size={20} />
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  className="uiverse-card p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:border-sky-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-slate-500 font-semibold text-xs sm:text-sm tracking-wide">{stat.label}</h3>
+                    <div
+                      className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                        stat.color === 'sky'
+                          ? 'bg-sky-50 text-sky-600'
+                          : stat.color === 'cyan'
+                          ? 'bg-cyan-50 text-cyan-600'
+                          : stat.color === 'blue'
+                          ? 'bg-blue-50 text-blue-600'
+                          : 'bg-emerald-50 text-emerald-600'
+                      }`}
+                    >
+                      <Icon size={18} />
+                    </div>
                   </div>
-                </div>
-                <p className="text-3xl font-bold bg-gradient-to-r from-sky-500 to-cyan-400 bg-clip-text text-transparent">
-                  {stat.value}
-                </p>
-              </motion.div>
-            ))}
+                  <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-sky-600 to-cyan-500 bg-clip-text text-transparent mt-1">
+                    {stat.value}
+                  </p>
+                </motion.div>
+              );
+            })}
           </motion.div>
 
+          {/* Chart & Profile section */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
             {/* Accuracy Chart */}
             <motion.div
-              className="lg:col-span-2 p-8 rounded-2xl bg-white border border-slate-200"
-              initial={{ opacity: 0, y: 20 }}
+              className="lg:col-span-2 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between"
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-xl font-bold text-slate-900 mb-6">Accuracy by Condition</h2>
-              <div className="space-y-4">
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-1">Accuracy by Condition</h3>
+                <p className="text-slate-500 text-xs sm:text-sm mb-6 font-medium">Confidence average compared with biopsy findings</p>
+              </div>
+
+              <div className="space-y-5">
                 {accuracyByCondition.map((item, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-medium text-slate-700">{item.condition}</span>
-                      <span className="text-sm font-bold text-sky-600">{item.accuracy}%</span>
+                  <div key={item.condition}>
+                    <div className="flex justify-between items-center mb-1.5">
+                      <span className="font-semibold text-sm text-slate-700">{item.condition}</span>
+                      <span className="text-xs sm:text-sm font-bold text-sky-600">{item.accuracy}%</span>
                     </div>
-                    <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden relative">
                       <motion.div
-                        className="h-full bg-gradient-to-r from-sky-500 to-cyan-400"
-                        initial={{ width: '0%' }}
+                        className="absolute left-0 top-0 h-full bg-gradient-to-r from-sky-500 to-cyan-400 rounded-full"
+                        initial={{ width: 0 }}
                         whileInView={{ width: `${item.accuracy}%` }}
-                        transition={{ delay: index * 0.1, duration: 1.2 }}
+                        transition={{ delay: index * 0.05, duration: 1 }}
                         viewport={{ once: true }}
                       />
                     </div>
@@ -179,165 +204,185 @@ const Dashboard: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* User Profile */}
+            {/* Profile Card */}
             <motion.div
-              className="p-8 rounded-2xl bg-gradient-to-br from-sky-50 to-cyan-50 border border-slate-200"
-              initial={{ opacity: 0, y: 20 }}
+              className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 text-white shadow-lg flex flex-col justify-between relative overflow-hidden"
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
+              transition={{ delay: 0.05, duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-xl font-bold text-slate-900 mb-6">User Profile</h2>
-              <div className="space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center text-white font-bold text-2xl">
-                  {profileName
-                    .split(' ')
-                    .filter(Boolean)
-                    .slice(0, 2)
-                    .map((part) => part[0])
-                    .join('')
-                    .toUpperCase() || 'JD'}
+              {/* Decorative radial overlay */}
+              <div className="absolute -top-12 -right-12 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center font-extrabold text-lg text-sky-400 shadow-sm">
+                    {profileName
+                      .split(' ')
+                      .filter(Boolean)
+                      .slice(0, 2)
+                      .map((part) => part[0])
+                      .join('')
+                      .toUpperCase() || 'JD'}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDraftProfileName(profileName);
+                      setDraftMemberSince(memberSince);
+                      setIsEditProfileOpen(true);
+                    }}
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition text-slate-300 hover:text-white"
+                  >
+                    <Edit2 size={16} />
+                  </button>
                 </div>
-                <div>
-                  <p className="text-sm text-slate-600">Name</p>
-                  <p className="font-bold text-slate-900">{profileName}</p>
+
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-slate-500 font-extrabold block mb-0.5">Account User</span>
+                    <p className="font-bold text-base text-slate-100">{profileName}</p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-slate-500 font-extrabold block mb-0.5">Member Since</span>
+                    <p className="font-bold text-sm text-slate-300">{memberSince}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-slate-600">Member Since</p>
-                  <p className="font-bold text-slate-900">{memberSince}</p>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-white/5 relative z-10">
+                <div className="flex items-center gap-2 text-xs text-sky-400 font-bold uppercase tracking-wider">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Credentials Active
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDraftProfileName(profileName);
-                    setDraftMemberSince(memberSince);
-                    setIsEditProfileOpen(true);
-                  }}
-                  className="w-full py-2 rounded-lg bg-white text-sky-600 font-medium hover:bg-slate-100 transition"
-                >
-                  Edit Profile
-                </button>
               </div>
             </motion.div>
           </div>
 
-          {/* Recent Scans Table */}
+          {/* Recent Scans Logs */}
           <motion.div
-            className="p-8 rounded-2xl bg-white border border-slate-200"
-            initial={{ opacity: 0, y: 20 }}
+            className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm mb-8"
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
+            transition={{ delay: 0.05, duration: 0.5 }}
             viewport={{ once: true }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-slate-900">Recent Scans</h2>
-              <button className="text-sky-600 font-medium hover:text-sky-700 transition">View All</button>
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-800">Scans History</h3>
+                <p className="text-slate-500 text-xs font-semibold">Latest uploaded images and prediction details</p>
+              </div>
+              <button className="text-xs sm:text-sm font-bold text-sky-600 hover:text-sky-700 transition">View All Logs</button>
             </div>
 
             {!hasScans ? (
-              <div className="py-12 text-center">
-                <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-                  <Activity size={32} className="text-slate-400" />
+              <div className="py-12 text-center border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4 border border-slate-200">
+                  <Activity size={24} className="text-slate-400" />
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">No scans uploaded yet</h3>
-                <p className="text-slate-600 mb-6">Start by uploading a skin image for AI analysis</p>
+                <h3 className="text-base font-bold text-slate-800 mb-1">No Scans Recorded</h3>
+                <p className="text-slate-500 text-sm max-w-xs mx-auto mb-6 font-medium">Please upload patient data and skin photos to start the pipeline.</p>
                 <Link
                   to="/analysis"
-                  className="inline-flex items-center gap-2 px-6 py-2 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-medium hover:shadow-lg transition"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-950 text-white font-bold text-sm shadow-sm transition"
                 >
-                  Start Your First Scan
-                  <ArrowRight size={16} />
+                  Start First Screening
+                  <ArrowRight size={14} />
                 </Link>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-slate-200">
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-slate-600">Date</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-slate-600">Condition</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-slate-600">Confidence</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-slate-600">Status</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-slate-600">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentScans.map((scan, index) => (
-                      <motion.tr
-                        key={scan.id}
-                        className="border-b border-slate-200 hover:bg-slate-50 transition"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: index * 0.05, duration: 0.4 }}
-                        viewport={{ once: true }}
-                      >
-                        <td className="px-4 py-4 text-sm text-slate-700">
-                          <div className="flex items-center gap-2">
-                            <Calendar size={16} className="text-slate-400" />
-                            {scan.date}
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 text-sm font-medium text-slate-900">{scan.condition}</td>
-                        <td className="px-4 py-4">
-                          <div className="flex items-center gap-2">
-                            <div className="w-12 h-2 bg-slate-200 rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-gradient-to-r from-sky-500 to-cyan-400"
-                                style={{ width: `${scan.confidence}%` }}
-                              />
+              <div className="overflow-x-auto -mx-6 sm:mx-0">
+                <div className="inline-block min-w-full align-middle px-6 sm:px-0">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-slate-200 text-left">
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-500">Date Checked</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-500">Condition Prediction</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-500">Model Confidence</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-500">Status</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-500 text-right">Report</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {recentScans.map((scan, index) => (
+                        <motion.tr
+                          key={scan.id}
+                          className="border-b border-slate-100 hover:bg-slate-50/50 transition duration-150"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ delay: index * 0.05, duration: 0.3 }}
+                          viewport={{ once: true }}
+                        >
+                          <td className="py-4 text-xs sm:text-sm text-slate-600 font-semibold">
+                            <div className="flex items-center gap-2">
+                              <Calendar size={14} className="text-slate-400" />
+                              {scan.date}
                             </div>
-                            <span className="text-xs font-bold text-sky-600">{scan.confidence}%</span>
-                          </div>
-                        </td>
-                        <td className="px-4 py-4">
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium">
-                            <CheckCircle size={14} />
-                          {scan.status}
-                        </span>
-                      </td>
-                        <td className="px-4 py-4">
-                          <button className="text-sky-600 hover:text-sky-700 transition">
-                            <Download size={18} />
-                          </button>
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
+                          </td>
+                          <td className="py-4 text-xs sm:text-sm font-bold text-slate-800">{scan.condition}</td>
+                          <td className="py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-16 h-2 bg-slate-100 rounded-full overflow-hidden relative">
+                                <div
+                                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-sky-500 to-cyan-400 rounded-full"
+                                  style={{ width: `${scan.confidence}%` }}
+                                />
+                              </div>
+                              <span className="text-xs font-bold text-sky-600">{scan.confidence}%</span>
+                            </div>
+                          </td>
+                          <td className="py-4">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold border border-emerald-100">
+                              <CheckCircle size={12} />
+                              {scan.status}
+                            </span>
+                          </td>
+                          <td className="py-4 text-right">
+                            <button className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300 transition">
+                              <Download size={15} />
+                            </button>
+                          </td>
+                        </motion.tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </motion.div>
 
           {/* Activity Timeline */}
           <motion.div
-            className="mt-8 p-8 rounded-2xl bg-white border border-slate-200"
-            initial={{ opacity: 0, y: 20 }}
+            className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm"
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
+            transition={{ delay: 0.05, duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Recent Activity</h2>
-            <div className="space-y-4">
+            <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-6">Recent System Activity</h3>
+            <div className="relative border-l border-slate-100 pl-6 space-y-6">
               {[
-                { time: '2 hours ago', action: 'Completed skin analysis scan', type: 'scan' },
-                { time: '1 day ago', action: 'Downloaded clinical report PDF', type: 'download' },
-                { time: '3 days ago', action: 'Uploaded new patient image', type: 'upload' },
-                { time: '1 week ago', action: 'Received dermatologist recommendation', type: 'comment' },
+                { time: '2 hours ago', action: 'Completed skin analysis scan', desc: 'Patient: Jane Doe (Age: 34), Result: Acne Vulgaris.' },
+                { time: '1 day ago', action: 'Downloaded clinical report PDF', desc: 'Report ID: AN-1768402. Status: Verified.' },
+                { time: '3 days ago', action: 'Uploaded new patient image', desc: 'Model evaluation initialized.' },
+                { time: '1 week ago', action: 'Received dermatologist recommendation', desc: 'Annotation updated on server.' },
               ].map((activity, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center gap-4 pb-4 border-b border-slate-200 last:border-0"
+                  className="relative"
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.4 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center flex-shrink-0">
-                    <Clock size={18} className="text-sky-600" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-slate-900">{activity.action}</p>
-                    <p className="text-xs text-slate-500">{activity.time}</p>
+                  <div className="absolute -left-[31px] top-0 w-2.5 h-2.5 rounded-full bg-sky-500 ring-4 ring-white" />
+                  <div>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <h4 className="font-bold text-sm text-slate-800 leading-none">{activity.action}</h4>
+                      <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{activity.time}</span>
+                    </div>
+                    <p className="text-slate-500 text-xs sm:text-sm font-semibold leading-relaxed">{activity.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -346,57 +391,65 @@ const Dashboard: React.FC = () => {
         </div>
       </main>
 
-      {isEditProfileOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 px-4">
-          <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl border border-slate-200">
-            <h3 className="text-xl font-bold text-slate-900 mb-2">Edit Profile</h3>
-            <p className="text-sm text-slate-600 mb-6">Update the profile details shown on the dashboard.</p>
+      {/* Edit Profile Modal */}
+      <AnimatePresence>
+        {isEditProfileOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 px-4">
+            <motion.div 
+              className="w-full max-w-md rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-slate-200"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+            >
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Edit Account Profile</h3>
+              <p className="text-slate-500 text-sm mb-6 font-semibold">Update details printed on clinical reports and shown on dashboard widgets.</p>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Name</label>
-                <input
-                  type="text"
-                  value={draftProfileName}
-                  onChange={(e) => setDraftProfileName(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
-                />
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Display Name</label>
+                  <input
+                    type="text"
+                    value={draftProfileName}
+                    onChange={(e) => setDraftProfileName(e.target.value)}
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-slate-900 outline-none focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-500/5 transition font-semibold text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Member Since</label>
+                  <input
+                    type="text"
+                    value={draftMemberSince}
+                    onChange={(e) => setDraftMemberSince(e.target.value)}
+                    className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-slate-900 outline-none focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-500/5 transition font-semibold text-sm"
+                    placeholder="Jan 15, 2026"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Member Since</label>
-                <input
-                  type="text"
-                  value={draftMemberSince}
-                  onChange={(e) => setDraftMemberSince(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
-                  placeholder="Jan 15, 2026"
-                />
-              </div>
-            </div>
 
-            <div className="mt-6 flex gap-3 justify-end">
-              <button
-                type="button"
-                onClick={() => setIsEditProfileOpen(false)}
-                className="rounded-xl border border-slate-200 px-4 py-2.5 text-slate-700 hover:bg-slate-50 transition"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setProfileName(draftProfileName.trim() || 'John Doe');
-                  setMemberSince(draftMemberSince.trim() || 'Jan 15, 2026');
-                  setIsEditProfileOpen(false);
-                }}
-                className="rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-2.5 font-medium text-white hover:shadow-lg transition"
-              >
-                Save Changes
-              </button>
-            </div>
+              <div className="mt-8 flex gap-3 justify-end">
+                <button
+                  type="button"
+                  onClick={() => setIsEditProfileOpen(false)}
+                  className="rounded-xl border border-slate-200 px-4 py-2.5 text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProfileName(draftProfileName.trim() || 'John Doe');
+                    setMemberSince(draftMemberSince.trim() || 'Jan 15, 2026');
+                    setIsEditProfileOpen(false);
+                  }}
+                  className="rounded-xl bg-slate-900 hover:bg-slate-950 px-5 py-2.5 font-bold text-white text-xs sm:text-sm hover:shadow-lg transition"
+                >
+                  Save Profile
+                </button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       <PremiumFooter />
     </div>
