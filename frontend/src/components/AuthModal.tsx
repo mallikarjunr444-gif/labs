@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
-const AuthModal = ({ onClose }) => {
+const AuthModal = ({ onClose }: { onClose: () => void }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,12 +13,12 @@ const AuthModal = ({ onClose }) => {
     try {
       await signInWithPopup(auth, provider);
       onClose();
-    } catch (error) {
+    } catch (error: any) {
       setError(error.message);
     }
   };
 
-  const handleEmailPasswordSubmit = async (e) => {
+  const handleEmailPasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     try {
@@ -28,7 +28,7 @@ const AuthModal = ({ onClose }) => {
         await createUserWithEmailAndPassword(auth, email, password);
       }
       onClose();
-    } catch (error) {
+    } catch (error: any) {
       setError(error.message);
     }
   };
