@@ -46,21 +46,21 @@ const PremiumNavbar: React.FC = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'} ${isHeroPage ? 'bg-transparent text-white' : 'bg-white shadow-glow-md text-slate-900 border-b'}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'} ${isHeroPage && !isScrolled ? 'bg-transparent text-white' : 'bg-white shadow-glow-md text-slate-900 border-b'}`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6" style={{ transformStyle: 'preserve-3d' }}>
           <Link to="/" className="relative z-10 inline-flex items-center" aria-label="Medicus Labs home">
-            <BrandLogo tone={isHeroPage ? 'light' : 'dark'} />
+            <BrandLogo tone={isHeroPage && !isScrolled ? 'light' : 'dark'} />
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center">
             <div className="flex items-center gap-8 text-sm md:flex">
               {navItems.map((item) => (
-                <Link key={item.name} to={item.href} className={`hover:opacity-90 ${isHeroPage ? 'text-white/85 hover:text-white' : 'text-slate-700 hover:text-slate-900'} transition-transform hover:-translate-y-0.5` }>
+                <Link key={item.name} to={item.href} className={`hover:opacity-90 ${isHeroPage && !isScrolled ? 'text-white/85 hover:text-white' : 'text-slate-700 hover:text-slate-900'} transition-transform hover:-translate-y-0.5` }>
                   {item.name}
                 </Link>
               ))}
@@ -85,7 +85,7 @@ const PremiumNavbar: React.FC = () => {
               </>
             ) : (
               <>
-                <LiquidButton onClick={() => setShowAuthModal(true)} className={`text-sm font-semibold ${isHeroPage ? 'text-white' : 'text-slate-900'}`}>
+                <LiquidButton onClick={() => setShowAuthModal(true)} className={`text-sm font-semibold ${isHeroPage && !isScrolled ? 'text-white' : 'text-slate-900'}`}>
                   Login / Sign Up
                 </LiquidButton>
               </>
