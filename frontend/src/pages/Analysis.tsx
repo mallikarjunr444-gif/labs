@@ -116,6 +116,7 @@ const Analysis: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState('');
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [engine, setEngine] = useState<'grok' | 'skinive'>('grok');
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const steps = [
@@ -184,6 +185,7 @@ const Analysis: React.FC = () => {
       formData.append('mobile', form.phone);
       formData.append('age', form.age);
       formData.append('gender', form.gender);
+      formData.append('engine', engine);
 
       for (const { s, msg } of stepsMessages) {
         setStep(s);
@@ -358,6 +360,67 @@ const Analysis: React.FC = () => {
           {/* Form and Upload Screen */}
           {!result && !loading && (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Engine Selector */}
+              <div className="lg:col-span-2 uiverse-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
+                <div className="mb-4">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5 font-display">
+                    <Cpu className="text-sky-500 animate-pulse" size={16} />
+                    Select Diagnostic Classifier Engine
+                  </h3>
+                  <p className="text-slate-400 text-xs font-semibold mt-0.5">Choose the neural model to run the pathology analysis</p>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Grok Engine Option */}
+                  <div
+                    onClick={() => setEngine('grok')}
+                    className={`p-4 rounded-2xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 ${
+                      engine === 'grok'
+                        ? 'border-sky-500 bg-sky-50/[0.08] shadow-md shadow-sky-500/5'
+                        : 'border-slate-100 bg-slate-50/30 hover:border-slate-200 hover:bg-slate-50/50'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                      engine === 'grok' ? 'border-sky-500 text-sky-500 bg-sky-50' : 'border-slate-300'
+                    }`}>
+                      {engine === 'grok' && <div className="w-2.5 h-2.5 rounded-full bg-sky-500" />}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-800 flex items-center gap-1.5 font-display">
+                        Grok-2-Vision AI (Default)
+                      </h4>
+                      <p className="text-xs text-slate-500 font-semibold mt-1">
+                        Multimodal visual language model from xAI. Ideal for general dermatology, differential diagnoses, and contextual recommendations.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Skinive Engine Option */}
+                  <div
+                    onClick={() => setEngine('skinive')}
+                    className={`p-4 rounded-2xl border-2 cursor-pointer transition-all duration-300 flex items-start gap-4 ${
+                      engine === 'skinive'
+                        ? 'border-sky-500 bg-sky-50/[0.08] shadow-md shadow-sky-500/5'
+                        : 'border-slate-100 bg-slate-50/30 hover:border-slate-200 hover:bg-slate-50/50'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                      engine === 'skinive' ? 'border-sky-500 text-sky-500 bg-sky-50' : 'border-slate-300'
+                    }`}>
+                      {engine === 'skinive' && <div className="w-2.5 h-2.5 rounded-full bg-sky-500" />}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-800 flex items-center gap-1.5 font-display">
+                        Skinive.Cloud Deep AI
+                      </h4>
+                      <p className="text-xs text-slate-500 font-semibold mt-1">
+                        Dermatological classification API. Specializes in risk assessment of 50+ conditions across acne, mycosis, melanoma, and neoplasms.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Form panel */}
               <div className="uiverse-card bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm space-y-6">
                 <div>

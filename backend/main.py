@@ -20,6 +20,7 @@ load_dotenv()
 
 # Import Grok Vision Service
 from grok_service import grok_service, CONDITIONS_DB
+from skinive_service import skinive_service
 
 # Configure logging
 logging.basicConfig(
@@ -105,12 +106,13 @@ async def start_analysis(
     gender: str = Form(...),
     mobile: str = Form(...),
     email: str = Form(...),
+    engine: str = Form("grok"),
 ):
     """
     Start dermatology analysis with image upload and patient information
     """
     try:
-        logger.info(f"📸 Starting analysis for patient: {fullName}")
+        logger.info(f"📸 Starting analysis for patient: {fullName} (Engine: {engine})")
 
         # Validate file
         if not file.filename:
@@ -130,11 +132,17 @@ async def start_analysis(
         logger.info(f"✅ File saved: {file_path}")
 
         # ======================================================
-        # GROK VISION AI ANALYSIS
+        # CHOOSE AI ENGINE FOR ANALYSIS
         # ======================================================
-        logger.info(f"[{fullName}] Running Grok Vision AI analysis...")
-
-        ai_result = await grok_service.analyze_skin_image(str(file_path))
+        if engine.lower() == "skinive":
+            logger.info(f"[{fullName}] Running Skinive Cloud AI analysis...")
+            ai_result = await skinive_service.analyze_skin(str(file_path), age=age, gender=gender)
+            powered_by_engine = ai_result.get("powered_by", "Skinive.Cloud AI API")
+        else:
+            logger.info(f"[{fullName}] Running Grok Vision AI analysis...")
+            ai_result = await grok_service.analyze_skin_image(str(file_path))
+            is_fallback = ai_result.get("fallback", False)
+            powered_by_engine = "Grok Vision AI" if not is_fallback else "Heuristic Analysis (Grok unavailable)"
 
         condition = ai_result.get("condition", "Healthy Skin")
         confidence = ai_result.get("confidence", 50.0)
@@ -147,7 +155,6 @@ async def start_analysis(
         recommendations = ai_result.get("recommendations", [])
         precautions = ai_result.get("precautions", [])
         is_urgent = severity_level == "high"
-        is_fallback = ai_result.get("fallback", False)
 
         logger.info(f"✅ AI Analysis: {condition} ({confidence}%) - Severity: {severity}")
 
@@ -176,7 +183,7 @@ async def start_analysis(
             },
             "recommendations": recommendations,
             "precautions": precautions,
-            "powered_by": "Grok Vision AI" if not is_fallback else "Heuristic Analysis (Grok unavailable)",
+            "powered_by": powered_by_engine,
             "timestamp": datetime.now().isoformat(),
         }
 
