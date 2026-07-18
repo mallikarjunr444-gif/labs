@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   User, UploadCloud, ShieldCheck, Cpu, Brain, FileText, Mail, 
   ChevronDown, AlertTriangle, ShieldAlert, CheckCircle, Download, RefreshCw,
-  Clock, ArrowRight, Shield
+  Clock, ArrowRight, Shield, Camera
 } from 'lucide-react';
 import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
@@ -267,7 +267,7 @@ const Analysis: React.FC = () => {
                   Clinical AI Workflow
                 </span>
                 <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-                  Skin Pathology <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">Analysis Engine</span>
+                  Clinical Dermatology <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">Analysis Engine</span>
                 </h1>
                 <p className="text-slate-300 text-base max-w-2xl mx-auto font-medium">
                   Follow our secure pipeline for automated classifications, ISIC validation, and instant reporting.
@@ -509,6 +509,99 @@ const Analysis: React.FC = () => {
                   Initialize Diagnostic Engine
                   <ArrowRight size={16} />
                 </button>
+              </div>
+
+              {/* Clinical AI Analysis Methodology & Guidelines */}
+              <div className="lg:col-span-2 uiverse-card bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Method column */}
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                      <Brain className="text-sky-500" size={20} />
+                      AI Dermatological Analysis Method
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+                      Our advanced core architecture utilizes peer-reviewed computer vision standard methodologies:
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center flex-shrink-0">
+                        <Cpu className="text-sky-600" size={18} />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-slate-800">Deep Machine Learning</h4>
+                        <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                          Medicus Labs leverages a neural network trained on a database of tens of thousands of dermoscopic images with verified clinical diagnoses from professional dermatologists.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center flex-shrink-0">
+                        <ShieldCheck className="text-indigo-600" size={18} />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-slate-800">Advanced Feature Detection</h4>
+                        <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                          While physicians typically rely on the manual ABCDE rule, the AI engine processes thousands of micro-features simultaneously to detect boundary, vascular, and pigment irregularities.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0">
+                        <RefreshCw className="text-emerald-600 animate-spin" style={{ animationDuration: '4s' }} size={18} />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-slate-800">Continuous Improvement</h4>
+                        <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                          Through clinical collaboration, the engine's neural weights are updated continuously to classify skin anomalies including acne subtypes, viral manifestations (HPV), and benign neoplasms.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Capture guidelines column */}
+                <div className="space-y-6 border-t md:border-t-0 md:border-l border-slate-100 pt-6 md:pt-0 md:pl-8">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                      <Camera className="text-sky-500" size={20} />
+                      Optimal Clinical Capture Guidelines
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+                      To achieve maximum classification sensitivity and match reference dataset lighting conditions:
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-50/50 rounded-2xl p-4 sm:p-5 border border-slate-100 space-y-4">
+                    <div className="flex gap-3">
+                      <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</div>
+                      <div>
+                        <h5 className="text-xs sm:text-sm font-bold text-slate-700">Close Range Focus</h5>
+                        <p className="text-xs text-slate-500 font-semibold">Hold the camera lens less than 10 cm away from the skin lesion.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</div>
+                      <div>
+                        <h5 className="text-xs sm:text-sm font-bold text-slate-700">Centered & Stable Position</h5>
+                        <p className="text-xs text-slate-500 font-semibold">Align the active skin mark directly in the center of the frame and keep the lens completely still.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</div>
+                      <div>
+                        <h5 className="text-xs sm:text-sm font-bold text-slate-700">Zero Obstructing Elements</h5>
+                        <p className="text-xs text-slate-500 font-semibold">Ensure there is no hair, shadows, ink markings, or deep skin folds/wrinkles obstructing the scan.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Powered by partners badge */}

@@ -278,11 +278,157 @@ class GitHubDiseaseDatabase:
                     "Keep stress levels low",
                     "Get adequate sleep"
                 ]
+            },
+            "rosacea": {
+                "condition": "Rosacea",
+                "severity_levels": ["Mild", "Moderate", "Severe"],
+                "symptoms": [
+                    "Facial redness or persistent flushing",
+                    "Visible broken blood vessels (telangiectasia)",
+                    "Pus-filled bumps resembling acne",
+                    "Enlarged, bulbous nose (rhinophyma)",
+                    "Eye irritation, dryness, or swollen eyelids"
+                ],
+                "precautions": [
+                    "Avoid spicy foods and hot beverages",
+                    "Limit alcohol consumption",
+                    "Protect skin from wind and extreme sun",
+                    "Use ultra-gentle, fragrance-free products",
+                    "Avoid rubbing, scrubbing, or exfoliating facial skin"
+                ],
+                "medicines": [
+                    "Metronidazole (topical gel)",
+                    "Azelaic acid (topical cream)",
+                    "Brimonidine gel (topical for flushing)",
+                    "Doxycycline (oral antibiotic)",
+                    "Ivermectin (topical cream)"
+                ],
+                "skincare_support": [
+                    "Use physical/mineral sunscreen (SPF 30+) daily",
+                    "Cleanse face gently with lukewarm water",
+                    "Apply barrier-repairing moisturizer daily",
+                    "Avoid products containing glycolic or salicylic acid"
+                ],
+                "dermatologist_recommendation": "Highly recommended. A dermatologist can prescribe targeted treatments to manage flares and prevent long-term skin thickening.",
+                "home_care": [
+                    "Keep a trigger diary to track flare-ups",
+                    "Avoid hot showers and steam rooms",
+                    "Adopt stress-reduction routines (meditation, breathing)",
+                    "Wash pillowcases and linens regularly with gentle soap"
+                ]
+            },
+            "dermatitis": {
+                "condition": "Dermatitis",
+                "severity_levels": ["Mild", "Moderate", "Severe"],
+                "symptoms": [
+                    "Itchy, dry, or cracked skin",
+                    "Red rash, swelling, or bumps",
+                    "Blisters that may ooze and crust over",
+                    "Skin flaking, scaling, or thickening",
+                    "Stinging, burning, or painful skin patches"
+                ],
+                "precautions": [
+                    "Avoid contact with known allergens, metals, or harsh chemicals",
+                    "Moisturize skin immediately after washing",
+                    "Wear loose, soft, breathable cotton clothing",
+                    "Avoid scratching to prevent secondary bacterial infections"
+                ],
+                "medicines": [
+                    "Topical hydrocortisone or steroid creams",
+                    "Antihistamines (oral for itching)",
+                    "Topical calcineurin inhibitors (tacrolimus)",
+                    "Antibiotic ointments (if skin is cracked and infected)"
+                ],
+                "skincare_support": [
+                    "Wash with hypoallergenic, fragrance-free cleanser",
+                    "Use thick ointments or barrier creams containing ceramides",
+                    "Apply cool, wet compresses to soothe raw or itchy patches"
+                ],
+                "dermatologist_recommendation": "Recommended if the rash does not improve after 10-14 days of over-the-counter care, is painful, spreads, or shows signs of yellow crusting.",
+                "home_care": [
+                    "Use fragrance-free, dye-free laundry detergent",
+                    "Limit baths or showers to under 10 minutes using lukewarm water",
+                    "Run a home humidifier in dry seasons"
+                ]
+            },
+            "ringworm": {
+                "condition": "Ringworm",
+                "severity_levels": ["Localized", "Spreading", "Severe/Infected"],
+                "symptoms": [
+                    "Itchy, circular rash with raised, red edges",
+                    "Red, scaly skin inside the ring-shaped pattern",
+                    "Bald, scaly patches on scalp (tinea capitis)",
+                    "Cracked, peeling skin between toes (athlete's foot)"
+                ],
+                "precautions": [
+                    "Keep the affected skin clean and dry",
+                    "Avoid sharing clothing, towels, bedding, or hairbrushes",
+                    "Wash athletic gear and sheets daily in hot water",
+                    "Have household pets checked if they show signs of hair loss"
+                ],
+                "medicines": [
+                    "Clotrimazole (topical antifungal)",
+                    "Miconazole (topical antifungal)",
+                    "Terbinafine (topical cream or oral tablets)",
+                    "Ketoconazole (topical antifungal shampoo/cream)"
+                ],
+                "skincare_support": [
+                    "Apply antifungal cream 1-2 inches beyond the visible border",
+                    "Cleanse gently with mild soap and dry thoroughly",
+                    "Use separate towels for the infected body parts"
+                ],
+                "dermatologist_recommendation": "Recommended if the infection covers a large area, affects the scalp or nails, or fails to clear after 2 weeks of OTC antifungal treatment.",
+                "home_care": [
+                    "Wash hands thoroughly after touching the affected area",
+                    "Wear breathable cotton socks and underwear",
+                    "Disinfect showers, bathrooms, and gym equipment regularly"
+                ]
+            },
+            "vitiligo": {
+                "condition": "Vitiligo",
+                "severity_levels": ["Segmental (localized)", "Non-segmental (generalized)"],
+                "symptoms": [
+                    "Patchy loss of skin pigment (white patches)",
+                    "Premature whitening/greying of scalp hair, eyelashes, or brows",
+                    "Loss of color inside tissues lining the mouth and nose"
+                ],
+                "precautions": [
+                    "Protect depigmented areas carefully from sunburn",
+                    "Apply high SPF broad-spectrum sunscreen daily",
+                    "Avoid skin trauma (cuts, friction, tattoos) to prevent new patches",
+                    "Monitor for other autoimmune conditions (e.g., thyroid)"
+                ],
+                "medicines": [
+                    "Topical corticosteroid creams (early stages)",
+                    "Topical calcineurin inhibitors (tacrolimus)",
+                    "Narrowband UVB phototherapy",
+                    "Oral corticosteroids (to slow rapid depigmentation)"
+                ],
+                "skincare_support": [
+                    "Apply broad-spectrum, water-resistant sunscreen daily",
+                    "Use cosmetic cover-ups or self-tanners if desired",
+                    "Keep skin moisturized to support the barrier"
+                ],
+                "dermatologist_recommendation": "Recommended to discuss modern repigmentation therapies, narrow-band light options, and slow down active pigment loss.",
+                "home_care": [
+                    "Connect with vitiligo support networks",
+                    "Eat a balanced diet rich in natural antioxidants",
+                    "Practice stress management to protect emotional well-being"
+                ]
             }
         }
         
         # Get specific disease data or generic response
         disease_lower = disease_name.lower().strip()
+        if "ringworm" in disease_lower:
+            disease_lower = "ringworm"
+        elif "vitiligo" in disease_lower:
+            disease_lower = "vitiligo"
+        elif "rosacea" in disease_lower:
+            disease_lower = "rosacea"
+        elif "dermatitis" in disease_lower:
+            disease_lower = "dermatitis"
+            
         if disease_lower in default_data:
             return {
                 "status": "success",
