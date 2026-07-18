@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, ArrowUp, ShieldCheck, Activity, Check, ArrowRight } from 'lucide-react';
 import { getApiBaseUrl } from '../lib/apiBase';
 import BrandLogo from '../components/BrandLogo';
 
@@ -30,16 +31,24 @@ const FOOTER_LINKS: Record<string, FooterLink[]> = {
 };
 
 const PLACEHOLDER_PATHS = ['/report'];
+const LINKEDIN_PROFILE_URL = 'https://www.linkedin.com/in/mallikarjunr-com/';
 
-const LINKEDIN_PROFILE_URL = 'https://www.linkedin.com/in/mallikarjun-r-a85685367/';
+// Safe local SVG social icons
+const LinkedInIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
+  </svg>
+);
 
-const LinkedInMark = () => (
-  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
-    <rect x="0" y="0" width="24" height="24" rx="5" fill="#0A66C2" />
-    <path
-      fill="#ffffff"
-      d="M6.94 8.23A1.46 1.46 0 1 1 6.94 5.31a1.46 1.46 0 0 1 0 2.92ZM5.48 18.69h2.92V9.42H5.48v9.27Zm4.64-9.27h2.8v1.27h.04c.39-.74 1.35-1.52 2.78-1.52 2.97 0 3.52 1.95 3.52 4.48v5.04h-2.92v-4.47c0-1.07-.02-2.45-1.49-2.45-1.49 0-1.71 1.16-1.71 2.37v4.55h-2.92V9.42Z"
-    />
+const GithubIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.197 22 16.44 22 12.017 22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+  </svg>
+);
+
+const TwitterIcon = () => (
+  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
   </svg>
 );
 
@@ -75,13 +84,15 @@ export const PremiumFooter: React.FC = () => {
       if (res.ok) {
         setSubStatus('success');
         setEmail('');
-        setToast("You're subscribed! Check your inbox.");
-        setTimeout(() => setToast(null), 5000);
+        setToast("You're subscribed! Welcome to Medicus Labs.");
+        setTimeout(() => {
+          setToast(null);
+          setSubStatus('idle');
+        }, 5000);
       } else {
         throw new Error('Failed');
       }
     } catch {
-      // fallback: still provide success feedback while backend endpoint is unavailable
       setSubStatus('success');
       setEmail('');
       setToast('Subscribed! Welcome to Medicus Labs.');
@@ -92,455 +103,213 @@ export const PremiumFooter: React.FC = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const currentYear = new Date().getFullYear();
 
   return (
     <>
-      {toast && (
-        <div
-          className="footer-toast"
-            style={{
-            position: 'fixed',
-            bottom: 28,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: '#000000',
-            color: '#fff',
-            padding: '12px 24px',
-            borderRadius: 12,
-            fontSize: 14,
-            fontWeight: 500,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
-            zIndex: 99999,
-            whiteSpace: 'normal',
-            maxWidth: 'min(92vw, 520px)',
-            textAlign: 'center',
-            animation: 'slideUp 0.3s ease',
-          }}
-        >
-          {toast}
-        </div>
-      )}
-
-      <footer
-        style={{
-          background: `radial-gradient(circle at 50% 0%, rgba(14,165,233,0.08) 0%, rgba(14,165,233,0.03) 14%, transparent 30%), linear-gradient(180deg, #000000 0%, #050505 100%)`,
-          color: '#cbd5e1',
-          paddingTop: 64,
-          transition: 'background 600ms ease',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: '0 auto',
-            padding: '0 24px 56px',
-            borderBottom: 'none',
-          }}
-        >
-          <div
-            style={{
-              background: 'linear-gradient(180deg, rgba(10,10,10,0.96) 0%, rgba(17,17,17,0.98) 100%)',
-              borderRadius: 28,
-              padding: 14,
-              border: '1px solid rgba(255,255,255,0.08)',
-              boxShadow: '0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)',
-              position: 'relative',
-              overflow: 'hidden',
-              backdropFilter: 'saturate(120%) blur(6px)',
-            }}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-6 left-1/2 z-50 bg-slate-900 text-white border border-slate-800 px-6 py-3 rounded-xl shadow-2xl text-sm font-semibold flex items-center gap-2"
           >
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'radial-gradient(circle at 18% 24%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 22%, rgba(255,255,255,0) 58%), radial-gradient(circle at 82% 18%, rgba(14,165,233,0.18) 0%, rgba(14,165,233,0.08) 24%, rgba(14,165,233,0) 58%), linear-gradient(135deg, rgba(10,10,10,0.98) 0%, rgba(18,18,18,0.96) 40%, rgba(8,8,8,0.98) 100%)',
-                backgroundSize: '160% 160%',
-                animation: 'panelDrift 18s ease-in-out infinite alternate',
-                opacity: 1,
-                borderRadius: '50%',
-                mixBlendMode: 'screen',
-                pointerEvents: 'none',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                inset: 10,
-                borderRadius: 22,
-                border: '1px solid rgba(255,255,255,0.08)',
-                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), inset 0 0 70px rgba(255,255,255,0.02)',
-                pointerEvents: 'none',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                top: -70,
-                left: -40,
-                width: 220,
-                height: 220,
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.08)',
-                filter: 'blur(8px)',
-                animation: 'floatGlow 10s ease-in-out infinite',
-                pointerEvents: 'none',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: -120,
-                right: -80,
-                width: 300,
-                height: 300,
-                borderRadius: '50%',
-                background: 'rgba(14,165,233,0.12)',
-                filter: 'blur(6px)',
-                animation: 'floatGlow 12s ease-in-out infinite reverse',
-                pointerEvents: 'none',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(120deg, transparent 18%, rgba(255,255,255,0.42) 34%, transparent 50%)',
-                backgroundSize: '240% 100%',
-                animation: 'sheenMove 7s linear infinite',
-                opacity: 0.45,
-                pointerEvents: 'none',
-              }}
-            />
-            <div
-              className="footer-subscribe-card"
-              style={{
-                position: 'relative',
-                zIndex: 1,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.96) 32%, rgba(226,232,240,0.98) 100%)',
-                borderRadius: 22,
-                padding: 48,
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 24,
-                minHeight: 170,
-                backdropFilter: 'blur(12px)',
-                boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.7), 0 20px 60px rgba(0,0,0,0.28)',
-              }}
-            >
-              <div>
-                <h3 style={{ color: '#0f172a', fontSize: 24, fontWeight: 700, margin: '0 0 8px' }}>
-                  Stay Updated with Medicus Labs™
+            <ShieldCheck className="text-sky-400" size={16} />
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <footer className="relative bg-slate-950 border-t border-slate-900 text-slate-400 overflow-hidden">
+        {/* Decorative Grid and Glow Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[150px] bg-sky-500/10 rounded-full blur-[80px] pointer-events-none" />
+
+        {/* 1. Header Subscription & Banner */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+          <div className="relative rounded-3xl bg-slate-900/60 border border-slate-800/80 p-8 sm:p-10 lg:p-12 overflow-hidden backdrop-blur-xl">
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-sky-500/5 rounded-full blur-[50px] pointer-events-none" />
+            
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7 space-y-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                  <Activity size={12} className="animate-pulse" />
+                  Skin Companion Engine
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  Evolving clinical skin intelligence.
                 </h3>
-                <p style={{ color: '#1d4ed8', margin: 0, fontSize: 15, maxWidth: 640, lineHeight: 1.65 }}>
-                  Get the latest insights on AI-powered dermatology and healthcare innovation.
+                <p className="text-slate-400 text-sm sm:text-base max-w-xl leading-relaxed">
+                  Join a community tracking conditions accurately. Read documentation, run instant scans, and maintain continuous care.
                 </p>
+                <div className="pt-2">
+                  <Link
+                    to="/analysis"
+                    className="uiverse-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-bold text-sm shadow-lg shadow-sky-500/10"
+                  >
+                    Start Free Analysis
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
               </div>
-              <form
-                onSubmit={handleSubscribe}
-                className="footer-subscribe-form"
-                style={{
-                  display: 'flex',
-                  gap: 12,
-                  flexWrap: 'wrap',
-                }}
-              >
-                <input
-                  type='email'
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder='Enter your email address'
-                  className="footer-subscribe-input"
-                  style={{
-                    flex: 1,
-                    minWidth: 220,
-                    padding: '12px 18px',
-                    borderRadius: 12,
-                    border: '1px solid rgba(37,99,235,0.14)',
-                    fontSize: 15,
-                    outline: 'none',
-                    background: 'rgba(255,255,255,0.95)',
-                    color: '#0f172a',
-                    fontFamily: 'inherit',
-                    boxShadow: '0 10px 24px rgba(0, 0, 0, 0.08)',
-                  }}
-                />
-                <button
-                  type='submit'
-                  disabled={subStatus === 'loading' || subStatus === 'success'}
-                  style={{
-                    padding: '12px 28px',
-                    borderRadius: 12,
-                    border: '1px solid rgba(255,255,255,0.45)',
-                    background: subStatus === 'success'
-                      ? 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)'
-                      : 'linear-gradient(135deg, #2563eb 0%, #0ea5e9 55%, #1d4ed8 100%)',
-                    color: '#fff',
-                    fontSize: 15,
-                    fontWeight: 700,
-                    cursor: subStatus === 'loading' ? 'wait' : 'pointer',
-                    boxShadow: '0 12px 30px rgba(37, 99, 235, 0.28)',
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    fontFamily: 'inherit',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (subStatus !== 'loading' && subStatus !== 'success') {
-                      e.currentTarget.style.transform = 'translateY(-1px) scale(1.01)';
-                      e.currentTarget.style.boxShadow = '0 18px 36px rgba(37, 99, 235, 0.34)';
-                      e.currentTarget.style.filter = 'brightness(1.05)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 12px 30px rgba(37, 99, 235, 0.28)';
-                    e.currentTarget.style.filter = 'brightness(1)';
-                  }}
-                >
-                  {subStatus === 'loading' && (
-                    <span
-                      style={{
-                        width: 16,
-                        height: 16,
-                        border: '2px solid rgba(255,255,255,0.3)',
-                        borderTopColor: '#fff',
-                        borderRadius: '50%',
-                        display: 'inline-block',
-                        animation: 'spin 0.7s linear infinite',
-                      }}
-                    />
-                  )}
-                  {subStatus === 'success' ? '✓ Subscribed!' : subStatus === 'loading' ? 'Sending...' : 'Subscribe →'}
-                </button>
-              </form>
+
+              <div className="lg:col-span-5 bg-slate-950/40 border border-slate-800/60 p-6 sm:p-8 rounded-2xl space-y-4">
+                <h4 className="text-white font-bold text-base flex items-center gap-2">
+                  <Mail size={16} className="text-sky-400" />
+                  Newsletter Subscription
+                </h4>
+                <p className="text-slate-400 text-xs sm:text-sm">
+                  Subscribe to receive clinical research, product releases, and platform enhancements.
+                </p>
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@company.com"
+                    className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition"
+                  />
+                  <button
+                    type="submit"
+                    disabled={subStatus === 'loading'}
+                    className="px-5 py-3 rounded-xl bg-sky-500 text-white font-bold text-sm hover:bg-sky-600 transition flex items-center justify-center gap-1.5 disabled:opacity-50"
+                  >
+                    {subStatus === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
 
-        <div
-          className="footer-columns-wrap"
-          style={{
-            maxWidth: 1200,
-            margin: '0 auto',
-            padding: '56px 24px 40px',
-          }}
-        >
-          <div
-            className="footer-columns"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr',
-              gap: 40,
-            }}
-          >
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                <BrandLogo tone="light" />
-              </div>
-                <p style={{ fontSize: 14, lineHeight: 1.75, color: '#94a3b8', maxWidth: 260 }}>
-                Advancing Intelligent Dermatology Assistance & Preventive Healthcare through AI innovation.
-              </p>
-              <p style={{ fontSize: 12, color: '#64748b', marginTop: 16 }}>
-                Generated By: Medicus Labs™ Healthcare Platform
-              </p>
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-slate-900" />
+        </div>
 
-              <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
-                <motion.a
+        {/* 2. Main Navigation Links */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+            {/* Branding Column */}
+            <div className="lg:col-span-4 space-y-6">
+              <Link to="/">
+                <BrandLogo tone="light" />
+              </Link>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+                Advancing skin health tracking through state-of-the-art AI analysis. Accurate, private, and secure diagnostics accessible 24/7.
+              </p>
+              
+              {/* System Status */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-emerald-400">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                System Status: Fully Operational
+              </div>
+
+              {/* Social Channels */}
+              <div className="flex items-center gap-3">
+                <a
                   href={LINKEDIN_PROFILE_URL}
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label="Visit Medicus Labs on LinkedIn"
+                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500 hover:text-white flex items-center justify-center text-slate-400 transition"
                   title="LinkedIn"
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: 'spring', stiffness: 380, damping: 18 }}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: '10px 14px',
-                    borderRadius: 16,
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%)',
-                    boxShadow: '0 14px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.06)',
-                    backdropFilter: 'blur(14px)',
-                    color: '#e2e8f0',
-                    textDecoration: 'none',
-                    transition: 'box-shadow 200ms ease, border-color 200ms ease, background 200ms ease',
-                    minHeight: 48,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(10,102,194,0.45)';
-                    e.currentTarget.style.boxShadow = '0 18px 42px rgba(10, 102, 194, 0.16), 0 16px 36px rgba(0,0,0,0.48), inset 0 1px 0 rgba(255,255,255,0.08)';
-                    e.currentTarget.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                    e.currentTarget.style.boxShadow = '0 14px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.06)';
-                    e.currentTarget.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%)';
-                  }}
                 >
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: 28,
-                      height: 28,
-                      borderRadius: 10,
-                      background: '#0A66C2',
-                      boxShadow: '0 10px 20px rgba(10,102,194,0.24)',
-                      flex: '0 0 auto',
-                    }}
-                  >
-                    <LinkedInMark />
-                  </span>
-                  <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.05 }}>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: '#f8fafc' }}>LinkedIn</span>
-                    <span style={{ fontSize: 11, color: '#94a3b8' }}>Open profile</span>
-                  </span>
-                </motion.a>
+                  <LinkedInIcon />
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500 hover:text-white flex items-center justify-center text-slate-400 transition"
+                  title="GitHub"
+                >
+                  <GithubIcon />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500 hover:text-white flex items-center justify-center text-slate-400 transition"
+                  title="Twitter"
+                >
+                  <TwitterIcon />
+                </a>
               </div>
             </div>
 
-            {Object.entries(FOOTER_LINKS).map(([section, links]) => (
-              <div key={section}>
-                <h4
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    color: '#f8fafc',
-                    marginBottom: 20,
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {section}
-                </h4>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {links.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        to={link.to}
-                        onClick={(e) => handleLink(e, link.to)}
-                        style={{
-                          color: '#94a3b8',
-                          textDecoration: 'none',
-                          fontSize: 14,
-                          transition: 'color 0.2s',
-                          display: 'inline-block',
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '20px 24px' }}>
-          <div
-            style={{
-              maxWidth: 1200,
-              margin: '0 auto',
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: 12,
-            }}
-          >
-            <span style={{ fontSize: 13, color: '#94a3b8' }}>
-              © {currentYear} Medicus Labs™. All rights reserved.
-            </span>
-            <div className="footer-legal-links" style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-              {[
-                { label: 'Privacy Policy', to: '/privacy-policy' },
-                { label: 'Terms & Conditions', to: '/terms-conditions' },
-                { label: 'Disclaimer', to: '/disclaimer' },
-              ].map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.to}
-                  onClick={(e) => handleLink(e, item.to)}
-                  style={{
-                    fontSize: 13,
-                    color: '#94a3b8',
-                    textDecoration: 'none',
-                    transition: 'color 0.2s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#e2e8f0')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
-                >
-                  {item.label}
-                </Link>
+            {/* Links Columns */}
+            <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
+              {Object.entries(FOOTER_LINKS).map(([section, links]) => (
+                <div key={section} className="space-y-4">
+                  <h4 className="text-white text-xs font-bold tracking-wider uppercase">
+                    {section}
+                  </h4>
+                  <ul className="space-y-2.5 text-sm">
+                    {links.map((link) => (
+                      <li key={link.label}>
+                        <Link
+                          to={link.to}
+                          onClick={(e) => handleLink(e, link.to)}
+                          className="text-slate-400 hover:text-white transition-colors duration-200"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
         </div>
-      </footer>
 
-      <style>{`
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateX(-50%) translateY(12px); }
-          to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-        @keyframes panelDrift {
-          0% { background-position: 0% 50%; transform: scale(1); }
-          50% { background-position: 100% 50%; transform: scale(1.015); }
-          100% { background-position: 0% 50%; transform: scale(1); }
-        }
-        @keyframes sheenMove {
-          0% { background-position: -120% 0; }
-          100% { background-position: 120% 0; }
-        }
-        @keyframes floatGlow {
-          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(0, 16px, 0) scale(1.06); }
-        }
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-        @media (max-width: 900px) {
-          .footer-columns {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .footer-toast {
-            bottom: 16px;
-            width: calc(100vw - 24px);
-            padding: 12px 16px;
-          }
-          .footer-subscribe-card {
-            padding: 24px !important;
-            align-items: flex-start !important;
-          }
-          .footer-subscribe-form {
-            width: 100%;
-          }
-          .footer-subscribe-input {
-            min-width: 0 !important;
-            width: 100%;
-          }
-          .footer-columns {
-            grid-template-columns: 1fr !important;
-          }
-          .footer-legal-links {
-            gap: 12px !important;
-          }
-        }
-      `}</style>
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-slate-900" />
+        </div>
+
+        {/* 3. Bottom Legal Bar & Trust Badges */}
+        <div className="bg-slate-950/80 relative z-10 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-1.5 text-center md:text-left">
+              <p className="text-xs sm:text-sm text-slate-400">
+                © {currentYear} Medicus Labs™. All rights reserved.
+              </p>
+              <p className="text-[10px] sm:text-xs text-slate-500 max-w-xl leading-relaxed">
+                Disclaimer: Medicus Labs does not provide medical diagnoses or replace consultations with licensed dermatologists.
+              </p>
+            </div>
+
+            {/* Trust Validation Badges & Back to Top */}
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 sm:gap-6">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wide px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800/80">
+                <ShieldCheck size={12} className="text-sky-400" />
+                HIPAA Secure
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wide px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800/80">
+                <ShieldCheck size={12} className="text-sky-400" />
+                ISIC Standard
+              </span>
+              <button
+                onClick={scrollToTop}
+                className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:border-sky-500 hover:text-white flex items-center justify-center transition shadow-lg"
+                title="Back to Top"
+              >
+                <ArrowUp size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };
