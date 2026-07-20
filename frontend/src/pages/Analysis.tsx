@@ -257,37 +257,28 @@ const Analysis: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-900 selection:bg-sky-500/10 selection:text-sky-900">
+    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] selection:bg-[#206E55]/20 font-sans">
       <PremiumNavbar />
 
       <main className="relative pt-32 pb-24 px-4 sm:px-6">
-        {/* Ambient page background glow */}
-        <div className="absolute top-[10%] right-[10%] w-[450px] h-[450px] bg-gradient-to-br from-sky-400/5 to-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
-
         <div className="relative z-10 max-w-6xl mx-auto">
           {/* Header Banner */}
-          <div className="relative w-full rounded-3xl overflow-hidden mb-12 shadow-xl border border-slate-200/60">
-            <div className="absolute inset-0">
-              <img src="/media/hero-man-bench.jpg" alt="Clinical AI Diagnostics" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
-            </div>
-            <div className="relative z-10 py-16 px-8 text-center sm:px-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-xs font-semibold text-[#206E55] tracking-wider uppercase mb-4">
-                  Clinical AI Workflow
-                </span>
-                <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#141515] mb-4 tracking-tight leading-tight">
-                  Clinical Dermatology <span className="text-[#206E55]">Analysis Engine</span>
-                </h1>
-                <p className="text-[#5A554A] text-base max-w-2xl mx-auto font-medium">
-                  Follow our secure pipeline for automated classifications, ISIC validation, and instant reporting.
-                </p>
-              </motion.div>
-            </div>
+          <div className="w-full rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] py-12 px-6 sm:px-12 text-center mb-10 shadow-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-xs font-semibold text-[#206E55] tracking-wider uppercase mb-4">
+                Clinical AI Workflow
+              </span>
+              <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#141515] mb-4 tracking-tight leading-tight">
+                Clinical Dermatology <span className="text-[#206E55]">Analysis Engine</span>
+              </h1>
+              <p className="text-[#5A554A] text-base max-w-2xl mx-auto font-medium">
+                Follow our secure pipeline for automated classifications, ISIC validation, and instant reporting.
+              </p>
+            </motion.div>
           </div>
 
           {/* Stepper Widget */}
