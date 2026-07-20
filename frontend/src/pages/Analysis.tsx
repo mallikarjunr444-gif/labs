@@ -496,6 +496,7 @@ const Analysis: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Take Photo Option */}
                       <button
+                        type="button"
                         onClick={() => setShowCamera(true)}
                         className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-sky-400 hover:bg-sky-50/50 hover:scale-[1.02] active:scale-[0.98]"
                       >
@@ -510,6 +511,7 @@ const Analysis: React.FC = () => {
 
                       {/* Upload from Gallery Option */}
                       <button
+                        type="button"
                         onClick={() => fileRef.current?.click()}
                         className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-50/50 hover:scale-[1.02] active:scale-[0.98]"
                       >
@@ -523,33 +525,35 @@ const Analysis: React.FC = () => {
                       </button>
                     </div>
                   ) : (
-                    <div className="space-y-4">
-                      <div className="relative rounded-2xl border-2 border-emerald-300 bg-emerald-50/[0.05] p-4">
-                        <img src={imagePreview} alt="Preview" className="max-h-48 w-full rounded-xl object-cover shadow-sm border border-slate-100" />
-                        <span className="absolute top-3 right-3 inline-block text-xs font-bold text-emerald-600 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full border border-emerald-200 shadow-sm">
-                          ✓ Image Ready
-                        </span>
+                      <div className="space-y-4">
+                        <div className="relative rounded-2xl border-2 border-emerald-300 bg-emerald-50/[0.05] p-4">
+                          <img src={imagePreview} alt="Preview" className="max-h-48 w-full rounded-xl object-cover shadow-sm border border-slate-100" />
+                          <span className="absolute top-3 right-3 inline-block text-xs font-bold text-emerald-600 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full border border-emerald-200 shadow-sm">
+                            ✓ Image Ready
+                          </span>
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => fileRef.current?.click()}
+                            className="flex-1 px-4 py-2.5 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
+                          >
+                            <Camera size={16} />
+                            Retake Photo
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setImage(null);
+                              setImagePreview(null);
+                            }}
+                            className="px-4 py-2.5 rounded-xl border-2 border-red-200 bg-red-50 hover:bg-red-100 text-red-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
+                          >
+                            <X size={16} />
+                            Remove
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => fileRef.current?.click()}
-                          className="flex-1 px-4 py-2.5 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
-                        >
-                          <Camera size={16} />
-                          Retake Photo
-                        </button>
-                        <button
-                          onClick={() => {
-                            setImage(null);
-                            setImagePreview(null);
-                          }}
-                          className="px-4 py-2.5 rounded-xl border-2 border-red-200 bg-red-50 hover:bg-red-100 text-red-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
-                        >
-                          <X size={16} />
-                          Remove
-                        </button>
-                      </div>
-                    </div>
                   )}
 
                   <input
