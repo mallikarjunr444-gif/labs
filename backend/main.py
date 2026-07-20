@@ -654,7 +654,12 @@ async def chat_endpoint(payload: ChatPayload):
         messages_dict = [{"role": m.role, "content": m.content} for m in payload.messages]
         return StreamingResponse(
             stream_ai_response(messages_dict, image_base64=payload.image),
-            media_type="text/event-stream"
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache, no-transform",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            }
         )
     except Exception as e:
         logger.error(f"Chat endpoint error: {e}")
