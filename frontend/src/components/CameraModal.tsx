@@ -54,12 +54,18 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
         },
       };
 
+      console.log('Requesting camera access with constraints:', constraints);
       const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
       setStream(mediaStream);
 
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
+        videoRef.current.onloadedmetadata = () => {
+          console.log('Camera stream loaded - Video dimensions:', videoRef.current?.videoWidth, 'x', videoRef.current?.videoHeight);
+        };
       }
+
+      console.log('Camera stream started successfully');
     } catch (err: any) {
       console.error('Camera error:', err);
       setCameraAvailable(false);
@@ -78,6 +84,7 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
 
   useEffect(() => {
     if (isOpen && !capturedImage) {
+      console.log('Opening camera modal');
       startCamera();
     }
 
@@ -107,30 +114,69 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
+    console.log('Capture started - Video readyState:', video.readyState, 'Video dimensions:', video.videoWidth, 'x', video.videoHeight);
+
     if (!context) {
+      console.error('Failed to get canvas context');
       setIsCapturing(false);
+      setError('Unable to capture image. Please try again.');
       return;
     }
 
-    canvas.width = video.videoWidth || 1920;
-    canvas.height = video.videoHeight || 1080;
+    // Ensure video has loaded a frame
+    if (video.readyState < 2) {
+      console.error('Video not ready for capture');
+      setIsCapturing(false);
+      setError('Camera not ready. Please wait a moment and try again.');
+      return;
+    }
 
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const width = video.videoWidth || 1920;
+    const height = video.videoHeight || 1080;
 
-    canvas.toBlob(
-      (blob) => {
-        if (blob) {
-          const imageUrl = URL.createObjectURL(blob);
-          setCapturedImage(imageUrl);
-          
-          const file = new File([blob], 'camera_capture.jpg', { type: 'image/jpeg' });
-          (window as any).__cameraFile = file;
-        }
+    canvas.width = width;
+    canvas.height = height;
+
+    try {
+      // Clear canvas and draw video frame
+      context.clearRect(0, 0, width, height);
+      context.drawImage(video, 0, 0, width, height);
+
+      // Verify canvas has content
+      const imageData = context.getImageData(0, 0, width, height);
+      const hasContent = imageData.data.some((value, index) => index % 4 === 3 && value > 0); // Check alpha channel
+
+      if (!hasContent) {
+        console.error('Canvas appears to be empty');
         setIsCapturing(false);
-      },
-      'image/jpeg',
-      0.95
-    );
+        setError('Unable to capture image. Please try again.');
+        return;
+      }
+
+      canvas.toBlob(
+        (blob) => {
+          if (blob && blob.size > 0) {
+            console.log('Image successfully created - Blob size:', blob.size);
+            const imageUrl = URL.createObjectURL(blob);
+            setCapturedImage(imageUrl);
+            
+            const file = new File([blob], 'camera_capture.jpg', { type: 'image/jpeg' });
+            (window as any).__cameraFile = file;
+            console.log('Preview set, image URL:', imageUrl);
+          } else {
+            console.error('Blob creation failed or empty');
+            setIsCapturing(false);
+            setError('Unable to capture image. Please try again.');
+          }
+        },
+        'image/jpeg',
+        0.95
+      );
+    } catch (err) {
+      console.error('Error during capture:', err);
+      setIsCapturing(false);
+      setError('Unable to capture image. Please try again.');
+    }
   };
 
   const handleRetake = () => {
@@ -207,12 +253,21 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
                   />
                   <canvas ref={canvasRef} className="hidden" />
 
-                  {/* Captured Image Preview */}
-                  {capturedImage && (
-                    <div className="absolute inset-0 bg-black">
-                      <img src={capturedImage} alt="Captured" className="w-full h-full object-contain" />
-                    </div>
-                  )}
+                   {/* Captured Image Preview */}
+                   {capturedImage && (
+                     <div className="absolute inset-0 bg-black z-10">
+                       <img 
+                         src={capturedImage} 
+                         alt="Captured" 
+                         className="w-full h-full object-contain"
+                         onLoad={() => console.log('Preview image loaded successfully')}
+                         onError={(e) => {
+                           console.error('Failed to load preview image', e);
+                           setError('Failed to display captured image. Please try again.');
+                         }}
+                       />
+                     </div>
+                   )}
                 </>
               ) : (
                 <div className="flex items-center justify-center h-full">

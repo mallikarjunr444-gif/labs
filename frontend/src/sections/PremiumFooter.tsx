@@ -9,16 +9,12 @@ import {
   Check,
   Activity,
   Heart,
-  FileText
+  FileText,
+  Github,
+  Linkedin
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo';
-
-const TwitterIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
 
 const GithubIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -32,14 +28,6 @@ const LinkedinIcon: React.FC<{ size?: number; className?: string }> = ({ size = 
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <rect x="2" y="9" width="4" height="12" />
     <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-const DiscordIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <circle cx="12" cy="12" r="10" />
-    <circle cx="8" cy="12" r="2" />
-    <circle cx="16" cy="12" r="2" />
   </svg>
 );
 
@@ -86,11 +74,18 @@ const footerColumns = [
   },
 ];
 
+const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 const socialLinks = [
-  { icon: TwitterIcon, href: 'https://x.com/medicuslabs', label: 'Twitter' },
-  { icon: GithubIcon, href: 'https://github.com/mallikarjunr444-gif/labs', label: 'GitHub' },
-  { icon: LinkedinIcon, href: 'https://linkedin.com/company/medicus-labs', label: 'LinkedIn' },
-  { icon: DiscordIcon, href: 'https://discord.gg/medicuslabs', label: 'Discord' },
+  { icon: GithubIcon, href: 'https://github.com/mallikarjunr444-gif', label: 'GitHub' },
+  { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/mallikarjunr-com/', label: 'LinkedIn' },
+  { icon: InstagramIcon, href: 'https://www.instagram.com/mallikarjunr_official/', label: 'Instagram' },
 ];
 
 export const PremiumFooter: React.FC = () => {
@@ -234,23 +229,26 @@ export const PremiumFooter: React.FC = () => {
             <p className="text-xs text-[#5A554A] leading-relaxed font-medium">
               Clinical-grade AI dermatology assistant. Fast, encrypted, and built to empower patients and physicians worldwide.
             </p>
-            <div className="flex items-center gap-3 pt-2">
-              {socialLinks.map((social, idx) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={idx}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-9 h-9 rounded-full border border-[#E5E2DA] bg-white flex items-center justify-center text-[#5A554A] hover:text-[#206E55] hover:border-[#206E55] hover:scale-105 transition-all duration-200 shadow-sm"
-                  >
-                    <Icon size={16} />
-                  </a>
-                );
-              })}
-            </div>
+             <div className="flex items-center gap-3 pt-2">
+               {socialLinks.map((social, idx) => {
+                 const Icon = social.icon;
+                 return (
+                   <motion.a
+                     key={idx}
+                     href={social.href}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     aria-label={social.label}
+                     title={social.label}
+                     className="w-9 h-9 rounded-full border border-[#E5E2DA] bg-white flex items-center justify-center text-[#5A554A] hover:text-[#206E55] hover:border-[#206E55] transition-all duration-200 shadow-sm"
+                     whileHover={{ scale: 1.1, y: -2 }}
+                     whileTap={{ scale: 0.95 }}
+                   >
+                     <Icon size={16} />
+                   </motion.a>
+                 );
+               })}
+             </div>
           </motion.div>
 
           {/* 4 Responsive Columns */}
