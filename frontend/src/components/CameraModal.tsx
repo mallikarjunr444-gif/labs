@@ -129,11 +129,22 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
       return;
     }
 
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+
+    if (!context) {
+      console.error('Failed to get canvas context');
+      setError('Unable to capture image. Please try again.');
+      return;
+    }
+
     const width = video.videoWidth || 1920;
     const height = video.videoHeight || 1080;
 
     canvas.width = width;
     canvas.height = height;
+    
+    setIsCapturing(true);
 
     try {
       // Clear canvas and draw video frame
@@ -142,7 +153,7 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
 
       // Verify canvas has content
       const imageData = context.getImageData(0, 0, width, height);
-      const hasContent = imageData.data.some((value, index) => index % 4 === 3 && value > 0); // Check alpha channel
+      const hasContent = imageData.data.some((value: number, index: number) => index % 4 === 3 && value > 0); // Check alpha channel
 
       if (!hasContent) {
         console.error('Canvas appears to be empty');
@@ -152,7 +163,7 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
       }
 
       canvas.toBlob(
-        (blob) => {
+        (blob: Blob | null) => {
           if (blob && blob.size > 0) {
             console.log('Image successfully created - Blob size:', blob.size);
             const imageUrl = URL.createObjectURL(blob);
@@ -163,9 +174,9 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
             console.log('Preview set, image URL:', imageUrl);
           } else {
             console.error('Blob creation failed or empty');
-            setIsCapturing(false);
             setError('Unable to capture image. Please try again.');
           }
+          setIsCapturing(false);
         },
         'image/jpeg',
         0.95
