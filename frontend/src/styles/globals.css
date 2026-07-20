@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #0284C7;
-  --color-deep: #0284C7;
-  --color-surface: #FFFFFF;
-  --color-accent: #0EA5E9;
-  --color-glow: rgba(14, 165, 233, 0.1);
+  --color-primary: #206E55;
+  --color-deep: #141515;
+  --color-surface: #FAF9F5;
+  --color-accent: #206E55;
+  --color-glow: rgba(32, 110, 85, 0.1);
 }
 
 * {
@@ -22,8 +22,8 @@ html {
 }
 
 body {
-  background-color: #FFFFFF;
-  color: #0F172A;
+  background-color: #FAF9F5;
+  color: #141515;
   overflow-x: hidden;
 }
 
