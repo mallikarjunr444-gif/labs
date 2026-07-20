@@ -30,7 +30,7 @@ const FOOTER_LINKS: Record<string, FooterLink[]> = {
   ],
 };
 
-const PLACEHOLDER_PATHS = ['/report'];
+
 const LINKEDIN_PROFILE_URL = 'https://www.linkedin.com/in/mallikarjunr-com/';
 
 // Safe local SVG social icons
@@ -57,12 +57,8 @@ export const PremiumFooter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subStatus, setSubStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleLink = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
-    if (PLACEHOLDER_PATHS.includes(to)) {
-      e.preventDefault();
-      setToast(`"${to.replace('/', '').replace('-', ' ')}" page coming soon!`);
-      setTimeout(() => setToast(null), 3000);
-    }
+  const handleLink = (_e: React.MouseEvent<HTMLAnchorElement>, _to: string) => {
+    // All links are now active
   };
 
   const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -161,7 +157,7 @@ export const PremiumFooter: React.FC = () => {
               <div className="lg:col-span-5 bg-slate-950/40 border border-slate-800/60 p-6 sm:p-8 rounded-2xl space-y-4">
                 <h4 className="text-white font-bold text-base flex items-center gap-2">
                   <Mail size={16} className="text-sky-400" />
-                  Newsletter Subscription
+                  Get Clinical Updates
                 </h4>
                 <p className="text-slate-400 text-xs sm:text-sm">
                   Subscribe to receive clinical research, product releases, and platform enhancements.

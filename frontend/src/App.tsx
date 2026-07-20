@@ -12,6 +12,10 @@ const FAQ = lazy(() => import('./pages/FAQ'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Profile = lazy(() => import('./pages/Profile'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsConditions = lazy(() => import('./pages/TermsConditions'));
+const Disclaimer = lazy(() => import('./pages/Disclaimer'));
+const ReportIssue = lazy(() => import('./pages/ReportIssue'));
 
 import PremiumNavbar from './components/PremiumNavbar';
 import Footer from './components/Footer';
@@ -33,6 +37,12 @@ const App = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
+            {/* Legal Pages */}
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
+            {/* Support Pages */}
+            <Route path="/report" element={<ReportIssue />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

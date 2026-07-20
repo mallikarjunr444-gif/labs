@@ -1,6 +1,6 @@
 """
-Grok (xAI) Vision Integration Service
-Handles AI-powered skin disease analysis using xAI Grok Vision API
+Groq Vision Integration Service
+Handles AI-powered skin disease validation and analysis using Groq Qwen Vision API
 """
 
 import os
@@ -190,40 +190,166 @@ CONDITIONS_DB = {
 
 class GrokVisionService:
     """
-    Sends skin images to xAI Grok Vision API for dermatological analysis.
-    Falls back to HuggingFace if Grok is unavailable.
+    Sends skin images to Groq Vision API for dermatological analysis.
+    Falls back to local heuristic checking when unavailable.
     """
 
     def __init__(self):
-        self.api_key = os.getenv("XAI_API_KEY") or os.getenv("GROK_API_KEY")
-        self.api_url = os.getenv("XAI_API_URL", "https://api.x.ai/v1/chat/completions")
-        self.model = os.getenv("XAI_MODEL", "grok-2-vision")
+        # Default to the Groq API key supplied by the environment
+        self.api_key = os.getenv("GROQ_API_KEY") or os.getenv("XAI_API_KEY")
+        self.api_url = "https://api.groq.com/openai/v1/chat/completions"
+        self.model = "qwen/qwen3.6-27b"
+
+    async def validate_skin_image(self, image_path: str) -> dict:
+        """
+        Verify if the uploaded image is actually human skin or a skin condition.
+        Returns:
+            dict: {"is_skin": bool, "reason": str}
+        """
+        if not self.api_key:
+            return {"is_skin": True, "reason": "No API key configured. Skipping validation."}
+
+        try:
+            # Resize image to save tokens
+            from PIL import Image
+            import io
+            
+            img = Image.open(image_path)
+            img.thumbnail((300, 300))
+            
+            buffered = io.BytesIO()
+            img.save(buffered, format="JPEG", quality=85)
+            image_data = base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+            prompt = (
+                "You are a medical verification assistant. Check if the image shows human skin or a skin condition (acne, rash, mole, lesion, etc.). "
+                "Respond ONLY with a JSON object inside markdown code block:\n"
+                "```json\n"
+                "{\n"
+                '  "is_skin": true/false,\n'
+                '  "reason": "Explain in 1 clear sentence why this is or is not human skin."\n'
+                "}\n"
+                "```"
+            )
+
+            payload = {
+                "model": self.model,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": prompt},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{image_data}"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "temperature": 0.0,
+                "max_tokens": 400
+            }
+
+            headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+
+            logger.info("Verifying image skin classification via Groq Vision API...")
+            async with httpx.AsyncClient(timeout=25.0) as client:
+                response = await client.post(self.api_url, json=payload, headers=headers)
+                
+            if response.status_code == 200:
+                content = response.json()["choices"][0]["message"]["content"]
+                
+                # Parse JSON
+                import re
+                import json
+                
+                json_match = re.search(r'```json\s*(\{.*?\}).*?```', content, re.DOTALL)
+                if json_match:
+                    parsed = json.loads(json_match.group(1))
+                    return {
+                        "is_skin": parsed.get("is_skin", True),
+                        "reason": parsed.get("reason", "Verification complete.")
+                    }
+                
+                brace_start = content.find('{')
+                brace_end = content.rfind('}')
+                if brace_start != -1 and brace_end != -1:
+                    parsed = json.loads(content[brace_start:brace_end + 1])
+                    return {
+                        "is_skin": parsed.get("is_skin", True),
+                        "reason": parsed.get("reason", "Verification complete.")
+                    }
+                    
+            elif response.status_code == 429:
+                logger.warning("Groq API rate limit during validation. Retrying once after short delay...")
+                import asyncio
+                await asyncio.sleep(3.0)
+                async with httpx.AsyncClient(timeout=25.0) as client:
+                    response = await client.post(self.api_url, json=payload, headers=headers)
+                if response.status_code == 200:
+                    content = response.json()["choices"][0]["message"]["content"]
+                    json_match = re.search(r'```json\s*(\{.*?\}).*?```', content, re.DOTALL)
+                    if json_match:
+                        parsed = json.loads(json_match.group(1))
+                        return {
+                            "is_skin": parsed.get("is_skin", True),
+                            "reason": parsed.get("reason", "Verification complete.")
+                        }
+            
+            logger.error(f"Groq validation failed with status {response.status_code}. Defaulting to True.")
+            return {"is_skin": True, "reason": "API error. Skipping validation."}
+
+        except Exception as e:
+            logger.error(f"Error during skin image validation: {str(e)}")
+            return {"is_skin": True, "reason": f"Exception encountered: {str(e)}. Skipping validation."}
 
     async def analyze_skin_image(self, image_path: str) -> Dict:
         """
-        Analyze a skin image using Grok Vision API.
+        Analyze a skin image using Groq Vision API.
 
         Returns a structured result with condition, confidence, severity, and recommendations.
         """
+        import time
+        start_time = time.time()
+        logger.info(f"📁 Starting AI Inference pipeline for image: {image_path}")
+
         if not self.api_key:
-            logger.warning("No XAI_API_KEY found, using fallback analysis")
-            return self._fallback_analysis(image_path)
+            logger.error("❌ Groq API key is missing. Cannot perform image analysis.")
+            raise RuntimeError("API key is not configured for Groq Vision service.")
 
         try:
-            # Read and encode image
-            with open(image_path, "rb") as img_file:
-                image_data = base64.b64encode(img_file.read()).decode("utf-8")
+            # 1. Preprocessing
+            logger.info("⚙️ Preprocessing image: Loading with Pillow...")
+            from PIL import Image
+            import io
+            
+            img = Image.open(image_path)
+            orig_w, orig_h = img.size
+            logger.info(f"📸 Original image resolution: {orig_w}x{orig_h}, Format: {img.format}, Mode: {img.mode}")
+            
+            # Resizing to 500x500 standard dimensions while preserving aspect ratio
+            img.thumbnail((500, 500))
+            new_w, new_h = img.size
+            logger.info(f"📐 Resized image to: {new_w}x{new_h} for model input compliance")
+            
+            buffered = io.BytesIO()
+            img.save(buffered, format="JPEG", quality=85)
+            resized_bytes = len(buffered.getvalue())
+            logger.info(f"📦 Preprocessed image size: {resized_bytes / 1024:.2f} KB (JPEG encoded)")
+            
+            image_data = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
-            # Determine mime type
-            ext = Path(image_path).suffix.lower()
-            mime_map = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".gif": "image/gif"}
-            mime_type = mime_map.get(ext, "image/jpeg")
-
-            logger.info(f"Sending image to Grok Vision API for analysis...")
-
+            # 2. Model Inference Call
+            logger.info(f"🧠 Initiating model inference with {self.model} model on Groq...")
             prompt = """You are a board-certified dermatologist AI assistant. Analyze this skin image and provide a clinical assessment.
 
-IMPORTANT: Respond ONLY with valid JSON in this exact format, no other text:
+IMPORTANT: Respond ONLY with a valid JSON block inside markdown code tags:
+```json
 {
   "condition": "One of: Acne Vulgaris, Melanoma, Eczema, Psoriasis, Rosacea, Vitiligo, Dermatitis, Fungal Infection, Healthy Skin",
   "confidence": <number between 0 and 100>,
@@ -243,6 +369,7 @@ IMPORTANT: Respond ONLY with valid JSON in this exact format, no other text:
     {"condition": "name", "probability": <0-100>}
   ]
 }
+```
 
 Analyze carefully. If the image does not show a clear skin condition or appears normal, classify as "Healthy Skin" with appropriate confidence. Do NOT default to Melanoma."""
 
@@ -256,7 +383,7 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
                             {
                                 "type": "image_url",
                                 "image_url": {
-                                    "url": f"data:{mime_type};base64,{image_data}"
+                                    "url": f"data:image/jpeg;base64,{image_data}"
                                 },
                             },
                         ],
@@ -271,44 +398,71 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
                 "Content-Type": "application/json",
             }
 
-            async with httpx.AsyncClient(timeout=60.0) as client:
+            async with httpx.AsyncClient(timeout=45.0) as client:
                 response = await client.post(
                     self.api_url,
                     json=payload,
                     headers=headers,
                 )
 
+            processing_time_ms = int((time.time() - start_time) * 1000)
+            logger.info(f"⏱️ Model HTTP request completed in {processing_time_ms} ms. Status code: {response.status_code}")
+
             if response.status_code == 200:
                 result = response.json()
                 content = result["choices"][0]["message"]["content"]
+                logger.info(f"📥 Received assistant output (length: {len(content)} chars)")
 
                 # Parse JSON from response
                 parsed = self._parse_grok_response(content)
                 if parsed:
-                    logger.info(f"Grok analysis complete: {parsed.get('condition')} ({parsed.get('confidence')}%)")
+                    parsed["model_version"] = self.model
+                    parsed["processing_time_ms"] = processing_time_ms
+                    logger.info(f"✅ Prediction success: {parsed.get('condition')} ({parsed.get('confidence')}%)")
                     return parsed
                 else:
-                    logger.warning("Failed to parse Grok response, using fallback")
-                    return self._fallback_analysis(image_path)
+                    logger.error("❌ Failed to parse JSON format from Groq vision assistant content.")
+                    raise RuntimeError("Failed to parse visual prediction JSON output from AI model.")
 
+            elif response.status_code == 429:
+                logger.warning("⚠️ Groq API rate limit hit. Retrying once after 4s delay...")
+                await asyncio.sleep(4.0)
+                async with httpx.AsyncClient(timeout=45.0) as client:
+                    response = await client.post(
+                        self.api_url,
+                        json=payload,
+                        headers=headers,
+                    )
+                processing_time_ms = int((time.time() - start_time) * 1000)
+                if response.status_code == 200:
+                    result = response.json()
+                    content = result["choices"][0]["message"]["content"]
+                    parsed = self._parse_grok_response(content)
+                    if parsed:
+                        parsed["model_version"] = self.model
+                        parsed["processing_time_ms"] = processing_time_ms
+                        logger.info(f"✅ Prediction success on retry: {parsed.get('condition')} ({parsed.get('confidence')}%)")
+                        return parsed
+                
+                logger.error(f"❌ Groq API error after rate limit retry: {response.status_code} - {response.text}")
+                raise RuntimeError(f"AI Model rate limit exceeded: {response.text}")
             else:
-                logger.error(f"Grok API error: {response.status_code} - {response.text}")
-                return self._fallback_analysis(image_path)
+                logger.error(f"❌ Groq API error status {response.status_code}: {response.text}")
+                raise RuntimeError(f"AI Model inference error: {response.text}")
 
-        except httpx.TimeoutException:
-            logger.error("Grok API timeout")
-            return self._fallback_analysis(image_path)
+        except httpx.TimeoutException as te:
+            logger.error("❌ Groq API connection timeout")
+            raise RuntimeError(f"Connection timeout with AI prediction service: {str(te)}")
         except Exception as e:
-            logger.error(f"Grok analysis error: {str(e)}")
-            return self._fallback_analysis(image_path)
+            logger.error(f"❌ Exception in AI Inference pipeline: {str(e)}")
+            raise RuntimeError(f"Dermatological prediction pipeline failed: {str(e)}")
 
     def _parse_grok_response(self, content: str) -> Optional[Dict]:
-        """Parse the JSON response from Grok."""
+        """Parse the JSON response from Groq."""
         import json
         import re
 
         # Try to extract JSON from the response
-        # Sometimes the model wraps it in markdown code blocks
         json_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', content, re.DOTALL)
         if json_match:
             content = json_match.group(1)
@@ -330,7 +484,6 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
 
         # Validate and normalize the condition name
         condition = data.get("condition", "Healthy Skin")
-        # Match against known conditions
         matched_condition = None
         for known in CONDITIONS_DB:
             if known.lower() in condition.lower():
@@ -338,7 +491,6 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
                 break
 
         if not matched_condition:
-            # Try partial matching
             condition_lower = condition.lower()
             mappings = {
                 "acne": "Acne Vulgaris",
@@ -386,72 +538,10 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
 
     def _fallback_analysis(self, image_path: str) -> Dict:
         """
-        Fallback when Grok API is unavailable.
-        Uses basic image analysis heuristics.
+        No fallback allowed. Raise an exception if inference fails.
         """
-        import random
-
-        # Try basic image color analysis for a rough heuristic
-        try:
-            from PIL import Image
-            import numpy as np
-
-            img = Image.open(image_path).convert("RGB")
-            img_array = np.array(img)
-
-            # Calculate basic color statistics
-            mean_r = np.mean(img_array[:, :, 0])
-            mean_g = np.mean(img_array[:, :, 1])
-            mean_b = np.mean(img_array[:, :, 2])
-
-            # Simple heuristic based on dominant colors
-            if mean_r > 180 and mean_g > 160 and mean_b > 140:
-                # Light/normal skin tone
-                condition = "Healthy Skin"
-                confidence = random.uniform(72, 88)
-            elif mean_r > 160 and mean_g < 120:
-                # Reddish - possible inflammation/acne/rosacea
-                conditions = ["Acne Vulgaris", "Rosacea", "Dermatitis"]
-                condition = random.choice(conditions)
-                confidence = random.uniform(65, 82)
-            elif mean_r > 140 and mean_g > 100 and mean_b < 100:
-                # Reddish-brown - possible eczema/dermatitis
-                conditions = ["Eczema", "Dermatitis", "Psoriasis"]
-                condition = random.choice(conditions)
-                confidence = random.uniform(68, 85)
-            else:
-                # Varied - could be multiple things
-                conditions = ["Eczema", "Acne Vulgaris", "Dermatitis", "Psoriasis"]
-                condition = random.choice(conditions)
-                confidence = random.uniform(60, 78)
-
-        except Exception:
-            # If image analysis fails, default to healthy
-            condition = "Healthy Skin"
-            confidence = 70.0
-
-        condition_info = CONDITIONS_DB.get(condition, CONDITIONS_DB["Healthy Skin"])
-
-        return {
-            "condition": condition,
-            "confidence": round(confidence, 1),
-            "severity": condition_info["severity"],
-            "severity_level": condition_info["severity_level"],
-            "color": condition_info["color"],
-            "description": condition_info["description"],
-            "key_findings": ["Image analyzed with heuristic method", "Grok Vision API unavailable"],
-            "symptoms": {
-                "redness": round(random.uniform(10, 60), 0),
-                "scaling": round(random.uniform(5, 45), 0),
-                "itching": round(random.uniform(10, 55), 0),
-                "inflammation": round(random.uniform(5, 40), 0),
-                "pigmentation": round(random.uniform(5, 35), 0),
-            },
-            "differential_diagnoses": [],
-            "recommendations": condition_info["recommendations"],
-            "precautions": condition_info["precautions"],
-            "fallback": True,
-        }
+        logger.error(f"❌ AI Inference failed for image {image_path}. Fallbacks are disabled.")
+        raise RuntimeError("The dermatology AI model failed to produce a prediction for this image.")
 
 
 # Singleton instance

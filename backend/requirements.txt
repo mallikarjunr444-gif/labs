@@ -24,6 +24,7 @@ aiofiles==23.2.1
 requests==2.31.0
 Pillow
 numpy
+reportlab
 
 # Environment
 python-dotenv==1.0.0
