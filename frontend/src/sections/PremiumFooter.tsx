@@ -96,15 +96,33 @@ const socialLinks = [
 export const PremiumFooter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [subError, setSubError] = useState('');
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+    setIsLoading(true);
+    setSubError('');
+    try {
+      const res = await fetch('http://127.0.0.1:8000/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.detail || 'Subscription failed');
       setIsSubscribed(true);
       setEmail('');
-      setTimeout(() => setIsSubscribed(false), 4000);
+      setTimeout(() => setIsSubscribed(false), 5000);
+    } catch (err: any) {
+      setSubError(err?.message || 'Could not subscribe. Please try again.');
+      setTimeout(() => setSubError(''), 4000);
+    } finally {
+      setIsLoading(false);
     }
   };
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -155,7 +173,7 @@ export const PremiumFooter: React.FC = () => {
             <div className="lg:col-span-5">
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10" size={16} />
                   <input
                     type="email"
                     required
@@ -167,12 +185,18 @@ export const PremiumFooter: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="px-7 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm flex items-center justify-center gap-2 flex-shrink-0"
+                  disabled={isLoading || isSubscribed}
+                  className="px-7 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm flex items-center justify-center gap-2 flex-shrink-0 disabled:opacity-70"
                 >
                   {isSubscribed ? (
                     <>
-                      Subscribed!
+                      Subscribed! 🎉
                       <Check size={16} />
+                    </>
+                  ) : isLoading ? (
+                    <>
+                      Sending...
+                      <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                     </>
                   ) : (
                     <>
@@ -182,6 +206,14 @@ export const PremiumFooter: React.FC = () => {
                   )}
                 </button>
               </form>
+              {subError && (
+                <p className="text-red-500 text-xs mt-2 text-center">{subError}</p>
+              )}
+              {isSubscribed && (
+                <p className="text-[#206E55] text-xs mt-2 text-center font-semibold">
+                  ✅ Welcome email sent to your inbox!
+                </p>
+              )}
             </div>
           </div>
         </motion.div>

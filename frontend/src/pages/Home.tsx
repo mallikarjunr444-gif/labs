@@ -8,7 +8,13 @@ import {
   FileText,
   ChevronRight,
   Send,
-  Bot
+  Bot,
+  Sparkles,
+  Shield,
+  Clock,
+  ShieldCheck,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import VideoCtaSection from '../components/VideoCtaSection';
@@ -30,6 +36,68 @@ const Home: React.FC = () => {
   const [activeCondition, setActiveCondition] = useState<number | null>(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatQuery, setChatQuery] = useState('');
+  const [isMuted, setIsMuted] = useState(() => localStorage.getItem('medicus_hero_sound') === 'on' ? false : true);
+  
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const simulatorRef = useRef<HTMLDivElement | null>(null);
+
+  const toggleSound = () => {
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    localStorage.setItem('medicus_hero_sound', nextMuted ? 'off' : 'on');
+
+    // Clear any running fade
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+
+    if (!nextMuted) {
+      // Create audio element on first use
+      if (!audioRef.current) {
+        const audio = new Audio('/forest-ambient.mp3');
+        audio.loop = true;
+        audio.volume = 0;
+        audioRef.current = audio;
+      }
+      audioRef.current.play().catch(() => {});
+      // Fade in
+      let vol = audioRef.current.volume;
+      fadeIntervalRef.current = setInterval(() => {
+        if (!audioRef.current) return;
+        vol = Math.min(vol + 0.02, 0.35);
+        audioRef.current.volume = vol;
+        if (vol >= 0.35 && fadeIntervalRef.current) {
+          clearInterval(fadeIntervalRef.current);
+          fadeIntervalRef.current = null;
+        }
+      }, 80);
+    } else {
+      if (!audioRef.current) return;
+      // Fade out then pause
+      let vol = audioRef.current.volume;
+      fadeIntervalRef.current = setInterval(() => {
+        if (!audioRef.current) return;
+        vol = Math.max(vol - 0.02, 0);
+        audioRef.current.volume = vol;
+        if (vol <= 0 && fadeIntervalRef.current) {
+          clearInterval(fadeIntervalRef.current);
+          fadeIntervalRef.current = null;
+          audioRef.current?.pause();
+        }
+      }, 80);
+    }
+  };
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    };
+  }, []);
+
+  const scrollToSimulator = () => {
+    simulatorRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleStartAnalysis = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,18 +132,142 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#141515] overflow-x-hidden selection:bg-[#206E55]/20 font-sans">
       
-      {/* ── HERO SECTION ── */}
-      <section className="relative px-4 sm:px-6 lg:px-8 pb-12 pt-36 sm:pt-44 lg:pt-48">
+      {/* ── TOP CINEMATIC FULLSCREEN HERO SECTION ── */}
+      <section className="relative w-full min-h-screen flex flex-col justify-between items-center text-center text-white overflow-hidden pt-32 pb-10 px-4 select-none">
+        
+        {/* Background Image / Overlay (Forest Lake Image) */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url('/hero-bg.jpg'), url('https://images.unsplash.com/photo-ESkw2ayO2As?auto=format&fit=crop&w=2560&q=80')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            filter: 'brightness(0.75) contrast(1.05)',
+          }}
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/55 via-black/40 to-black/75" />
+
+        {/* Content Container */}
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center space-y-6 my-auto pt-6">
+          
+          {/* #1 Health AI Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-xs sm:text-sm font-bold uppercase tracking-widest text-white shadow-lg"
+          >
+            <Sparkles size={14} className="text-emerald-300" />
+            #1 Health AI Worldwide
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display leading-[1.08] tracking-tight text-white max-w-3xl text-balance"
+          >
+            AI Dermatology That Helps You Understand Your Skin
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-base sm:text-xl font-medium text-white/90 max-w-2xl leading-relaxed text-balance"
+          >
+            Clinical-grade AI reference models, instant ISIC validation, and physician-ready reports—built for complete privacy.
+          </motion.p>
+
+          {/* Premium CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-wrap items-center justify-center gap-4 pt-4"
+          >
+            <Link to="/analysis">
+              <button className="px-8 py-4 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm sm:text-base transition-all shadow-xl hover:scale-105 inline-flex items-center gap-2.5 border border-white/20">
+                Start Free Analysis
+                <ArrowRight size={18} />
+              </button>
+            </Link>
+
+            <button
+              onClick={scrollToSimulator}
+              className="px-8 py-4 rounded-full bg-white/15 backdrop-blur-md text-white hover:bg-white/25 font-bold text-sm sm:text-base transition-all border border-white/30 shadow-xl hover:scale-105 inline-flex items-center gap-2.5"
+            >
+              Learn More
+            </button>
+          </motion.div>
+
+          {/* Trust Indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex items-center justify-center gap-6 pt-2 text-xs sm:text-sm font-semibold text-white/80"
+          >
+            <span className="flex items-center gap-1.5">
+              <Clock size={14} /> Zero Waiting Time
+            </span>
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck size={14} /> Safe and Secure
+            </span>
+          </motion.div>
+        </div>
+
+        {/* Bottom Bar: Sound Toggle & Perfectly Centered Scroll Indicator */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-3 items-center px-4 sm:px-8 pt-6 border-t border-white/15 text-xs font-bold uppercase tracking-widest text-white/80">
+          
+          {/* Sound Button (Left) */}
+          <div className="justify-self-start">
+            <button
+              onClick={toggleSound}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition text-xs font-bold"
+            >
+              <span className="flex items-center gap-2">
+                {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                {isMuted ? 'SOUND: OFF' : 'SOUND: ON'}
+              </span>
+            </button>
+          </div>
+
+          {/* Centered Scroll Indicator (Center) */}
+          <div className="flex flex-col items-center gap-1.5 justify-self-center cursor-pointer" onClick={scrollToSimulator}>
+            <span className="text-[10px] tracking-[0.2em] font-extrabold text-white/90">SCROLL</span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-5 h-8 rounded-full border-2 border-white/70 flex items-start justify-center p-1"
+            >
+              <div className="w-1 h-2 rounded-full bg-white" />
+            </motion.div>
+          </div>
+
+          {/* Trust Badge (Right) */}
+          <div className="justify-self-end hidden sm:flex items-center gap-2 text-[11px] font-extrabold tracking-wider text-white/70">
+            <Shield size={14} className="text-emerald-400" />
+            <span>HIPAA ENFORCED</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECOND HERO SECTION ("Hi, I'm Medicus Labs") ── */}
+      <section ref={simulatorRef} className="relative px-4 sm:px-6 lg:px-8 pb-12 pt-20 sm:pt-28">
         <div className="mx-auto max-w-[880px] text-left sm:text-center flex flex-col items-center">
           <p className="mb-4 text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#206E55]">
             Trusted Clinical AI Companion
           </p>
-          <h1 className="m-0 text-4xl sm:text-6xl lg:text-[4.6rem] font-extrabold font-display leading-[1.06] text-[#141515] tracking-tight max-w-4xl text-balance">
+          <h2 className="m-0 text-4xl sm:text-6xl lg:text-[4.6rem] font-extrabold font-display leading-[1.06] text-[#141515] tracking-tight max-w-4xl text-balance">
             Hi, I’m Medicus Labs
-          </h1>
-          <h2 className="mt-4 text-xl sm:text-3xl font-medium leading-snug tracking-tight text-[#141515] max-w-2xl">
-            Secure. Private. Built on clinical models.
           </h2>
+          <h3 className="mt-4 text-xl sm:text-3xl font-medium leading-snug tracking-tight text-[#141515] max-w-2xl">
+            Secure. Private. Built on clinical models.
+          </h3>
           <p className="mt-4 text-[#5A554A] text-base sm:text-lg max-w-xl leading-relaxed">
             Tell me about your skin symptoms or upload a clinical photograph. Get an instant diagnostic reference and physician-ready report in minutes.
           </p>
