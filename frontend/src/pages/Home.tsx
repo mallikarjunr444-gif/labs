@@ -7,12 +7,14 @@ import {
   Activity,
   FileText,
   ChevronRight,
-  Send
+  Send,
+  Bot
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import VideoCtaSection from '../components/VideoCtaSection';
 import { PremiumFooter } from '../sections';
 import { publicInfoLinks } from './PublicInfoPage';
+import AIChatModal from '../components/AIChatModal';
 
 // ── SAMPLE PRE-SET SYMPTOM PROMPTS ──
 const SAMPLE_PROMPTS = [
@@ -26,14 +28,19 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const [symptomText, setSymptomText] = useState('');
   const [activeCondition, setActiveCondition] = useState<number | null>(0);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatQuery, setChatQuery] = useState('');
 
   const handleStartAnalysis = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/analysis', { state: { initialQuery: symptomText } });
+    setChatQuery(symptomText);
+    setIsChatOpen(true);
   };
 
   const handlePromptClick = (prompt: string) => {
     setSymptomText(prompt);
+    setChatQuery(prompt);
+    setIsChatOpen(true);
   };
 
   const stats = [
@@ -464,6 +471,27 @@ const Home: React.FC = () => {
 
       {/* ── PREMIUM FOOTER ── */}
       <PremiumFooter />
+
+      {/* ── FLOATING LIVE AI CHAT TRIGGER ── */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => {
+            setChatQuery('');
+            setIsChatOpen(true);
+          }}
+          className="flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-xs uppercase tracking-wider shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 border border-white/20"
+        >
+          <Bot size={18} />
+          <span>Ask Medicus AI</span>
+        </button>
+      </div>
+
+      {/* ── LIVE STREAMING AI CHAT MODAL ── */}
+      <AIChatModal
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        initialQuery={chatQuery}
+      />
     </div>
   );
 };

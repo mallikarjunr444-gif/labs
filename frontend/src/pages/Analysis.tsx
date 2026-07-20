@@ -1,5 +1,6 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { 
   User, UploadCloud, ShieldCheck, Cpu, Brain, FileText, Mail, 
   ChevronDown, AlertTriangle, ShieldAlert, CheckCircle, Download, RefreshCw,
@@ -118,6 +119,21 @@ const Analysis: React.FC = () => {
   const [validating, setValidating] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const fileRef = useRef<HTMLInputElement | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.initialImage) {
+      const initialImg = location.state.initialImage;
+      setImagePreview(initialImg);
+      fetch(initialImg)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const file = new File([blob], 'skin_upload.jpg', { type: blob.type || 'image/jpeg' });
+          setImage(file);
+        })
+        .catch((err) => console.error("Error setting image from state:", err));
+    }
+  }, [location.state]);
 
   const steps = [
     { id: 1, label: 'Patient Info', icon: User },

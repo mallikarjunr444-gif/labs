@@ -7,22 +7,25 @@ import os
 import logging
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from datetime import datetime
 import aiofiles
 from pathlib import Path
+from pydantic import BaseModel
+from typing import List, Optional
 
 # Load environment variables
 load_dotenv()
 
-# Import Grok Vision Service
+# Import Grok Vision Service & Chat Service
 from grok_service import grok_service, CONDITIONS_DB
 from skinive_service import skinive_service
 from report_generator import report_generator
 from email_service import send_welcome_email
+from chat_service import stream_ai_response
 
 
 # Configure logging
@@ -497,6 +500,34 @@ async def root():
         "docs": "/api/docs",
         "version": "2.0.0",
     }
+
+
+# ============================================================================
+# STREAMING AI CHAT ENDPOINT
+# ============================================================================
+
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+class ChatPayload(BaseModel):
+    messages: List[ChatMessage]
+    image: Optional[str] = None
+
+@app.post("/api/chat")
+async def chat_endpoint(payload: ChatPayload):
+    """
+    Real-time streaming AI Chat endpoint for clinical dermatology assistance.
+    """
+    try:
+        messages_dict = [{"role": m.role, "content": m.content} for m in payload.messages]
+        return StreamingResponse(
+            stream_ai_response(messages_dict, image_base64=payload.image),
+            media_type="text/event-stream"
+        )
+    except Exception as e:
+        logger.error(f"Chat endpoint error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to process chat request.")
 
 
 # ============================================================================
