@@ -12,7 +12,8 @@ type CameraModalProps = {
 const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const initializedRef = useRef(false);
   const [error, setError] = useState<string | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('environment');
@@ -22,13 +23,23 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
   const [videoPlaying, setVideoPlaying] = useState(false);
 
   const stopStream = useCallback(() => {
-    if (stream) {
-      stream.getTracks().forEach(track => track.stop());
-      setStream(null);
+    if (streamRef.current) {
+      console.log('Stopping camera stream');
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+      initializedRef.current = false;
     }
-  }, [stream]);
+  }, []);
 
   const startCamera = useCallback(async () => {
+    // Prevent multiple calls
+    if (initializedRef.current) {
+      console.log('Camera already initialized, skipping');
+      return;
+    }
+
+    console.log('Starting camera...');
+    initializedRef.current = true;
     setError(null);
     setCapturedImage(null);
     setCameraAvailable(true);
@@ -36,15 +47,6 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         throw new Error('Camera API not supported in this browser');
-      }
-
-      // Check for multiple cameras
-      try {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const videoDevices = devices.filter(device => device.kind === 'videoinput');
-        setHasMultipleCameras(videoDevices.length > 1);
-      } catch (e) {
-        setHasMultipleCameras(false);
       }
 
       const constraints: MediaStreamConstraints = {
@@ -55,52 +57,53 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
         },
       };
 
-      console.log('Requesting camera access with constraints:', constraints);
+      console.log('Requesting camera access...');
       const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-      setStream(mediaStream);
+      streamRef.current = mediaStream;
+      console.log('MediaStream created');
 
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
         videoRef.current.onloadedmetadata = () => {
-          console.log('Camera stream loaded - Video dimensions:', videoRef.current?.videoWidth, 'x', videoRef.current?.videoHeight);
+          console.log('Video loaded:', videoRef.current?.videoWidth, 'x', videoRef.current?.videoHeight);
         };
         videoRef.current.onplay = () => {
-          console.log('Video is now playing');
+          console.log('Video playing');
           setVideoPlaying(true);
-        };
-        videoRef.current.onpause = () => {
-          console.log('Video paused');
-          setVideoPlaying(false);
         };
       }
 
-      console.log('Camera stream started successfully');
+      console.log('Camera started successfully');
     } catch (err: any) {
       console.error('Camera error:', err);
+      initializedRef.current = false; // Allow retry
       setCameraAvailable(false);
       
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        setError('Camera access was denied. Please allow camera access in your browser settings or upload an image from your device.');
-      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-        setError('No camera found on this device. Please upload an image from your device.');
-      } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
-        setError('Camera is in use by another application or not readable.');
+      if (err.name === 'NotAllowedError') {
+        setError('Camera access denied. Please allow camera access or upload an image.');
+      } else if (err.name === 'NotFoundError') {
+        setError('No camera found. Please upload an image.');
       } else {
-        setError('Unable to access camera. Please upload an image from your device.');
+        setError('Unable to access camera. Please upload an image.');
       }
     }
   }, [facingMode]);
 
+  // Start camera only when modal opens
   useEffect(() => {
-    if (isOpen && !capturedImage) {
-      console.log('Opening camera modal');
+    if (isOpen) {
+      console.log('Modal opened, starting camera');
       startCamera();
     }
 
     return () => {
-      stopStream();
+      // Only cleanup on unmount
+      if (!isOpen) {
+        console.log('Modal closed, cleaning up');
+        stopStream();
+      }
     };
-  }, [isOpen, facingMode, capturedImage, startCamera, stopStream]);
+  }, [isOpen]); // Only depend on isOpen
 
   useEffect(() => {
     // Prevent body scroll when modal is open
@@ -206,6 +209,7 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
   };
 
   const handleClose = () => {
+    console.log('Closing camera');
     stopStream();
     setCapturedImage(null);
     setError(null);
