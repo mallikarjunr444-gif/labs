@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #0EA5E9;
-  --color-deep: #FFFFFF;
-  --color-surface: #F9FAFB;
-  --color-accent: #0369A1;
-  --color-glow: rgba(3, 105, 161, 0.1);
+  --color-primary: #206E55;
+  --color-deep: #141515;
+  --color-surface: #FAF9F5;
+  --color-accent: #206E55;
+  --color-glow: rgba(32, 110, 85, 0.1);
 }
 
 * {
@@ -22,8 +22,8 @@ html {
 }
 
 body {
-  background-color: #FFFFFF;
-  color: #111827;
+  background-color: #FAF9F5;
+  color: #141515;
   overflow-x: hidden;
 }
 
@@ -244,7 +244,7 @@ input[type='text'], input[type='email'], input[type='tel'],
 input[type='number'], input[type='password'], select, textarea {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #000000;
+  color: inherit;
   border-radius: 12px;
   padding: 12px 16px;
   font-size: 15px;

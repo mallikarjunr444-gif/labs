@@ -169,7 +169,7 @@ export const PremiumFooter: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@company.com"
-                    className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition"
+                    className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm !text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition caret-sky-400"
                   />
                   <button
                     type="submit"

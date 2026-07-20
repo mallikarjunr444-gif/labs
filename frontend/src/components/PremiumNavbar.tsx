@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,7 +5,6 @@ import { Menu, X, ArrowRight, Sparkles, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import BrandLogo from './BrandLogo';
 import AuthModal from './AuthModal';
-import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -24,8 +22,6 @@ const PremiumNavbar: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const location = useLocation();
-  const heroPaths = ['/'];
-  const isHeroPage = heroPaths.includes(location.pathname);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -35,6 +31,7 @@ const PremiumNavbar: React.FC = () => {
 
   useEffect(() => { setIsOpen(false); }, [location]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 1023px)');
     const onChange = () => setIsMobile(mq.matches);
@@ -46,21 +43,31 @@ const PremiumNavbar: React.FC = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'} ${isHeroPage && !isScrolled ? 'bg-transparent text-white' : 'bg-white shadow-glow-md text-slate-900 border-b'}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.02)]' : 'py-4.5'
+        } bg-[#FAF9F5] border-b border-[#E5E2DA]/80`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6" style={{ transformStyle: 'preserve-3d' }}>
-          <Link to="/" className="relative z-10 inline-flex items-center" aria-label="Medicus Labs home">
-            <BrandLogo tone={isHeroPage && !isScrolled ? 'light' : 'dark'} />
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+          <Link to="/" className="inline-flex items-center" aria-label="Medicus Labs home">
+            <BrandLogo tone="dark" />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center">
-            <div className="flex items-center gap-8 text-sm md:flex">
+          <div className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center gap-7 text-sm font-semibold">
               {navItems.map((item) => (
-                <Link key={item.name} to={item.href} className={`hover:opacity-90 ${isHeroPage && !isScrolled ? 'text-white/85 hover:text-white' : 'text-slate-700 hover:text-slate-900'} transition-transform hover:-translate-y-0.5` }>
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`transition-colors duration-200 ${
+                    location.pathname === item.href
+                      ? 'text-[#206E55]'
+                      : 'text-[#5A554A] hover:text-[#206E55]'
+                  }`}
+                >
                   {item.name}
                 </Link>
               ))}
@@ -71,46 +78,48 @@ const PremiumNavbar: React.FC = () => {
           <div className="hidden lg:flex items-center gap-4">
             {isAuthenticated ? (
               <>
-                <Link to="/profile" className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900 transition">
-                  <User size={16} />
+                <Link to="/profile" className="flex items-center gap-1.5 text-sm font-semibold text-[#5A554A] hover:text-[#206E55] transition">
+                  <User size={15} />
                   Profile
                 </Link>
                 <button
                   type="button"
                   onClick={logout}
-                  className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:text-slate-900 transition"
+                  className="rounded-full border border-[#D1CDC2] bg-white px-4 py-2 text-xs font-bold text-[#5A554A] hover:border-[#206E55] hover:text-[#206E55] transition"
                 >
                   Sign Out
                 </button>
               </>
             ) : (
               <>
-                <LiquidButton onClick={() => setShowAuthModal(true)} className={`text-sm font-semibold ${isHeroPage && !isScrolled ? 'text-white' : 'text-slate-900'}`}>
+                <button
+                  type="button"
+                  onClick={() => setShowAuthModal(true)}
+                  className="text-sm font-semibold text-[#5A554A] hover:text-[#206E55] transition"
+                >
                   Login / Sign Up
-                </LiquidButton>
+                </button>
               </>
             )}
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/analysis"
-                className="relative group inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm overflow-hidden bg-sky-500"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-sm transition-colors"
               >
-                <span className="relative z-10 text-white font-bold flex items-center gap-2">
-                  <Sparkles size={14} />
-                  Start Analysis
-                  <ArrowRight className="group-hover:translate-x-0.5 transition-transform" size={15} />
-                </span>
+                <Sparkles size={13} />
+                Start Analysis
+                <ArrowRight size={14} className="ml-0.5" />
               </Link>
             </motion.div>
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-gray-100 text-text-primary transition hover:bg-gray-200 lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E2DA] bg-[#FAF9F5] text-[#141515] transition hover:bg-[#F3F1EB] lg:hidden active:scale-95"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </motion.nav>
@@ -124,24 +133,24 @@ const PremiumNavbar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-white/95 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-[#FAF9F5]/98 backdrop-blur-sm" />
             <motion.div
               className="relative flex min-h-screen flex-col gap-1 px-5 pb-8 pt-24 sm:px-8 sm:pt-28"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.08 }}
             >
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.name}
-                  initial={{ x: -20, opacity: 0 }}
+                  initial={{ x: -10, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.05 * i }}
+                  transition={{ delay: 0.04 * i }}
                 >
                   <Link
                     to={item.href}
-                    className="block border-b border-gray-200 py-3.5 text-xl font-semibold text-text-primary transition hover:text-accent-blue sm:py-4 sm:text-2xl"
+                    className="block border-b border-[#E5E2DA]/60 py-3.5 text-lg font-bold text-[#141515] transition hover:text-[#206E55] sm:py-4"
                   >
                     {item.name}
                   </Link>
@@ -150,37 +159,37 @@ const PremiumNavbar: React.FC = () => {
               <div className="pt-8">
                 {isAuthenticated ? (
                   <>
-                    <Link to="/profile" className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-slate-100 text-text-primary font-bold text-lg mb-4">
-                      <User size={18} />
+                    <Link to="/profile" className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-[#F3F1EB] text-[#141515] font-bold text-base mb-4">
+                      <User size={16} />
                       Profile
                     </Link>
                     <button
                       type="button"
                       onClick={logout}
-                      className="flex items-center justify-center gap-2 w-full py-4 rounded-lg border border-gray-200 bg-white text-text-primary font-bold text-lg"
+                      className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full border border-[#D1CDC2] bg-white text-[#5A554A] font-bold text-base"
                     >
                       Sign Out
                     </button>
                   </>
                 ) : (
                   <>
-                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-4 rounded-lg bg-slate-100 text-text-primary font-bold text-lg mb-4">Login / Sign Up</button>
+                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-3.5 rounded-full bg-[#F3F1EB] text-[#141515] font-bold text-base mb-4">Login / Sign Up</button>
                   </>
                 )}
               </div>
               <motion.div
-                className="pt-8"
-                initial={{ y: 20, opacity: 0 }}
+                className="pt-4"
+                initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.2 }}
               >
                 <Link
                   to="/analysis"
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-sky-500 text-white font-bold text-lg shadow-glow-md"
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-[#206E55] text-white font-bold text-base shadow-sm"
                 >
-                  <Sparkles size={18} />
+                  <Sparkles size={16} />
                   Start Analysis
-                  <ArrowRight size={18} />
+                  <ArrowRight size={16} />
                 </Link>
               </motion.div>
             </motion.div>
