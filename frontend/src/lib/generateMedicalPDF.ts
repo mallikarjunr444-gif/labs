@@ -222,7 +222,7 @@ function drawFooter(doc: jsPDF) {
     y + 0.5,
   );
   doc.text(
-    `© ${new Date().getFullYear()} Medicus Labs™. All rights reserved.  |  medicuslabs.com`,
+    `© ${new Date().getFullYear()} Medicus Labs™. All rights reserved.  |  medicuslabs.app`,
     PAGE_W - MARGIN,
     y + 0.5,
     { align: 'right' },
@@ -591,7 +591,7 @@ export async function generateMedicalPDF(data: PDFReportData): Promise<void> {
   doc.setFontSize(7.5);
   doc.setFont('helvetica', 'normal');
   setFont(doc, [148, 163, 184]);
-  doc.text(`${data.reportId}  ·  ${dateStr}  ·  medicuslabs.com`, PAGE_W / 2, y + 14.5, { align: 'center' });
+  doc.text(`${data.reportId}  ·  ${dateStr}  ·  medicuslabs.app`, PAGE_W / 2, y + 14.5, { align: 'center' });
 
   // ── Save ──────────────────────────────────────────────────────────────
   const filename = `MedicusLabs_Report_${data.reportId}_${now.toISOString().slice(0, 10)}.pdf`;

@@ -96,7 +96,7 @@ def _welcome_html(subscriber_email: str) -> str:
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding-bottom:28px;">
-                    <a href="https://medicuslabs.com/analysis"
+                    <a href="https://medicuslabs.app/analysis"
                        style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#0ea5e9,#06b6d4);color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;border-radius:10px;letter-spacing:0.3px;">
                       Start Your Free Skin Analysis →
                     </a>
@@ -114,7 +114,7 @@ def _welcome_html(subscriber_email: str) -> str:
           <tr>
             <td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:24px 48px;text-align:center;">
               <p style="margin:0 0 6px;color:#64748b;font-size:12px;">
-                This email was sent to <strong>{subscriber_email}</strong> because you subscribed at medicuslabs.com.
+                This email was sent to <strong>{subscriber_email}</strong> because you subscribed at medicuslabs.app.
               </p>
               <p style="margin:0;color:#94a3b8;font-size:12px;">
                 © {year} Medicus Labs™. All rights reserved.
@@ -151,7 +151,7 @@ async def send_welcome_email(subscriber_email: str) -> bool:
             f"Welcome to Medicus Labs!\n\n"
             f"Thank you for subscribing. You'll receive clinical research updates, "
             f"platform enhancements, and product releases.\n\n"
-            f"Start your free skin analysis at https://medicuslabs.com/analysis\n\n"
+            f"Start your free skin analysis at https://medicuslabs.app/analysis\n\n"
             f"© {datetime.now().year} Medicus Labs™"
         )
         msg.attach(MIMEText(plain, "plain"))
