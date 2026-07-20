@@ -81,7 +81,12 @@ if FRONTEND_DIST.exists():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://labs-8b2b3.web.app",
+        "https://labs-8b2b3.firebaseapp.com",
+        "http://localhost:5173",
+        "http://localhost:3000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
