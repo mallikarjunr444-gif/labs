@@ -185,10 +185,13 @@ async def start_analysis(
             content = await file.read()
             await f.write(content)
 
+        logger.info("--------------------------------------------------")
+        logger.info("Step 1 ✓ Image uploaded")
         logger.info(f"✅ File saved: {file_path}")
 
         # Validate that the image actually shows human skin/lesion using Groq Vision API
         validation = await grok_service.validate_skin_image(str(file_path))
+        logger.info("Step 2 ✓ Image validated")
         if not validation.get("is_skin", True):
             try:
                 os.remove(file_path)
@@ -212,12 +215,21 @@ async def start_analysis(
             powered_by_engine = ai_result.get("powered_by", "Skinive.Cloud AI API")
         else:
             logger.info(f"[{fullName}] Running Grok Vision AI analysis...")
-            ai_result = await grok_service.analyze_skin_image(str(file_path))
+            ai_result = await grok_service.analyze_skin_image(
+                image_path=str(file_path),
+                patient_name=fullName,
+                patient_age=age,
+                patient_gender=gender,
+                patient_email=email,
+                patient_mobile=mobile,
+            )
             is_fallback = ai_result.get("fallback", False)
             powered_by_engine = "Grok Vision AI" if not is_fallback else "Heuristic Analysis (Grok unavailable)"
 
         condition = ai_result.get("condition", "Healthy Skin")
         confidence = ai_result.get("confidence", 50.0)
+        if confidence <= 1.0:
+            confidence = confidence * 100
         severity = ai_result.get("severity", "Mild")
         severity_level = ai_result.get("severity_level", "low")
         description = ai_result.get("description", "")
@@ -245,6 +257,8 @@ async def start_analysis(
         processing_time_ms = ai_result.get("processing_time_ms", 860)
         lesions = ai_result.get("lesions", [])
 
+        logger.info("Step 6 ✓ Prediction complete")
+        logger.info("Step 7 ✓ Report generated (Pathology dictionary prepared)")
         logger.info(f"✅ AI Analysis complete: {condition} ({confidence}%) - Severity: {severity}")
 
         # Generate analysis ID
@@ -294,6 +308,8 @@ async def start_analysis(
             if not pdf_file.exists():
                 raise HTTPException(status_code=500, detail="PDF report generation failed - file not created")
             
+            logger.info("Step 8 ✓ PDF generated")
+            logger.info("--------------------------------------------------")
             logger.info(f"✅ PDF report generated successfully: {pdf_path}")
             
         except Exception as pdf_error:

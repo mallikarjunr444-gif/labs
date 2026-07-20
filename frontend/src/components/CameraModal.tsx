@@ -310,13 +310,13 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
 
             {/* Bottom Controls */}
             {cameraAvailable && !error && (
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 bg-gradient-to-t from-black/80 to-transparent z-20">
                 {capturedImage ? (
                   /* After Capture Controls */
                   <div className="flex gap-3 max-w-md mx-auto">
                     <button
                       onClick={handleRetake}
-                      className="flex-1 px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold flex items-center justify-center gap-2 transition backdrop-blur-sm border border-white/20"
+                      className="flex-1 px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold flex items-center justify-center gap-2 transition backdrop-blur-sm border border-white/20 text-sm sm:text-base"
                     >
                       <RefreshCw size={20} />
                       Retake
@@ -324,7 +324,7 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
                     <button
                       onClick={handleConfirm}
                       disabled={isCapturing}
-                      className="flex-1 px-6 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white font-bold flex items-center justify-center gap-2 transition shadow-lg"
+                      className="flex-1 px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white font-bold flex items-center justify-center gap-2 transition shadow-lg text-sm sm:text-base"
                     >
                       <ArrowRight size={20} />
                       Continue Analysis
@@ -332,15 +332,15 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
                   </div>
                 ) : (
                   /* Camera Controls */
-                  <div className="flex items-center justify-center gap-6 max-w-md mx-auto">
+                  <div className="flex items-center justify-center gap-4 sm:gap-6 max-w-md mx-auto">
                     {/* Flip Camera Button */}
                     {hasMultipleCameras && (
                       <button
                         onClick={switchCamera}
-                        className="p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm border border-white/20"
+                        className="p-3 sm:p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm border border-white/20"
                         aria-label="Switch camera"
                       >
-                        <RefreshCw size={24} />
+                        <RefreshCw size={20} className="sm:w-6 sm:h-6" />
                       </button>
                     )}
 
@@ -348,19 +348,19 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
                     <button
                       onClick={handleCapture}
                       disabled={isCapturing}
-                      className="p-6 rounded-full bg-white hover:bg-white/90 disabled:bg-white/50 text-black transition shadow-2xl"
+                      className="p-4 sm:p-6 rounded-full bg-white hover:bg-white/90 disabled:bg-white/50 text-black transition shadow-2xl"
                       aria-label="Capture photo"
                     >
-                      <Camera size={32} />
+                      <Camera size={28} className="sm:w-8 sm:h-8" />
                     </button>
 
                     {/* Gallery Button */}
                     <button
                       onClick={handleClose}
-                      className="p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm border border-white/20"
+                      className="p-3 sm:p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition backdrop-blur-sm border border-white/20"
                       aria-label="Open gallery"
                     >
-                      <Image size={24} />
+                      <Image size={20} className="sm:w-6 sm:h-6" />
                     </button>
                   </div>
                 )}

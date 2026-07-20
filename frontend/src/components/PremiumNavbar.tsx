@@ -144,7 +144,7 @@ const PremiumNavbar: React.FC = () => {
 
           {/* Mobile toggle */}
           <button
-            className={`flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden active:scale-95 ${isHome ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-[#E5E2DA] bg-[#FAF9F5] text-[#141515] hover:bg-[#F3F1EB]'}`}
+            className={`flex h-11 w-11 items-center justify-center rounded-full border transition lg:hidden active:scale-95 ${isHome ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-[#E5E2DA] bg-[#FAF9F5] text-[#141515] hover:bg-[#F3F1EB]'}`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
           >

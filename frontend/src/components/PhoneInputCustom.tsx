@@ -118,7 +118,12 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      const target = e.target as HTMLElement;
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(target) &&
+        !target.closest('.phone-dropdown-portal')
+      ) {
         setOpen(false);
         setSearch('');
       }
@@ -215,13 +220,16 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
 
       {open && createPortal(
         <motion.div
+          className="phone-dropdown-portal"
           initial={{ opacity: 0, scale: 0.95, y: position === 'down' ? -10 : 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: position === 'down' ? -10 : 10 }}
           transition={{ duration: 0.15, ease: 'easeOut' }}
           style={{
             position: 'fixed',
-            left: buttonRef.current ? buttonRef.current.getBoundingClientRect().left : 0,
+            left: buttonRef.current 
+              ? Math.max(8, Math.min(buttonRef.current.getBoundingClientRect().left, window.innerWidth - Math.min(320, window.innerWidth - 32) - 8))
+              : 8,
             [position === 'down' ? 'top' : 'bottom']: position === 'down' 
               ? (buttonRef.current ? buttonRef.current.getBoundingClientRect().bottom + 6 : 0)
               : (buttonRef.current ? window.innerHeight - buttonRef.current.getBoundingClientRect().top + 6 : 0),

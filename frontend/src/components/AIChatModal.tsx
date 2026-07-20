@@ -209,7 +209,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="w-full max-w-4xl h-[90vh] sm:h-[85vh] rounded-3xl bg-[#FAF9F5] border border-[#E5E2DA] shadow-2xl flex flex-col overflow-hidden text-[#141515]"
+          className="w-full max-w-4xl h-[90dvh] sm:h-[85vh] rounded-3xl bg-[#FAF9F5] border border-[#E5E2DA] shadow-2xl flex flex-col overflow-hidden text-[#141515]"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}

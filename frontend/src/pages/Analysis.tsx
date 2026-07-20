@@ -208,16 +208,31 @@ const Analysis: React.FC = () => {
     }
 
     setValidating(true);
+    setLoading(true);
     setErrors({});
 
-    const stepsMessages = [
-      { s: 2, msg: 'Verifying uploaded image...' },
-      { s: 3, msg: 'ISIC validation in progress...' },
-      { s: 4, msg: 'AI model analysis running...' },
-      { s: 5, msg: 'Generating risk prediction...' },
-      { s: 6, msg: 'Preparing clinical report...' },
-      { s: 7, msg: 'Finalizing patient delivery...' },
+    const progressSteps = [
+      'Step 1/8: Uploading patient skin image to clinical servers...',
+      'Step 2/8: Validating image for human skin structure...',
+      'Step 3/8: Preprocessing pixels and mapping features...',
+      'Step 4/8: Activating ISIC-trained AI model weights...',
+      'Step 5/8: Running deep convolutional neural network inference...',
+      'Step 6/8: Generating clinical disease prediction & confidence...',
+      'Step 7/8: Compiling differential diagnoses & care guidelines...',
+      'Step 8/8: Building hospital-grade 1-page PDF report...',
     ];
+
+    let currentStepIndex = 0;
+    setStep(1);
+    setLoadingStep(progressSteps[0]);
+
+    const interval = setInterval(() => {
+      if (currentStepIndex < progressSteps.length - 1) {
+        currentStepIndex++;
+        setLoadingStep(progressSteps[currentStepIndex]);
+        setStep(currentStepIndex + 1);
+      }
+    }, 1200);
 
     try {
       const formData = new FormData();
@@ -234,22 +249,44 @@ const Analysis: React.FC = () => {
         body: formData,
       });
 
+      clearInterval(interval);
+
       if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.detail || errData.error || 'Analysis failed');
+        let errorMessage = `Analysis failed (Server returned status ${res.status}).`;
+        try {
+          const errData = await res.json();
+          if (errData && errData.detail) {
+            if (typeof errData.detail === 'string') {
+              errorMessage = errData.detail;
+            } else if (Array.isArray(errData.detail)) {
+              errorMessage = errData.detail.map((err: any) => `${err.loc.join('.')}: ${err.msg}`).join(', ');
+            } else {
+              errorMessage = JSON.stringify(errData.detail);
+            }
+          } else if (errData && errData.error) {
+            errorMessage = errData.error;
+          }
+        } catch (e) {
+          try {
+            const text = await res.text();
+            if (text && text.length < 200) {
+              errorMessage = text;
+            }
+          } catch (te) {}
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await res.json();
       
-      setValidating(false);
-      setLoading(true);
-
-      // Validation succeeded, play the stepper animations
-      for (const { s, msg } of stepsMessages) {
-        setStep(s);
-        setLoadingStep(msg);
-        await new Promise((r) => setTimeout(r, 900));
+      // Fast-forward any remaining steps smoothly
+      for (let i = currentStepIndex; i < progressSteps.length; i++) {
+        setStep(i + 1);
+        setLoadingStep(progressSteps[i]);
+        await new Promise((r) => setTimeout(r, 350));
       }
+      
+      setValidating(false);
 
       const confidenceRaw = Number(data?.prediction?.confidence_percentage ?? data?.prediction?.confidence ?? 0);
       const normalized: AnalysisResult = {
@@ -276,9 +313,10 @@ const Analysis: React.FC = () => {
       setStep(7);
       setLoading(false);
     } catch (err: any) {
+      clearInterval(interval);
       setValidating(false);
       setLoading(false);
-      setErrors((p) => ({ ...p, submit: err?.message || 'Analysis failed' }));
+      setErrors((p) => ({ ...p, submit: err?.message || 'Connection failed. Please check if the backend server is running.' }));
       setStep(1);
     }
   };
@@ -287,38 +325,25 @@ const Analysis: React.FC = () => {
     if (!result) return;
     
     setLoading(true);
-    setLoadingStep('Generating PDF report...');
+    setLoadingStep('Step 8/8: Building hospital-grade 1-page PDF report...');
     
     try {
       const API = getApiBaseUrl();
       const url = `${API}/reports/${result.reportId}/download`;
       
-      // Fetch the PDF
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || errorData.message || 'Failed to generate report');
-      }
-      
-      // Get the blob
-      const blob = await response.blob();
-      
-      // Create download link
-      const downloadUrl = window.URL.createObjectURL(blob);
+      // Trigger native browser download directly via anchor
       const link = document.createElement('a');
-      link.href = downloadUrl;
+      link.href = url;
+      link.target = '_blank';
       link.setAttribute('download', `Medicus_Labs_Report_${result.reportId}.pdf`);
       document.body.appendChild(link);
       link.click();
       link.remove();
       
-      // Cleanup
-      window.URL.revokeObjectURL(downloadUrl);
-      
+      // Keep loading spinner briefly for visual feedback
+      await new Promise((r) => setTimeout(r, 1000));
       setLoading(false);
       setLoadingStep('');
-      
     } catch (err: any) {
       setLoading(false);
       setLoadingStep('');
@@ -352,7 +377,7 @@ const Analysis: React.FC = () => {
           </div>
 
           {/* Stepper Widget */}
-          <div className="bg-white border border-[#E5E2DA] p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto">
+          <div className="bg-white border border-[#E5E2DA] p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             <div className="flex justify-between items-center min-w-[760px] px-4">
               {steps.map((s, i) => {
                 const Icon = s.icon;
@@ -741,10 +766,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Inflammatory immune responses inside the dermis"
     ],
     remedies: [
-      "Wash face gently with a mild, non-abrasive cleanser twice daily.",
-      "Apply warm, damp compresses to deep, painful cysts to relieve pressure.",
-      "Stay well-hydrated to help flush out skin impurities.",
-      "Do not scrub skin aggressively, which worsens active inflammation."
+      "Wash face gently with a mild, non-abrasive, pH-balanced cleanser twice daily.",
+      "Apply warm, damp compresses to deep, painful cysts for 10-15 minutes to relieve pressure.",
+      "Apply diluted tea tree oil (5%) locally to inflamed spots as a natural antibacterial.",
+      "Use honey and turmeric face masks to calm skin redness and reduce inflammation.",
+      "Stay well-hydrated by drinking at least 2.5 liters of clean water daily to flush impurities.",
+      "Cleanse your skin immediately after sweating to prevent follicle blockage.",
+      "Do not scrub skin aggressively, which damages the barrier and worsens active inflammation."
     ],
     treatments: [
       "Over-the-counter Salicylic Acid or Benzoyl Peroxide gels.",
@@ -805,9 +833,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "High number of atypical moles (dysplastic nevi)"
     ],
     remedies: [
-      "No home remedies are safe or effective for treating melanoma.",
-      "Protect the lesion from any physical trauma, friction, or scratching.",
-      "Minimize all UV exposure to prevent further DNA damage."
+      "Apply pure organic aloe vera or cold-pressed rosehip oil to surrounding skin to maintain elasticity.",
+      "Consume foods rich in cellular antioxidants and polyphenols (e.g. green tea, berries, spinach, and walnuts).",
+      "Keep the lesion covered with sterile, non-adherent gauze to protect it from physical friction or trauma.",
+      "Wash surrounding skin areas using only lukewarm water and mild, soap-free, hypoallergenic cleansers.",
+      "Maintain a daily photographic record of the lesion at identical lighting and angles to track updates.",
+      "Eat healthy fatty acids (olive oil, avocados) to support cellular membrane integrity.",
+      "Avoid all sun exposure and wear high UPF-rated clothing over the area."
     ],
     treatments: [
       "Surgical excision (removing the tumor and surrounding healthy margin).",
@@ -867,10 +899,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Immune system hypersensitivity to ordinary substances"
     ],
     remedies: [
-      "Take lukewarm baths (10-15 mins) and moisturize immediately within 3 minutes.",
-      "Apply cool, wet compresses to active flare-ups to reduce severe itching.",
-      "Use colloidal oatmeal additives in bathing water to soothe irritation.",
-      "Use a cool-mist humidifier in your home to maintain moisture levels."
+      "Take short, lukewarm baths (10-15 mins) and apply heavy moisturizer within 3 minutes of drying.",
+      "Apply cool, wet compresses (soaked in water or green tea) to active flare-ups to reduce severe itching.",
+      "Use colloidal oatmeal additives in bathing water to calm epidermal irritation and dryness.",
+      "Apply virgin coconut oil or sunflower seed oil daily to boost the skin's lipid barrier.",
+      "Use a cool-mist humidifier in your home and bedroom to maintain relative humidity around 50%.",
+      "Wear soft, smooth, breathable silk or 100% organic cotton fabrics next to your skin.",
+      "Practice wet-wrap therapy at night by applying moisturizer under a damp layer of clothing."
     ],
     treatments: [
       "Topical corticosteroid ointments to calm acute flare-ups.",
@@ -931,10 +966,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Infections, stress, cold weather, and skin injuries (Koebner response)"
     ],
     remedies: [
-      "Keep skin lubricated with heavy moisturizers immediately after bathing.",
-      "Soak in lukewarm baths with Epsom salt or coal tar solution.",
-      "Get safe, controlled solar exposure (10-15 minutes of midday sun) to help slow cell growth.",
-      "Use scale-softening creams containing salicylic acid."
+      "Keep skin heavily lubricated with thick, ointment-based moisturizers immediately after bathing.",
+      "Soak in lukewarm baths containing Epsom salt, Dead Sea salts, or coal tar solution to soothe plaques.",
+      "Get safe, controlled solar exposure (10-15 minutes of midday sun) to slow rapid skin cell turnover.",
+      "Apply pure Aloe Vera gel or virgin coconut oil to calm plaque-associated redness and irritation.",
+      "Use scale-softening creams containing Salicylic Acid, Lactic Acid, or Urea to lift scale buildup.",
+      "Drink anti-inflammatory herbal teas like turmeric or ginger tea to support systemic health.",
+      "Use a humidifier indoors to prevent dry, scaly skin patches from worsening during winter months."
     ],
     treatments: [
       "Topical Vitamin D analogues and prescription topical steroids.",
@@ -995,10 +1033,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Genetics combined with trigger exposure (heat, spicy foods, alcohol)"
     ],
     remedies: [
-      "Wash face with lukewarm water and a very gentle sensitive cleanser.",
-      "Apply cool compresses to calm acute flushing episodes.",
-      "Use green-tinted primers to visually neutralize facial redness.",
-      "Ensure sun protection is worn at all times."
+      "Wash face using only fingertips with lukewarm water and an ultra-gentle, non-foaming sensitive cleanser.",
+      "Apply cool, damp compresses to the face for 5-10 minutes to calm active hot flushing episodes.",
+      "Use green-tinted moisturizers or primers to visually neutralize persistent facial redness.",
+      "Incorporate topical licorice root, green tea extract, or chamomile to soothe vascular reactivity.",
+      "Wear wide-brimmed hats and use physical Zinc Oxide sunscreen to block UV-induced flushing.",
+      "Allow hot beverages or soups to cool down to lukewarm temperature before consuming.",
+      "Avoid facial friction, washcloths, or scrubbing brushes that irritate the blood vessels."
     ],
     treatments: [
       "Topical metronidazole, azelaic acid, or ivermectin creams.",
@@ -1060,9 +1101,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Genetic factors influencing immune regulation"
     ],
     remedies: [
-      "Use broad-spectrum SPF 50+ to protect depigmented spots from severe sunburn.",
-      "Apply cosmetic camouflage creams or self-tanning products to even out skin tone.",
-      "Take Vitamin B12 and Folic Acid supplements, which some studies link to pigment stabilization."
+      "Apply broad-spectrum SPF 50+ mineral sunscreen to all depigmented spots to prevent severe sunburns.",
+      "Apply professional cosmetic camouflage creams or self-tanning products to blend depigmented margins.",
+      "Take oral Vitamin B12, Folic Acid, and Vitamin C supplements to support antioxidant cell defense.",
+      "Consume antioxidant-rich foods like walnuts, blueberries, and spinach to combat oxidative stress.",
+      "Apply mustard oil mixed with turmeric powder locally (a traditional remedy to help stimulate melanocytes).",
+      "Avoid micro-injuries, cuts, or friction on the skin to prevent the development of new patches (Koebner effect).",
+      "Use mild, pH-balanced barrier protection creams to maintain overall epidermal health."
     ],
     treatments: [
       "Prescription topical steroids to calm autoimmune response in early stages.",
@@ -1122,10 +1167,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Compromised skin barrier function"
     ],
     remedies: [
-      "Apply cool, wet compresses to the affected area to soothe itching.",
-      "Take lukewarm baths containing colloidal oatmeal.",
-      "Apply over-the-counter 1% hydrocortisone cream to calm inflammation.",
-      "Rinse skin immediately with cool water if exposed to a known allergen."
+      "Apply cool, wet compresses to the affected skin area for 15 minutes to reduce swelling and itching.",
+      "Take lukewarm baths containing colloidal oatmeal to calm epidermal irritation and itching.",
+      "Apply over-the-counter 1% hydrocortisone cream to active patches to reduce localized redness.",
+      "Rinse skin immediately with cool water and soap-free cleanser if exposed to a known allergen or irritant.",
+      "Apply fragrance-free ceramides or plain petroleum jelly to seal the damaged epidermal barrier.",
+      "Soak a cloth in cool chamomile tea and lay it over the rash as a natural anti-inflammatory.",
+      "Avoid wearing wool or tight synthetic clothing over active dermatitis rashes."
     ],
     treatments: [
       "Prescription topical corticosteroids to reduce swelling and redness.",
@@ -1186,10 +1234,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Excessive sweating and lack of ventilation in skin folds"
     ],
     remedies: [
-      "Keep the infected area completely clean and thoroughly dry.",
-      "Change socks, underwear, and activewear at least once daily.",
-      "Wash bath towels after each use to prevent spreading to other body parts.",
-      "Avoid walking barefoot in public gyms, showers, or pools."
+      "Keep the infected area completely clean and thoroughly dry after showering.",
+      "Change socks, underwear, and gym clothes at least once daily (or immediately after sweating).",
+      "Wash bath towels, bedsheets, and clothing after each use to prevent fungal spreading.",
+      "Avoid walking barefoot in public gyms, locker rooms, public showers, or pools.",
+      "Apply diluted tea tree oil (diluted in carrier oil) as a natural topical antifungal agent.",
+      "Apply plain Greek yogurt (contains live Lactobacillus cultures) to superficial yeast-prone skin folds.",
+      "Disinfect gym bags and athletic footwear regularly using antifungal spray."
     ],
     treatments: [
       "Over-the-counter topical antifungal creams (Clotrimazole, Terbinafine).",
@@ -1250,9 +1301,13 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
       "Adequate hydration and balanced nutrition"
     ],
     remedies: [
-      "Maintain your daily gentle cleansing and moisturizing routine.",
-      "Stay hydrated by drinking at least 2 liters of water daily.",
-      "Incorporate antioxidant serums (Vitamin C) to prevent environmental aging."
+      "Maintain a daily double-cleansing routine at night to completely remove city pollution and SPF.",
+      "Stay hydrated by drinking at least 2 to 2.5 liters of clean water daily.",
+      "Incorporate antioxidant serums like Vitamin C or Niacinamide to defend against environmental aging.",
+      "Apply a hydrating hyaluronic acid serum under your moisturizer to lock in plump hydration.",
+      "Massage face gently for 2 minutes daily to stimulate blood flow and lymphatic drainage.",
+      "Use silk pillowcases to prevent skin friction and morning sleep creases.",
+      "Perform monthly skin self-examinations to establish your baseline health."
     ],
     treatments: [
       "No medical treatments are required.",
@@ -1302,6 +1357,442 @@ const MEDICAL_CATALOG: Record<string, ConditionDetails> = {
     faqs: [
       { q: "How often should I wash my face?", a: "Twice daily: once in the morning to remove overnight oils, and once at night to clear pollution, makeup, and sunscreen." },
       { q: "Why is daily sunscreen important?", a: "Daily sunscreen prevents up to 90% of premature skin aging (wrinkles, dark spots) and drastically cuts your risk of skin cancer." }
+    ]
+  },
+  "Basal Cell Carcinoma": {
+    overview: "Basal Cell Carcinoma (BCC) is the most common form of skin cancer, arising from basal cells in the deepest layer of the epidermis. It grows very slowly and rarely spreads, but can cause local tissue destruction if untreated.",
+    causes: [
+      "Chronic, cumulative exposure to ultraviolet (UV) radiation from sunlight or tanning beds",
+      "Fair skin type that burns easily and rarely tans",
+      "History of radiation therapy or immune suppression"
+    ],
+    remedies: [
+      "Keep the lesion clean and dry, covering it with a sterile bandage if it bleeds.",
+      "Apply protective barrier ointments like pure petroleum jelly to prevent local crusting.",
+      "Maintain a clean environment to avoid secondary bacterial infection on open sores.",
+      "Track any bleeding, crusting, or growth changes weekly using photography.",
+      "Protect the surrounding skin with zinc-based mineral sunscreen."
+    ],
+    treatments: [
+      "Surgical excision (removing the tumor with a margin of healthy skin).",
+      "Mohs micrographic surgery (recommended for facial lesions to preserve healthy tissue).",
+      "Electrodesiccation and curettage (scraping and burning the tumor).",
+      "Cryosurgery (freezing the lesion with liquid nitrogen)."
+    ],
+    dos: [
+      "Wear wide-brimmed hats and UPF 50+ clothing when outdoors.",
+      "Apply broad-spectrum sunscreen with SPF 50+ daily.",
+      "Get professional skin checks annually."
+    ],
+    donts: [
+      "Do not scratch, pick, or attempt to pop the pearly nodule or sore.",
+      "Avoid direct sun exposure during peak UV hours (10 AM to 4 PM).",
+      "Do not apply strong chemical exfoliants or acids over the lesion."
+    ],
+    products: [
+      "100% pure petroleum jelly (Vaseline)",
+      "Mineral broad-spectrum SPF 50+ sunscreen",
+      "Gentle non-soap hydrating face wash"
+    ],
+    dietSupport: [
+      "Foods rich in antioxidants and Vitamin E (almonds, sunflower seeds)",
+      "Beta-carotene rich vegetables (carrots, sweet potatoes)",
+      "Cruciferous vegetables (broccoli, brussels sprouts)"
+    ],
+    dietAvoid: [
+      "Refined carbohydrates and processed trans-fats",
+      "Excessive alcohol intake",
+      "High sodium foods"
+    ],
+    lifestyle: [
+      "Avoid tanning beds and artificial UV tanning completely.",
+      "Examine your skin from head to toe once a month.",
+      "Seek shade whenever your shadow is shorter than you are."
+    ],
+    whenToSeeDoctor: [
+      "You notice a pearly bump, a flat pink patch, or an open sore that bleeds, oozes, or crusts and does not heal after 3-4 weeks."
+    ],
+    references: [
+      { name: "Skin Cancer Foundation - BCC Guide", url: "https://www.skincancer.org/skin-cancer-information/basal-cell-carcinoma/" },
+      { name: "AAD - Basal Cell Carcinoma Treatment", url: "https://www.aad.org/public/diseases/skin-cancer/types/basal-cell-carcinoma" }
+    ],
+    faqs: [
+      { q: "Does basal cell carcinoma spread?", a: "BCC rarely metastasizes (spreads) to distant parts of the body, but it can grow deep into local tissues, muscle, and bone if ignored." },
+      { q: "Is BCC life-threatening?", a: "It is rarely life-threatening, but early treatment is essential to prevent disfigurement, especially on the face." }
+    ]
+  },
+  "Squamous Cell Carcinoma": {
+    overview: "Squamous Cell Carcinoma (SCC) is the second most common form of skin cancer, originating in the squamous cells of the outer epidermis. It can grow rapidly and has a higher risk of spreading to lymph nodes compared to BCC.",
+    causes: [
+      "Long-term, cumulative exposure to intense solar ultraviolet (UV) radiation",
+      "Frequent use of tanning beds and lamps",
+      "Chronic skin inflammation, burns, or scars",
+      "Immunosuppressive treatments or medical conditions"
+    ],
+    remedies: [
+      "Protect the rough, scaly lesion from scratching, rubbing, or physical trauma.",
+      "Keep the skin area clean with mild, fragrance-free cleanser and lukewarm water.",
+      "Apply protective sterile dressings to open, crusty, or bleeding sores.",
+      "Eat a diet high in anti-inflammatory carotenoids and flavonoids to support skin resilience.",
+      "Track the lesion dimensions monthly using a ruler and camera logs."
+    ],
+    treatments: [
+      "Surgical excision with clear margins.",
+      "Mohs micrographic surgery (especially for lesions on ears, lips, and nose).",
+      "Cryosurgery or radiation therapy for early or hard-to-reach lesions.",
+      "Topical chemotherapy or immune response modifiers for superficial SCC."
+    ],
+    dos: [
+      "Perform monthly self-checks for new or changing crusty spots.",
+      "Use broad-spectrum SPF 50+ mineral sunscreen daily.",
+      "Keep the wound covered and clean after clinical excisions."
+    ],
+    donts: [
+      "Do not attempt to peel, scrape, or pick off the scaly crust or horn.",
+      "Avoid raw sun exposure during peak daylight hours.",
+      "Do not use hot water or abrasive scrubs on the affected area."
+    ],
+    products: [
+      "Hypoallergenic barrier ointment (Aquaphor)",
+      "High SPF mineral sunscreen",
+      "Soft cotton protective bandages"
+    ],
+    dietSupport: [
+      "Polyphenol-rich foods (green tea, dark chocolate, pomegranates)",
+      "Cold-water fish rich in omega-3 fatty acids",
+      "Foods high in Vitamin C (citrus, bell peppers)"
+    ],
+    dietAvoid: [
+      "High glycemic index processed sugars",
+      "Fried foods containing oxidized lipids",
+      "Red meat and cured products"
+    ],
+    lifestyle: [
+      "Always wear UV-blocking sunglasses and wide-brimmed hats outdoors.",
+      "Avoid occupational exposure to industrial chemicals and coal tar.",
+      "Maintain regular scheduled check-ups with a dermatologist."
+    ],
+    whenToSeeDoctor: [
+      "A firm red nodule, a scaly sore that bleeds or crusts, or a rapid-growing cutaneous horn appears on sun-exposed areas."
+    ],
+    references: [
+      { name: "Mayo Clinic - Squamous Cell Carcinoma", url: "https://www.mayoclinic.org/diseases-conditions/squamous-cell-carcinoma/" },
+      { name: "AAD - SCC Symptoms & Causes", url: "https://www.aad.org/public/diseases/skin-cancer/types/squamous-cell-carcinoma" }
+    ],
+    faqs: [
+      { q: "Can squamous cell carcinoma metastasize?", a: "Yes, SCC can spread to regional lymph nodes and other organs, particularly if it occurs on the lip, ear, or in immunocompromised patients." },
+      { q: "Is SCC curable?", a: "Yes, when caught early, the vast majority of SCCs are easily treated and completely cured with simple surgical procedures." }
+    ]
+  },
+  "Actinic Keratosis": {
+    overview: "Actinic Keratosis (AK) is a rough, scaly, precancerous patch on the skin that develops after years of sun exposure. If left untreated, a small percentage of AK lesions can transition into Squamous Cell Carcinoma.",
+    causes: [
+      "Long-term, cumulative exposure to ultraviolet (UV) radiation from sunlight or tanning booths",
+      "Older age and history of frequent sunburns",
+      "Weakened immune system"
+    ],
+    remedies: [
+      "Moisturize the rough patch regularly with a urea or lactic acid lotion to soften scales.",
+      "Gently cleanse the area daily with mild soap-free cleansers.",
+      "Apply protective zinc mineral sunscreen to prevent further solar damage.",
+      "Use cool compresses to soothe any itching or burning sensation.",
+      "Take oral Vitamin B3 (Nicotinamide 500mg twice daily), which studies show helps reduce AK formation."
+    ],
+    treatments: [
+      "Cryotherapy (freezing the patch with liquid nitrogen).",
+      "Topical 5-Fluorouracil (5-FU) or Imiquimod creams to target abnormal cells.",
+      "Photodynamic therapy (PDT) using a light-activated topical agent.",
+      "Laser resurfacing or chemical peels for widespread lesions."
+    ],
+    dos: [
+      "Check your skin monthly for new dry, rough, sandpaper-like patches.",
+      "Wear sun-protective clothing (long sleeves, hats) whenever outdoors.",
+      "Apply mineral SPF 30+ daily to all sun-exposed areas."
+    ],
+    donts: [
+      "Do not pick, scratch, or try to peel off the dry, scaly patch.",
+      "Avoid spending time in the direct sun without protective measures.",
+      "Do not use products containing heavy fragrances or essential oils on the patch."
+    ],
+    products: [
+      "Urea 10% skin softening lotion",
+      "Nicotinamide 500mg dietary supplements",
+      "Zinc Oxide mineral sunscreen"
+    ],
+    dietSupport: [
+      "Foods rich in Vitamin A (sweet potatoes, pumpkin)",
+      "Green tea and white tea (rich in polyphenols)",
+      "Anti-inflammatory vegetables and berries"
+    ],
+    dietAvoid: [
+      "High-sugar sodas and processed foods",
+      "Alcohol and smoking (both deplete skin antioxidants)",
+      "Trans-fatty acids"
+    ],
+    lifestyle: [
+      "Incorporate sun protection as a non-negotiable daily habit.",
+      "Perform outdoor exercises early in the morning or late in the evening.",
+      "Avoid all tanning beds and artificial UV sources."
+    ],
+    whenToSeeDoctor: [
+      "A rough patch becomes tender, thick, painful, starts bleeding, or grows rapidly (signs of progression to SCC)."
+    ],
+    references: [
+      { name: "Skin Cancer Foundation - Actinic Keratosis", url: "https://www.skincancer.org/skin-cancer-information/actinic-keratosis/" },
+      { name: "AAD - Actinic Keratosis FAQs", url: "https://www.aad.org/public/diseases/skin-cancer/types/actinic-keratosis" }
+    ],
+    faqs: [
+      { q: "Are all actinic keratoses cancerous?", a: "No, AKs are precancerous. Most remain benign, but about 5% to 10% can progress to squamous cell carcinoma over time." },
+      { q: "What does an AK feel like?", a: "It often feels like a rough, sandpapery patch of skin that is easier to feel than it is to see." }
+    ]
+  },
+  "Melasma": {
+    overview: "Melasma is a common skin condition characterized by symmetric brown or blue-gray patches, typically appearing on the face (cheeks, forehead, upper lip). It is triggered by hormonal changes and sun exposure.",
+    causes: [
+      "Hormonal fluctuations during pregnancy (chloasma) or birth control use",
+      "Ultraviolet (UV) radiation and visible light (including blue light from screens)",
+      "Genetic predisposition and heat exposure"
+    ],
+    remedies: [
+      "Apply topical Vitamin C or Licorice Root extract to help brighten hyperpigmented spots.",
+      "Wash with a gentle exfoliating cleanser containing lactic acid to promote cell turnover.",
+      "Use mineral sunscreen containing Iron Oxide, which protects against visible blue light.",
+      "Apply cool Aloe Vera gel to calm skin after heat or sun exposure.",
+      "Use high-coverage mineral makeup to safely camouflage patches."
+    ],
+    treatments: [
+      "Topical hydroquinone (gold standard skin-lightening agent).",
+      "Topical retinoids, azelaic acid, or kojic acid creams.",
+      "Chemical peels (glycolic or salicylic acid) under professional supervision.",
+      "Oral tranexamic acid for severe, stubborn cases."
+    ],
+    dos: [
+      "Wear a wide-brimmed hat to protect your face from direct sun.",
+      "Apply mineral SPF 50+ with iron oxides every single day.",
+      "Stay in air-conditioned environments during hot summer days (heat triggers melasma)."
+    ],
+    donts: [
+      "Avoid harsh laser treatments without consulting a melasma specialist (lasers can worsen melasma).",
+      "Do not use highly irritating skincare products (inflammation triggers pigmentation).",
+      "Avoid waxing facial skin, as the heat and friction can worsen patches."
+    ],
+    products: [
+      "Mineral SPF 50+ with Iron Oxides",
+      "20% Azelaic Acid cream",
+      "Gentle Lactic Acid cleanser"
+    ],
+    dietSupport: [
+      "Foods high in folate (folic acid deficiency is linked to hyperpigmentation)",
+      "Citrus fruits and bell peppers rich in Vitamin C",
+      "Green tea and antioxidant berries"
+    ],
+    dietAvoid: [
+      "Excessive alcohol (increases blood vessel dilation and heat)",
+      "High glycemic processed carbohydrates",
+      "Soy products (contain phytoestrogens which may impact hormone balance)"
+    ],
+    lifestyle: [
+      "Limit blue light exposure by using screen protectors or night modes.",
+      "Avoid cooking over extremely hot stoves or staying in saunas for long periods.",
+      "Manage stress levels, as cortisol can impact hormonal balance."
+    ],
+    whenToSeeDoctor: [
+      "The patches fail to improve after 3 months of strict sun protection and OTC brightening ingredients."
+    ],
+    references: [
+      { name: "AAD - Melasma Management", url: "https://www.aad.org/public/diseases/color-problems/melasma" },
+      { name: "Harvard Health - Melasma Overview", url: "https://www.health.harvard.edu/a_to_z/melasma-a-to-z" }
+    ],
+    faqs: [
+      { q: "Does melasma go away after pregnancy?", a: "Often yes, melasma triggered by pregnancy or birth control pills can fade gradually after delivery or discontinuation of the medication." },
+      { q: "Why does melasma return in the summer?", a: "Even a few minutes of unprotected exposure to sun or intense heat can reactivate pigment-producing cells, causing faded patches to reappear." }
+    ]
+  },
+  "Shingles": {
+    overview: "Shingles (Herpes Zoster) is a painful, blistering skin rash caused by reactivation of the varicella-zoster virus (the virus that causes chickenpox). It typically appears as a localized band or strip of blisters on one side of the body.",
+    causes: [
+      "Reactivation of the latent varicella-zoster virus in nerve tissues",
+      "Weakened immune system due to aging, stress, or medical conditions",
+      "Increased susceptibility in individuals over the age of 50"
+    ],
+    remedies: [
+      "Keep the blistering rash clean and dry to prevent secondary infections.",
+      "Apply cool, wet compresses to the rash to soothe intense pain and itching.",
+      "Take soothing colloidal oatmeal baths to relieve burning skin.",
+      "Wear loose-fitting, soft cotton clothing to reduce friction against blisters.",
+      "Apply pure calamine lotion to weeping blisters to help dry them out."
+    ],
+    treatments: [
+      "Prescription antiviral medications (Valacyclovir, Acyclovir) to shorten outbreak duration.",
+      "Over-the-counter or prescription pain relievers (Gabapentin, Ibuprofen).",
+      "Topical numbing creams (Lidocaine patches) for localized pain relief.",
+      "Calamine and antiseptic washes to protect open blisters."
+    ],
+    dos: [
+      "Get the Shingrix vaccine if you are over 50 years old.",
+      "Rest and allow your body to heal from the viral stress.",
+      "Wash your hands thoroughly after touching the affected rash area."
+    ],
+    donts: [
+      "Do not scratch or pop the blisters (leads to permanent scarring and infection).",
+      "Avoid contact with pregnant women, newborns, or unvaccinated individuals while blisters are active.",
+      "Do not wear tight synthetic fabrics that cling to the sores."
+    ],
+    products: [
+      "Calamine soothing lotion",
+      "Colloidal oatmeal bath soak",
+      "Non-stick sterile gauze pads"
+    ],
+    dietSupport: [
+      "Lysine-rich foods (poultry, fish, legumes) which help inhibit viral replication",
+      "Foods high in Vitamin C and Zinc to boost immune response",
+      "Hydrating clear broths and herbal teas"
+    ],
+    dietAvoid: [
+      "Arginine-rich foods (chocolate, nuts, gelatin) which can promote viral activity",
+      "High sugar processed foods which lower immune efficiency",
+      "Alcoholic beverages"
+    ],
+    lifestyle: [
+      "Isolate from vulnerable individuals until the blisters crust over.",
+      "Maintain a stress-free environment to support the immune system.",
+      "Ensure plenty of bed rest and deep sleep cycles."
+    ],
+    whenToSeeDoctor: [
+      "IMMEDIATELY if the rash occurs near or around your eyes (can cause permanent vision loss), or if pain is accompanied by high fever."
+    ],
+    references: [
+      { name: "CDC - Shingles (Herpes Zoster)", url: "https://www.cdc.gov/shingles/index.html" },
+      { name: "Mayo Clinic - Shingles Symptoms & Causes", url: "https://www.mayoclinic.org/diseases-conditions/shingles/symptoms-causes/syc-20353001" }
+    ],
+    faqs: [
+      { q: "Is shingles contagious?", a: "You cannot catch shingles from someone else. However, someone with active shingles can pass the varicella-zoster virus to a person who has never had chickenpox or the vaccine, causing chickenpox." },
+      { q: "What is postherpetic neuralgia?", a: "It is the most common complication of shingles, causing chronic, burning nerve pain in the area of the rash even after the blisters have completely healed." }
+    ]
+  },
+  "Alopecia Areata": {
+    overview: "Alopecia Areata is an autoimmune skin condition that causes patchy hair loss, typically on the scalp, eyebrows, or beard. The immune system mistakenly attacks active hair follicles, causing hair to fall out in smooth, round clumps.",
+    causes: [
+      "Autoimmune attack on hair follicles, arresting their growth cycle",
+      "Genetic predisposition (family history of alopecia or other autoimmune diseases)",
+      "Environmental triggers such as severe emotional stress or viral illness"
+    ],
+    remedies: [
+      "Massage the scalp gently with essential oils (rosemary, lavender, thyme) diluted in jojoba oil to stimulate follicles.",
+      "Apply raw onion juice to the patches (studies suggest sulfur compounds can promote hair regrowth).",
+      "Eat a diet high in biotin, zinc, and iron to support follicle cell regeneration.",
+      "Wear protective head coverings, scarves, or hats to protect exposed scalp from sunburn.",
+      "Use mild, volumizing, chemical-free shampoos."
+    ],
+    treatments: [
+      "Intralesional corticosteroid injections (most common treatment to kickstart regrowth).",
+      "Topical minoxidil (Rogaine) to stimulate follicle activity.",
+      "Topical immunotherapy or contact sensitizers for widespread hair loss.",
+      "New class JAK inhibitors (oral Baricitinib) for severe, total body hair loss."
+    ],
+    dos: [
+      "Protect bald patches with sunscreen or UPF hats whenever outdoors.",
+      "Be gentle when washing, brushing, or styling remaining hair.",
+      "Join support networks to manage the emotional impact of hair loss."
+    ],
+    donts: [
+      "Do not use high heat hair dryers, straighteners, or harsh hair dyes.",
+      "Avoid tight hairstyles (braids, ponytails) that pull on hair roots.",
+      "Do not stress excessively over shedding (stress exacerbates the autoimmune cycle)."
+    ],
+    products: [
+      "Rosemary essential oil (diluted)",
+      "Sulfate-free scalp-stimulating shampoo",
+      "Zinc and Biotin hair supplements"
+    ],
+    dietSupport: [
+      "Iron-rich foods (spinach, lentils, red meat in moderation)",
+      "Biotin-rich foods (eggs, sweet potatoes, almonds)",
+      "Anti-inflammatory omega-3 fats (chia seeds, wild salmon)"
+    ],
+    dietAvoid: [
+      "Highly processed sugars (exacerbate systemic inflammation)",
+      "Dairy and gluten (if individual immune sensitivities exist)",
+      "Trans-fats"
+    ],
+    lifestyle: [
+      "Practice daily stress-relief techniques like meditation or yoga.",
+      "Use silk pillowcases to minimize friction on fragile hair fibers.",
+      "Maintain a gentle scalp care routine."
+    ],
+    whenToSeeDoctor: [
+      "You notice rapid, extensive hair loss covering large areas of the scalp or body, or if hair loss is accompanied by skin scarring or burning."
+    ],
+    references: [
+      { name: "National Alopecia Areata Foundation", url: "https://www.naaf.org/" },
+      { name: "AAD - Alopecia Areata Overview", url: "https://www.aad.org/public/diseases/hair-loss/types/alopecia-areata" }
+    ],
+    faqs: [
+      { q: "Will my hair grow back?", a: "For many people, hair regrows spontaneously within a year, although the condition is unpredictable and future episodes of hair loss can occur." },
+      { q: "Does alopecia areata lead to total baldness?", a: "In about 5% of cases, alopecia areata progresses to total scalp hair loss (Alopecia Totalis) or complete body hair loss (Alopecia Universalis)." }
+    ]
+  },
+  "Urticaria": {
+    overview: "Urticaria (Hives) is a vascular reaction of the skin characterized by transient, itchy red welts (wheals) of varying sizes, often triggered by allergic reactions, infections, temperature changes, or stress.",
+    causes: [
+      "Histamine release from mast cells in response to allergens (foods, medications)",
+      "Viral or bacterial infections triggering immune complexes",
+      "Physical triggers (cold, heat, pressure, exercise, sunlight)",
+      "Chronic autoimmune activation"
+    ],
+    remedies: [
+      "Apply cool, wet compresses to active welts to reduce swelling and calm itching.",
+      "Take a lukewarm bath with colloidal oatmeal to soothe skin irritation.",
+      "Apply cooling Calamine lotion to hives to relieve localized discomfort.",
+      "Wear loose-fitting, lightweight, smooth-textured cotton clothing.",
+      "Drink anti-inflammatory nettle leaf tea (a natural antihistamine)."
+    ],
+    treatments: [
+      "Over-the-counter second-generation H1 antihistamines (Cetirizine, Loratadine).",
+      "Prescription strength H2 blockers (Famotidine) for combined blockade.",
+      "Short course of oral corticosteroids (Prednisone) for severe acute flare-ups.",
+      "Biologic injections (Xolair/Omalizumab) for chronic spontaneous urticaria."
+    ],
+    dos: [
+      "Identify and record trigger exposures (food, heat, pressure) in a diary.",
+      "Keep your body cool, as heat directly triggers histamine release.",
+      "Apply soothing, unscented moisturizers daily."
+    ],
+    donts: [
+      "Do not scratch or rub active hives (causes further mast cell degranulation and spreading).",
+      "Avoid hot showers, saunas, and spicy foods.",
+      "Do not take aspirin or NSAIDs like ibuprofen, which can worsen hives in some individuals."
+    ],
+    products: [
+      "Calamine cooling lotion",
+      "Colloidal oatmeal bath powder",
+      "Non-drowsy second-generation antihistamine"
+    ],
+    dietSupport: [
+      "Foods low in histamine (fresh meats, fresh fruits like pears/apples, non-citrus veggies)",
+      "Vitamin C rich foods (natural mast-cell stabilizer)",
+      "Lukewarm ginger or peppermint herbal teas"
+    ],
+    dietAvoid: [
+      "High-histamine foods (aged cheeses, fermented foods, cured meats, spinach, tomatoes)",
+      "Shellfish and nuts (common allergen triggers)",
+      "Alcohol and artificial preservatives"
+    ],
+    lifestyle: [
+      "Avoid high-stress environments which release cortisol and trigger hives.",
+      "Wear loose, friction-free clothing.",
+      "Maintain a cool temperature in your home and bedroom."
+    ],
+    whenToSeeDoctor: [
+      "Hives are accompanied by swelling of the lips, tongue, or throat, or difficulty breathing (Anaphylaxis - Seek emergency care immediately)."
+    ],
+    references: [
+      { name: "Asthma and Allergy Foundation of America - Hives", url: "https://www.aafa.org/hives-urticaria/" },
+      { name: "AAD - Hives Treatment Guidance", url: "https://www.aad.org/public/diseases/a-z/hives-overview" }
+    ],
+    faqs: [
+      { q: "How long do individual hives last?", a: "Individual hives typically fade away within 24 hours, although new ones may continue to erupt in other areas." },
+      { q: "What is the difference between acute and chronic hives?", a: "Acute hives last less than 6 weeks and are usually linked to a specific trigger or virus. Chronic hives last longer than 6 weeks and are often autoimmune." }
     ]
   }
 };
@@ -1434,7 +1925,7 @@ function ResultCard({
       </div>
 
       {/* Tabs Navigation */}
-      <div className="flex border-b border-slate-200 overflow-x-auto scrollbar-none gap-2 bg-slate-100/55 p-1 rounded-2xl">
+      <div className="flex border-b border-slate-200 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-2 bg-slate-100/55 p-1 rounded-2xl">
         {(['clinical', 'treatment', 'lifestyle', 'progress'] as const).map((tab) => {
           const labels = {
             clinical: { text: 'Diagnostic Metrics', icon: Cpu },
