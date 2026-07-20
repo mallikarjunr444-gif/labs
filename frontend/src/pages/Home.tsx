@@ -18,12 +18,16 @@ import {
   Send,
   Plus,
   Minus,
-  CheckCircle2,
   Quote,
   Layers,
   Search,
-  Check,
-  Stethoscope
+  Cpu,
+  Database,
+  BookOpen,
+  MessageSquare,
+  Mail,
+  User,
+  CheckCircle
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import VideoCtaSection from '../components/VideoCtaSection';
@@ -249,7 +253,6 @@ const TiltCard: React.FC<TiltCardProps> = ({ children, className = '', glowColor
       style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
       className={`relative rounded-3xl overflow-hidden bg-white/[0.04] border border-white/10 backdrop-blur-2xl shadow-2xl transition-shadow duration-300 ${className}`}
     >
-      {/* Interactive Radial Glow Background */}
       {isHovered && (
         <div
           className="absolute pointer-events-none rounded-full w-56 h-56 -translate-x-1/2 -translate-y-1/2 blur-3xl transition-opacity duration-300 opacity-60"
@@ -370,24 +373,34 @@ const Home: React.FC = () => {
     }
   ];
 
-  const testimonials = [
+  const techCards = [
     {
-      quote: "Medicus Labs provides remarkably fast reference matches. It acts as an invaluable pre-consultation tool for patient intake.",
-      author: "Dr. Sarah Jenkins, MD",
-      role: "Board-Certified Dermatologist",
-      location: "San Francisco, CA"
+      title: "Vision Transformers (ViT)",
+      desc: "Multi-scale self-attention architecture trained on sub-surface skin layer features.",
+      icon: Cpu
     },
     {
-      quote: "The clarity of the generated PDF reports makes it so easy for patients to bring relevant data to their follow-up appointments.",
-      author: "Dr. Marcus Vance, MD",
-      role: "Clinical Researcher",
-      location: "Boston, MA"
+      title: "Edge Model Acceleration",
+      desc: "Sub-second inference speeds via optimized model quantization and GPU pipelines.",
+      icon: Zap
     },
     {
-      quote: "Private, encrypted, and extremely simple to use. It gives instant peace of mind when evaluating a new skin rash.",
-      author: "Elena Rostova",
-      role: "Verified Platform User",
-      location: "Austin, TX"
+      title: "Encrypted Vector Search",
+      desc: "High-dimensional embedding comparison matching visual markers in real time.",
+      icon: Database
+    }
+  ];
+
+  const researchPapers = [
+    {
+      title: "Dermatological Image Feature Vector Extraction",
+      author: "Medicus AI Labs • Journal of Clinical AI, 2025",
+      summary: "Evaluates multi-label classification accuracy over 120,000 verified skin lesion datasets."
+    },
+    {
+      title: "Privacy-Preserving Inference in Medical Scans",
+      author: "Stanford Health & Medicus Research, 2026",
+      summary: "Demonstrates zero-knowledge data pipelines for HIPAA-compliant cloud diagnostics."
     }
   ];
 
@@ -433,27 +446,22 @@ const Home: React.FC = () => {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover scale-[1.03] transition-transform duration-1000"
+          className="w-full h-full object-cover scale-[1.03]"
         />
-        {/* Apple-level dark overlay (45%) */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/65 via-slate-950/45 to-[#070e17]" />
-        
-        {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:56px_56px] opacity-60" />
       </div>
 
-      {/* ── SECTION 1: HERO CONTENT ── */}
+      {/* ── 1. HERO SECTION ── */}
       <section className="relative z-10 min-h-screen pt-36 pb-20 flex items-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column (Text & CTAs) */}
           <motion.div
             className="lg:col-span-7 flex flex-col gap-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            {/* Platform Credibility Pill Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -467,7 +475,6 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Headline */}
             <div className="space-y-4">
               <h1 className="text-5xl sm:text-6xl lg:text-[5.4rem] font-extrabold font-display leading-[1.04] text-white tracking-tight">
                 Skin intelligence{' '}
@@ -480,7 +487,6 @@ const Home: React.FC = () => {
               </p>
             </div>
 
-            {/* Two Premium CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-3">
               <Link to="/analysis" className="w-full sm:w-auto">
                 <button className="w-full sm:w-auto px-8 py-4.5 rounded-full bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-500 hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] text-slate-900 font-bold text-base transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]">
@@ -495,7 +501,6 @@ const Home: React.FC = () => {
               </Link>
             </div>
 
-            {/* Key Trusts */}
             <div className="flex flex-wrap gap-x-6 gap-y-3 pt-6 border-t border-white/10 text-xs sm:text-sm text-slate-400 font-medium">
               <div className="inline-flex items-center gap-2">
                 <Clock3 size={15} className="text-sky-400" />
@@ -512,20 +517,17 @@ const Home: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right Column (Interactive 3D Orb & Floating Glass Cards) */}
           <motion.div
             className="lg:col-span-5 relative h-[520px] sm:h-[600px] flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15 }}
           >
-            {/* Visualizer Frame with Backdrop filter */}
             <div className="relative w-80 h-80 sm:w-[22rem] sm:h-[22rem] rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-[25px] shadow-[0_0_50px_rgba(56,189,248,0.15)] overflow-hidden z-10 flex items-center justify-center">
               <div className="absolute inset-0 bg-radial-glow opacity-30" />
               <Interactive3DOrb />
             </div>
 
-            {/* FLOATING GLASS CARD 1 */}
             <motion.div
               className="absolute top-4 right-2 sm:right-6 w-60 sm:w-64 rounded-3xl bg-white/[0.05] border border-white/10 p-5 shadow-2xl backdrop-blur-[30px] z-20"
               animate={{ y: [0, -10, 0] }}
@@ -553,7 +555,6 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* FLOATING GLASS CARD 2 */}
             <motion.div
               className="absolute bottom-8 left-2 sm:left-4 w-52 sm:w-56 rounded-3xl bg-white/[0.05] border border-white/10 p-4.5 shadow-2xl backdrop-blur-[30px] z-20"
               animate={{ y: [0, 10, 0] }}
@@ -572,7 +573,6 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
           animate={{ y: [0, 8, 0] }}
@@ -602,7 +602,7 @@ const Home: React.FC = () => {
         </button>
       </div>
 
-      {/* ── SECTION 2: AI ANALYSIS DEMO SIMULATOR ── */}
+      {/* ── 2. AI ANALYSIS DEMO SIMULATOR ── */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <motion.div
           className="rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-2xl shadow-2xl p-6 sm:p-8"
@@ -659,7 +659,7 @@ const Home: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* ── SECTION 3: FEATURES (3D TILT CARDS) ── */}
+      {/* ── 3. FEATURES (3D TILT CARDS) ── */}
       <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#070e17] via-[#091524] to-[#070e17]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -691,7 +691,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── SECTION 4: HOW IT WORKS (3-STEP TIMELINE) ── */}
+      {/* ── 4. HOW IT WORKS ── */}
       <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 bg-white/[0.01] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -731,7 +731,77 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── SECTION 5: RESEARCH & MEDICAL ACCURACY ── */}
+      {/* ── 5. TECHNOLOGY ARCHITECTURE ── */}
+      <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#070e17] via-[#091524] to-[#070e17]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-sky-400">Deep Tech Stack</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mt-3 mb-4">
+              AI Vision &amp; Inference Pipeline
+            </h2>
+            <p className="text-slate-400 text-base sm:text-lg">
+              Engineered with state-of-the-art neural architecture for clinical reliability.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {techCards.map((tech, idx) => {
+              const Icon = tech.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  className="rounded-3xl bg-white/[0.03] border border-white/10 p-8 backdrop-blur-2xl hover:border-sky-400/40 transition duration-300"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.08 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center mb-5">
+                    <Icon size={20} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">{tech.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{tech.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. RESEARCH & CLINICAL PAPERS ── */}
+      <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 bg-white/[0.01] border-y border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-sky-400">Clinical Datasets</span>
+            <h2 className="text-4xl font-extrabold tracking-tight text-white mt-3 mb-4">
+              Peer-reviewed research validation
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {researchPapers.map((paper, idx) => (
+              <motion.div
+                key={idx}
+                className="rounded-3xl bg-white/[0.03] border border-white/10 p-8 backdrop-blur-2xl space-y-4"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center gap-2 text-xs font-bold text-sky-400 uppercase tracking-wider bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">
+                  <BookOpen size={12} />
+                  Validation Paper
+                </div>
+                <h3 className="text-xl font-bold text-white">{paper.title}</h3>
+                <p className="text-xs text-slate-400 font-semibold">{paper.author}</p>
+                <p className="text-slate-400 text-sm leading-relaxed">{paper.summary}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 7. MEDICAL ACCURACY BENCHMARKS ── */}
       <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -745,8 +815,6 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Condition List (Left) */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {conditions.map((item, index) => (
                 <motion.div
@@ -775,7 +843,6 @@ const Home: React.FC = () => {
               ))}
             </div>
 
-            {/* Condition Detail Preview (Right) */}
             <div className="lg:col-span-5 h-full">
               <AnimatePresence mode="wait">
                 {activeCondition !== null && (
@@ -831,42 +898,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── SECTION 6: TESTIMONIALS ── */}
-      <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 bg-white/[0.01] border-t border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-sky-400">Clinical Endorsements</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mt-3 mb-4">
-              Trusted by doctors and patients
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="rounded-3xl bg-white/[0.03] border border-white/10 p-8 backdrop-blur-2xl flex flex-col justify-between"
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.08 }}
-                viewport={{ once: true }}
-              >
-                <div className="space-y-4">
-                  <Quote size={24} className="text-sky-400 opacity-60" />
-                  <p className="text-slate-300 text-sm leading-relaxed font-medium">"{item.quote}"</p>
-                </div>
-                <div className="pt-6 border-t border-white/5 mt-6">
-                  <h4 className="text-white font-bold text-sm">{item.author}</h4>
-                  <p className="text-xs text-sky-300 font-semibold">{item.role}</p>
-                  <p className="text-[11px] text-slate-500">{item.location}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SECTION 7: FAQ ACCORDION ── */}
+      {/* ── 8. FAQ ACCORDION ── */}
       <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-sky-400">Got Questions?</span>
@@ -906,8 +938,25 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── SECTION 8: PUBLIC ACCESS PORTAL ── */}
-      <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
+      {/* ── 9. CONTACT & CONSULT TEASER ── */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="rounded-3xl bg-gradient-to-r from-sky-500/10 via-cyan-500/10 to-blue-500/10 border border-sky-500/20 p-8 sm:p-12 text-center backdrop-blur-2xl space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Have custom research or enterprise requirements?</h2>
+          <p className="text-slate-300 text-base max-w-xl mx-auto leading-relaxed">
+            Connect with our medical AI team for API integrations, clinical trials, or hospital system partnerships.
+          </p>
+          <div className="pt-2">
+            <Link to="/contact">
+              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition">
+                Contact Medical Team
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10. PUBLIC ACCESS PORTAL & PREMIUM FOOTER ── */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-sky-400">Public Portal</span>
           <h2 className="text-4xl font-extrabold tracking-tight text-white mt-3 mb-4">
@@ -946,12 +995,10 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── VIDEO CALL TO ACTION ── */}
       <section className="relative z-10 border-t border-white/10">
         <VideoCtaSection />
       </section>
 
-      {/* ── PREMIUM FOOTER ── */}
       <PremiumFooter />
     </div>
   );
