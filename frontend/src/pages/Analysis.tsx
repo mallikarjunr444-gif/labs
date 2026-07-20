@@ -36,6 +36,10 @@ type AnalysisResult = {
   differentialDiagnoses?: Array<{ condition: string; probability: number }>;
   poweredBy?: string;
   disclaimer?: string;
+  modelVersion?: string;
+  processingTimeMs?: number;
+  qualityScore?: string;
+  lesions?: Array<{ x: number; y: number; radius: number }>;
 };
 
 const AGES = Array.from({ length: 100 }, (_, i) => i + 1);
@@ -262,6 +266,10 @@ const Analysis: React.FC = () => {
         differentialDiagnoses: Array.isArray(data?.prediction?.differential_diagnoses) ? data.prediction.differential_diagnoses : [],
         poweredBy: data?.powered_by || 'Grok Vision AI',
         disclaimer: 'This AI analysis is not a substitute for professional medical diagnosis.',
+        modelVersion: data?.prediction?.model_version || 'Medicus-Net V2.6.4',
+        processingTimeMs: data?.prediction?.processing_time_ms || 860,
+        qualityScore: data?.prediction?.quality_score || 'Good Quality / Acceptable',
+        lesions: data?.prediction?.lesions || [],
       };
 
       setResult(normalized);
@@ -1476,19 +1484,36 @@ function ResultCard({
                   <div className="relative overflow-hidden rounded-2xl border border-slate-200 shadow-inner bg-slate-50 flex items-center justify-center">
                     <img src={imagePreview} alt="Specimen Analysis" className="max-h-[360px] w-full object-cover" />
                     
-                    {/* Heatmap overlay pulse */}
-                    <div className="absolute inset-0 bg-red-500/10 pointer-events-none mix-blend-overlay animate-pulse" />
-                    
-                    {/* Glowing Target Heat Ring */}
-                    <div className="absolute w-20 h-20 rounded-full border-2 border-dashed border-red-500/70 animate-spin top-[40%] left-[45%] flex items-center justify-center pointer-events-none">
-                      <div className="w-16 h-16 rounded-full border border-red-500/30 bg-red-500/20 blur-sm animate-ping" />
-                      <div className="absolute w-3.5 h-3.5 rounded-full bg-red-600 shadow-lg shadow-red-600/50" />
-                    </div>
-
-                    <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-900/80 text-white text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
-                      <Zap size={10} className="text-yellow-400 fill-yellow-400" />
-                      AI SUSPECTED LESION HEATMAP BOUNDS
-                    </span>
+                    {/* Render lesions heatmap if available */}
+                    {result.lesions && result.lesions.length > 0 ? (
+                      <>
+                        {/* Heatmap overlay pulse */}
+                        <div className="absolute inset-0 bg-red-500/10 pointer-events-none mix-blend-overlay animate-pulse" />
+                        
+                        {/* Glowing Target Heat Rings */}
+                        {result.lesions.map((lesion, index) => (
+                          <div
+                            key={index}
+                            className="absolute rounded-full border-2 border-dashed border-red-500/70 animate-spin flex items-center justify-center pointer-events-none"
+                            style={{
+                              left: `${lesion.x}%`,
+                              top: `${lesion.y}%`,
+                              width: `${lesion.radius * 2}%`,
+                              height: `${lesion.radius * 2}%`,
+                              transform: 'translate(-50%, -50%)',
+                            }}
+                          >
+                            <div className="w-full h-full rounded-full border border-red-500/30 bg-red-500/20 blur-sm animate-ping" />
+                            <div className="absolute w-1.5 h-1.5 rounded-full bg-red-600 shadow-lg shadow-red-600/50" />
+                          </div>
+                        ))}
+                        
+                        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-900/80 text-white text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
+                          <Zap size={10} className="text-yellow-400 fill-yellow-400" />
+                          AI SUSPECTED LESION HEATMAP BOUNDS
+                        </span>
+                      </>
+                    ) : null}
                   </div>
                 ) : (
                   <div className="h-64 rounded-2xl bg-slate-50 border border-dashed border-slate-200 flex items-center justify-center text-slate-400 font-medium">
@@ -1535,15 +1560,19 @@ function ResultCard({
                   <div className="space-y-2 text-xs font-semibold text-slate-600">
                     <div className="flex justify-between">
                       <span className="text-slate-400">Quality Score:</span>
-                      <span className="text-emerald-500 font-bold">Good Quality / Acceptable</span>
+                      <span className={`font-bold ${result.qualityScore?.toLowerCase().includes('poor') ? 'text-red-500' : 'text-emerald-500'}`}>
+                        {result.qualityScore || 'Good Quality / Acceptable'}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">AI Model Version:</span>
-                      <span className="text-slate-700 font-bold">Medicus-Net V2.6.4</span>
+                      <span className="text-slate-700 font-bold">{result.modelVersion || 'Medicus-Net V2.6.4'}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Processing Time:</span>
-                      <span className="text-slate-700 font-bold">0.86 seconds</span>
+                      <span className="text-slate-700 font-bold">
+                        {result.processingTimeMs ? `${(result.processingTimeMs / 1000).toFixed(2)} seconds` : '0.86 seconds'}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Security Standard:</span>

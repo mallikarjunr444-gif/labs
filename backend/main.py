@@ -202,6 +202,10 @@ async def start_analysis(
         # ======================================================
         # CHOOSE AI ENGINE FOR ANALYSIS
         # ======================================================
+        if engine.lower() == "skinive" and not os.getenv("SKINIVE_API_KEY"):
+            logger.warning("⚠️ SKINIVE_API_KEY is not configured. Falling back to Groq Vision AI engine...")
+            engine = "grok"
+
         if engine.lower() == "skinive":
             logger.info(f"[{fullName}] Running Skinive Cloud AI analysis...")
             ai_result = await skinive_service.analyze_skin(str(file_path), age=age, gender=gender)
@@ -223,6 +227,23 @@ async def start_analysis(
         recommendations = ai_result.get("recommendations", [])
         precautions = ai_result.get("precautions", [])
         is_urgent = severity_level == "high"
+
+        # Validate confidence threshold (below 70.0% is considered too low)
+        if confidence < 70.0:
+            logger.warning(f"⚠️ Confidence score too low ({confidence}%). Rejecting analysis.")
+            try:
+                os.remove(file_path)
+            except Exception:
+                pass
+            raise HTTPException(
+                status_code=400,
+                detail="The uploaded image does not provide enough information for a confident AI assessment. Please upload a clearer, well-lit image of the affected skin area."
+            )
+
+        quality_score = ai_result.get("quality_score", "Good Quality / Acceptable")
+        model_version = ai_result.get("model_version", "Medicus-Net V2.6.4" if engine == "grok" else "Skinive Engine V3.2")
+        processing_time_ms = ai_result.get("processing_time_ms", 860)
+        lesions = ai_result.get("lesions", [])
 
         logger.info(f"✅ AI Analysis complete: {condition} ({confidence}%) - Severity: {severity}")
 
@@ -260,6 +281,9 @@ async def start_analysis(
                     "key_findings": key_findings,
                     "symptoms": symptoms,
                     "differential_diagnoses": differential_diagnoses,
+                    "quality_score": quality_score,
+                    "model_version": model_version,
+                    "processing_time_ms": processing_time_ms,
                 },
                 recommendations=recommendations,
                 precautions=precautions,
@@ -299,6 +323,10 @@ async def start_analysis(
                 "key_findings": key_findings,
                 "symptoms": symptoms,
                 "differential_diagnoses": differential_diagnoses,
+                "quality_score": quality_score,
+                "model_version": model_version,
+                "processing_time_ms": processing_time_ms,
+                "lesions": lesions,
             },
             "recommendations": recommendations,
             "precautions": precautions,

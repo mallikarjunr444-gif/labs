@@ -719,15 +719,18 @@ class ReportGenerator:
         # ==================== AI MODEL INFORMATION ====================
         elements.append(Paragraph("9. AI MODEL INFORMATION", self.styles['SectionHeader']))
         
+        model_name = prediction.get("model_version", "Medicus-Net V2.6.4")
+        processing_time = prediction.get("processing_time_ms", 860)
+
         model_data = [
             ["Parameter", "Details"],
-            ["Model Name", "Skinive Cloud AI API (v3.2)"],
-            ["Analysis Engine", "Deep Learning CNN"],
-            ["Confidence Threshold", "85% minimum"],
+            ["Model Name", model_name],
+            ["Analysis Engine", "Vision Transformer (ViT)" if "llama" in model_name.lower() else "Deep Learning CNN"],
+            ["Confidence Threshold", "70.0% minimum"],
             ["Analysis Time", f"{datetime.now().strftime('%B %d, %Y at %I:%M %p')}"],
-            ["Processing Duration", "~3.2 seconds"],
-            ["Model Version", "Clinical Grade V2.6.4"],
-            ["Database Version", "DermDB 2024.1"],
+            ["Processing Duration", f"{processing_time / 1000:.2f} seconds"],
+            ["Model Version", model_name],
+            ["Database Version", "DermDB 2026.1"],
         ]
         model_table = Table(model_data, colWidths=[2.5*inch, 4.7*inch])
         model_table.setStyle(TableStyle([

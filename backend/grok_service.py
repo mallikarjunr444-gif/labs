@@ -198,7 +198,7 @@ class GrokVisionService:
         # Default to the Groq API key supplied by the environment
         self.api_key = os.getenv("GROQ_API_KEY") or os.getenv("XAI_API_KEY")
         self.api_url = "https://api.groq.com/openai/v1/chat/completions"
-        self.model = "qwen/qwen3.6-27b"
+        self.model = "llama-3.2-11b-vision-preview"
 
     async def validate_skin_image(self, image_path: str) -> dict:
         """
@@ -354,6 +354,7 @@ IMPORTANT: Respond ONLY with a valid JSON block inside markdown code tags:
   "condition": "One of: Acne Vulgaris, Melanoma, Eczema, Psoriasis, Rosacea, Vitiligo, Dermatitis, Fungal Infection, Healthy Skin",
   "confidence": <number between 0 and 100>,
   "severity": "One of: None, Mild, Mild-Medium, Medium, Medium-High, High, Variable",
+  "quality_score": "One of: Good, Fair, Poor (depending on resolution, focus, and lighting)",
   "description": "Brief clinical description of findings (1-2 sentences)",
   "key_findings": ["finding1", "finding2", "finding3"],
   "symptoms": {
@@ -367,11 +368,14 @@ IMPORTANT: Respond ONLY with a valid JSON block inside markdown code tags:
     {"condition": "name", "probability": <0-100>},
     {"condition": "name", "probability": <0-100>},
     {"condition": "name", "probability": <0-100>}
+  ],
+  "lesions": [
+    {"x": <percentage from left, float between 0 and 100>, "y": <percentage from top, float between 0 and 100>, "radius": <approximate radius as percentage of image width/height, float between 2 and 8>}
   ]
 }
 ```
 
-Analyze carefully. If the image does not show a clear skin condition or appears normal, classify as "Healthy Skin" with appropriate confidence. Do NOT default to Melanoma."""
+Analyze carefully. If the image does not show a clear skin condition or appears normal, classify as "Healthy Skin" with appropriate confidence. Do NOT default to Melanoma. If the skin is healthy or has no visible distinct lesions, return an empty array [] for "lesions"."""
 
             payload = {
                 "model": self.model,
@@ -520,11 +524,32 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
         condition_info = CONDITIONS_DB[matched_condition]
         confidence = min(100, max(0, float(data.get("confidence", 50))))
 
+        # Determine severity level dynamically based on AI output
+        severity = data.get("severity", condition_info["severity"])
+        severity_lower = severity.lower()
+        if "none" in severity_lower or "healthy" in severity_lower:
+            severity_level = "none"
+        elif "high" in severity_lower or "severe" in severity_lower or "urgent" in severity_lower:
+            severity_level = "high"
+        elif "medium" in severity_lower or "moderate" in severity_lower:
+            severity_level = "medium"
+        else:
+            severity_level = "low"
+
+        # Extract quality score and lesions list
+        quality_score = data.get("quality_score", "Good Quality / Acceptable")
+        if quality_score in ["Good", "Fair", "Poor"]:
+            quality_score = f"{quality_score} Quality"
+        
+        lesions = data.get("lesions", [])
+        if not isinstance(lesions, list):
+            lesions = []
+
         return {
             "condition": matched_condition,
             "confidence": confidence,
-            "severity": data.get("severity", condition_info["severity"]),
-            "severity_level": condition_info["severity_level"],
+            "severity": severity,
+            "severity_level": severity_level,
             "color": condition_info["color"],
             "description": data.get("description", condition_info["description"]),
             "key_findings": data.get("key_findings", []),
@@ -534,6 +559,8 @@ Analyze carefully. If the image does not show a clear skin condition or appears 
             "differential_diagnoses": data.get("differential_diagnoses", []),
             "recommendations": condition_info["recommendations"],
             "precautions": condition_info["precautions"],
+            "quality_score": quality_score,
+            "lesions": lesions
         }
 
     def _fallback_analysis(self, image_path: str) -> Dict:

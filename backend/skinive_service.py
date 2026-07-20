@@ -231,6 +231,24 @@ class SkiniveService:
                 "probability": round(random.uniform(5, 20), 1)
             })
 
+        # Dynamic mock lesions based on chosen class
+        if chosen == "healthy":
+            lesions = []
+        elif chosen == "acne":
+            lesions = [
+                {"x": 42.5, "y": 38.0, "radius": 4.5},
+                {"x": 61.2, "y": 55.4, "radius": 3.8},
+                {"x": 48.0, "y": 48.0, "radius": 5.0}
+            ]
+        elif chosen == "melanoma":
+            lesions = [
+                {"x": 50.0, "y": 45.0, "radius": 6.0}
+            ]
+        else:
+            lesions = [
+                {"x": 48.0, "y": 50.0, "radius": 8.0}
+            ]
+
         return {
             "condition": class_info["condition"],
             "confidence": round(confidence, 1),
@@ -260,7 +278,11 @@ class SkiniveService:
                 "Disclaimer: Sandboxed model simulation for development purposes",
                 "Seek medical advice if lesion changes color, shape, or bleeds"
             ],
-            "powered_by": "Skinive.Cloud Sandbox AI"
+            "powered_by": "Skinive.Cloud Sandbox AI",
+            "quality_score": "Good Quality / Acceptable",
+            "lesions": lesions,
+            "model_version": "Skinive Sandbox V1",
+            "processing_time_ms": 1120
         }
 
 skinive_service = SkiniveService()
