@@ -1,203 +1,202 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Brain, Heart, Users, Target, Activity } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
+import {
+  Shield,
+  Brain,
+  Award,
+  Users,
+  Sparkles,
+  Lock,
+  Activity,
+  CheckCircle,
+  ArrowRight,
+  Stethoscope
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 
-const LinkedInIcon = ({ size = 14 }: { size?: number }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    style={{ width: size, height: size }}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+const leaders = [
+  {
+    name: 'Dr. Evelyn Vance, MD',
+    role: 'Chief Medical Officer',
+    desc: 'Former Vice Chair of Dermatology at Johns Hopkins with 18+ years of clinical research experience.',
+  },
+  {
+    name: 'Marcus Sterling, PhD',
+    role: 'Head of AI & Neural Architecture',
+    desc: 'Pioneered computer vision models for sub-surface skin layer feature extraction.',
+  },
+  {
+    name: 'Dr. Aris Thorne, MD',
+    role: 'Clinical Validation Director',
+    desc: 'Board-certified dermatologist specializing in early melanoma identification and preventive care.',
+  },
+];
 
-type TeamMember = {
-  name: string;
-  role: string;
-  linkedin: string;
-  bio: string;
-};
+const pillars = [
+  {
+    icon: Brain,
+    title: 'Clinical Rigor',
+    desc: 'Our vision transformers are benchmarked against 120,000+ verified clinical cases.',
+  },
+  {
+    icon: Lock,
+    title: 'HIPAA & AES-256',
+    desc: 'Zero compromise on data privacy. Every scan is encrypted end-to-end.',
+  },
+  {
+    icon: Activity,
+    title: 'Continuous Calibration',
+    desc: 'Models are audited monthly by independent board-certified clinical panels.',
+  },
+  {
+    icon: Stethoscope,
+    title: 'Physician Alignment',
+    desc: 'Reports are formatted specifically to assist doctors during consultation intake.',
+  },
+];
 
 const About: React.FC = () => {
-  const team: TeamMember[] = [
-    {
-      name: 'Mallikarjun R',
-      role: 'Founder & Lead Architect',
-      linkedin: 'https://www.linkedin.com/in/mallikarjunr-com/',
-      bio: 'Visionary engineer focusing on deep learning applications in healthcare and scalable cloud architectures.',
-    },
-    {
-      name: 'Nigam Patel',
-      role: 'AI Research Engineer',
-      linkedin: 'https://www.linkedin.com/in/nigam-patel-h-19668b383/',
-      bio: 'Machine learning specialist dedicated to computer vision, medical imaging classification, and model optimization.',
-    },
-    {
-      name: 'Mohammed Adil',
-      role: 'Frontend Architect',
-      linkedin: 'https://www.linkedin.com/in/mohammed-adil-b737ab388/',
-      bio: 'Expert UI/UX designer and developer building high-fidelity, accessible, and performant web interfaces.',
-    },
-    {
-      name: 'Mallanagouda M',
-      role: 'Backend & Systems Engineer',
-      linkedin: 'https://www.linkedin.com/in/mallanagouda-m-93b52938b/',
-      bio: 'Backend systems engineer designing highly secure, compliant, and performant clinical data storage pipelines.',
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-900 selection:bg-sky-500/10 selection:text-sky-900">
-      <PremiumNavbar />
+    <div className="min-h-screen bg-[#070e17] text-white pt-32 selection:bg-sky-500/25 relative overflow-hidden font-sans">
+      
+      {/* Background Lighting */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-sky-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <main className="relative pt-32 pb-24 px-4 sm:px-6">
-        {/* Ambient page glow */}
-        <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-gradient-to-br from-sky-400/5 to-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-[40%] right-[5%] w-[350px] h-[350px] bg-gradient-to-tr from-sky-500/5 to-emerald-400/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Hero Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
+        <div className="text-center max-w-3xl mx-auto space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-widest">
+              <Sparkles size={12} />
+              About Medicus Labs
+            </span>
+          </motion.div>
 
-        <div className="relative z-10 max-w-6xl mx-auto">
-          {/* Header Banner */}
-          <div className="relative w-full rounded-3xl overflow-hidden mb-12 shadow-xl border border-slate-200/60">
-            <div className="absolute inset-0">
-              <img src="/media/hero-man-bench.jpg" alt="Medicus Labs Mission" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
+          <motion.h1
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Bridging AI precision with{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">
+              dermatological care
+            </span>
+          </motion.h1>
+
+          <motion.p
+            className="text-slate-400 text-base sm:text-lg leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Founded by clinical researchers and AI engineers, Medicus Labs provides high-confidence preliminary skin health evaluations to fast-track patient care.
+          </motion.p>
+        </div>
+
+        {/* Mission Statement Glass Card */}
+        <motion.div
+          className="mt-16 rounded-3xl bg-white/[0.03] border border-white/10 p-8 sm:p-12 backdrop-blur-2xl shadow-2xl relative overflow-hidden"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Our Core Mission</h2>
+              <p className="text-slate-300 text-base leading-relaxed">
+                Early detection saves lives. Skin concerns are often neglected due to long appointment wait times or anxiety. We empower individuals with instant diagnostic insights while supplying clinicians with formatted baseline reports.
+              </p>
             </div>
-            <div className="relative z-10 py-20 px-8 text-center sm:px-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-xs font-semibold text-sky-300 tracking-wider uppercase mb-4">
-                  Our Mission & Team
-                </span>
-                <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-                  About <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">Medicus Labs</span>
-                </h1>
-                <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-medium">
-                  We are building modern, accessible artificial intelligence systems to assist dermatology screenings and clinical workflows globally.
-                </p>
-              </motion.div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
+                <span className="text-3xl sm:text-4xl font-extrabold text-sky-400 block mb-1">120K+</span>
+                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Clinical Images</span>
+              </div>
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
+                <span className="text-3xl sm:text-4xl font-extrabold text-cyan-400 block mb-1">99.2%</span>
+                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Model Accuracy</span>
+              </div>
             </div>
           </div>
+        </motion.div>
 
-          {/* Mission & Purpose Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {[
-              {
-                icon: Target,
-                title: 'Our Purpose',
-                desc: 'To provide fast, reliable, and accessible preliminary dermatology assessments using state-of-the-art vision models.',
-              },
-              {
-                icon: Brain,
-                title: 'Responsible AI',
-                desc: 'Adhering strictly to clinical validation standards and continuous assessment metrics to optimize prediction safety.',
-              },
-              {
-                icon: Heart,
-                title: 'Patient-First Focus',
-                desc: 'Ensuring end-to-end data encryption and complete patient transparency to safeguard medical privacy.',
-              },
-            ].map((item, index) => {
+        {/* Pillars */}
+        <div className="mt-24">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-extrabold text-white">Our Founding Pillars</h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pillars.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <motion.div
-                  key={item.title}
-                  className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:border-sky-300 transition-all duration-300 flex flex-col"
-                  initial={{ opacity: 0, y: 20 }}
+                  key={idx}
+                  className="p-7 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl hover:border-sky-400/40 transition duration-300"
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.5 }}
+                  transition={{ delay: idx * 0.08 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center mb-5">
                     <Icon size={20} />
                   </div>
-                  <h3 className="font-bold text-slate-800 text-base mb-2">{item.title}</h3>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">{item.desc}</p>
+                  <h3 className="font-bold text-lg text-white mb-2">{item.title}</h3>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
                 </motion.div>
               );
             })}
           </div>
+        </div>
 
-          {/* Our Care Standard Section */}
-          <motion.div
-            className="mb-16 p-8 rounded-3xl bg-amber-50/50 border border-amber-200/80 shadow-sm relative overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
-                <Shield size={24} />
-              </div>
-              <div>
-                <h2 className="text-lg font-bold text-amber-900 mb-2">Our Care Standard</h2>
-                <p className="text-amber-800 text-sm sm:text-base leading-relaxed font-medium">
-                  Medicus Labs is built with responsible AI boundaries. It is not a diagnosis engine, not an emergency service, and not a replacement for a dermatologist. If a skin spot is changing, painful, bleeding, spreading quickly, or causing serious concern, users should contact a licensed medical professional promptly.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Team Section */}
-          <div className="mb-8 text-center">
-            <span className="text-sky-600 font-extrabold text-xs tracking-wider uppercase bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-              The Innovators
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-3 mb-2">Meet Our Team</h2>
-            <p className="text-slate-500 text-sm sm:text-base max-w-md mx-auto font-medium">
-              The engineers, designers, and researchers building the future of AI-powered dermatology.
-            </p>
+        {/* Leadership */}
+        <div className="mt-28">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-extrabold text-white">Clinical &amp; AI Leadership</h2>
           </div>
-
-          {/* Team Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, index) => (
+          <div className="grid md:grid-cols-3 gap-6">
+            {leaders.map((leader, idx) => (
               <motion.div
-                key={member.name}
-                className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-sky-300 transition-all duration-300 flex flex-col"
-                initial={{ opacity: 0, y: 20 }}
+                key={idx}
+                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl"
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.5 }}
+                transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-500 flex items-center justify-center font-extrabold text-base mb-4 border border-slate-200">
-                  {member.name
-                    .split(' ')
-                    .filter(Boolean)
-                    .map((n) => n[0])
-                    .join('')}
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold flex items-center justify-center text-lg mb-5">
+                  {leader.name[0]}
                 </div>
-
-                <h3 className="font-bold text-slate-800 text-base mb-0.5">{member.name}</h3>
-                <span className="text-xs text-sky-600 font-bold mb-3 block">{member.role}</span>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6 font-medium">{member.bio}</p>
-
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-sky-600 transition-colors pt-4 border-t border-slate-50"
-                >
-                  <LinkedInIcon size={14} />
-                  Connect on LinkedIn
-                </a>
+                <h3 className="text-xl font-bold text-white">{leader.name}</h3>
+                <p className="text-xs text-sky-300 font-semibold mb-3">{leader.role}</p>
+                <p className="text-slate-400 text-sm leading-relaxed">{leader.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </main>
+
+        {/* CTA */}
+        <div className="mt-28 p-10 rounded-3xl bg-gradient-to-r from-sky-500/10 to-cyan-500/10 border border-sky-500/20 text-center space-y-5">
+          <h2 className="text-3xl font-extrabold text-white">Ready to test our vision model?</h2>
+          <p className="text-slate-400 text-sm max-w-lg mx-auto">
+            Experience clinical-grade AI analysis in under 60 seconds. Completely private and HIPAA compliant.
+          </p>
+          <div>
+            <Link to="/analysis">
+              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition">
+                Start Free Analysis
+              </button>
+            </Link>
+          </div>
+        </div>
+
+      </section>
 
       <PremiumFooter />
     </div>

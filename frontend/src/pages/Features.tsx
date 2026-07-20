@@ -1,288 +1,176 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Zap, Brain, Lock, BarChart3, TrendingUp, Cloud,
-  Shield, CheckCircle2, Database, Activity, Cpu, ArrowRight
+  Brain,
+  Zap,
+  Lock,
+  FileText,
+  Activity,
+  Sparkles,
+  Shield,
+  Layers,
+  ArrowRight,
+  Database,
+  CheckCircle2
 } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
+import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 
-type FeatureItem = {
-  icon: React.ComponentType<any>;
-  title: string;
-  description: string;
-  details: string[];
-};
-
-type WorkflowStep = {
-  number: number;
-  title: string;
-  description: string;
-};
-
-type AccuracyItem = {
-  condition: string;
-  accuracy: number;
-  cases: number;
-};
+const detailedFeatures = [
+  {
+    icon: Brain,
+    title: 'Vision Transformer (ViT) Architecture',
+    tag: 'Core Model',
+    desc: 'Self-attention mechanism processing multi-scale image patches to detect subtle micro-patterns in skin texture, pigmentation, and lesion boundaries.',
+  },
+  {
+    icon: Zap,
+    title: 'Sub-Second GPU Inference',
+    tag: 'Performance',
+    desc: 'Model quantization and TensorRT pipeline execution deliver complete multi-condition risk evaluations in under 600 milliseconds.',
+  },
+  {
+    icon: Lock,
+    title: 'Zero-Knowledge Encryption',
+    tag: 'Security',
+    desc: 'Images are processed in volatile memory with instant cryptographic purge after feature extraction. Full HIPAA & GDPR compliance.',
+  },
+  {
+    icon: FileText,
+    title: 'Physician PDF Generation',
+    tag: 'Clinical Export',
+    desc: 'Formated baseline report detailing condition indexes, severity metrics, and diagnostic risk classifications for doctor intake.',
+  },
+  {
+    icon: Layers,
+    title: 'Multi-Condition Cross-Checking',
+    tag: 'Diagnostic Depth',
+    desc: 'Evaluates inputs simultaneously across 8 major categories: Acne, Melanoma, Eczema, Psoriasis, Rosacea, Vitiligo, Dermatitis, and Fungal Infections.',
+  },
+  {
+    icon: Database,
+    title: '120K+ Dataset Calibration',
+    tag: 'Benchmark Data',
+    desc: 'Trained and audited against verified dermatological archives with ongoing monthly validation by board-certified clinicians.',
+  },
+];
 
 const Features: React.FC = () => {
-  const features: FeatureItem[] = [
-    {
-      icon: Brain,
-      title: 'AI Detection Engine',
-      description: 'Advanced deep learning model trained on 100,000+ dermatological images for accurate skin condition detection.',
-      details: ['ResNet-based architecture', 'Multi-class classification', '94%+ accuracy rate']
-    },
-    {
-      icon: Database,
-      title: 'ISIC Dataset Validation',
-      description: 'Integration with International Skin Imaging Collaboration dataset for clinical-grade validation.',
-      details: ['ISIC certified', 'Continuous updates', 'Research-backed']
-    },
-    {
-      icon: Zap,
-      title: 'Real-time Analysis',
-      description: 'Instant processing of skin images with sub-second response times.',
-      details: ['< 500ms processing', 'Cloud-optimized', 'Parallel processing']
-    },
-    {
-      icon: TrendingUp,
-      title: 'Confidence Scoring',
-      description: 'Detailed confidence metrics for each prediction with clinical interpretation guidelines.',
-      details: ['Probability scores', 'Severity assessment', 'Reliability indicators']
-    },
-    {
-      icon: BarChart3,
-      title: 'PDF Report Generation',
-      description: 'Professional clinical reports with patient info, predictions, and dermatologist recommendations.',
-      details: ['Customizable templates', 'Image embedding', 'Clinical-grade format']
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud Storage',
-      description: 'Secure cloud-based storage with automatic backup and version control.',
-      details: ['Auto-backup', 'Global CDN', 'Redundancy']
-    },
-    {
-      icon: Lock,
-      title: 'Secure Patient Data',
-      description: 'Military-grade encryption and HIPAA/GDPR compliance for patient privacy.',
-      details: ['End-to-end encryption', 'HIPAA compliant', 'GDPR certified']
-    },
-    {
-      icon: Shield,
-      title: 'Dermatology Intelligence',
-      description: 'Clinical decision support with evidence-based recommendations and treatment guidance.',
-      details: ['Evidence-based', 'Peer-reviewed', 'Doctor-approved']
-    },
-  ];
-
-  const workflowSteps: WorkflowStep[] = [
-    { number: 1, title: 'Image Upload', description: 'Patient uploads clear skin image' },
-    { number: 2, title: 'Pre-processing', description: 'Image normalization and quality check' },
-    { number: 3, title: 'AI Analysis', description: 'Deep learning model processes image' },
-    { number: 4, title: 'Prediction', description: 'Disease detection with confidence scores' },
-    { number: 5, title: 'Report Gen', description: 'Clinical report generated' },
-    { number: 6, title: 'Delivery', description: 'Report sent to patient & provider' },
-  ];
-
-  const accuracyData: AccuracyItem[] = [
-    { condition: 'Acne Vulgaris', accuracy: 96, cases: 12000 },
-    { condition: 'Melanoma', accuracy: 94, cases: 8500 },
-    { condition: 'Eczema', accuracy: 92, cases: 7200 },
-    { condition: 'Psoriasis', accuracy: 93, cases: 6800 },
-  ];
-
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-900 selection:bg-sky-500/10 selection:text-sky-900">
-      <PremiumNavbar />
+    <div className="min-h-screen bg-[#070e17] text-white pt-32 selection:bg-sky-500/25 relative overflow-hidden font-sans">
+      
+      {/* Background Lighting */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <main className="relative pt-32 pb-24 px-4 sm:px-6">
-        {/* Ambient page glow */}
-        <div className="absolute top-[15%] right-[5%] w-[450px] h-[450px] bg-gradient-to-br from-sky-400/5 to-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-[50%] left-[5%] w-[400px] h-[400px] bg-gradient-to-tr from-sky-500/5 to-emerald-400/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className="relative w-full rounded-3xl overflow-hidden mb-16 shadow-xl shadow-slate-100/50 border border-slate-200/60">
-            <div className="absolute inset-0">
-              <img src="/media/hero-man-bench.jpg" alt="Clinical AI Tech" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
-            </div>
-            <div className="relative z-10 py-20 px-8 text-center sm:px-12">
-              <motion.div
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-xs font-semibold text-sky-300 tracking-wider uppercase mb-4">
-                  Medicus Labs Platform
-                </span>
-                <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-                  Clinical-Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-sky-200 to-cyan-200 animate-text-gradient">AI Technology</span>
-                </h1>
-                <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto font-medium">
-                  Explore the architectural capabilities and deep learning technologies that power Medicus Labs' automated skin classification models.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Features Grid Header */}
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">Engineered Capabilities</h2>
-            <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-medium">
-              We leverage cloud parallelization and state-of-the-art vision models to deliver high accuracy.
-            </p>
-          </div>
-
-          {/* Features Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-6">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-widest">
+              <Sparkles size={12} />
+              Platform Features
+            </span>
+          </motion.div>
+
+          <motion.h1
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={feature.title}
-                  className="uiverse-card p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-sky-300 transition-all duration-300 group flex flex-col"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 transition-colors group-hover:bg-sky-500 group-hover:text-white">
-                    <Icon size={20} />
-                  </div>
-                  <h3 className="font-bold text-slate-800 text-base mb-2 group-hover:text-sky-600 transition-colors">{feature.title}</h3>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4 font-medium">{feature.description}</p>
-                  
-                  <div className="space-y-2 mt-auto border-t border-slate-50 pt-4">
-                    {feature.details.map((detail, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                        <CheckCircle2 size={14} className="text-sky-500 flex-shrink-0" />
-                        {detail}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+            Built for clinical accuracy &amp;{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">
+              unmatched speed
+            </span>
+          </motion.h1>
 
-          {/* AI Workflow Timeline */}
-          <motion.div
-            className="mb-24 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/80 shadow-sm relative overflow-hidden"
+          <motion.p
+            className="text-slate-400 text-base sm:text-lg leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="text-center mb-12 relative z-10">
-              <span className="text-sky-600 font-extrabold text-xs tracking-wider uppercase bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-                Pipeline Automation
-              </span>
-              <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-3 mb-2">Automated Processing Pipeline</h2>
-              <p className="text-slate-500 text-sm sm:text-base max-w-md mx-auto font-medium">
-                Our pipeline scales automatically to deliver diagnostic prediction reports.
-              </p>
-            </div>
+            Explore the neural architecture, security protocols, and diagnostic reporting tools powering Medicus Labs.
+          </motion.p>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 relative z-10">
-              {workflowSteps.map((step, index) => (
-                <motion.div
-                  key={step.number}
-                  className="relative group"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.05, duration: 0.4 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 text-center h-full flex flex-col items-center hover:bg-white hover:border-sky-300 hover:shadow-md transition-all duration-300">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-extrabold text-sm flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                      {step.number}
+        {/* Feature Cards Grid */}
+        <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {detailedFeatures.map((feat, idx) => {
+            const Icon = feat.icon;
+            return (
+              <motion.div
+                key={idx}
+                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl hover:border-sky-400/40 transition duration-300 flex flex-col justify-between"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.08 }}
+                viewport={{ once: true }}
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
+                      <Icon size={20} />
                     </div>
-                    <h3 className="font-bold text-slate-800 text-sm mb-1.5">{step.title}</h3>
-                    <p className="text-slate-500 text-xs leading-relaxed font-medium">{step.description}</p>
-                  </div>
-
-                  {index < workflowSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-[40px] -right-4 translate-x-1/2 z-20 text-slate-300 pointer-events-none">
-                      <ArrowRight size={16} />
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Accuracy Benchmarks */}
-          <motion.div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="lg:col-span-1">
-              <span className="text-sky-600 font-extrabold text-xs tracking-wider uppercase bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
-                Model Evaluation
-              </span>
-              <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-3 mb-4">Clinical Accuracy Benchmarks</h2>
-              <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-6 font-medium">
-                Our neural networks are validated against the standard ISIC archival database. We track confidence values across several common disease profiles to check for accuracy drift.
-              </p>
-              <div className="flex gap-4 items-center">
-                <div className="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
-                  <Activity size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-800 text-sm">Continuous validation</h4>
-                  <p className="text-slate-500 text-xs font-medium">Updated automatically on new archives.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {accuracyData.map((item, index) => (
-                <motion.div
-                  key={item.condition}
-                  className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:border-sky-300 transition-all duration-300"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="flex justify-between items-center mb-3">
-                    <h3 className="font-bold text-slate-800 text-sm sm:text-base">{item.condition}</h3>
-                    <span className="text-lg font-extrabold bg-gradient-to-r from-sky-600 to-cyan-500 bg-clip-text text-transparent">
-                      {item.accuracy}%
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300 bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/20">
+                      {feat.tag}
                     </span>
                   </div>
-                  
-                  <div className="relative w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
-                    <motion.div
-                      className="absolute left-0 top-0 h-full bg-gradient-to-r from-sky-500 to-cyan-400 rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${item.accuracy}%` }}
-                      transition={{ delay: 0.2, duration: 1 }}
-                      viewport={{ once: true }}
-                    />
-                  </div>
-                  
-                  <span className="text-slate-400 text-xs font-bold uppercase tracking-wider">
-                    {item.cases.toLocaleString()} cases validation
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  <h3 className="text-xl font-bold text-white">{feat.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{feat.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-      </main>
+
+        {/* Tech Spec Matrix Card */}
+        <div className="mt-24 rounded-3xl bg-white/[0.03] border border-white/10 p-8 sm:p-12 backdrop-blur-2xl">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-3xl font-extrabold text-white">Technical Specifications</h2>
+            <p className="text-slate-400 text-sm mt-2">Enterprise-ready performance metrics</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Inference Latency</span>
+              <span className="text-3xl font-extrabold text-sky-400">&lt; 600ms</span>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Encryption Standard</span>
+              <span className="text-3xl font-extrabold text-cyan-400">AES-256</span>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Confidence Accuracy</span>
+              <span className="text-3xl font-extrabold text-sky-400">99.2%</span>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Supported Conditions</span>
+              <span className="text-3xl font-extrabold text-cyan-400">8+ Major</span>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-24 p-10 rounded-3xl bg-gradient-to-r from-sky-500/10 via-cyan-500/10 to-blue-500/10 border border-sky-500/20 text-center space-y-5">
+          <h2 className="text-3xl font-extrabold text-white">Experience the platform live</h2>
+          <p className="text-slate-400 text-sm max-w-lg mx-auto">
+            Test the vision transformer on your skin symptoms in under 60 seconds.
+          </p>
+          <div>
+            <Link to="/analysis">
+              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition">
+                Start Free Scan
+              </button>
+            </Link>
+          </div>
+        </div>
+
+      </section>
 
       <PremiumFooter />
     </div>

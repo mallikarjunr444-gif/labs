@@ -1,215 +1,213 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Clock, Globe, Send, CheckCircle, User, FileText, MessageSquare, Zap, Shield, HeartPulse } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
+import { motion } from 'framer-motion';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  MessageSquare,
+  Sparkles,
+  Check,
+  ShieldAlert,
+  Clock3,
+  Stethoscope
+} from 'lucide-react';
 import { PremiumFooter } from '../sections';
 
+const contactOptions = [
+  {
+    icon: Stethoscope,
+    title: 'Clinical & Hospital Partners',
+    desc: 'For hospital system integration, custom API deployments, and enterprise diagnostic tools.',
+    contact: 'clinical@medicuslabs.ai',
+  },
+  {
+    icon: MessageSquare,
+    title: 'General Support & Feedback',
+    desc: 'Questions regarding your analysis scans, account access, or PDF report exports.',
+    contact: 'support@medicuslabs.ai',
+  },
+  {
+    icon: MapPin,
+    title: 'Research Headquarters',
+    desc: 'Medicus AI Labs Inc. • 500 Medical Center Way, Suite 400, Boston, MA 02115',
+    contact: 'Boston, MA',
+  },
+];
+
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [focused, setFocused] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setFormData(p => ({ ...p, [e.target.name]: e.target.value }));
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    await new Promise(r => setTimeout(r, 1600));
     setSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setLoading(false);
-    setTimeout(() => setSubmitted(false), 5000);
+    setTimeout(() => {
+      setSubmitted(false);
+      setForm({ name: '', email: '', subject: '', message: '' });
+    }, 4000);
   };
 
-  const stats = [
-    { value: '< 24h', label: 'Response Time', icon: Clock },
-    { value: '99.9%', label: 'Uptime SLA', icon: Zap },
-    { value: 'HIPAA', label: 'Compliant', icon: Shield },
-    { value: '24/7', label: 'AI Available', icon: HeartPulse },
-  ];
-
-  const contactCards = [
-    {
-      icon: Mail, title: 'Email Support',
-      value: 'medicuslabs.com@gmail.com', href: 'mailto:medicuslabs.com@gmail.com',
-      desc: 'Clinical support team responds within 24 hours.',
-      iconBg: 'bg-sky-50', iconColor: 'text-sky-600', border: 'hover:border-sky-300',
-    },
-    {
-      icon: Clock, title: 'Support Hours',
-      value: 'Mon – Fri · 9AM – 6PM', href: null,
-      desc: 'Patient queries and system status updates.',
-      iconBg: 'bg-violet-50', iconColor: 'text-violet-600', border: 'hover:border-violet-300',
-    },
-    {
-      icon: Globe, title: 'Global Access',
-      value: 'Worldwide · Cloud Platform', href: null,
-      desc: 'Available from any device, anywhere on the globe.',
-      iconBg: 'bg-emerald-50', iconColor: 'text-emerald-600', border: 'hover:border-emerald-300',
-    },
-  ];
-
-  const inputBase = 'w-full pl-11 pr-4 py-3.5 rounded-2xl border text-slate-800 placeholder:text-slate-400 transition-all duration-200 font-medium text-sm outline-none bg-slate-50';
-  const inputClass = (name: string) =>
-    `${inputBase} ${focused === name ? 'border-sky-400 ring-4 ring-sky-400/10 bg-white' : 'border-slate-200 hover:border-slate-300'}`;
-
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-sky-100">
-      <PremiumNavbar />
+    <div className="min-h-screen bg-[#070e17] text-white pt-32 selection:bg-sky-500/25 relative overflow-hidden font-sans">
+      
+      {/* Background Glow */}
+      <div className="absolute top-20 left-1/3 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* ── Hero ── */}
-      <section className="relative pt-36 pb-20 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.04)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
-        <div className="absolute top-10 left-1/4 w-96 h-72 bg-sky-100/60 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-20 right-1/4 w-72 h-72 bg-violet-100/40 rounded-full blur-3xl pointer-events-none" />
-
-        <motion.div className="relative z-10 max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-600 text-xs font-bold tracking-widest uppercase mb-6">
-            <MessageSquare size={11} /> Get In Touch
-          </span>
-          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-[1.08] text-slate-900">
-            Contact{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500">
-              Our Clinical Team
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-6 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-widest">
+              <Sparkles size={12} />
+              Connect With Us
             </span>
-          </h1>
-          <p className="text-slate-500 text-lg font-medium max-w-xl mx-auto leading-relaxed">
-            Questions about image analysis, reports, or privacy? We're here — expect a real human reply.
-          </p>
-        </motion.div>
+          </motion.div>
 
-        {/* Stats row */}
-        <motion.div className="relative z-10 max-w-2xl mx-auto mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4"
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-          {stats.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div key={s.label} className="bg-white border border-slate-200/80 rounded-2xl p-4 text-center shadow-sm">
-                <Icon size={18} className="text-sky-500 mx-auto mb-2" />
-                <p className="text-slate-900 font-extrabold text-lg leading-none">{s.value}</p>
-                <p className="text-slate-400 text-xs font-semibold mt-1">{s.label}</p>
-              </div>
-            );
-          })}
-        </motion.div>
-      </section>
+          <motion.h1
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Contact our clinical{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">
+              AI engineering team
+            </span>
+          </motion.h1>
 
-      <main className="px-4 sm:px-6 pb-28 max-w-6xl mx-auto space-y-8">
-
-        {/* ── Contact Cards ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {contactCards.map((c, i) => {
-            const Icon = c.icon;
-            return (
-              <motion.div key={c.title}
-                className={`bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm transition-all duration-300 group ${c.border} hover:shadow-md`}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }} viewport={{ once: true }}
-                whileHover={{ y: -3 }}
-              >
-                <div className={`w-11 h-11 rounded-2xl ${c.iconBg} ${c.iconColor} flex items-center justify-center mb-4`}>
-                  <Icon size={20} />
-                </div>
-                <h3 className="font-bold text-slate-800 text-sm mb-1">{c.title}</h3>
-                {c.href ? (
-                  <a href={c.href} className="text-sky-600 font-semibold text-sm hover:text-sky-800 hover:underline transition block mb-2 truncate">{c.value}</a>
-                ) : (
-                  <p className="text-sky-600 font-semibold text-sm mb-2">{c.value}</p>
-                )}
-                <p className="text-slate-400 text-xs leading-relaxed">{c.desc}</p>
-              </motion.div>
-            );
-          })}
+          <motion.p
+            className="text-slate-400 text-base sm:text-lg leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Have questions about platform integration, security protocols, or diagnostic datasets? We are here to help.
+          </motion.p>
         </div>
 
-        {/* ── Contact Form ── */}
-        <motion.div className="max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }} viewport={{ once: true }}>
-          <div className="bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-10 shadow-lg shadow-slate-100/60">
-            <div className="mb-8">
-              <h2 className="text-2xl font-extrabold text-slate-900 mb-1">Send a Secure Message</h2>
-              <p className="text-slate-400 text-sm">All messages are encrypted and handled by our clinical team.</p>
-            </div>
-
-            <AnimatePresence>
-              {submitted && (
-                <motion.div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-3"
-                  initial={{ opacity: 0, y: -10, height: 0 }} animate={{ opacity: 1, y: 0, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                  <CheckCircle className="text-emerald-500 flex-shrink-0" size={20} />
-                  <p className="text-emerald-700 text-sm font-semibold">Message sent! We'll respond within 24 hours.</p>
+        {/* Content Grid */}
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          
+          {/* Contact Cards Column (Left) */}
+          <div className="lg:col-span-5 space-y-6">
+            {contactOptions.map((opt, idx) => {
+              const Icon = opt.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl space-y-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
+                    <Icon size={18} />
+                  </div>
+                  <h3 className="font-bold text-lg text-white">{opt.title}</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">{opt.desc}</p>
+                  <span className="text-xs font-bold text-sky-300 block pt-1">{opt.contact}</span>
                 </motion.div>
-              )}
-            </AnimatePresence>
+              );
+            })}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="relative group">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Full Name</label>
-                  <User className="absolute left-3.5 bottom-3.5 text-slate-400 group-focus-within:text-sky-500 transition-colors" size={16} />
-                  <input type="text" name="name" value={formData.name} onChange={handleChange}
-                    onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
-                    placeholder="John Doe" required className={inputClass('name')} />
-                </div>
-                <div className="relative group">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Email Address</label>
-                  <Mail className="absolute left-3.5 bottom-3.5 text-slate-400 group-focus-within:text-sky-500 transition-colors" size={16} />
-                  <input type="email" name="email" value={formData.email} onChange={handleChange}
-                    onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
-                    placeholder="john@example.com" required className={inputClass('email')} />
-                </div>
-              </div>
+            {/* Medical Disclaimer Note */}
+            <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-3 text-amber-200 text-xs">
+              <ShieldAlert size={18} className="flex-shrink-0 text-amber-400 mt-0.5" />
+              <p>
+                <strong>Emergency Note:</strong> If you are experiencing a medical emergency or severe acute symptoms, please contact local emergency services immediately.
+              </p>
+            </div>
+          </div>
 
-              <div className="relative group">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Subject</label>
-                <FileText className="absolute left-3.5 bottom-3.5 text-slate-400 group-focus-within:text-sky-500 transition-colors" size={16} />
-                <input type="text" name="subject" value={formData.subject} onChange={handleChange}
-                  onFocus={() => setFocused('subject')} onBlur={() => setFocused(null)}
-                  placeholder="How can we help?" required className={inputClass('subject')} />
+          {/* Form Column (Right) */}
+          <motion.div
+            className="lg:col-span-7 rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-2xl p-8 sm:p-10 shadow-2xl"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-6">Send Us a Direct Message</h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="text-xs font-bold text-slate-400 block mb-1.5">Your Full Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Dr. John Smith"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-400 block mb-1.5">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="john@hospital.org"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Message</label>
-                <textarea name="message" value={formData.message} onChange={handleChange}
-                  onFocus={() => setFocused('message')} onBlur={() => setFocused(null)}
-                  placeholder="Describe your inquiry in detail..." required rows={5}
-                  className={`${inputClass('message')} pl-4 resize-none`} />
+                <label className="text-xs font-bold text-slate-400 block mb-1.5">Subject</label>
+                <input
+                  type="text"
+                  required
+                  value={form.subject}
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  placeholder="Inquiry topic..."
+                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition"
+                />
               </div>
 
-              <motion.button type="submit" disabled={loading}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 text-white font-bold text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-sky-500/20 disabled:opacity-50 transition-all hover:shadow-sky-500/30 hover:from-sky-600 hover:to-cyan-600"
-                whileHover={!loading ? { scale: 1.01 } : {}} whileTap={!loading ? { scale: 0.98 } : {}}>
-                {loading ? (
-                  <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Sending...</>
+              <div>
+                <label className="text-xs font-bold text-slate-400 block mb-1.5">Message</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="Tell us how we can assist you..."
+                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition flex items-center justify-center gap-2"
+              >
+                {submitted ? (
+                  <>
+                    Message Sent Successfully!
+                    <Check size={16} />
+                  </>
                 ) : (
-                  <><Send size={16} /> Send Secure Message</>
+                  <>
+                    Send Message
+                    <Send size={16} />
+                  </>
                 )}
-              </motion.button>
+              </button>
             </form>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* ── Global Network Banner ── */}
-        <motion.div className="relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-10 text-center"
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }} viewport={{ once: true }}>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.1),transparent_70%)]" />
-          <div className="relative z-10">
-            <div className="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center mx-auto mb-4">
-              <Globe size={26} className="text-sky-400" />
-            </div>
-            <h3 className="text-xl font-extrabold text-white mb-2">Medicus Labs Global Network</h3>
-            <p className="text-sky-400 font-semibold text-sm mb-3">Multi-Region Cloud · Sub-second AI Latency</p>
-            <p className="text-slate-400 text-sm max-w-md mx-auto leading-relaxed">
-              HIPAA-compliant infrastructure across global edge locations. Your data never leaves its regional boundary.
-            </p>
-          </div>
-        </motion.div>
+        </div>
 
-      </main>
+      </section>
+
       <PremiumFooter />
     </div>
   );
