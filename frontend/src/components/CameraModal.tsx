@@ -19,6 +19,7 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
   const [cameraAvailable, setCameraAvailable] = useState(true);
   const [isCapturing, setIsCapturing] = useState(false);
   const [hasMultipleCameras, setHasMultipleCameras] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
 
   const stopStream = useCallback(() => {
     if (stream) {
@@ -62,6 +63,14 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
         videoRef.current.srcObject = mediaStream;
         videoRef.current.onloadedmetadata = () => {
           console.log('Camera stream loaded - Video dimensions:', videoRef.current?.videoWidth, 'x', videoRef.current?.videoHeight);
+        };
+        videoRef.current.onplay = () => {
+          console.log('Video is now playing');
+          setVideoPlaying(true);
+        };
+        videoRef.current.onpause = () => {
+          console.log('Video paused');
+          setVideoPlaying(false);
         };
       }
 
@@ -109,24 +118,13 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
   const handleCapture = () => {
     if (!videoRef.current || !canvasRef.current || isCapturing) return;
 
-    setIsCapturing(true);
     const video = videoRef.current;
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    
+    console.log('Capture started - Video readyState:', video.readyState, 'Video dimensions:', video.videoWidth, 'x', video.videoHeight, 'Playing:', videoPlaying);
 
-    console.log('Capture started - Video readyState:', video.readyState, 'Video dimensions:', video.videoWidth, 'x', video.videoHeight);
-
-    if (!context) {
-      console.error('Failed to get canvas context');
-      setIsCapturing(false);
-      setError('Unable to capture image. Please try again.');
-      return;
-    }
-
-    // Ensure video has loaded a frame
-    if (video.readyState < 2) {
-      console.error('Video not ready for capture');
-      setIsCapturing(false);
+    // Ensure video has loaded a frame and is playing
+    if (video.readyState < 2 || !videoPlaying) {
+      console.error('Video not ready for capture - readyState:', video.readyState, 'playing:', videoPlaying);
       setError('Camera not ready. Please wait a moment and try again.');
       return;
     }
@@ -266,6 +264,9 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
                            setError('Failed to display captured image. Please try again.');
                          }}
                        />
+                       <div className="absolute bottom-4 left-0 right-0 text-center">
+                         <p className="text-white/60 text-xs font-medium">Preview</p>
+                       </div>
                      </div>
                    )}
                 </>
