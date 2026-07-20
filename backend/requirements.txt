@@ -43,6 +43,9 @@ alembic==1.12.1
 aiofiles==23.2.1
 # asyncpg==0.29.0
 
+# QR code generation (optional)
+qrcode[pil]
+
 # Optional: For ML model integration
 # torch==2.1.0
 # transformers==4.34.0

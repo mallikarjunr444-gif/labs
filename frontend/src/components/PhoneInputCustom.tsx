@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import type { CountryCode } from 'libphonenumber-js';
+import { motion } from 'framer-motion';
 
 const COUNTRIES = [
   { code: 'IN', dial: '+91', flag: '🇮🇳', name: 'India' },
@@ -49,7 +51,10 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
   const [search, setSearch] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [position, setPosition] = useState<'down' | 'up'>('down');
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     // try to initialize from provided E.164 value
@@ -95,6 +100,22 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
     }
   }, [selected, number]);
 
+  const calculatePosition = useCallback(() => {
+    if (!buttonRef.current) return;
+    
+    const rect = buttonRef.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const spaceBelow = viewportHeight - rect.bottom;
+    const dropdownHeight = 400; // Approximate max height
+    
+    // If not enough space below, open upward
+    if (spaceBelow < dropdownHeight && rect.top > dropdownHeight) {
+      setPosition('up');
+    } else {
+      setPosition('down');
+    }
+  }, []);
+
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -106,6 +127,25 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const handleResize = () => calculatePosition();
+    const handleScroll = () => {
+      // Close dropdown on scroll for better UX
+      setOpen(false);
+      setSearch('');
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll, true);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll, true);
+    };
+  }, [open, calculatePosition]);
+
   const filtered = COUNTRIES.filter(
     (c) => c.name.toLowerCase().includes(search.toLowerCase()) || c.dial.includes(search)
   );
@@ -115,17 +155,21 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'stretch',
           border: '1.5px solid #e2e8f0',
           borderRadius: 10,
           background: '#fff',
-          overflow: 'hidden',
+          overflow: 'visible',
         }}
         className="phone-input-wrapper"
       >
         <button
+          ref={buttonRef}
           type="button"
-          onClick={() => setOpen((s) => !s)}
+          onClick={() => {
+            calculatePosition();
+            setOpen((s) => !s);
+          }}
           aria-haspopup="listbox"
           aria-expanded={open}
           style={{
@@ -169,19 +213,25 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
         />
       </div>
 
-      {open && (
-        <div
+      {open && createPortal(
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: position === 'down' ? -10 : 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: position === 'down' ? -10 : 10 }}
+          transition={{ duration: 0.15, ease: 'easeOut' }}
           style={{
-            position: 'absolute',
-            top: 'calc(100% + 6px)',
-            left: 0,
-            zIndex: 9999,
+            position: 'fixed',
+            left: buttonRef.current ? buttonRef.current.getBoundingClientRect().left : 0,
+            [position === 'down' ? 'top' : 'bottom']: position === 'down' 
+              ? (buttonRef.current ? buttonRef.current.getBoundingClientRect().bottom + 6 : 0)
+              : (buttonRef.current ? window.innerHeight - buttonRef.current.getBoundingClientRect().top + 6 : 0),
+            zIndex: 99999,
             background: '#ffffff',
             border: '1.5px solid #e2e8f0',
             borderRadius: 12,
-            boxShadow: '0 16px 48px rgba(0,0,0,0.14)',
-            width: 'min(280px, calc(100vw - 24px))',
-            maxHeight: 320,
+            boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+            width: 'min(320px, calc(100vw - 32px))',
+            maxHeight: 'min(420px, calc(100vh - 120px))',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
@@ -190,16 +240,18 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
         >
           <div style={{ padding: '10px 12px', borderBottom: '1px solid #f1f5f9' }}>
             <input
+              ref={searchInputRef}
               autoFocus
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search country..."
+              aria-label="Search countries"
               style={{
                 width: '100%',
                 border: '1.5px solid #e2e8f0',
                 borderRadius: 8,
-                padding: '8px 12px',
+                padding: '10px 12px',
                 fontSize: 13,
                 outline: 'none',
                 background: '#f8fafc',
@@ -208,7 +260,13 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
             />
           </div>
 
-          <div style={{ overflowY: 'auto', flex: 1 }}>
+          <div 
+            style={{ 
+              overflowY: 'auto', 
+              flex: 1,
+              overscrollBehavior: 'contain'
+            }}
+          >
             {filtered.map((c) => (
               <div
                 key={`${c.code}-${c.dial}`}
@@ -217,27 +275,40 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
                   setOpen(false);
                   setSearch('');
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelected(c);
+                    setOpen(false);
+                    setSearch('');
+                  }
+                }}
                 role="option"
                 aria-selected={selected.code === c.code}
+                tabIndex={0}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 10,
-                  padding: '10px 14px',
+                  gap: 12,
+                  padding: '12px 14px',
                   cursor: 'pointer',
                   background: selected.code === c.code ? '#f0f9ff' : 'transparent',
+                  borderBottom: '1px solid #f8fafc',
                 }}
               >
-                <span style={{ fontSize: 20 }}>{c.flag}</span>
-                <span style={{ flex: 1, fontSize: 14, color: '#1e293b' }}>{c.name}</span>
+                <span style={{ fontSize: 22, lineHeight: 1 }}>{c.flag}</span>
+                <span style={{ flex: 1, fontSize: 14, color: '#1e293b', fontWeight: 500 }}>{c.name}</span>
                 <span style={{ fontSize: 13, color: '#64748b', fontWeight: 600, fontFamily: 'monospace' }}>{c.dial}</span>
               </div>
             ))}
             {filtered.length === 0 && (
-              <div style={{ padding: 20, textAlign: 'center', color: '#94a3b8', fontSize: 14 }}>No countries found</div>
+              <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 14 }}>
+                No countries found
+              </div>
             )}
           </div>
-        </div>
+        </motion.div>,
+        document.body
       )}
 
       {error && <p style={{ color: '#ef4444', marginTop: 8, fontSize: 13 }}>{error}</p>}

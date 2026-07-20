@@ -9,6 +9,7 @@ import {
 import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import PhoneInputCustom from '../components/PhoneInputCustom';
+import CameraModal from '../components/CameraModal';
 import { getApiBaseUrl } from '../lib/apiBase';
 
 type FormState = {
@@ -118,6 +119,7 @@ const Analysis: React.FC = () => {
   const [loadingStep, setLoadingStep] = useState('');
   const [validating, setValidating] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [showCamera, setShowCamera] = useState(false);
   const fileRef = useRef<HTMLInputElement | null>(null);
   const location = useLocation();
 
@@ -155,23 +157,40 @@ const Analysis: React.FC = () => {
     return e;
   }, [form]);
 
-  const handleFileSelect = useCallback((file: File | null) => {
-    if (!file) return;
+  const validateImageFile = useCallback((file: File): boolean => {
     const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
     if (!allowed.includes(file.type)) {
       setErrors((p) => ({ ...p, image: 'Please upload JPG, PNG, or WEBP only.' }));
-      return;
+      return false;
     }
     if (file.size > 10 * 1024 * 1024) {
       setErrors((p) => ({ ...p, image: 'Image must be under 10MB.' }));
-      return;
+      return false;
     }
+    return true;
+  }, []);
+
+  const handleFileSelect = useCallback((file: File | null) => {
+    if (!file) return;
+    
+    if (!validateImageFile(file)) return;
+    
     setImage(file);
     setErrors((p) => ({ ...p, image: undefined }));
     const reader = new FileReader();
     reader.onload = (e) => setImagePreview((e.target?.result as string) || null);
     reader.readAsDataURL(file);
-  }, []);
+  }, [validateImageFile]);
+
+  const handleCameraCapture = useCallback((file: File) => {
+    if (!validateImageFile(file)) return;
+    
+    setImage(file);
+    setErrors((p) => ({ ...p, image: undefined }));
+    const reader = new FileReader();
+    reader.onload = (e) => setImagePreview((e.target?.result as string) || null);
+    reader.readAsDataURL(file);
+  }, [validateImageFile]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -180,7 +199,7 @@ const Analysis: React.FC = () => {
     if (Object.keys(errs).length > 0) return;
 
     if (!image) {
-      setErrors((p) => ({ ...p, image: 'Please upload a skin image.' }));
+      setErrors((p) => ({ ...p, image: 'Please capture or upload a skin image.' }));
       return;
     }
 
@@ -258,17 +277,44 @@ const Analysis: React.FC = () => {
 
   const downloadPDF = async () => {
     if (!result) return;
+    
+    setLoading(true);
+    setLoadingStep('Generating PDF report...');
+    
     try {
       const API = getApiBaseUrl();
       const url = `${API}/reports/${result.reportId}/download`;
+      
+      // Fetch the PDF
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || errorData.message || 'Failed to generate report');
+      }
+      
+      // Get the blob
+      const blob = await response.blob();
+      
+      // Create download link
+      const downloadUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `report_${result.reportId}.pdf`);
+      link.href = downloadUrl;
+      link.setAttribute('download', `Medicus_Labs_Report_${result.reportId}.pdf`);
       document.body.appendChild(link);
       link.click();
       link.remove();
+      
+      // Cleanup
+      window.URL.revokeObjectURL(downloadUrl);
+      
+      setLoading(false);
+      setLoadingStep('');
+      
     } catch (err: any) {
-      setErrors((p) => ({ ...p, submit: 'Failed to download PDF report.' }));
+      setLoading(false);
+      setLoadingStep('');
+      setErrors((p) => ({ ...p, submit: 'Unable to generate the report. Please try again.' }));
     }
   };
 
@@ -446,45 +492,65 @@ const Analysis: React.FC = () => {
                 <div className="uiverse-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
                   <h3 className="text-base font-bold text-slate-800 mb-4">Patient Image</h3>
 
-                  <div
-                    onClick={() => fileRef.current?.click()}
-                    onDragOver={(e) => {
-                      e.preventDefault();
-                      setDragOver(true);
-                    }}
-                    onDragLeave={() => setDragOver(false)}
-                    onDrop={(e) => {
-                      e.preventDefault();
-                      setDragOver(false);
-                      handleFileSelect(e.dataTransfer.files[0] || null);
-                    }}
-                    className={`flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-300 ${
-                      dragOver 
-                        ? 'border-sky-500 bg-sky-50/50' 
-                        : imagePreview 
-                        ? 'border-emerald-300 bg-emerald-50/[0.05]' 
-                        : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300'
-                    }`}
-                  >
-                    {imagePreview ? (
-                      <div className="w-full space-y-4">
-                        <img src={imagePreview} alt="Preview" className="max-h-40 w-full rounded-xl object-cover shadow-sm border border-slate-100" />
-                        <span className="inline-block text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
-                          File loaded — Click to change
-                        </span>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200">
-                          <UploadCloud size={24} />
+                  {!imagePreview ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Take Photo Option */}
+                      <button
+                        onClick={() => setShowCamera(true)}
+                        className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-sky-400 hover:bg-sky-50/50 hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <div className="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center border border-sky-200 group-hover:scale-110 transition-transform">
+                          <Camera size={32} />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-700 mb-1">Drop patient photograph here or click to browse</p>
-                          <p className="text-slate-400 text-xs font-medium">JPEG, PNG, or WEBP up to 10MB</p>
+                          <p className="text-sm font-bold text-slate-800 mb-1">📷 Take Photo</p>
+                          <p className="text-slate-500 text-xs font-semibold">Use your device camera</p>
                         </div>
-                      </>
-                    )}
-                  </div>
+                      </button>
+
+                      {/* Upload from Gallery Option */}
+                      <button
+                        onClick={() => fileRef.current?.click()}
+                        className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-50/50 hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center border border-emerald-200 group-hover:scale-110 transition-transform">
+                          <UploadCloud size={32} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-slate-800 mb-1">🖼 Upload from Gallery</p>
+                          <p className="text-slate-500 text-xs font-semibold">Choose from device storage</p>
+                        </div>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="relative rounded-2xl border-2 border-emerald-300 bg-emerald-50/[0.05] p-4">
+                        <img src={imagePreview} alt="Preview" className="max-h-48 w-full rounded-xl object-cover shadow-sm border border-slate-100" />
+                        <span className="absolute top-3 right-3 inline-block text-xs font-bold text-emerald-600 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full border border-emerald-200 shadow-sm">
+                          ✓ Image Ready
+                        </span>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => fileRef.current?.click()}
+                          className="flex-1 px-4 py-2.5 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
+                        >
+                          <Camera size={16} />
+                          Retake Photo
+                        </button>
+                        <button
+                          onClick={() => {
+                            setImage(null);
+                            setImagePreview(null);
+                          }}
+                          className="px-4 py-2.5 rounded-xl border-2 border-red-200 bg-red-50 hover:bg-red-100 text-red-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
+                        >
+                          <X size={16} />
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   <input
                     ref={fileRef}
@@ -498,24 +564,30 @@ const Analysis: React.FC = () => {
 
 
 
-                {/* Submit trigger */}
-                <button
-                  type="submit"
-                  disabled={validating}
-                  className="uiverse-btn w-full py-4 rounded-2xl bg-slate-900 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 disabled:opacity-75 disabled:cursor-not-allowed"
-                >
-                  {validating ? (
-                    <>
-                      <div className="w-5 h-5 rounded-full border-2 border-white/20 border-t-white animate-spin" />
-                      Verifying Skin Pathology...
-                    </>
-                  ) : (
-                    <>
-                      Initialize Diagnostic Engine
-                      <ArrowRight size={16} />
-                    </>
-                  )}
-                </button>
+              <CameraModal
+                isOpen={showCamera}
+                onClose={() => setShowCamera(false)}
+                onCapture={handleCameraCapture}
+              />
+
+              {/* Submit trigger */}
+              <button
+                type="submit"
+                disabled={validating}
+                className="uiverse-btn w-full py-4 rounded-2xl bg-slate-900 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 disabled:opacity-75 disabled:cursor-not-allowed"
+              >
+                {validating ? (
+                  <>
+                    <div className="w-5 h-5 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+                    Verifying Skin Pathology...
+                  </>
+                ) : (
+                  <>
+                    Continue Analysis
+                    <ArrowRight size={16} />
+                  </>
+                )}
+              </button>
               </div>
 
               {/* Clinical AI Analysis Methodology & Guidelines */}
