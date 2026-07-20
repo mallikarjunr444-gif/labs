@@ -27,8 +27,8 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
       console.log('Stopping camera stream');
       streamRef.current.getTracks().forEach(track => track.stop());
       streamRef.current = null;
-      initializedRef.current = false;
     }
+    initializedRef.current = false;
   }, []);
 
   const startCamera = useCallback(async () => {
@@ -62,6 +62,13 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
       streamRef.current = mediaStream;
       console.log('MediaStream created');
 
+      // Check for multiple cameras after permission is granted
+      if (navigator.mediaDevices.enumerateDevices) {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        setHasMultipleCameras(videoDevices.length > 1);
+      }
+
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
         videoRef.current.onloadedmetadata = () => {
@@ -88,6 +95,29 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
       }
     }
   }, [facingMode]);
+
+  // Check for multiple cameras on component mount
+  useEffect(() => {
+    // Mobile fallback: assume multiple cameras (front/back) on all mobile devices
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      setHasMultipleCameras(true);
+    }
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      return;
+    }
+    const checkCameras = async () => {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        setHasMultipleCameras(prev => prev || videoDevices.length > 1);
+      } catch (err) {
+        console.error('Error checking cameras on mount:', err);
+      }
+    };
+    checkCameras();
+  }, []);
 
   // Start camera only when modal opens
   useEffect(() => {
