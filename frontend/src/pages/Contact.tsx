@@ -9,7 +9,6 @@ import {
   Sparkles,
   Check,
   ShieldAlert,
-  Clock3,
   Stethoscope
 } from 'lucide-react';
 import { PremiumFooter } from '../sections';
@@ -49,12 +48,9 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#070e17] text-white pt-32 selection:bg-sky-500/25 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
       
-      {/* Background Glow */}
-      <div className="absolute top-20 left-1/3 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-6 mb-16">
@@ -63,26 +59,26 @@ const Contact: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-widest">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
               <Sparkles size={12} />
               Connect With Us
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white"
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-[#141515]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Contact our clinical{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">
+            <span className="text-[#206E55]">
               AI engineering team
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-slate-400 text-base sm:text-lg leading-relaxed"
+            className="text-[#5A554A] text-base sm:text-lg leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -101,25 +97,25 @@ const Contact: React.FC = () => {
               return (
                 <motion.div
                   key={idx}
-                  className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl space-y-3"
+                  className="p-6 rounded-3xl bg-white border border-[#E5E2DA] shadow-sm space-y-3"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-2xl bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] flex items-center justify-center">
                     <Icon size={18} />
                   </div>
-                  <h3 className="font-bold text-lg text-white">{opt.title}</h3>
-                  <p className="text-slate-400 text-xs leading-relaxed">{opt.desc}</p>
-                  <span className="text-xs font-bold text-sky-300 block pt-1">{opt.contact}</span>
+                  <h3 className="font-bold text-lg text-[#141515]">{opt.title}</h3>
+                  <p className="text-[#5A554A] text-xs leading-relaxed">{opt.desc}</p>
+                  <span className="text-xs font-bold text-[#206E55] block pt-1">{opt.contact}</span>
                 </motion.div>
               );
             })}
 
             {/* Medical Disclaimer Note */}
-            <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-3 text-amber-200 text-xs">
-              <ShieldAlert size={18} className="flex-shrink-0 text-amber-400 mt-0.5" />
+            <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3 text-amber-800 text-xs">
+              <ShieldAlert size={18} className="flex-shrink-0 text-amber-600 mt-0.5" />
               <p>
                 <strong>Emergency Note:</strong> If you are experiencing a medical emergency or severe acute symptoms, please contact local emergency services immediately.
               </p>
@@ -128,66 +124,66 @@ const Contact: React.FC = () => {
 
           {/* Form Column (Right) */}
           <motion.div
-            className="lg:col-span-7 rounded-3xl bg-white/[0.04] border border-white/10 backdrop-blur-2xl p-8 sm:p-10 shadow-2xl"
+            className="lg:col-span-7 rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-10 shadow-sm"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Send Us a Direct Message</h2>
+            <h2 className="text-2xl font-bold text-[#141515] mb-6">Send Us a Direct Message</h2>
             
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-1.5">Your Full Name</label>
+                  <label className="text-xs font-bold text-[#5A554A] block mb-1.5">Your Full Name</label>
                   <input
                     type="text"
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Dr. John Smith"
-                    className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-[#141515] placeholder-slate-400 text-sm focus:outline-none focus:border-[#206E55] transition"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-400 block mb-1.5">Email Address</label>
+                  <label className="text-xs font-bold text-[#5A554A] block mb-1.5">Email Address</label>
                   <input
                     type="email"
                     required
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="john@hospital.org"
-                    className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-[#141515] placeholder-slate-400 text-sm focus:outline-none focus:border-[#206E55] transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 block mb-1.5">Subject</label>
+                <label className="text-xs font-bold text-[#5A554A] block mb-1.5">Subject</label>
                 <input
                   type="text"
                   required
                   value={form.subject}
                   onChange={(e) => setForm({ ...form, subject: e.target.value })}
                   placeholder="Inquiry topic..."
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition"
+                  className="w-full px-4 py-3 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-[#141515] placeholder-slate-400 text-sm focus:outline-none focus:border-[#206E55] transition"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 block mb-1.5">Message</label>
+                <label className="text-xs font-bold text-[#5A554A] block mb-1.5">Message</label>
                 <textarea
                   required
                   rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell us how we can assist you..."
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition resize-none"
+                  className="w-full px-4 py-3 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-[#141515] placeholder-slate-400 text-sm focus:outline-none focus:border-[#206E55] transition resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-sm transition flex items-center justify-center gap-2"
               >
                 {submitted ? (
                   <>

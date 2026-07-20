@@ -277,13 +277,13 @@ const Analysis: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/20 text-xs font-semibold text-sky-300 tracking-wider uppercase mb-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-xs font-semibold text-[#206E55] tracking-wider uppercase mb-4">
                   Clinical AI Workflow
                 </span>
-                <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
-                  Clinical Dermatology <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">Analysis Engine</span>
+                <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#141515] mb-4 tracking-tight leading-tight">
+                  Clinical Dermatology <span className="text-[#206E55]">Analysis Engine</span>
                 </h1>
-                <p className="text-slate-300 text-base max-w-2xl mx-auto font-medium">
+                <p className="text-[#5A554A] text-base max-w-2xl mx-auto font-medium">
                   Follow our secure pipeline for automated classifications, ISIC validation, and instant reporting.
                 </p>
               </motion.div>
@@ -291,7 +291,7 @@ const Analysis: React.FC = () => {
           </div>
 
           {/* Stepper Widget */}
-          <div className="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto">
+          <div className="bg-white border border-[#E5E2DA] p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto">
             <div className="flex justify-between items-center min-w-[760px] px-4">
               {steps.map((s, i) => {
                 const Icon = s.icon;
@@ -304,17 +304,17 @@ const Analysis: React.FC = () => {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                           isActive
-                            ? 'bg-sky-500 border-sky-500 text-white shadow-lg shadow-sky-500/25 scale-110'
+                            ? 'bg-[#206E55] border-[#206E55] text-white shadow-md scale-110'
                             : isDone
-                            ? 'bg-emerald-500 border-emerald-500 text-white'
-                            : 'bg-slate-50 border-slate-200 text-slate-400'
+                            ? 'bg-emerald-600 border-emerald-600 text-white'
+                            : 'bg-[#FAF9F5] border-[#E5E2DA] text-slate-400'
                         }`}
                       >
                         {isDone ? <CheckCircle size={16} /> : <Icon size={16} />}
                       </div>
                       <span
                         className={`text-[10px] sm:text-xs font-bold tracking-wide transition-colors ${
-                          isActive ? 'text-sky-600' : isDone ? 'text-emerald-600' : 'text-slate-400'
+                          isActive ? 'text-[#206E55]' : isDone ? 'text-emerald-700' : 'text-slate-400'
                         }`}
                       >
                         {s.label}
@@ -324,7 +324,7 @@ const Analysis: React.FC = () => {
                     {i < steps.length - 1 && (
                       <div
                         className={`h-0.5 flex-1 mx-4 transition-colors duration-300 ${
-                          step > s.id ? 'bg-emerald-500' : 'bg-slate-100'
+                          step > s.id ? 'bg-emerald-600' : 'bg-[#E5E2DA]'
                         }`}
                       />
                     )}

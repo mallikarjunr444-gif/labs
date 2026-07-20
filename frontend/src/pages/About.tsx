@@ -2,195 +2,195 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Shield,
-  Brain,
   Award,
-  Users,
   Sparkles,
-  Lock,
-  Activity,
-  CheckCircle,
   ArrowRight,
-  Stethoscope
+  Brain,
+  CheckCircle,
+  FileText,
+  Users
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 
-const leaders = [
-  {
-    name: 'Dr. Evelyn Vance, MD',
-    role: 'Chief Medical Officer',
-    desc: 'Former Vice Chair of Dermatology at Johns Hopkins with 18+ years of clinical research experience.',
-  },
-  {
-    name: 'Marcus Sterling, PhD',
-    role: 'Head of AI & Neural Architecture',
-    desc: 'Pioneered computer vision models for sub-surface skin layer feature extraction.',
-  },
-  {
-    name: 'Dr. Aris Thorne, MD',
-    role: 'Clinical Validation Director',
-    desc: 'Board-certified dermatologist specializing in early melanoma identification and preventive care.',
-  },
-];
-
 const pillars = [
   {
     icon: Brain,
-    title: 'Clinical Rigor',
-    desc: 'Our vision transformers are benchmarked against 120,000+ verified clinical cases.',
+    title: 'Vision Transformers',
+    desc: 'Our models extract sub-surface skin features calibrated against 120,000+ verified clinical image cases.',
   },
   {
-    icon: Lock,
-    title: 'HIPAA & AES-256',
-    desc: 'Zero compromise on data privacy. Every scan is encrypted end-to-end.',
+    icon: Shield,
+    title: 'HIPAA & GDPR Compliant',
+    desc: 'AES-256 volatile memory encryption ensures your sensitive health data is never stored or monetized.',
   },
   {
-    icon: Activity,
-    title: 'Continuous Calibration',
-    desc: 'Models are audited monthly by independent board-certified clinical panels.',
+    icon: Award,
+    title: 'Physician Calibration',
+    desc: 'Validated alongside board-certified dermatologists to deliver high-confidence diagnostic indicators.',
   },
   {
-    icon: Stethoscope,
-    title: 'Physician Alignment',
-    desc: 'Reports are formatted specifically to assist doctors during consultation intake.',
+    icon: FileText,
+    title: 'Physician-Ready Reports',
+    desc: 'Generates structured PDF packet summaries designed specifically for primary care intake.',
+  },
+];
+
+const leadership = [
+  {
+    name: 'Dr. Elena Rostova',
+    role: 'Chief Medical Officer',
+    credentials: 'MD, PhD in Dermatology • Harvard Medical School',
+    bio: 'Pioneered early visual skin neoplasm classification benchmarks and published 40+ peer-reviewed studies.',
+  },
+  {
+    name: 'Marcus Vance',
+    role: 'Head of Neural Vision Systems',
+    credentials: 'MS in Computer Vision • MIT Artificial Intelligence Lab',
+    bio: 'Architected edge ViT neural pipelines deployed across leading hospital research networks.',
+  },
+  {
+    name: 'Sarah Chen',
+    role: 'VP of Patient Privacy & Security',
+    credentials: 'CISSP, CIPP/US • Former Health System Security Director',
+    bio: 'Oversees zero-knowledge cryptographic safeguards ensuring HIPAA compliance across all scan transactions.',
   },
 ];
 
 const About: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#070e17] text-white pt-32 selection:bg-sky-500/25 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
       
-      {/* Background Lighting */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-sky-500/5 rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
-        <div className="text-center max-w-3xl mx-auto space-y-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-6 mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-widest">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
               <Sparkles size={12} />
               About Medicus Labs
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white"
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-[#141515]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Bridging AI precision with{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">
-              dermatological care
+            Democratizing clinical skin intelligence through{' '}
+            <span className="text-[#206E55]">
+              ethical AI
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-slate-400 text-base sm:text-lg leading-relaxed"
+            className="text-[#5A554A] text-base sm:text-lg leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Founded by clinical researchers and AI engineers, Medicus Labs provides high-confidence preliminary skin health evaluations to fast-track patient care.
+            Founded by clinical researchers and AI engineers, Medicus Labs bridges the gap between patient skin concerns and professional dermatological care.
           </motion.p>
         </div>
 
-        {/* Mission Statement Glass Card */}
-        <motion.div
-          className="mt-16 rounded-3xl bg-white/[0.03] border border-white/10 p-8 sm:p-12 backdrop-blur-2xl shadow-2xl relative overflow-hidden"
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Our Core Mission</h2>
-              <p className="text-slate-300 text-base leading-relaxed">
-                Early detection saves lives. Skin concerns are often neglected due to long appointment wait times or anxiety. We empower individuals with instant diagnostic insights while supplying clinicians with formatted baseline reports.
+        {/* Mission Statement Hero Card */}
+        <div className="rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-12 shadow-[0_8px_30px_rgba(13,39,64,0.03)] mb-20">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <span className="text-xs font-extrabold text-[#206E55] uppercase tracking-wider">Our Core Mission</span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#141515] leading-tight">
+                Empowering individuals with instant, clinical-grade reference tools.
+              </h2>
+              <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                Over 3 billion people worldwide lack immediate access to dermatological specialists. Our vision transformer platform provides pre-screening clarity, helping patients identify skin conditions early and prepare structured intake summaries for their doctor visits.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <span className="text-3xl sm:text-4xl font-extrabold text-sky-400 block mb-1">120K+</span>
-                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Clinical Images</span>
-              </div>
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <span className="text-3xl sm:text-4xl font-extrabold text-cyan-400 block mb-1">99.2%</span>
-                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Model Accuracy</span>
+            <div className="lg:col-span-4 flex justify-center">
+              <div className="p-8 rounded-2xl bg-[#F3F1EB] border border-[#E5E2DA] text-center space-y-2 w-full">
+                <span className="text-4xl sm:text-5xl font-extrabold text-[#206E55]">99.2%</span>
+                <p className="text-xs font-bold text-[#141515] uppercase tracking-wider">Top-Class Accuracy Benchmark</p>
+                <p className="text-[11px] text-[#5A554A]">Cross-referenced against verified ISIC image archives</p>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Pillars */}
-        <div className="mt-24">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-extrabold text-white">Our Founding Pillars</h2>
+        {/* Founding Pillars Grid */}
+        <div className="space-y-10 mb-24">
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl font-extrabold text-[#141515]">Built on Four Clinical Pillars</h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pillars.map((item, idx) => {
-              const Icon = item.icon;
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pillars.map((p, idx) => {
+              const Icon = p.icon;
               return (
                 <motion.div
                   key={idx}
-                  className="p-7 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl hover:border-sky-400/40 transition duration-300"
+                  className="p-6 rounded-3xl bg-white border border-[#E5E2DA] space-y-4 shadow-sm hover:border-[#206E55] transition-all"
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.08 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-[#E8F2ED] text-[#206E55] flex items-center justify-center border border-[#206E55]/10">
                     <Icon size={20} />
                   </div>
-                  <h3 className="font-bold text-lg text-white mb-2">{item.title}</h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="font-bold text-lg text-[#141515]">{p.title}</h3>
+                  <p className="text-[#5A554A] text-xs leading-relaxed">{p.desc}</p>
                 </motion.div>
               );
             })}
           </div>
         </div>
 
-        {/* Leadership */}
-        <div className="mt-28">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-extrabold text-white">Clinical &amp; AI Leadership</h2>
+        {/* Clinical Leadership Profiles */}
+        <div className="space-y-12">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-bold text-[#206E55] uppercase tracking-widest">Expertise</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#141515] mt-2">Clinical &amp; Engineering Leadership</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {leaders.map((leader, idx) => (
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {leadership.map((leader, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl"
-                initial={{ opacity: 0, y: 15 }}
+                className="p-8 rounded-3xl bg-white border border-[#E5E2DA] space-y-4 shadow-sm hover:border-[#206E55] transition"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold flex items-center justify-center text-lg mb-5">
-                  {leader.name[0]}
+                <div className="w-14 h-14 rounded-full bg-[#E8F2ED] text-[#206E55] font-extrabold flex items-center justify-center text-xl">
+                  {leader.name[3] || leader.name[0]}
                 </div>
-                <h3 className="text-xl font-bold text-white">{leader.name}</h3>
-                <p className="text-xs text-sky-300 font-semibold mb-3">{leader.role}</p>
-                <p className="text-slate-400 text-sm leading-relaxed">{leader.desc}</p>
+                <div>
+                  <h3 className="text-xl font-bold text-[#141515]">{leader.name}</h3>
+                  <p className="text-xs font-bold text-[#206E55] mt-0.5">{leader.role}</p>
+                  <p className="text-[11px] text-slate-400 font-semibold mt-0.5">{leader.credentials}</p>
+                </div>
+                <p className="text-[#5A554A] text-xs leading-relaxed pt-2 border-t border-slate-100">
+                  {leader.bio}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-28 p-10 rounded-3xl bg-gradient-to-r from-sky-500/10 to-cyan-500/10 border border-sky-500/20 text-center space-y-5">
-          <h2 className="text-3xl font-extrabold text-white">Ready to test our vision model?</h2>
-          <p className="text-slate-400 text-sm max-w-lg mx-auto">
-            Experience clinical-grade AI analysis in under 60 seconds. Completely private and HIPAA compliant.
-          </p>
-          <div>
+        {/* CTA Card */}
+        <div className="mt-24 p-10 rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] text-center space-y-4">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-[#141515]">Ready to run a clinical scan?</h3>
+          <p className="text-[#5A554A] text-sm max-w-xl mx-auto">Upload a photo or describe symptoms to receive instant diagnostic reference indicators.</p>
+          <div className="pt-2">
             <Link to="/analysis">
-              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition">
+              <button className="px-8 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm inline-flex items-center gap-2">
                 Start Free Analysis
+                <ArrowRight size={15} />
               </button>
             </Link>
           </div>

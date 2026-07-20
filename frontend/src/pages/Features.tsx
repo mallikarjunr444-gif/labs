@@ -5,169 +5,171 @@ import {
   Zap,
   Lock,
   FileText,
-  Activity,
-  Sparkles,
-  Shield,
   Layers,
-  ArrowRight,
-  Database,
-  CheckCircle2
+  BarChart3,
+  Check,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 
-const detailedFeatures = [
+const featureList = [
   {
     icon: Brain,
-    title: 'Vision Transformer (ViT) Architecture',
-    tag: 'Core Model',
-    desc: 'Self-attention mechanism processing multi-scale image patches to detect subtle micro-patterns in skin texture, pigmentation, and lesion boundaries.',
+    title: 'Vision Transformers (ViT)',
+    desc: 'Multi-scale self-attention architecture trained on sub-surface skin layer features across 120,000+ verified clinical cases.',
+    tag: 'Core AI Model',
   },
   {
     icon: Zap,
-    title: 'Sub-Second GPU Inference',
+    title: 'Sub-Second Inference Speed',
+    desc: 'GPU-accelerated neural pipeline delivers diagnostic confidence scores and condition rankings in under 600 milliseconds.',
     tag: 'Performance',
-    desc: 'Model quantization and TensorRT pipeline execution deliver complete multi-condition risk evaluations in under 600 milliseconds.',
   },
   {
     icon: Lock,
     title: 'Zero-Knowledge Encryption',
-    tag: 'Security',
-    desc: 'Images are processed in volatile memory with instant cryptographic purge after feature extraction. Full HIPAA & GDPR compliance.',
+    desc: 'Images are processed in volatile RAM with instant cryptographic purge after feature extraction in compliance with HIPAA & GDPR.',
+    tag: 'Security & Privacy',
   },
   {
     icon: FileText,
-    title: 'Physician PDF Generation',
-    tag: 'Clinical Export',
-    desc: 'Formated baseline report detailing condition indexes, severity metrics, and diagnostic risk classifications for doctor intake.',
+    title: 'Physician-Ready PDF Exports',
+    desc: 'Generates structured PDF packet summaries detailing condition indexes, severity metrics, and care steps for doctor visits.',
+    tag: 'Clinical Utility',
   },
   {
     icon: Layers,
-    title: 'Multi-Condition Cross-Checking',
-    tag: 'Diagnostic Depth',
-    desc: 'Evaluates inputs simultaneously across 8 major categories: Acne, Melanoma, Eczema, Psoriasis, Rosacea, Vitiligo, Dermatitis, and Fungal Infections.',
+    title: 'Multi-Condition Evaluation',
+    desc: 'Simultaneously cross-references 8 major dermatological categories including Melanoma, Acne, Eczema, and Psoriasis.',
+    tag: 'Comprehensive Coverage',
   },
   {
-    icon: Database,
-    title: '120K+ Dataset Calibration',
-    tag: 'Benchmark Data',
-    desc: 'Trained and audited against verified dermatological archives with ongoing monthly validation by board-certified clinicians.',
+    icon: BarChart3,
+    title: 'Dataset Calibration Metrics',
+    desc: 'Calibrated continuously against ISIC, HAM10000, and DermNet archives for balanced skin tone representation.',
+    tag: 'Model Accuracy',
   },
+];
+
+const specMatrix = [
+  { spec: 'Inference Latency', medicus: '< 600ms', industry: '3.5s - 8.0s' },
+  { spec: 'Model Architecture', medicus: 'Vision Transformer (ViT-H/14)', industry: 'Standard CNN / ResNet' },
+  { spec: 'Data Encryption', medicus: 'AES-256 Volatile Purge', industry: 'Standard Database Storage' },
+  { spec: 'Physician PDF Generation', medicus: 'Instant < 1 min', industry: 'Manual / Unavailable' },
+  { spec: 'HIPAA & GDPR Compliance', medicus: 'Fully Verified', industry: 'Varies' },
 ];
 
 const Features: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#070e17] text-white pt-32 selection:bg-sky-500/25 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
       
-      {/* Background Lighting */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-6">
+        <div className="text-center max-w-3xl mx-auto space-y-6 mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-widest">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
               <Sparkles size={12} />
-              Platform Features
+              Technical Capabilities
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white"
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-[#141515]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Built for clinical accuracy &amp;{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400">
-              unmatched speed
+            Engineered for clinical precision &amp;{' '}
+            <span className="text-[#206E55]">
+              instant speed
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-slate-400 text-base sm:text-lg leading-relaxed"
+            className="text-[#5A554A] text-base sm:text-lg leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Explore the neural architecture, security protocols, and diagnostic reporting tools powering Medicus Labs.
+            Discover the neural vision architecture, privacy protocols, and reporting workflows powering Medicus Labs.
           </motion.p>
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {detailedFeatures.map((feat, idx) => {
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+          {featureList.map((feat, idx) => {
             const Icon = feat.icon;
             return (
               <motion.div
                 key={idx}
-                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl hover:border-sky-400/40 transition duration-300 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 15 }}
+                className="p-8 rounded-3xl bg-white border border-[#E5E2DA] space-y-4 shadow-sm hover:border-[#206E55] transition duration-300"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.08 }}
                 viewport={{ once: true }}
               >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
-                      <Icon size={20} />
-                    </div>
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300 bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/20">
-                      {feat.tag}
-                    </span>
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-[#E8F2ED] text-[#206E55] flex items-center justify-center border border-[#206E55]/10">
+                    <Icon size={20} />
                   </div>
-                  <h3 className="text-xl font-bold text-white">{feat.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{feat.desc}</p>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#206E55] bg-[#E8F2ED] px-3 py-1 rounded-full">
+                    {feat.tag}
+                  </span>
                 </div>
+                <h3 className="text-xl font-bold text-[#141515] pt-2">{feat.title}</h3>
+                <p className="text-[#5A554A] text-xs leading-relaxed">{feat.desc}</p>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Tech Spec Matrix Card */}
-        <div className="mt-24 rounded-3xl bg-white/[0.03] border border-white/10 p-8 sm:p-12 backdrop-blur-2xl">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl font-extrabold text-white">Technical Specifications</h2>
-            <p className="text-slate-400 text-sm mt-2">Enterprise-ready performance metrics</p>
+        {/* Technical Specification Comparison Matrix */}
+        <div className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-12 shadow-sm space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-bold text-[#206E55] uppercase tracking-widest">Benchmarking</span>
+            <h2 className="text-3xl font-extrabold text-[#141515]">Specification Comparison Matrix</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Inference Latency</span>
-              <span className="text-3xl font-extrabold text-sky-400">&lt; 600ms</span>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Encryption Standard</span>
-              <span className="text-3xl font-extrabold text-cyan-400">AES-256</span>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Confidence Accuracy</span>
-              <span className="text-3xl font-extrabold text-sky-400">99.2%</span>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Supported Conditions</span>
-              <span className="text-3xl font-extrabold text-cyan-400">8+ Major</span>
-            </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm text-[#141515]">
+              <thead>
+                <tr className="border-b border-[#E5E2DA] text-xs font-bold text-[#5A554A] uppercase tracking-wider">
+                  <th className="pb-4 pl-4">Capability / Specification</th>
+                  <th className="pb-4 text-[#206E55]">Medicus Labs AI</th>
+                  <th className="pb-4 text-slate-400">Industry Average</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#E5E2DA]">
+                {specMatrix.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-white/40 transition">
+                    <td className="py-4 pl-4 font-bold text-[#141515]">{row.spec}</td>
+                    <td className="py-4 font-extrabold text-[#206E55] flex items-center gap-1.5">
+                      <Check size={14} className="text-[#206E55]" />
+                      {row.medicus}
+                    </td>
+                    <td className="py-4 text-[#5A554A]">{row.industry}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
         {/* CTA */}
-        <div className="mt-24 p-10 rounded-3xl bg-gradient-to-r from-sky-500/10 via-cyan-500/10 to-blue-500/10 border border-sky-500/20 text-center space-y-5">
-          <h2 className="text-3xl font-extrabold text-white">Experience the platform live</h2>
-          <p className="text-slate-400 text-sm max-w-lg mx-auto">
-            Test the vision transformer on your skin symptoms in under 60 seconds.
-          </p>
-          <div>
-            <Link to="/analysis">
-              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 font-bold text-sm hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] transition">
-                Start Free Scan
-              </button>
-            </Link>
-          </div>
+        <div className="mt-20 text-center">
+          <Link to="/analysis">
+            <button className="px-8 py-4 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm inline-flex items-center gap-2">
+              Experience the Platform
+              <ArrowRight size={15} />
+            </button>
+          </Link>
         </div>
 
       </section>
