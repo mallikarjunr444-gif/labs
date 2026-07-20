@@ -9,9 +9,7 @@ import {
   Check,
   Activity,
   Heart,
-  FileText,
-  Github,
-  Linkedin
+  FileText
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo';
