@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { getApiBaseUrl } from '../lib/apiBase';
 import {
   X,
   Send,
@@ -117,7 +118,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
         image: currentImage
       };
 
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${getApiBaseUrl()}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

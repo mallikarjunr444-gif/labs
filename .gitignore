@@ -6,3 +6,9 @@ __pycache__/
 uploads/
 .DS_Store
 *.log
+backend/reports/
+subscribers.txt
+*.lock.json
+**/*.lock.json
+.agents/
+

@@ -424,18 +424,18 @@ const Analysis: React.FC = () => {
           <AnimatePresence>
             {loading && (
               <motion.div
-                className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-slate-950/80 backdrop-blur-sm"
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-[#FAF9F5]/90 backdrop-blur-sm"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-full border-4 border-slate-800 border-t-sky-500 animate-spin" />
-                  <Clock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sky-400" size={20} />
+                  <div className="w-16 h-16 rounded-full border-4 border-[#E5E2DA] border-t-[#206E55] animate-spin" />
+                  <Clock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#206E55]" size={20} />
                 </div>
-                <div className="text-center">
-                  <p className="text-lg font-bold text-white mb-1">Analyzing Patient Specimen</p>
-                  <p className="text-slate-400 text-sm font-semibold">{loadingStep}</p>
+                <div className="text-center px-4">
+                  <p className="text-lg font-bold text-[#141515] mb-1">Analyzing Patient Specimen</p>
+                  <p className="text-[#5A554A] text-sm font-semibold">{loadingStep}</p>
                 </div>
               </motion.div>
             )}
