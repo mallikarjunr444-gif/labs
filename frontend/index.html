@@ -2,17 +2,149 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Medicus Labs™ - Advanced AI-powered dermatology analysis platform. Get clinical-grade skin health insights in seconds." />
-    <meta property="og:title" content="Medicus Labs™ | AI-Powered Dermatology Analysis" />
-    <meta property="og:description" content="Public AI dermatology assistance, skin image analysis, reports, privacy information, and medical disclaimer pages." />
-    <meta property="og:image" content="/media/medicus-labs-logo.png" />
     <meta name="theme-color" content="#020617" />
-    <title>Medicus Labs™ | AI-Powered Dermatology Analysis</title>
+    <meta name="color-scheme" content="light" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Medicus Labs | AI Dermatology Platform for Skin Analysis</title>
+    <meta name="title" content="Medicus Labs | AI Dermatology Platform for Skin Analysis" />
+    <meta name="description" content="AI-powered dermatology platform for secure skin analysis. Get clinical-grade AI skin insights, physician-ready PDF reports, and instant diagnostic reference — all completely private and encrypted." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://medicuslabs.ai/" />
+    <meta property="og:title" content="Medicus Labs | AI Dermatology Platform for Skin Analysis" />
+    <meta property="og:description" content="AI-powered dermatology platform for secure skin analysis. Get clinical-grade AI skin insights, physician-ready PDF reports, and instant diagnostic reference — all completely private and encrypted." />
+    <meta property="og:image" content="/media/medicus-labs-logo.png" />
+    <meta property="og:site_name" content="Medicus Labs" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Medicus Labs | AI Dermatology Platform for Skin Analysis" />
+    <meta name="twitter:description" content="AI-powered dermatology platform for secure skin analysis. Get clinical-grade AI skin insights, physician-ready PDF reports, and instant diagnostic reference." />
+    <meta name="twitter:image" content="/media/medicus-labs-logo.png" />
+    
+    <!-- Favicon / Icons -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Preconnect & Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://firebase.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href="https://medicuslabs.ai/" />
+    
+    <!-- Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Font fallback => no FOUT/FOIT -->
     <style>
-      body { background-color: #020617; margin: 0; }
+      body { background-color: #FAF9F5; margin: 0; font-family: system-ui, -apple-system, sans-serif; }
     </style>
+    
+    <!-- JSON-LD Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalOrganization",
+      "name": "Medicus Labs",
+      "alternateName": "Medicus Labs AI Dermatology",
+      "url": "https://medicuslabs.ai/",
+      "logo": "https://medicuslabs.ai/media/medicus-labs-logo.png",
+      "description": "AI-powered dermatology platform for clinical-grade skin analysis.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Mallikarjun R",
+        "jobTitle": "Founder & CEO",
+        "url": "https://medicuslabs.ai/founder",
+        "sameAs": [
+          "https://www.linkedin.com/in/mallikarjunr-com/",
+          "https://github.com/mallikarjunr444-gif"
+        ]
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "contactType": "customer support",
+        "email": "medicuslabs.com@gmail.com"
+      },
+      "sameAs": [
+        "https://x.com/medicuslabs",
+        "https://github.com/mallikarjunr444-gif/labs",
+        "https://www.linkedin.com/company/medicus-labs"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Dermatology Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Skin Analysis"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Dermatology Chat"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    
+    <!-- JSON-LD Website Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Medicus Labs",
+      "url": "https://medicuslabs.ai/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://medicuslabs.ai/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- JSON-LD SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Medicus Labs AI Dermatology",
+      "operatingSystem": "Web",
+      "applicationCategory": "HealthApplication",
+      "description": "Clinical-grade AI dermatology platform for skin analysis and diagnostic reference.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Medicus Labs"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

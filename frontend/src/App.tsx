@@ -16,6 +16,12 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsConditions = lazy(() => import('./pages/TermsConditions'));
 const Disclaimer = lazy(() => import('./pages/Disclaimer'));
 const ReportIssue = lazy(() => import('./pages/ReportIssue'));
+const FounderPage = lazy(() => import('./pages/FounderPage'));
+const TeamPage = lazy(() => import('./pages/TeamPage'));
+const BlogAcne = lazy(() => import('./pages/BlogAcne'));
+const BlogEczema = lazy(() => import('./pages/BlogEczema'));
+const BlogMelanoma = lazy(() => import('./pages/BlogMelanoma'));
+const BlogPsoriasis = lazy(() => import('./pages/BlogPsoriasis'));
 
 import PremiumNavbar from './components/PremiumNavbar';
 import Footer from './components/Footer';
@@ -37,6 +43,13 @@ const App = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
+            <Route path="/founder" element={<FounderPage />} />
+            <Route path="/team" element={<TeamPage />} />
+            {/* Blog Pages */}
+            <Route path="/blog/acne" element={<BlogAcne />} />
+            <Route path="/blog/eczema" element={<BlogEczema />} />
+            <Route path="/blog/melanoma" element={<BlogMelanoma />} />
+            <Route path="/blog/psoriasis" element={<BlogPsoriasis />} />
             {/* Legal Pages */}
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />

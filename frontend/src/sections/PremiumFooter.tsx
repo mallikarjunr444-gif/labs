@@ -68,8 +68,8 @@ const footerColumns = [
     title: 'Resources',
     links: [
       { name: 'API Documentation', href: '/faq' },
-      { name: 'HIPAA Compliance', href: '/privacy' },
-      { name: 'Security Standards', href: '/security' },
+      { name: 'HIPAA Compliance', href: '/privacy-policy' },
+      { name: 'Security Standards', href: '/privacy-policy' },
       { name: 'User Reference Guide', href: '/faq' },
       { name: 'System Status: 99.9%', href: '/contact' },
     ],
@@ -77,20 +77,20 @@ const footerColumns = [
   {
     title: 'Legal & Safety',
     links: [
-      { name: 'Terms of Service', href: '/terms' },
-      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'Terms of Service', href: '/terms-conditions' },
+      { name: 'Privacy Policy', href: '/privacy-policy' },
       { name: 'Medical Disclaimer', href: '/disclaimer' },
-      { name: 'Cookie Policy', href: '/cookies' },
-      { name: 'GDPR Compliance', href: '/compliance' },
+      { name: 'Cookie Policy', href: '/privacy-policy' },
+      { name: 'GDPR Compliance', href: '/privacy-policy' },
     ],
   },
 ];
 
 const socialLinks = [
-  { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
-  { icon: GithubIcon, href: 'https://github.com', label: 'GitHub' },
-  { icon: LinkedinIcon, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: DiscordIcon, href: 'https://discord.com', label: 'Discord' },
+  { icon: TwitterIcon, href: 'https://x.com/medicuslabs', label: 'Twitter' },
+  { icon: GithubIcon, href: 'https://github.com/mallikarjunr444-gif/labs', label: 'GitHub' },
+  { icon: LinkedinIcon, href: 'https://linkedin.com/company/medicus-labs', label: 'LinkedIn' },
+  { icon: DiscordIcon, href: 'https://discord.gg/medicuslabs', label: 'Discord' },
 ];
 
 export const PremiumFooter: React.FC = () => {

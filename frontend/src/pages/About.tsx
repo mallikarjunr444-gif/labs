@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
+import SEO from '../components/SEO';
 
 const LinkedinIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -77,7 +78,9 @@ const foundingTeam = [
 
 const About: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <>
+      <SEO title="About - Clinical AI Dermatology" description="Founded by product builders and AI engineers, Medicus Labs bridges the gap between patient skin concerns and professional dermatological care." />
+      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
@@ -125,7 +128,7 @@ const About: React.FC = () => {
                 Empowering individuals with instant, clinical-grade reference tools.
               </h2>
               <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
-                Over 3 billion people worldwide lack immediate access to dermatological specialists. Our vision transformer platform provides pre-screening clarity, helping patients identify skin conditions early and prepare structured intake summaries for their doctor visits.
+                <strong>Medicus Labs was founded by Mallikarjun R</strong> to bridge the critical gap in dermatological care access. Over 3 billion people worldwide lack immediate access to dermatological specialists. Our vision transformer platform provides pre-screening clarity, helping patients identify skin conditions early and prepare structured intake summaries for their doctor visits.
               </p>
             </div>
             <div className="lg:col-span-4 flex justify-center">
@@ -239,6 +242,7 @@ const About: React.FC = () => {
 
       <PremiumFooter />
     </div>
+    </>
   );
 };
 

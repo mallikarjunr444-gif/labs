@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
+import SEO from '../components/SEO';
 
 /* ─── Feature Cards ─────────────────────────────────────────────── */
 const featureList = [
@@ -173,7 +174,9 @@ const Features: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-28 selection:bg-[#206E55]/20 font-sans">
+    <>
+      <SEO title="Features - Clinical AI Dermatology Platform" description="Explore all Medicus Labs features: AI skin analysis, physician-ready PDF reports, Vision Transformer engine, zero-knowledge privacy, and more." />
+      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-28 selection:bg-[#206E55]/20 font-sans">
 
       {/* ── HERO HEADER ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
@@ -405,6 +408,7 @@ const Features: React.FC = () => {
 
       <PremiumFooter />
     </div>
+    </>
   );
 };
 

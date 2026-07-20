@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -14,7 +14,8 @@ import {
   Bot,
   User,
   Image as ImageIcon,
-  AlertCircle
+  AlertCircle,
+  WifiOff
 } from 'lucide-react';
 
 interface Message {

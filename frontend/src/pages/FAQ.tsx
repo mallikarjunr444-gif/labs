@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
+import SEO from '../components/SEO';
 
 const faqCategories = ['All', 'Accuracy & Models', 'Privacy & HIPAA', 'Reports & PDF'];
 
@@ -51,7 +52,9 @@ const Faq: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <>
+      <SEO title="FAQ - Frequently Asked Questions | Medicus Labs" description="Find answers to common questions about Medicus Labs AI dermatology: accuracy, privacy, HIPAA compliance, PDF reports, and supported skin conditions." />
+      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
       
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
@@ -161,6 +164,7 @@ const Faq: React.FC = () => {
 
       <PremiumFooter />
     </div>
+    </>
   );
 };
 
