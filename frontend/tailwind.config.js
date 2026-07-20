@@ -4,16 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        'medical-blue': '#206E55',
-        'cyan-glow': '#206E55',
-        'deep-blue': '#FAF9F5',
-        'light-cyan': '#E8F2ED',
+        'medical-blue': '#0284C7',
+        'cyan-glow': '#0EA5E9',
+        'deep-blue': '#0F172A',
+        'light-cyan': '#E0F2FE',
         'surface': '#FFFFFF',
-        'surface-2': '#F3F1EB',
-        'text-primary': '#141515',
-        'text-secondary': '#5A554A',
-        'accent-blue': '#206E55',
-        'accent-light': '#E8F2ED',
+        'surface-2': '#F8FAFC',
+        'text-primary': '#0F172A',
+        'text-secondary': '#475569',
+        'accent-blue': '#0284C7',
+        'accent-light': '#E0F2FE',
       },
       fontFamily: {
         display: ['"Space Grotesk"', 'Inter', 'sans-serif'],

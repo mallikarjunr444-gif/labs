@@ -43,16 +43,18 @@ const PremiumNavbar: React.FC = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.02)]' : 'py-4.5'
-        } bg-[#FAF9F5] border-b border-[#E5E2DA]/80`}
+        className={`fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto transition-all duration-300 ${
+          isScrolled 
+            ? 'py-3 bg-white/10 border border-white/20 shadow-2xl backdrop-blur-2xl' 
+            : 'py-4.5 bg-white/[0.06] border border-white/10 backdrop-blur-xl shadow-lg'
+        } rounded-full`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="flex items-center justify-between gap-3 px-6 sm:px-8">
           <Link to="/" className="inline-flex items-center" aria-label="Medicus Labs home">
-            <BrandLogo tone="dark" />
+            <BrandLogo tone="light" />
           </Link>
 
           {/* Desktop Menu */}
@@ -64,8 +66,8 @@ const PremiumNavbar: React.FC = () => {
                   to={item.href}
                   className={`transition-colors duration-200 ${
                     location.pathname === item.href
-                      ? 'text-[#206E55]'
-                      : 'text-[#5A554A] hover:text-[#206E55]'
+                      ? 'text-sky-400'
+                      : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -78,14 +80,14 @@ const PremiumNavbar: React.FC = () => {
           <div className="hidden lg:flex items-center gap-4">
             {isAuthenticated ? (
               <>
-                <Link to="/profile" className="flex items-center gap-1.5 text-sm font-semibold text-[#5A554A] hover:text-[#206E55] transition">
+                <Link to="/profile" className="flex items-center gap-1.5 text-sm font-semibold text-white/80 hover:text-white transition">
                   <User size={15} />
                   Profile
                 </Link>
                 <button
                   type="button"
                   onClick={logout}
-                  className="rounded-full border border-[#D1CDC2] bg-white px-4 py-2 text-xs font-bold text-[#5A554A] hover:border-[#206E55] hover:text-[#206E55] transition"
+                  className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10 hover:border-white/30 transition"
                 >
                   Sign Out
                 </button>
@@ -95,16 +97,16 @@ const PremiumNavbar: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowAuthModal(true)}
-                  className="text-sm font-semibold text-[#5A554A] hover:text-[#206E55] transition"
+                  className="text-sm font-semibold text-white/80 hover:text-white transition"
                 >
                   Login / Sign Up
                 </button>
               </>
             )}
-            <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/analysis"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-sm transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)] text-slate-900 font-bold text-sm transition-all duration-300"
               >
                 <Sparkles size={13} />
                 Start Analysis
@@ -115,11 +117,11 @@ const PremiumNavbar: React.FC = () => {
 
           {/* Mobile toggle */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E2DA] bg-[#FAF9F5] text-[#141515] transition hover:bg-[#F3F1EB] lg:hidden active:scale-95"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/10 lg:hidden active:scale-95"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X size={18} /> : <Menu size={18} />}
+            {isOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </motion.nav>
@@ -133,9 +135,9 @@ const PremiumNavbar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-[#FAF9F5]/98 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-slate-950/92 backdrop-blur-xl" />
             <motion.div
-              className="relative flex min-h-screen flex-col gap-1 px-5 pb-8 pt-24 sm:px-8 sm:pt-28"
+              className="relative flex min-h-screen flex-col gap-1 px-6 pb-8 pt-28 sm:px-8"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
@@ -150,7 +152,7 @@ const PremiumNavbar: React.FC = () => {
                 >
                   <Link
                     to={item.href}
-                    className="block border-b border-[#E5E2DA]/60 py-3.5 text-lg font-bold text-[#141515] transition hover:text-[#206E55] sm:py-4"
+                    className="block border-b border-white/10 py-3.5 text-lg font-bold text-white/90 transition hover:text-sky-400 sm:py-4"
                   >
                     {item.name}
                   </Link>
@@ -159,21 +161,21 @@ const PremiumNavbar: React.FC = () => {
               <div className="pt-8">
                 {isAuthenticated ? (
                   <>
-                    <Link to="/profile" className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-[#F3F1EB] text-[#141515] font-bold text-base mb-4">
+                    <Link to="/profile" className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-white/5 border border-white/10 text-white font-bold text-base mb-4">
                       <User size={16} />
                       Profile
                     </Link>
                     <button
                       type="button"
                       onClick={logout}
-                      className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full border border-[#D1CDC2] bg-white text-[#5A554A] font-bold text-base"
+                      className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full border border-white/10 bg-slate-900 text-white font-bold text-base"
                     >
                       Sign Out
                     </button>
                   </>
                 ) : (
                   <>
-                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-3.5 rounded-full bg-[#F3F1EB] text-[#141515] font-bold text-base mb-4">Login / Sign Up</button>
+                    <button onClick={() => {setIsOpen(false); setShowAuthModal(true);}} className="flex items-center justify-center w-full py-3.5 rounded-full bg-white/5 border border-white/10 text-white font-bold text-base mb-4">Login / Sign Up</button>
                   </>
                 )}
               </div>
@@ -185,7 +187,7 @@ const PremiumNavbar: React.FC = () => {
               >
                 <Link
                   to="/analysis"
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-[#206E55] text-white font-bold text-base shadow-sm"
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-900 font-bold text-base shadow-lg shadow-sky-500/10"
                 >
                   <Sparkles size={16} />
                   Start Analysis
