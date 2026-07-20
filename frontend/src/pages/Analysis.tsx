@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { 
   User, UploadCloud, ShieldCheck, Cpu, Brain, FileText, Mail, 
   ChevronDown, AlertTriangle, ShieldAlert, CheckCircle, Download, RefreshCw,
-  Clock, ArrowRight, Shield, Camera, Heart, ExternalLink, Sparkles, HelpCircle, Check, X, Activity, Zap
+  Clock, ArrowRight, Shield, Camera, Heart, ExternalLink, Sparkles, HelpCircle, Check, X, Activity, Zap, Image
 } from 'lucide-react';
 import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
@@ -495,6 +495,7 @@ const Analysis: React.FC = () => {
                   {!imagePreview ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Take Photo Option */}
+                      {/* Take Photo Option */}
                       <button
                         type="button"
                         onClick={() => setShowCamera(true)}
@@ -504,7 +505,7 @@ const Analysis: React.FC = () => {
                           <Camera size={32} />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-800 mb-1">📷 Take Photo</p>
+                          <p className="text-sm font-bold text-slate-800 mb-1">Take Photo</p>
                           <p className="text-slate-500 text-xs font-semibold">Use your device camera</p>
                         </div>
                       </button>
@@ -516,11 +517,11 @@ const Analysis: React.FC = () => {
                         className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-50/50 hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center border border-emerald-200 group-hover:scale-110 transition-transform">
-                          <UploadCloud size={32} />
+                          <Image size={32} />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-800 mb-1">🖼 Upload from Gallery</p>
-                          <p className="text-slate-500 text-xs font-semibold">Choose from device storage</p>
+                          <p className="text-sm font-bold text-slate-800 mb-1">Upload from Gallery</p>
+                          <p className="text-slate-500 text-xs font-semibold">Choose an image from your device</p>
                         </div>
                       </button>
                     </div>

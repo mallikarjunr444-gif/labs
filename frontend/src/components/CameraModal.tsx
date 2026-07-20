@@ -97,13 +97,18 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
     }
 
     return () => {
-      // Only cleanup on unmount
-      if (!isOpen) {
-        console.log('Modal closed, cleaning up');
-        stopStream();
-      }
+      console.log('Modal closed/unmounted, stopping stream');
+      stopStream();
     };
-  }, [isOpen]); // Only depend on isOpen
+  }, [isOpen, startCamera, stopStream]);
+
+  // Ensure video has stream attached
+  useEffect(() => {
+    if (isOpen && videoRef.current && streamRef.current && !videoRef.current.srcObject) {
+      console.log('Reattaching stream to video element');
+      videoRef.current.srcObject = streamRef.current;
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     // Prevent body scroll when modal is open
