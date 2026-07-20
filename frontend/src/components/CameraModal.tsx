@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Camera, X, RefreshCw, Check, Image } from 'lucide-react';
+import { Camera, X, RefreshCw, Check, Image, ArrowRight } from 'lucide-react';
 
 type CameraModalProps = {
   isOpen: boolean;
@@ -326,8 +326,8 @@ const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCapture })
                       disabled={isCapturing}
                       className="flex-1 px-6 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white font-bold flex items-center justify-center gap-2 transition shadow-lg"
                     >
-                      <Check size={20} />
-                      Use Photo
+                      <ArrowRight size={20} />
+                      Continue Analysis
                     </button>
                   </div>
                 ) : (
