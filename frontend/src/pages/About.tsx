@@ -79,7 +79,7 @@ const foundingTeam = [
 const About: React.FC = () => {
   return (
     <>
-      <SEO title="About - Clinical AI Dermatology" description="Founded by product builders and AI engineers, Medicus Labs bridges the gap between patient skin concerns and professional dermatological care." />
+      <SEO title="About Us & Co-Founders | Medicus Labs" description="Founded by Mallikarjun R (Founder & CEO), Nigam Patel H (Co-Founder), Mallanagouda M (Co-Founder), and Mohammed Adil (Co-Founder), Medicus Labs bridges clinical dermatology and AI." />
       <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
