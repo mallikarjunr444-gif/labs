@@ -267,33 +267,33 @@ const Analysis: React.FC = () => {
 
       clearInterval(interval);
 
-      if (!res.ok) {
-        let errorMessage = `Analysis failed (Server returned status ${res.status}).`;
-        try {
-          const errData = await res.json();
-          if (errData && errData.detail) {
-            if (typeof errData.detail === 'string') {
-              errorMessage = errData.detail;
-            } else if (Array.isArray(errData.detail)) {
-              errorMessage = errData.detail.map((err: any) => `${err.loc.join('.')}: ${err.msg}`).join(', ');
-            } else {
-              errorMessage = JSON.stringify(errData.detail);
-            }
-          } else if (errData && errData.error) {
-            errorMessage = errData.error;
-          }
-        } catch (e) {
-          try {
-            const text = await res.text();
-            if (text && text.length < 200) {
-              errorMessage = text;
-            }
-          } catch (te) {}
-        }
-        throw new Error(errorMessage);
+      const contentType = res.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        const text = await res.text();
+        throw new Error(
+          `Server returned a non-JSON response (${res.status}). Please check backend status at ${API}/health.`
+        );
       }
 
       const data = await res.json();
+
+      if (!res.ok) {
+        let errorMessage = `Analysis failed (Server returned status ${res.status}).`;
+        if (data && data.detail) {
+          if (typeof data.detail === 'string') {
+            errorMessage = data.detail;
+          } else if (Array.isArray(data.detail)) {
+            errorMessage = data.detail.map((err: any) => `${err.loc?.join('.') || 'field'}: ${err.msg}`).join(', ');
+          } else {
+            errorMessage = JSON.stringify(data.detail);
+          }
+        } else if (data && data.error) {
+          errorMessage = data.error;
+        } else if (data && data.message) {
+          errorMessage = data.message;
+        }
+        throw new Error(errorMessage);
+      }
       
       // Fast-forward any remaining steps smoothly
       for (let i = currentStepIndex; i < progressSteps.length; i++) {

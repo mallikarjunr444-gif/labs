@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo';
+import { getApiBaseUrl } from '../lib/apiBase';
 
 const GithubIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -99,7 +100,7 @@ export const PremiumFooter: React.FC = () => {
     setIsLoading(true);
     setSubError('');
     try {
-      const res = await fetch('http://127.0.0.1:8000/subscribe', {
+      const res = await fetch(`${getApiBaseUrl()}/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

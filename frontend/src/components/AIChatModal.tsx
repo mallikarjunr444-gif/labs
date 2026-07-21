@@ -129,6 +129,11 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
         throw new Error('Failed to connect to Medicus AI service.');
       }
 
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('text/html')) {
+        throw new Error('Received HTML response instead of AI stream. Please verify backend status.');
+      }
+
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
 
@@ -190,12 +195,21 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
   };
 
   const renderMarkdown = (text: string) => {
-    // Basic Markdown formatting helper for crisp rendering
-    const formatted = text
-      .replace(/### (.*?)\n/g, '<h3 class="text-base font-bold text-[#141515] mt-3 mb-1">$1</h3>')
+    if (!text) return { __html: '' };
+
+    let formatted = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/^### (.*$)/gim, '<h3 class="text-sm font-bold text-[#141515] mt-3 mb-1">$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2 class="text-base font-bold text-[#141515] mt-3 mb-1">$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1 class="text-lg font-bold text-[#141515] mt-4 mb-2">$1</h1>')
       .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#141515]">$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em class="italic text-slate-600">$1</em>')
-      .replace(/\n\n/g, '<br/><br/>');
+      .replace(/(?<!^\s*)\*([^\*\n]+)\*/g, '<em class="italic text-slate-600">$1</em>')
+      .replace(/^[\*\-] (.*$)/gim, '<div class="flex items-start gap-2 my-1"><span class="text-[#206E55] font-bold">•</span><span>$1</span></div>')
+      .replace(/\n\n/g, '<div class="h-2"></div>')
+      .replace(/\n/g, '<br/>');
+
     return { __html: formatted };
   };
 
