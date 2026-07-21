@@ -290,8 +290,8 @@ async def start_analysis(
         precautions = ai_result.get("precautions", [])
         is_urgent = severity_level == "high"
 
-        # Validate confidence threshold (below 70.0% is considered too low)
-        if confidence < 70.0:
+        # Validate confidence threshold (below 30.0% is considered too low)
+        if confidence < 30.0:
             logger.warning(f"⚠️ Confidence score too low ({confidence}%). Rejecting analysis.")
             try:
                 os.remove(file_path)
