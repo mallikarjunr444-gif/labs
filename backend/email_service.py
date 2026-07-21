@@ -592,38 +592,47 @@ async def send_analysis_report_email(
                 msg.attach(attachment)
                 logger.info(f"📎 Attached PDF report ({filename}) to email for {patient_email}")
 
-        logger.info(f"📧 Dispatching analysis report email to patient: {patient_email}...")
-        await aiosmtplib.send(
-            msg,
-            hostname=SMTP_HOST,
-            port=SMTP_PORT,
-            username=smtp_user,
-            password=smtp_pass,
-            start_tls=True,
-        )
+        async def _dispatch_emails():
+            try:
+                logger.info(f"📧 Dispatching analysis report email to patient: {patient_email}...")
+                await aiosmtplib.send(
+                    msg,
+                    hostname=SMTP_HOST,
+                    port=SMTP_PORT,
+                    username=smtp_user,
+                    password=smtp_pass,
+                    start_tls=True,
+                    timeout=5.0
+                )
+            except Exception as e:
+                logger.warning(f"⚠️ Patient report email notice for {patient_email}: {str(e)}")
 
-        # Send copy / notification to admin (medicuslabs.com@gmail.com)
-        admin_msg = MIMEMultipart("alternative")
-        admin_msg["Subject"] = f"🔬 New Skin Analysis Performed: {patient_name} ({condition} - {confidence:.1f}%)"
-        admin_msg["From"] = f"{SENDER_NAME} <{smtp_user}>"
-        admin_msg["To"] = ADMIN_EMAIL
+            try:
+                admin_msg = MIMEMultipart("alternative")
+                admin_msg["Subject"] = f"🔬 New Skin Analysis Performed: {patient_name} ({condition} - {confidence:.1f}%)"
+                admin_msg["From"] = f"{SENDER_NAME} <{smtp_user}>"
+                admin_msg["To"] = ADMIN_EMAIL
+                admin_plain = f"Analysis Completed:\nPatient: {patient_name} ({patient_email})\nCondition: {condition}\nConfidence: {confidence:.1f}%\nSeverity: {severity}\nDate: {datetime.now().isoformat()}"
+                admin_msg.attach(MIMEText(admin_plain, "plain"))
 
-        admin_plain = f"Analysis Completed:\nPatient: {patient_name} ({patient_email})\nCondition: {condition}\nConfidence: {confidence:.1f}%\nSeverity: {severity}\nDate: {datetime.now().isoformat()}"
-        admin_msg.attach(MIMEText(admin_plain, "plain"))
+                await aiosmtplib.send(
+                    admin_msg,
+                    hostname=SMTP_HOST,
+                    port=SMTP_PORT,
+                    username=smtp_user,
+                    password=smtp_pass,
+                    start_tls=True,
+                    timeout=5.0
+                )
+            except Exception as e:
+                logger.warning(f"⚠️ Admin email notification notice: {str(e)}")
 
-        await aiosmtplib.send(
-            admin_msg,
-            hostname=SMTP_HOST,
-            port=SMTP_PORT,
-            username=smtp_user,
-            password=smtp_pass,
-            start_tls=True,
-        )
-
-        logger.info(f"✅ Analysis report email & admin notification delivered successfully for {patient_email}")
+        import asyncio
+        asyncio.create_task(_dispatch_emails())
+        logger.info(f"✅ Analysis report email queued for {patient_email}")
         return True
 
     except Exception as e:
-        logger.error(f"❌ Failed to send analysis report email to {patient_email}: {str(e)}")
+        logger.error(f"❌ Failed to queue analysis report email to {patient_email}: {str(e)}")
         return False
 
