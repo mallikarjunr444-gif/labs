@@ -1,18 +1,12 @@
 {
-  "name": "Medicus Labs AI Dermatology",
+  "name": "Medicus Labs | AI Dermatology Platform",
   "short_name": "Medicus Labs",
-  "description": "AI-powered dermatology platform for clinical-grade skin analysis.",
+  "description": "AI-powered dermatology platform for clinical-grade skin analysis and instant diagnostic reference.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAF9F5",
-  "theme_color": "#020617",
+  "background_color": "#0F172A",
+  "theme_color": "#00B289",
   "icons": [
-    {
-      "src": "/logo.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
     {
       "src": "/favicon-16x16.png",
       "sizes": "16x16",
@@ -24,9 +18,31 @@
       "type": "image/png"
     },
     {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
