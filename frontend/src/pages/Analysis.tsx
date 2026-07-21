@@ -260,12 +260,37 @@ const Analysis: React.FC = () => {
       formData.append('gender', form.gender);
 
       const API = getApiBaseUrl();
-      const res = await fetch(`${API}/analysis/start`, {
-        method: 'POST',
-        body: formData,
-      });
+      
+      let res: Response | null = null;
+      let lastFetchError: any = null;
+
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          if (attempt > 1) {
+            setLoadingStep(`Connecting to AI server (Attempt ${attempt}/3)... Please hold on.`);
+          }
+          res = await fetch(`${API}/analysis/start`, {
+            method: 'POST',
+            body: formData,
+          });
+          if (res) break;
+        } catch (fetchErr: any) {
+          lastFetchError = fetchErr;
+          if (attempt < 3) {
+            await new Promise((r) => setTimeout(r, 2000));
+          }
+        }
+      }
 
       clearInterval(interval);
+
+      if (!res) {
+        throw new Error(
+          lastFetchError?.message && lastFetchError.message.includes('Failed to fetch')
+            ? 'Unable to connect to AI server. The server may be warming up. Please try again in a few seconds.'
+            : lastFetchError?.message || 'Connection failed. Please check your internet connection and try again.'
+        );
+      }
 
       const contentType = res.headers.get('content-type') || '';
       if (!contentType.includes('application/json')) {
@@ -2356,42 +2381,42 @@ function ResultCard({
       </div>
 
       {/* Download & Share card */}
-      <div className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div className="space-y-1.5">
+      <div className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 overflow-hidden">
+        <div className="space-y-1.5 max-w-xl">
           <h3 className="text-lg font-bold flex items-center gap-2 font-display">
-            <Download size={20} className="text-sky-400 animate-bounce" />
-            Download Verifiable Medical Report
+            <Download size={20} className="text-sky-400 animate-bounce flex-shrink-0" />
+            <span>Download Verifiable Medical Report</span>
           </h3>
-          <p className="text-xs text-slate-400 font-semibold max-w-xl">
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">
             Generates a high-resolution, secure clinical PDF document complete with QR Verification code to easily share with your primary care provider.
           </p>
         </div>
         
-        <div className="flex flex-wrap sm:flex-nowrap gap-3 w-full md:w-auto">
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full xl:w-auto">
           <button 
             onClick={handleDownloadPDF} 
             disabled={downloading}
-            className="flex-1 md:flex-none px-5 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 disabled:bg-sky-500/50 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-sky-500/15 transition-all"
+            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 disabled:bg-sky-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-500/15 transition-all"
           >
-            <Download size={18} />
-            {downloading ? 'Downloading...' : 'Download PDF Report'}
+            <Download size={16} />
+            <span>{downloading ? 'Downloading...' : 'Download PDF Report'}</span>
           </button>
 
           <button 
             onClick={handleSendEmail} 
             disabled={emailing}
-            className="flex-1 md:flex-none px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/15 transition-all"
+            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/15 transition-all"
           >
-            <Mail size={18} />
-            {emailing ? 'Sending Email...' : 'Email Report to Gmail'}
+            <Mail size={16} />
+            <span>{emailing ? 'Sending...' : 'Email Report'}</span>
           </button>
           
           <button
             onClick={() => window.location.reload()}
-            className="flex-1 md:flex-none px-5 py-3.5 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition"
+            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition"
           >
             <RefreshCw size={16} />
-            New Scan
+            <span>New Scan</span>
           </button>
         </div>
       </div>
