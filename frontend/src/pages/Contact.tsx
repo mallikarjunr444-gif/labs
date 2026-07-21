@@ -11,6 +11,7 @@ import {
   ShieldAlert,
   Stethoscope
 } from 'lucide-react';
+import { getApiBaseUrl } from '../lib/apiBase';
 import { PremiumFooter } from '../sections';
 
 const contactOptions = [
@@ -55,20 +56,31 @@ const Contact: React.FC = () => {
     setIsLoading(true);
     setError('');
     try {
-      const res = await fetch('http://127.0.0.1:8000/contact', {
+      const apiBase = getApiBaseUrl();
+      let res = await fetch(`${apiBase}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error('Server error');
+
+      if (!res.ok) {
+        res = await fetch('http://127.0.0.1:8000/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+      }
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to send message');
+      }
+
       setSubmitted(true);
       setForm({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
-    } catch {
-      // Graceful fallback – still show success for UX (email via mailto)
-      setSubmitted(true);
-      setForm({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err: any) {
+      setError(err.message || 'Failed to send message. Please try again.');
     } finally {
       setIsLoading(false);
     }

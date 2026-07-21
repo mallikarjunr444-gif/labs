@@ -403,6 +403,31 @@ def get_disease_info(disease_name):
 
 
 # ============================================================================
+# CONTACT ENDPOINTS
+# ============================================================================
+
+@app.route('/contact', methods=['POST'])
+@app.route('/api/contact', methods=['POST'])
+def handle_contact():
+    """Handle contact form submissions and send notification email"""
+    try:
+        data = request.get_json() or {}
+        name = data.get('name', 'Anonymous')
+        email = data.get('email', '')
+        subject = data.get('subject', 'General Inquiry')
+        message = data.get('message', '')
+
+        if not email or not message:
+            return jsonify({"status": "error", "message": "Email and message required"}), 400
+
+        result = email_service.send_contact_notification(name, email, subject, message)
+        return jsonify(result), 200
+    except Exception as e:
+        logger.error(f"Contact endpoint error: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+# ============================================================================
 # ERROR HANDLERS
 # ============================================================================
 

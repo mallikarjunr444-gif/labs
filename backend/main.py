@@ -24,7 +24,7 @@ load_dotenv()
 from grok_service import grok_service, CONDITIONS_DB
 from skinive_service import skinive_service
 from report_generator import report_generator
-from email_service import send_welcome_email
+from email_service import send_welcome_email, send_contact_notification_email, send_analysis_report_email
 from chat_service import stream_ai_response
 
 
@@ -146,6 +146,48 @@ async def subscribe(payload: SubscribeRequest):
         "success": True,
         "message": "Subscribed! Check your inbox for a welcome email from Medicus Labs.",
         "email_sent": email_sent,
+    }
+
+
+# ============================================================================
+# CONTACT ENDPOINTS
+# ============================================================================
+
+class ContactRequest(BaseModel):
+    name: str
+    email: EmailStr
+    subject: Optional[str] = "General Inquiry"
+    message: str
+
+
+@app.post("/contact")
+@app.post("/api/contact")
+async def handle_contact_form(payload: ContactRequest):
+    """
+    Handles direct contact form submissions.
+    Sends notification email to medicuslabs.com@gmail.com and confirmation copy to user.
+    """
+    logger.info(f"📩 Contact message received from: {payload.name} ({payload.email})")
+
+    success = await send_contact_notification_email(
+        name=payload.name.strip(),
+        email=payload.email.strip().lower(),
+        subject=payload.subject.strip() if payload.subject else "General Inquiry",
+        message=payload.message.strip()
+    )
+
+    if not success:
+        logger.warning(f"⚠️ Could not send notification email for contact request from {payload.email}")
+        return {
+            "success": True,
+            "message": "Your message has been received. Our team will get back to you shortly.",
+            "email_sent": False
+        }
+
+    return {
+        "success": True,
+        "message": "Message sent! A notification email has been dispatched to medicuslabs.com@gmail.com.",
+        "email_sent": True
     }
 
 
@@ -353,7 +395,30 @@ async def start_analysis(
 
         ANALYSES_CACHE[analysis_result["analysis_id"]] = analysis_result
 
-        logger.info(f"✅ Analysis complete for {fullName}")
+        # ======================================================
+        # AUTOMATIC EMAIL REPORT DELIVERY TO PATIENT GMAIL
+        # ======================================================
+        email_sent = False
+        if email:
+            logger.info(f"📧 Automatically sending analysis report email to patient: {email}")
+            try:
+                email_sent = await send_analysis_report_email(
+                    patient_name=fullName,
+                    patient_email=email,
+                    condition=condition,
+                    confidence=confidence,
+                    severity=severity,
+                    description=description,
+                    recommendations=recommendations,
+                    precautions=precautions,
+                    pdf_path=pdf_path
+                )
+            except Exception as mail_err:
+                logger.error(f"⚠️ Automatic email dispatch error: {mail_err}")
+
+        analysis_result["email_sent"] = email_sent
+
+        logger.info(f"✅ Analysis complete & email dispatched ({email_sent}) for {fullName}")
         return analysis_result
 
     except HTTPException:
@@ -515,20 +580,52 @@ async def download_report(report_id: str):
         raise HTTPException(status_code=500, detail="Unable to download report. Please try again.")
 
 
+class EmailReportPayload(BaseModel):
+    email: EmailStr
+
 @app.post("/api/reports/{report_id}/email")
-async def email_report(report_id: str, email: str):
+async def email_report(report_id: str, payload: Optional[EmailReportPayload] = None, email: Optional[str] = None):
     """Email report to user"""
     try:
-        logger.info(f"📧 Sending report {report_id} to {email}")
+        recipient_email = payload.email if payload and payload.email else email
+        if not recipient_email:
+            raise HTTPException(status_code=400, detail="Email address required")
 
-        # TODO: Integrate with email_service
-        # await email_service.send_report(report_id, email)
+        logger.info(f"📧 Sending report {report_id} to {recipient_email}")
+
+        cached = ANALYSES_CACHE.get(report_id) or {}
+        patient_name = cached.get("patient", {}).get("name", "Valued Patient")
+        condition = cached.get("prediction", {}).get("disease", "Dermatology Assessment")
+        confidence = cached.get("prediction", {}).get("confidence_percentage", 85.0)
+        severity = cached.get("prediction", {}).get("severity", "Mild")
+        description = cached.get("prediction", {}).get("description", "")
+        recommendations = cached.get("recommendations", [])
+        precautions = cached.get("precautions", [])
+        pdf_path = cached.get("pdf_path")
+
+        success = await send_analysis_report_email(
+            patient_name=patient_name,
+            patient_email=recipient_email,
+            condition=condition,
+            confidence=confidence,
+            severity=severity,
+            description=description,
+            recommendations=recommendations,
+            precautions=precautions,
+            pdf_path=pdf_path
+        )
+
+        if not success:
+            raise HTTPException(status_code=500, detail="Could not send report email. Please check SMTP configuration.")
 
         return {
             "status": "success",
-            "message": f"Report sent to {email}",
+            "message": f"Analysis report email sent successfully to {recipient_email}",
+            "email_sent": True
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"❌ Email failed: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to send email")

@@ -12,6 +12,8 @@ import PhoneInputCustom from '../components/PhoneInputCustom';
 import CameraModal from '../components/CameraModal';
 import { getApiBaseUrl } from '../lib/apiBase';
 
+import { useAuth } from '../contexts/AuthContext';
+
 type FormState = {
   fullName: string;
   email: string;
@@ -126,6 +128,20 @@ const Analysis: React.FC = () => {
   const [showCamera, setShowCamera] = useState(false);
   const fileRef = useRef<HTMLInputElement | null>(null);
   const location = useLocation();
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      const name = user.displayName || (user as any)?.user_metadata?.full_name || (user as any)?.user_metadata?.name || '';
+      const userEmail = user.email || '';
+      setForm((prev) => ({
+        ...prev,
+        fullName: prev.fullName || name,
+        email: prev.email || userEmail,
+      }));
+    }
+  }, [user]);
 
   useEffect(() => {
     if (location.state?.initialImage) {
@@ -323,15 +339,12 @@ const Analysis: React.FC = () => {
 
   const downloadPDF = async () => {
     if (!result) return;
-    
     setLoading(true);
-    setLoadingStep('Step 8/8: Building hospital-grade 1-page PDF report...');
-    
+    setLoadingStep('Building hospital-grade 1-page PDF report...');
     try {
       const API = getApiBaseUrl();
       const url = `${API}/reports/${result.reportId}/download`;
       
-      // Trigger native browser download directly via anchor
       const link = document.createElement('a');
       link.href = url;
       link.target = '_blank';
@@ -340,14 +353,12 @@ const Analysis: React.FC = () => {
       link.click();
       link.remove();
       
-      // Keep loading spinner briefly for visual feedback
       await new Promise((r) => setTimeout(r, 1000));
-      setLoading(false);
-      setLoadingStep('');
     } catch (err: any) {
+      setErrors((p) => ({ ...p, submit: 'Unable to generate the report. Please try again.' }));
+    } finally {
       setLoading(false);
       setLoadingStep('');
-      setErrors((p) => ({ ...p, submit: 'Unable to generate the report. Please try again.' }));
     }
   };
 
@@ -1810,7 +1821,36 @@ function ResultCard({
 }) {
   const [activeTab, setActiveTab] = useState<'clinical' | 'treatment' | 'lifestyle' | 'progress'>('clinical');
   const [downloading, setDownloading] = useState(false);
+  const [emailing, setEmailing] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true);
+    try {
+      await onDownload();
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const handleSendEmail = async () => {
+    if (!result || !patient.email) return;
+    setEmailing(true);
+    try {
+      const API = getApiBaseUrl();
+      const res = await fetch(`${API}/reports/${result.reportId}/email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: patient.email }),
+      });
+      if (!res.ok) throw new Error('Failed to send email');
+      alert(`Report email successfully sent to ${patient.email}!`);
+    } catch (err: any) {
+      alert(`Could not send email to ${patient.email}. Please verify backend configuration.`);
+    } finally {
+      setEmailing(false);
+    }
+  };
 
   const isUrgent = result.urgent || result.severityLevel === 'high';
   const confidence = result.confidence || 0;
@@ -2328,19 +2368,28 @@ function ResultCard({
           </p>
         </div>
         
-        <div className="flex gap-4 w-full md:w-auto">
+        <div className="flex flex-wrap sm:flex-nowrap gap-3 w-full md:w-auto">
           <button 
-            onClick={handleDownload} 
+            onClick={handleDownloadPDF} 
             disabled={downloading}
-            className="flex-1 md:flex-none px-6 py-4 rounded-xl bg-sky-500 hover:bg-sky-600 disabled:bg-sky-500/50 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-sky-500/15 transition-all"
+            className="flex-1 md:flex-none px-5 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 disabled:bg-sky-500/50 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-sky-500/15 transition-all"
           >
             <Download size={18} />
-            {downloading ? 'Generating PDF...' : 'Download PDF Report'}
+            {downloading ? 'Downloading...' : 'Download PDF Report'}
+          </button>
+
+          <button 
+            onClick={handleSendEmail} 
+            disabled={emailing}
+            className="flex-1 md:flex-none px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/15 transition-all"
+          >
+            <Mail size={18} />
+            {emailing ? 'Sending Email...' : 'Email Report to Gmail'}
           </button>
           
           <button
             onClick={() => window.location.reload()}
-            className="flex-1 md:flex-none px-6 py-4 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition"
+            className="flex-1 md:flex-none px-5 py-3.5 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition"
           >
             <RefreshCw size={16} />
             New Scan

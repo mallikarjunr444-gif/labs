@@ -28,6 +28,51 @@ class EmailService:
         self.api_url = "https://api.resend.com/emails"
         self.email_template = self._get_email_template()
     
+    def send_contact_notification(self, name: str, email: str, subject: str, message: str) -> Dict:
+        """Send contact form notification email to medicuslabs.com@gmail.com and confirmation to user"""
+        try:
+            import smtplib
+            from email.mime.multipart import MIMEMultipart
+            from email.mime.text import MIMEText
+
+            smtp_user = os.getenv("SMTP_USER", "medicuslabs.com@gmail.com")
+            smtp_pass = os.getenv("SMTP_PASS", "esbuneeuknupnvgf")
+            admin_email = os.getenv("ADMIN_EMAIL", "medicuslabs.com@gmail.com")
+
+            if not smtp_user or not smtp_pass:
+                return {"status": "error", "message": "SMTP credentials not configured"}
+
+            # Admin Notification Email
+            admin_msg = MIMEMultipart("alternative")
+            admin_msg["Subject"] = f"📩 [Contact Form] {subject} - from {name}"
+            admin_msg["From"] = f"Medicus Labs™ <{smtp_user}>"
+            admin_msg["To"] = admin_email
+            admin_msg["Reply-To"] = email
+
+            body = f"New contact message from {name} ({email})\nSubject: {subject}\n\nMessage:\n{message}"
+            admin_msg.attach(MIMEText(body, "plain"))
+
+            with smtplib.SMTP("smtp.gmail.com", 587) as server:
+                server.starttls()
+                server.login(smtp_user, smtp_pass)
+                server.send_message(admin_msg)
+
+                # Send confirmation to user
+                user_msg = MIMEMultipart("alternative")
+                user_msg["Subject"] = "We received your message — Medicus Labs™"
+                user_msg["From"] = f"Medicus Labs™ <{smtp_user}>"
+                user_msg["To"] = email
+                user_msg["Reply-To"] = admin_email
+                user_body = f"Hello {name},\n\nThank you for contacting Medicus Labs. We received your message regarding '{subject}' and will get back to you shortly.\n\nBest regards,\nMedicus Labs Team"
+                user_msg.attach(MIMEText(user_body, "plain"))
+                server.send_message(user_msg)
+
+            logger.info(f"Contact notification email sent for {email}")
+            return {"status": "success", "message": "Notification email sent"}
+        except Exception as e:
+            logger.error(f"Failed to send contact notification email: {e}")
+            return {"status": "error", "message": str(e)}
+
     def send_report_email(self, recipient_email: str, analysis_data: Dict) -> Dict:
         """
         Send analysis report email to patient
