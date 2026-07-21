@@ -19,8 +19,8 @@ const contactOptions = [
     icon: Stethoscope,
     title: 'Clinical & Hospital Partners',
     desc: 'For hospital system integration, custom API deployments, and enterprise diagnostic tools.',
-    contact: 'clinical@medicuslabs.ai',
-    href: 'mailto:clinical@medicuslabs.ai',
+    contact: 'medicuslabs.com@gmail.com',
+    href: 'mailto:medicuslabs.com@gmail.com',
   },
   {
     icon: Mail,
@@ -33,8 +33,8 @@ const contactOptions = [
     icon: MessageSquare,
     title: 'General Support & Feedback',
     desc: 'Technical platform support, bug reports, or feature feedback — we read every message.',
-    contact: 'support@medicuslabs.ai',
-    href: 'mailto:support@medicuslabs.ai',
+    contact: 'medicuslabs.com@gmail.com',
+    href: 'mailto:medicuslabs.com@gmail.com',
   },
   {
     icon: MapPin,
