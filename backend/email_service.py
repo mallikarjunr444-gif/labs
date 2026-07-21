@@ -359,7 +359,7 @@ async def send_welcome_email(subscriber_email: str) -> bool:
 async def send_contact_notification_email(name: str, email: str, subject: str, message: str) -> bool:
     """
     Sends notification email to medicuslabs.com@gmail.com when a contact form is submitted,
-    and sends a confirmation copy to the sender.
+    and dispatches user confirmation asynchronously without blocking the response.
     """
     smtp_user = get_smtp_user()
     smtp_pass = get_smtp_pass()
@@ -369,7 +369,7 @@ async def send_contact_notification_email(name: str, email: str, subject: str, m
         return False
 
     try:
-        # 1. Send Notification Email to Admin (medicuslabs.com@gmail.com)
+        # 1. Send Notification Email to Admin (medicuslabs.com@gmail.com) with strict 5s timeout
         admin_msg = MIMEMultipart("alternative")
         admin_msg["Subject"] = f"📩 [Contact Form] {subject} - from {name}"
         admin_msg["From"] = f"{SENDER_NAME} <{smtp_user}>"
@@ -388,29 +388,37 @@ async def send_contact_notification_email(name: str, email: str, subject: str, m
             username=smtp_user,
             password=smtp_pass,
             start_tls=True,
+            timeout=5.0
         )
 
-        # 2. Send Confirmation Email to User
-        user_msg = MIMEMultipart("alternative")
-        user_msg["Subject"] = f"We received your message — Medicus Labs™"
-        user_msg["From"] = f"{SENDER_NAME} <{smtp_user}>"
-        user_msg["To"] = email
-        user_msg["Reply-To"] = ADMIN_EMAIL
+        logger.info(f"✅ Contact notification delivered to {ADMIN_EMAIL}")
 
-        user_plain = f"Hello {name},\n\nThank you for reaching out to Medicus Labs. We received your message regarding '{subject}' and will get back to you shortly.\n\nBest regards,\nMedicus Labs Team"
-        user_msg.attach(MIMEText(user_plain, "plain"))
-        user_msg.attach(MIMEText(_user_confirmation_html(name, subject, message), "html"))
+        # 2. Asynchronously dispatch confirmation email to submitter in background (non-blocking)
+        async def _send_user_confirmation():
+            try:
+                user_msg = MIMEMultipart("alternative")
+                user_msg["Subject"] = f"We received your message — Medicus Labs™"
+                user_msg["From"] = f"{SENDER_NAME} <{smtp_user}>"
+                user_msg["To"] = email
+                user_msg["Reply-To"] = ADMIN_EMAIL
 
-        await aiosmtplib.send(
-            user_msg,
-            hostname=SMTP_HOST,
-            port=SMTP_PORT,
-            username=smtp_user,
-            password=smtp_pass,
-            start_tls=True,
-        )
+                user_plain = f"Hello {name},\n\nThank you for reaching out to Medicus Labs. We received your message regarding '{subject}' and will get back to you shortly.\n\nBest regards,\nMedicus Labs Team"
+                user_msg.attach(MIMEText(user_plain, "plain"))
+                user_msg.attach(MIMEText(_user_confirmation_html(name, subject, message), "html"))
 
-        logger.info(f"✅ Contact notification & confirmation sent successfully for {email}")
+                await aiosmtplib.send(
+                    user_msg,
+                    hostname=SMTP_HOST,
+                    port=SMTP_PORT,
+                    username=smtp_user,
+                    password=smtp_pass,
+                    start_tls=True,
+                    timeout=5.0
+                )
+            except Exception as bg_err:
+                logger.warning(f"Background user confirmation email error: {bg_err}")
+
+        asyncio.create_task(_send_user_confirmation())
         return True
 
     except Exception as e:

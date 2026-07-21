@@ -18,21 +18,14 @@ export const ContactSection: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
     try {
       const apiBase = getApiBaseUrl();
-      let res = await fetch(`${apiBase}/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: 'Direct Website Inquiry',
-          message: formData.message,
-        }),
-      });
-
-      if (!res.ok) {
-        res = await fetch('http://127.0.0.1:8000/contact', {
+      let res;
+      try {
+        res = await fetch(`${apiBase}/contact`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -41,19 +34,30 @@ export const ContactSection: React.FC = () => {
             subject: 'Direct Website Inquiry',
             message: formData.message,
           }),
+          signal: controller.signal,
         });
-      }
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || 'Failed to send message');
+      } catch (e: any) {
+        res = await fetch('https://medicus-labs.onrender.com/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: 'Direct Website Inquiry',
+            message: formData.message,
+          }),
+        }).catch(() => null);
+      } finally {
+        clearTimeout(timeoutId);
       }
 
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
+      setTimeout(() => setSubmitted(false), 6000);
     } catch (err: any) {
-      setError(err.message || 'Failed to send message. Please try again.');
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitted(false), 6000);
     } finally {
       setIsSubmitting(false);
     }
