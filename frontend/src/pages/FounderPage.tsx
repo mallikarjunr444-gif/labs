@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Mail, ExternalLink, BookOpen, Cpu, Cloud, Code } from 'lucide-react';
+import { Sparkles, ArrowRight, Mail, ExternalLink, BookOpen, Cpu, Cloud, Code, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
@@ -28,116 +28,193 @@ const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size =
   </svg>
 );
 
+const MediumIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+  </svg>
+);
+
 const FounderPage: React.FC = () => {
   return (
     <>
-      <SEO title="Mallikarjun R - Founder & CEO of Medicus Labs" description="Mallikarjun R is the Founder & CEO of Medicus Labs. AI engineer, full-stack developer, and cloud architect building clinical-grade AI dermatology." />
+      <SEO
+        title="Mallikarjun R — Founder of Medicus Labs | Medicus Labs™"
+        description="Mallikarjun R is the Founder & CEO of Medicus Labs (medicuslabs.app). Full-stack AI engineer and cloud architect building clinical-grade AI skin intelligence."
+        canonical="https://medicuslabs.app/founder"
+      />
       <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
         
-        {/* ProfilePage JSON-LD */}
+        {/* ProfilePage & Person JSON-LD for Search Engine Dominance */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfilePage",
-            "dateCreated": "2026-07-20",
+            "dateCreated": "2026-07-21",
             "mainEntity": {
               "@type": "Person",
               "name": "Mallikarjun R",
-              "alternateName": "Mallikarjun R",
+              "alternateName": ["Mallikarjun R", "Founder of Medicus Labs", "Founder of Medicus"],
               "givenName": "Mallikarjun",
               "familyName": "R",
-              "description": "Founder & CEO of Medicus Labs. AI product builder, full-stack engineer, and cloud architect democratizing clinical-grade skin intelligence through ethical AI.",
-              "image": "https://medicuslabs.ai/media/mallikarjunr-founder.jpg",
-              "url": "https://medicuslabs.ai/founder",
+              "description": "Mallikarjun R is the Founder & CEO of Medicus Labs (medicuslabs.app). AI engineer and cloud architect democratizing clinical skin intelligence.",
+              "image": "https://medicuslabs.app/og-image.png",
+              "url": "https://medicuslabs.app/founder",
               "jobTitle": "Founder & CEO",
               "worksFor": {
                 "@type": "MedicalOrganization",
                 "name": "Medicus Labs",
-                "url": "https://medicuslabs.ai/"
+                "url": "https://medicuslabs.app/"
               },
               "founderOf": {
                 "@type": "MedicalOrganization",
                 "name": "Medicus Labs",
-                "url": "https://medicuslabs.ai/"
+                "url": "https://medicuslabs.app/"
               },
               "sameAs": [
+                "https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771",
                 "https://www.linkedin.com/in/mallikarjunr-com/",
                 "https://github.com/mallikarjunr444-gif",
                 "https://www.instagram.com/mallikarjunr_official/"
               ],
-              "alumniOf": "",
-              "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Deep Learning", "Computer Vision", "Dermatology", "Full-Stack Development", "Cloud Architecture", "DevOps"]
+              "knowsAbout": [
+                "Artificial Intelligence",
+                "Dermatology AI",
+                "Medicus Labs",
+                "Machine Learning",
+                "Deep Learning",
+                "Full-Stack Development",
+                "Cloud Architecture"
+              ]
             }
           })}
         </script>
 
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+          
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-6 mb-16">
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
                 <Sparkles size={12} />
-                Founder & CEO
+                Founder & CEO of Medicus Labs
               </span>
             </motion.div>
-            <motion.h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#141515]"
+            
+            <motion.h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#141515] font-display"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
               Mallikarjun R
             </motion.h1>
+            
             <motion.p className="text-[#206E55] text-lg font-bold"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
-              Founder & CEO — Medicus Labs
+              Founder & CEO — Medicus Labs (medicuslabs.app)
             </motion.p>
+            
             <motion.p className="text-[#5A554A] text-base sm:text-lg leading-relaxed"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
               AI product builder, full-stack engineer, and cloud architect on a mission to democratize clinical-grade skin intelligence through ethical AI.
             </motion.p>
+
+            {/* Official Medium Announcement Banner */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="pt-2"
+            >
+              <a
+                href="https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-black text-white hover:bg-slate-800 font-bold text-xs sm:text-sm shadow-md transition-all group"
+              >
+                <MediumIcon size={16} />
+                <span>Read Official Article: <strong>Introducing Medicus Labs 2.0 on Medium</strong></span>
+                <ExternalLink size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </motion.div>
           </div>
 
           {/* Profile Card */}
           <div className="rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-12 shadow-sm mb-12">
             <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[#E8F2ED] to-[#206E55] text-white font-extrabold flex items-center justify-center text-5xl border-4 border-[#206E55]/20 shadow-lg flex-shrink-0">
+              <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[#E8F2ED] to-[#206E55] text-white font-extrabold flex items-center justify-center text-5xl border-4 border-[#206E55]/20 shadow-lg flex-shrink-0 font-display">
                 MR
               </div>
+              
               <div className="space-y-5 flex-1">
                 <h2 className="text-3xl font-bold text-[#141515]">Vision & Journey</h2>
-                <p className="text-[#5A554A] text-sm leading-relaxed">
-                  <strong>Mallikarjun R</strong> is the <strong>Founder & CEO of Medicus Labs</strong>. With deep expertise in AI product development, 
-                  full-stack engineering, and cloud infrastructure, he identified a critical gap: billions of people worldwide lack 
+                
+                <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                  <strong>Mallikarjun R</strong> is the <strong>Founder & CEO of Medicus Labs</strong> (medicuslabs.app). With deep expertise in AI product development, 
+                  full-stack engineering, and cloud infrastructure, he identified a critical global health gap: over 3 billion people worldwide lack 
                   immediate access to dermatological specialists. Medicus Labs was founded by Mallikarjun R to bridge this gap.
                 </p>
-                <p className="text-[#5A554A] text-sm leading-relaxed">
-                  <strong>Medicus Labs</strong> was built from the ground up by <strong>Mallikarjun R</strong> combining Vision Transformer AI models, 
-                  HIPAA-compliant privacy architecture, and physician-ready reporting into a single, accessible platform.
-                  As <strong>Founder & CEO</strong>, he leads product vision, AI research, and technical architecture.
+                
+                <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                  <strong>Medicus Labs</strong> was architected from the ground up by <strong>Mallikarjun R</strong>, combining Vision Transformer AI models, 
+                  HIPAA-compliant privacy architecture, and physician-ready reporting into a single, accessible web platform.
+                  As <strong>Founder & CEO</strong>, he leads overall product vision, AI model training, and technical engineering.
                 </p>
-                <p className="text-[#5A554A] text-sm leading-relaxed">
-                  His work spans the entire stack — from training clinical AI models on 120,000+ dermatological images to 
-                  building the cloud infrastructure that processes them securely in under 600ms. <strong>Mallikarjun R</strong> 
-                  coded the initial platform prototype, trained the vision transformer models, and architected the HIPAA-compliant 
-                  infrastructure himself.
+                
+                <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                  Read Mallikarjun R's official founder launch post:{' '}
+                  <a
+                    href="https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-[#206E55] underline hover:text-[#408A6C]"
+                  >
+                    "Medicus Labs is Back: Introducing Medicus Labs 2.0" on Medium
+                  </a>.
                 </p>
                 
                 {/* Social Links */}
                 <div className="flex items-center flex-wrap gap-3 pt-4">
-                  <a href="https://www.linkedin.com/in/mallikarjunr-com/" target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0077B5] text-white hover:bg-[#006396] font-bold text-xs transition shadow-sm">
+                  <a
+                    href="https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white hover:bg-slate-800 font-bold text-xs transition shadow-sm"
+                  >
+                    <MediumIcon size={14} /> Medium Launch Story
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/mallikarjunr-com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0077B5] text-white hover:bg-[#006396] font-bold text-xs transition shadow-sm"
+                  >
                     <LinkedinIcon size={14} /> LinkedIn
                   </a>
-                  <a href="https://github.com/mallikarjunr444-gif" target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#24292E] text-white hover:bg-black font-bold text-xs transition shadow-sm">
+
+                  <a
+                    href="https://github.com/mallikarjunr444-gif"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#24292E] text-white hover:bg-black font-bold text-xs transition shadow-sm"
+                  >
                     <GithubIcon size={14} /> GitHub
                   </a>
-                  <a href="https://www.instagram.com/mallikarjunr_official/" target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E4405F] text-white hover:bg-[#c13549] font-bold text-xs transition shadow-sm">
+
+                  <a
+                    href="https://www.instagram.com/mallikarjunr_official/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#E4405F] text-white hover:bg-[#c13549] font-bold text-xs transition shadow-sm"
+                  >
                     <InstagramIcon size={14} /> Instagram
                   </a>
-                  <a href="mailto:medicuslabs.com@gmail.com"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#206E55] text-white hover:bg-[#408A6C] font-bold text-xs transition shadow-sm">
+
+                  <a
+                    href="mailto:medicuslabs.com@gmail.com"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#206E55] text-white hover:bg-[#408A6C] font-bold text-xs transition shadow-sm"
+                  >
                     <Mail size={14} /> Email
                   </a>
                 </div>
+
               </div>
             </div>
           </div>
@@ -184,14 +261,15 @@ const FounderPage: React.FC = () => {
 
           {/* CTA */}
           <div className="p-10 rounded-3xl bg-[#206E55] text-center text-white space-y-4 shadow-lg">
-            <h3 className="text-2xl font-bold">Built by Mallikarjun R for everyone</h3>
-            <p className="text-white/80 text-sm max-w-xl mx-auto">Experience the platform — no account needed, completely free.</p>
+            <h3 className="text-2xl font-bold font-display">Built by Mallikarjun R for everyone</h3>
+            <p className="text-white/80 text-sm max-w-xl mx-auto">Experience the platform built by Mallikarjun R — no account needed, completely free.</p>
             <Link to="/analysis">
               <button className="px-8 py-3.5 rounded-full bg-white text-[#206E55] font-extrabold text-sm hover:bg-[#E8F2ED] transition inline-flex items-center gap-2 shadow-md">
                 Start Free Analysis <ArrowRight size={15} />
               </button>
             </Link>
           </div>
+
         </section>
         <PremiumFooter />
       </div>

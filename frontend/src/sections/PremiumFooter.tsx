@@ -34,10 +34,11 @@ const footerColumns = [
     title: 'Company',
     links: [
       { name: 'About Medicus', href: '/about' },
+      { name: 'Founder: Mallikarjun R', href: '/founder' },
+      { name: 'Medium Launch Article', href: 'https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771', external: true },
       { name: 'Platform Features', href: '/features' },
       { name: 'Clinical Research', href: '/analysis' },
       { name: 'Careers & Hiring', href: '/contact' },
-      { name: 'Press & Media Kit', href: '/contact' },
     ],
   },
   {
@@ -256,14 +257,27 @@ export const PremiumFooter: React.FC = () => {
               <ul className="space-y-2.5">
                 {col.links.map((link, linkIdx) => (
                   <li key={linkIdx}>
-                    <Link
-                      to={link.href}
-                      className="group inline-flex items-center text-xs text-[#5A554A] hover:text-[#206E55] font-medium transition-all duration-200 relative"
-                    >
-                      <span className="group-hover:translate-x-0.5 transition-transform duration-200">
-                        {link.name}
-                      </span>
-                    </Link>
+                    {(link as any).external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center text-xs text-[#5A554A] hover:text-[#206E55] font-medium transition-all duration-200"
+                      >
+                        <span className="group-hover:translate-x-0.5 transition-transform duration-200">
+                          {link.name} ↗
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="group inline-flex items-center text-xs text-[#5A554A] hover:text-[#206E55] font-medium transition-all duration-200 relative"
+                      >
+                        <span className="group-hover:translate-x-0.5 transition-transform duration-200">
+                          {link.name}
+                        </span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
