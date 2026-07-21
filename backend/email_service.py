@@ -22,7 +22,7 @@ def get_smtp_user():
     return os.getenv("SMTP_USER", "medicuslabs.com@gmail.com")
 
 def get_smtp_pass():
-    return os.getenv("SMTP_PASS", "esbuneeuknupnvgf")
+    return os.getenv("SMTP_PASS", "")
 
 
 def _admin_contact_html(name: str, sender_email: str, subject: str, message: str) -> str:

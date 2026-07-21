@@ -36,7 +36,7 @@ class EmailService:
             from email.mime.text import MIMEText
 
             smtp_user = os.getenv("SMTP_USER", "medicuslabs.com@gmail.com")
-            smtp_pass = os.getenv("SMTP_PASS", "esbuneeuknupnvgf")
+            smtp_pass = os.getenv("SMTP_PASS", "")
             admin_email = os.getenv("ADMIN_EMAIL", "medicuslabs.com@gmail.com")
 
             if not smtp_user or not smtp_pass:
