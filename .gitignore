@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .env
+.env*
+*.db
 __pycache__/
 *.pyc
 uploads/
@@ -11,4 +13,5 @@ subscribers.txt
 *.lock.json
 **/*.lock.json
 .agents/
+
 

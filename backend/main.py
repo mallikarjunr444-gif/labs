@@ -20,7 +20,8 @@ from typing import List, Optional
 # Load environment variables
 load_dotenv()
 
-# Import Grok Vision Service & Chat Service
+# Import Database & Services
+from database import init_db, check_db_connection, get_db
 from grok_service import grok_service, CONDITIONS_DB
 from skinive_service import skinive_service
 from report_generator import report_generator
@@ -50,6 +51,10 @@ UPLOAD_DIR.mkdir(exist_ok=True)
 async def lifespan(app: FastAPI):
     """Application startup and shutdown logic"""
     logger.info("🚀 Starting Medicus Labs API...")
+    try:
+        init_db()
+    except Exception as e:
+        logger.warning(f"⚠️ Initial database setup notice: {str(e)}")
     yield
     logger.info("🛑 Shutting down Medicus Labs API...")
 
@@ -93,14 +98,17 @@ app.add_middleware(
 
 @app.get("/api/health")
 async def health_check():
-    """System health check endpoint"""
+    """System health check endpoint including database connectivity"""
+    db_health = check_db_connection()
     return {
-        "status": "healthy",
+        "status": "healthy" if db_health["connected"] else "degraded",
         "service": "Medicus Labs API",
         "version": "2.0.0",
         "timestamp": datetime.now().isoformat(),
         "environment": os.getenv("ENVIRONMENT", "development"),
+        "database": db_health,
     }
+
 
 
 # ============================================================================
