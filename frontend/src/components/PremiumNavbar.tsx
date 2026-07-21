@@ -116,7 +116,7 @@ const PremiumNavbar: React.FC = () => {
                 onClick={() => setShowAuthModal(true)}
                 className={`text-sm font-semibold transition ${isHome ? 'text-white/70 hover:text-white' : 'text-[#5A554A] hover:text-[#206E55]'}`}
               >
-                Login / Sign Up
+                Sign In
               </button>
             )}
 
@@ -192,7 +192,7 @@ const PremiumNavbar: React.FC = () => {
                   </>
                 ) : (
                   <button onClick={() => { setIsOpen(false); setShowAuthModal(true); }} className={`flex items-center justify-center w-full py-3.5 rounded-full font-bold text-base ${isHome ? 'bg-white/10 border border-white/20 text-white' : 'bg-[#F3F1EB] text-[#141515]'}`}>
-                    Login / Sign Up
+                    Sign In
                   </button>
                 )}
                 <Link to="/analysis" className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-[#206E55] text-white font-bold text-base shadow-sm">

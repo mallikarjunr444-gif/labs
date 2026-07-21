@@ -1,91 +1,107 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { X, Sparkles, Lock } from 'lucide-react';
 import { auth } from '../firebase';
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const AuthModal = ({ onClose }: { onClose: () => void }) => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setError('');
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
       onClose();
-    } catch (error: any) {
-      setError(error.message);
-    }
-  };
-
-  const handleEmailPasswordSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    try {
-      if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
+    } catch (err: any) {
+      console.error('Google Sign-In Error:', err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        setError('Sign-in popup was closed before completing. Please try again.');
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        setError(err.message || 'Failed to sign in with Google.');
       }
-      onClose();
-    } catch (error: any) {
-      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">{isLogin ? 'Login' : 'Sign Up'}</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">&times;</button>
-        </div>
+    <div className="fixed inset-0 z-50 flex justify-center items-center p-4 bg-black/60 backdrop-blur-sm">
+      <motion.div
+        initial={{ scale: 0.92, opacity: 0, y: 10 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.92, opacity: 0, y: 10 }}
+        transition={{ duration: 0.2 }}
+        className="bg-white p-8 sm:p-10 rounded-3xl shadow-2xl w-full max-w-md border border-[#E5E2DA] relative overflow-hidden text-center"
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 transition"
+          aria-label="Close modal"
+        >
+          <X size={20} />
+        </button>
 
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {/* Ambient Top Glow */}
+        <div className="w-32 h-32 bg-[#E8F2ED] rounded-full blur-2xl absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none" />
 
-        <div className="flex border-b mb-6">
-          <button onClick={() => setIsLogin(true)} className={`w-1/2 py-2 font-semibold ${isLogin ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-500'}`}>Login</button>
-          <button onClick={() => setIsLogin(false)} className={`w-1/2 py-2 font-semibold ${!isLogin ? 'border-b-2 border-indigo-600 text-indigo-600' : 'text-gray-500'}`}>Sign Up</button>
-        </div>
-
-        <form onSubmit={handleEmailPasswordSubmit} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            required
-          />
-          <button type="submit" className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 font-semibold">
-            {isLogin ? 'Login' : 'Sign Up'}
-          </button>
-        </form>
-
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
+        {/* Header Icon & Title */}
+        <div className="relative z-10 space-y-3">
+          <div className="w-14 h-14 rounded-2xl bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] flex items-center justify-center mx-auto shadow-sm">
+            <Sparkles size={26} />
           </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Or continue with</span>
-          </div>
+
+          <h2 className="text-2xl font-extrabold text-[#141515] font-display">
+            Welcome to Medicus Labs™
+          </h2>
+
+          <p className="text-xs sm:text-sm text-[#5A554A] font-semibold leading-relaxed">
+            Sign in securely using your Google account to access clinical skin analysis tools and verified reports.
+          </p>
         </div>
 
-        <div>
-          <button onClick={handleGoogleSignIn} className="w-full flex items-center justify-center gap-2 border rounded-md py-2 px-4 hover:bg-gray-50 font-semibold">
-            <svg className="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 381.5 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 126.9 26.8 170.2 68.8l-79.3 79.3c-33.4-31.8-78.7-51.7-129.9-51.7-97.2 0-176.4 79.2-176.4 176.4s79.2 176.4 176.4 176.4c70.8 0 131.3-41.5 158.2-101.9H248V261.8h239.2c.8 8.6 1.8 17.2 1.8 26z"></path></svg>
-            Google
+        {error && (
+          <div className="mt-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold">
+            {error}
+          </div>
+        )}
+
+        {/* Primary Action Button - Continue with Google */}
+        <div className="mt-8 space-y-4 relative z-10">
+          <button
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+            className="w-full py-4 px-6 rounded-2xl bg-white border-2 border-slate-200 hover:border-[#206E55] hover:bg-slate-50/80 text-slate-800 font-bold text-sm sm:text-base flex items-center justify-center gap-3 shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98] disabled:opacity-70"
+          >
+            {loading ? (
+              <div className="w-5 h-5 rounded-full border-2 border-[#206E55]/30 border-t-[#206E55] animate-spin" />
+            ) : (
+              <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 488 512">
+                <path fill="#4285F4" d="M488 261.8C488 403.3 381.5 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 126.9 26.8 170.2 68.8l-79.3 79.3c-33.4-31.8-78.7-51.7-129.9-51.7-97.2 0-176.4 79.2-176.4 176.4s79.2 176.4 176.4 176.4c70.8 0 131.3-41.5 158.2-101.9H248V261.8h239.2c.8 8.6 1.8 17.2 1.8 26z" />
+              </svg>
+            )}
+            <span className="font-extrabold">
+              {loading ? 'Connecting Google...' : 'Continue with Google'}
+            </span>
           </button>
         </div>
-      </div>
+
+        {/* Security Badge & Terms */}
+        <div className="mt-8 pt-5 border-t border-[#E5E2DA] space-y-2 text-[11px] text-[#5A554A] font-semibold">
+          <p className="flex items-center justify-center gap-1.5 text-[#206E55] font-extrabold">
+            <Lock size={12} />
+            Secure Authentication via Google OAuth 2.0
+          </p>
+          <p className="text-slate-400">
+            By continuing, you agree to Medicus Labs’{' '}
+            <a href="/terms" className="text-[#206E55] underline">Terms of Service</a> and{' '}
+            <a href="/privacy" className="text-[#206E55] underline">Privacy Policy</a>.
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 };
