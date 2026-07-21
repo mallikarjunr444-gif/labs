@@ -1,9 +1,4 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /api/
-Disallow: /dashboard/
-Disallow: /profile/
 
-Sitemap: https://medicuslabs.ai/sitemap.xml
+Sitemap: https://medicuslabs.app/sitemap.xml
