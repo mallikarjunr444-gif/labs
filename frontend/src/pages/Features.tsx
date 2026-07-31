@@ -23,6 +23,7 @@ import {
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
+import AdSpace from '../components/AdSpace';
 
 /* ─── Feature Cards ─────────────────────────────────────────────── */
 const featureList = [
@@ -233,6 +234,9 @@ const Features: React.FC = () => {
             </div>
           ))}
         </motion.div>
+
+        {/* ── ADVERTISEMENT BANNER ── */}
+        <AdSpace variant="banner" label="ADVERTISEMENT" className="my-10" />
 
         {/* ── FEATURE CARDS ── */}
         <div className="mb-6">

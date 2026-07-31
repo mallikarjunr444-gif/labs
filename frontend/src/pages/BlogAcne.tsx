@@ -3,6 +3,7 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
+import AdSpace from '../components/AdSpace';
 
 const BlogAcne: React.FC = () => (
   <>
@@ -19,6 +20,9 @@ const BlogAcne: React.FC = () => (
           <h2 className="text-2xl font-bold text-[#141515]">Symptoms</h2>
           <ul><li>Whiteheads and blackheads (comedones)</li><li>Papules — small red, tender bumps</li><li>Pustules — papules with pus at the tip</li><li>Nodules — large, solid, painful lumps under the skin</li><li>Cystic lesions — deep, pus-filled, painful bumps</li></ul>
           
+          {/* Ad Container */}
+          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+
           <h2 className="text-2xl font-bold text-[#141515]">Causes & Risk Factors</h2>
           <p>Acne develops when hair follicles become clogged with oil and dead skin cells. Key factors include excess sebum production, bacteria (Cutibacterium acnes), hormonal changes, genetics, stress, and certain medications.</p>
           

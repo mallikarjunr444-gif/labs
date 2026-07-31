@@ -22,6 +22,7 @@ import { PremiumFooter } from '../sections';
 import { publicInfoLinks } from './PublicInfoPage';
 import AIChatModal from '../components/AIChatModal';
 import SEO from '../components/SEO';
+import AdSpace from '../components/AdSpace';
 
 // ── SAMPLE PRE-SET SYMPTOM PROMPTS ──
 const SAMPLE_PROMPTS = [
@@ -262,8 +263,13 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* ── TOP ADVERTISEMENT BANNER SPACE ── */}
+      <div className="px-4 sm:px-6 lg:px-8 pt-8">
+        <AdSpace variant="banner" label="SPONSORED / ADVERTISEMENT" />
+      </div>
+
       {/* ── SECOND HERO SECTION ("Hi, I'm Medicus Labs") ── */}
-      <section ref={simulatorRef} className="relative px-4 sm:px-6 lg:px-8 pb-12 pt-20 sm:pt-28">
+      <section ref={simulatorRef} className="relative px-4 sm:px-6 lg:px-8 pb-12 pt-16">
         <div className="mx-auto max-w-[880px] text-left sm:text-center flex flex-col items-center">
           <p className="mb-4 text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#206E55]">
             Trusted Clinical AI Companion
@@ -618,6 +624,11 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ── MID-PAGE ADVERTISEMENT BANNER SPACE ── */}
+      <div className="px-4 sm:px-6 lg:px-8 py-4">
+        <AdSpace variant="banner" label="ADVERTISEMENT" />
+      </div>
 
       {/* ── PUBLIC INFORMATION SECTION ── */}
       <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
