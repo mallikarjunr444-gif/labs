@@ -146,7 +146,7 @@ const Home: React.FC = () => {
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url('/hero-bg.jpg'), url('https://images.unsplash.com/photo-ESkw2ayO2As?auto=format&fit=crop&w=2560&q=80')`,
+            backgroundImage: `url('/hero-bg.webp'), url('/hero-bg.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',
@@ -521,7 +521,7 @@ const Home: React.FC = () => {
                 <span className="px-2 py-0.5 rounded bg-amber-50 border border-amber-200 text-[9px] font-bold text-amber-700 uppercase">Attention</span>
               </div>
               <div className="space-y-2">
-                <h5 className="text-xs font-bold text-[#141515]">Key Findings</h5>
+                <h4 className="text-xs font-bold text-[#141515]">Key Findings</h4>
                 <p className="text-[10px] text-slate-500 leading-relaxed font-semibold">
                   - Sub-clinical skin barrier irritation observed.<br />
                   - High confidence index match for dermatitis.
