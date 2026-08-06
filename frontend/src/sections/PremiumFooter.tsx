@@ -289,9 +289,29 @@ export const PremiumFooter: React.FC = () => {
           ))}
         </motion.div>
 
+        {/* ── PUBLISHER POLICY & TRANSPARENCY LINKS BAR (ADSENSE COMPLIANCE) ── */}
+        <div className="pt-8 pb-4 border-t border-[#E5E2DA] flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-[#5A554A]">
+          <span className="text-[#141515] font-bold uppercase tracking-wider text-[11px]">Publisher Policies &amp; Governance:</span>
+          <Link to="/about" className="hover:text-[#206E55] transition">About Us</Link>
+          <span>•</span>
+          <Link to="/contact" className="hover:text-[#206E55] transition">Contact Us</Link>
+          <span>•</span>
+          <Link to="/faq" className="hover:text-[#206E55] transition">FAQ</Link>
+          <span>•</span>
+          <Link to="/privacy-policy" className="hover:text-[#206E55] transition">Privacy Policy</Link>
+          <span>•</span>
+          <Link to="/terms-conditions" className="hover:text-[#206E55] transition">Terms &amp; Conditions</Link>
+          <span>•</span>
+          <Link to="/disclaimer" className="hover:text-[#206E55] transition">Medical Disclaimer</Link>
+          <span>•</span>
+          <Link to="/editorial-policy" className="hover:text-[#206E55] transition">Editorial Policy</Link>
+          <span>•</span>
+          <Link to="/research" className="hover:text-[#206E55] transition">AI Research &amp; Data</Link>
+        </div>
+
         {/* ── TRUST BADGES & BOTTOM COPYRIGHT ROW ── */}
         <motion.div
-          className="pt-10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#5A554A]"
+          className="pt-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#5A554A]"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
