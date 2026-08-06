@@ -6,7 +6,6 @@ import {
   ChevronDown, AlertTriangle, ShieldAlert, CheckCircle, Download, RefreshCw,
   Clock, ArrowRight, Shield, Camera, Heart, ExternalLink, Sparkles, HelpCircle, Check, X, Activity, Zap, Image
 } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import PhoneInputCustom from '../components/PhoneInputCustom';
 import CameraModal from '../components/CameraModal';
@@ -389,8 +388,6 @@ const Analysis: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#141515] selection:bg-[#206E55]/20 font-sans">
-      <PremiumNavbar />
-
       <main className="relative pt-32 pb-24 px-4 sm:px-6">
         <div className="relative z-10 max-w-6xl mx-auto">
           {/* Header Banner */}

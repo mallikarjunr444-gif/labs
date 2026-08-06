@@ -1,5 +1,4 @@
 import React from 'react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import { FileText, Scale, AlertTriangle, Ban, CheckSquare } from 'lucide-react';
 
@@ -15,7 +14,6 @@ const Section: React.FC<{ icon: React.ReactNode; title: string; children: React.
 
 const TermsConditions: React.FC = () => (
   <div className="min-h-screen bg-slate-50/50">
-    <PremiumNavbar />
     <main className="pt-32 pb-24 px-4 sm:px-6 max-w-4xl mx-auto">
       <div className="mb-10">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-xs font-bold text-sky-600 tracking-wider uppercase mb-4">Legal</span>

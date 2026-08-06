@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import { Bug, Send, CheckCircle } from 'lucide-react';
 import { getApiBaseUrl } from '../lib/apiBase';
@@ -30,7 +29,6 @@ const ReportIssue: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50/50">
-      <PremiumNavbar />
       <main className="pt-32 pb-24 px-4 sm:px-6 max-w-2xl mx-auto">
         <div className="mb-10">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-xs font-bold text-red-500 tracking-wider uppercase mb-4">Support</span>
