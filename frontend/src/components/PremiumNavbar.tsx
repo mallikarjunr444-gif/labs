@@ -15,6 +15,7 @@ const desktopNavItems = [
   { name: 'Blog', href: '/blog' },
   { name: 'Condition Hub', href: '/condition-library' },
   { name: 'AI Research', href: '/research' },
+  { name: 'Analysis', href: '/analysis' },
   { name: 'Features', href: '/features' },
   { name: 'About', href: '/about' },
 ];
