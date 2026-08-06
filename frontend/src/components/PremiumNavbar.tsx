@@ -9,11 +9,11 @@ import AuthModal from './AuthModal';
 const navItems = [
   { name: 'Home', href: '/' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Condition Hub', href: '/condition-library' },
-  { name: 'AI Research', href: '/research' },
-  { name: 'About', href: '/about' },
+  { name: 'Conditions', href: '/condition-library' },
+  { name: 'Research', href: '/research' },
   { name: 'Features', href: '/features' },
   { name: 'Analysis', href: '/analysis' },
+  { name: 'About', href: '/about' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -53,21 +53,20 @@ const PremiumNavbar: React.FC = () => {
       ? 'bg-[#FAF9F5] border-b border-[#E5E2DA]/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
       : 'bg-[#FAF9F5] border-b border-[#E5E2DA]/80';
 
-  const logoTone = isHome ? 'light' : 'dark';
   const linkBase = isHome
     ? 'text-white/75 hover:text-white'
     : 'text-[#5A554A] hover:text-[#206E55]';
-  const linkActive = isHome ? 'text-white' : 'text-[#206E55]';
+  const linkActive = isHome ? 'text-white font-bold' : 'text-[#206E55] font-bold';
 
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-3.5 ${navBg}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-3 ${navBg}`}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 sm:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
           <Link to="/" aria-label="Medicus Labs home" className="flex items-center gap-2 shrink-0">
@@ -77,38 +76,36 @@ const PremiumNavbar: React.FC = () => {
             }
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2">
-            <div className="flex items-center gap-7 text-sm font-semibold">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`transition-colors duration-200 ${
-                    location.pathname === item.href ? linkActive : linkBase
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+          {/* Desktop Menu - Flexible, Non-Overlapping Layout */}
+          <div className="hidden lg:flex items-center gap-3 xl:gap-5 text-xs xl:text-sm font-semibold">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`whitespace-nowrap transition-colors duration-200 ${
+                  location.pathname === item.href ? linkActive : linkBase
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
 
           {/* CTA & Auth */}
-          <div className="hidden lg:flex items-center gap-4 shrink-0">
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
             {isAuthenticated ? (
               <>
                 <Link
                   to="/profile"
-                  className={`flex items-center gap-1.5 text-sm font-semibold transition ${isHome ? 'text-white/70 hover:text-white' : 'text-[#5A554A] hover:text-[#206E55]'}`}
+                  className={`flex items-center gap-1 text-xs xl:text-sm font-semibold transition ${isHome ? 'text-white/70 hover:text-white' : 'text-[#5A554A] hover:text-[#206E55]'}`}
                 >
-                  <User size={15} />
+                  <User size={14} />
                   Profile
                 </Link>
                 <button
                   type="button"
                   onClick={logout}
-                  className={`rounded-full border px-4 py-2 text-xs font-bold transition ${isHome ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-[#D1CDC2] bg-white text-[#5A554A] hover:border-[#206E55] hover:text-[#206E55]'}`}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-bold transition whitespace-nowrap ${isHome ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-[#D1CDC2] bg-white text-[#5A554A] hover:border-[#206E55] hover:text-[#206E55]'}`}
                 >
                   Sign Out
                 </button>
@@ -117,7 +114,7 @@ const PremiumNavbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowAuthModal(true)}
-                className={`text-sm font-semibold transition ${isHome ? 'text-white/70 hover:text-white' : 'text-[#5A554A] hover:text-[#206E55]'}`}
+                className={`text-xs xl:text-sm font-semibold transition whitespace-nowrap ${isHome ? 'text-white/70 hover:text-white' : 'text-[#5A554A] hover:text-[#206E55]'}`}
               >
                 Sign In
               </button>
@@ -127,7 +124,7 @@ const PremiumNavbar: React.FC = () => {
               {isHome ? (
                 <Link
                   to="/analysis"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-sm backdrop-blur-sm shadow-lg transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-xs xl:text-sm backdrop-blur-sm shadow-md transition-all whitespace-nowrap"
                 >
                   <MessageCircle size={14} />
                   Talk to Medicus
@@ -135,7 +132,7 @@ const PremiumNavbar: React.FC = () => {
               ) : (
                 <Link
                   to="/analysis"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-sm transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-xs xl:text-sm shadow-sm transition-colors whitespace-nowrap"
                 >
                   <Sparkles size={13} />
                   Start Analysis
@@ -147,7 +144,7 @@ const PremiumNavbar: React.FC = () => {
 
           {/* Mobile toggle */}
           <button
-            className={`flex h-11 w-11 items-center justify-center rounded-full border transition lg:hidden active:scale-95 ${isHome ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-[#E5E2DA] bg-[#FAF9F5] text-[#141515] hover:bg-[#F3F1EB]'}`}
+            className={`flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden active:scale-95 ${isHome ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-[#E5E2DA] bg-[#FAF9F5] text-[#141515] hover:bg-[#F3F1EB]'}`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -177,31 +174,31 @@ const PremiumNavbar: React.FC = () => {
                 <motion.div key={item.name} initial={{ x: -10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.04 * i }}>
                   <Link
                     to={item.href}
-                    className={`block border-b py-3.5 text-lg font-bold transition sm:py-4 ${isHome ? 'border-white/10 text-white/90 hover:text-white' : 'border-[#E5E2DA]/60 text-[#141515] hover:text-[#206E55]'}`}
+                    className={`block border-b py-3.5 text-base font-bold transition ${isHome ? 'border-white/10 text-white/90 hover:text-white' : 'border-[#E5E2DA]/60 text-[#141515] hover:text-[#206E55]'}`}
                   >
                     {item.name}
                   </Link>
                 </motion.div>
               ))}
-              <div className="pt-8 flex flex-col gap-3">
+              <div className="pt-6 flex flex-col gap-3">
                 {isAuthenticated ? (
                   <>
-                    <Link to="/profile" className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-bold text-base ${isHome ? 'bg-white/10 border border-white/20 text-white' : 'bg-[#F3F1EB] text-[#141515]'}`}>
-                      <User size={16} /> Profile
+                    <Link to="/profile" className={`flex items-center justify-center gap-2 w-full py-3 rounded-full font-bold text-sm ${isHome ? 'bg-white/10 border border-white/20 text-white' : 'bg-[#F3F1EB] text-[#141515]'}`}>
+                      <User size={15} /> Profile
                     </Link>
-                    <button type="button" onClick={logout} className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-full border font-bold text-base ${isHome ? 'border-white/20 bg-white/10 text-white' : 'border-[#D1CDC2] bg-white text-[#5A554A]'}`}>
+                    <button type="button" onClick={logout} className={`flex items-center justify-center gap-2 w-full py-3 rounded-full border font-bold text-sm ${isHome ? 'border-white/20 bg-white/10 text-white' : 'border-[#D1CDC2] bg-white text-[#5A554A]'}`}>
                       Sign Out
                     </button>
                   </>
                 ) : (
-                  <button onClick={() => { setIsOpen(false); setShowAuthModal(true); }} className={`flex items-center justify-center w-full py-3.5 rounded-full font-bold text-base ${isHome ? 'bg-white/10 border border-white/20 text-white' : 'bg-[#F3F1EB] text-[#141515]'}`}>
+                  <button onClick={() => { setIsOpen(false); setShowAuthModal(true); }} className={`flex items-center justify-center w-full py-3 rounded-full font-bold text-sm ${isHome ? 'bg-white/10 border border-white/20 text-white' : 'bg-[#F3F1EB] text-[#141515]'}`}>
                     Sign In
                   </button>
                 )}
-                <Link to="/analysis" className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-[#206E55] text-white font-bold text-base shadow-sm">
-                  <Sparkles size={16} />
+                <Link to="/analysis" className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-[#206E55] text-white font-bold text-sm shadow-sm">
+                  <Sparkles size={15} />
                   Start Analysis
-                  <ArrowRight size={16} />
+                  <ArrowRight size={15} />
                 </Link>
               </div>
             </motion.div>
