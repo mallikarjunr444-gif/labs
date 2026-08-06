@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, Search, Clock, BookOpen, User, ShieldCheck } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
 import AdSpace from '../components/AdSpace';
@@ -151,8 +150,6 @@ const BlogIndex: React.FC = () => {
         description="Explore peer-referenced clinical guides, dermatological research articles, AI skin analysis breakthroughs, and skin disease prevention protocols. Edited by Mallikarjun R & Medicus Labs Medical Team."
       />
       <div className="min-h-screen bg-[#FAF9F5] text-[#141515] font-sans">
-        <PremiumNavbar />
-
         <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto mb-14">

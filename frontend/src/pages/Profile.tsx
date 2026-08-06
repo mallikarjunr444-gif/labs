@@ -23,7 +23,6 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import supabase from '../lib/supabase';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import AuthModal from '../components/AuthModal';
 import { getApiBaseUrl } from '../lib/apiBase';
@@ -148,8 +147,6 @@ const Profile: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#141515] font-sans selection:bg-[#206E55]/20">
-      <PremiumNavbar />
-
       <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-10">
         
         {/* Page Header */}

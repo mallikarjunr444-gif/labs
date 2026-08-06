@@ -1,7 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Stethoscope, FileText, CheckCircle2, User, Clock, AlertCircle, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
 

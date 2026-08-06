@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, Search, ShieldCheck, Stethoscope, Activity, FileText, CheckCircle2 } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
 import AdSpace from '../components/AdSpace';
@@ -148,8 +147,6 @@ const ConditionLibrary: React.FC = () => {
         description="Comprehensive dermatological reference library indexing 10+ skin conditions (Acne, Eczema, Melanoma, Psoriasis, Rosacea, BCC, Vitiligo) with ICD-11 codes, visual symptoms, risk tiers, and clinical AI analysis integration."
       />
       <div className="min-h-screen bg-[#FAF9F5] text-[#141515] font-sans">
-        <PremiumNavbar />
-
         <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-12">

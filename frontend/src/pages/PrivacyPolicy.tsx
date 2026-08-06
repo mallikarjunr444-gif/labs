@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Eye, Lock, Database, Globe, Mail, ChevronDown, Check } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 
 const sections = [
@@ -174,8 +173,6 @@ const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i })
 
 const PrivacyPolicy: React.FC = () => (
   <div className="min-h-screen bg-[#FAF9F5] text-[#141515] font-sans">
-    <PremiumNavbar />
-
     <section className="relative pt-36 pb-16 px-4 sm:px-6 text-center overflow-hidden">
       <motion.div
         className="relative z-10 max-w-2xl mx-auto"
