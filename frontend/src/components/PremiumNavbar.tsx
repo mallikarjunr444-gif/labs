@@ -8,6 +8,9 @@ import AuthModal from './AuthModal';
 
 const navItems = [
   { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Condition Hub', href: '/condition-library' },
+  { name: 'AI Research', href: '/research' },
   { name: 'About', href: '/about' },
   { name: 'Features', href: '/features' },
   { name: 'Analysis', href: '/analysis' },
