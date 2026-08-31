@@ -60,7 +60,7 @@ const BlogKeratoacanthoma: React.FC = () => (
             <p>Keratoacanthoma (KA) is a rapidly evolving cutaneous neoplasm originating from infundibular hair follicle keratinocytes. Most dermatopathologists classify KA as a subtype of well-differentiated Squamous Cell Carcinoma.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

@@ -52,7 +52,7 @@ const BlogDysplasticNevi: React.FC = () => (
             <p>Dysplastic Nevi (Clark nevi) are atypical pigmented lesions serving as both potential direct precursors to melanoma and potent clinical markers of elevated overall cutaneous melanoma risk.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

@@ -265,7 +265,7 @@ const Home: React.FC = () => {
 
       {/* ── TOP ADVERTISEMENT BANNER SPACE ── */}
       <div className="px-4 sm:px-6 lg:px-8 pt-8">
-        <AdSpace variant="banner" label="SPONSORED / ADVERTISEMENT" />
+        <AdSpace variant="leaderboard" />
       </div>
 
       {/* ── SECOND HERO SECTION ("Hi, I'm Medicus Labs") ── */}
@@ -627,7 +627,7 @@ const Home: React.FC = () => {
 
       {/* ── MID-PAGE ADVERTISEMENT BANNER SPACE ── */}
       <div className="px-4 sm:px-6 lg:px-8 py-4">
-        <AdSpace variant="banner" label="ADVERTISEMENT" />
+        <AdSpace variant="leaderboard" />
       </div>
 
       {/* ── PUBLIC INFORMATION SECTION ── */}

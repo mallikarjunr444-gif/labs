@@ -249,7 +249,7 @@ const BlogIndex: React.FC = () => {
           )}
 
           {/* Ad Container */}
-          <AdSpace variant="banner" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="leaderboard" className="my-8" />
 
           {/* Grid of Articles */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

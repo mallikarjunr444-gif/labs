@@ -52,7 +52,7 @@ const BlogOilySkin: React.FC = () => (
             <p>Sebum is produced by holocrine sebaceous glands under androgenic control. When sebum excretion rates exceed 1.5 mg/10 cm²/3 hours, the skin is clinically classified as seborrheic or oily.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

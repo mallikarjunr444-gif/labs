@@ -52,7 +52,7 @@ const BlogActinicKeratosis: React.FC = () => (
             <p>Actinic Keratosis (AK), also termed solar keratosis, is a common premalignant cutaneous lesion arising on chronically sun-exposed skin of elderly fair-skinned patients. "Field cancerization" describes subclinical atypical keratinocytes surrounding visible AK lesions.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

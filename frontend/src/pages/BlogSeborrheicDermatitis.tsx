@@ -53,7 +53,7 @@ const BlogSeborrheicDermatitis: React.FC = () => (
             <p className="mt-4">The pathophysiologic mechanism involves three interacting factors: sebaceous secretion quantity, <em>Malassezia</em> yeast metabolic activity releasing free fatty acids (oleic acid), and individual host immune susceptibility.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">2. Clinical Presentation &amp; Anatomic Distribution</h2>

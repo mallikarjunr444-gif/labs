@@ -92,7 +92,7 @@ const BlogAcne: React.FC = () => (
           </section>
 
           {/* Ad Container */}
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">2. Clinical Classification &amp; Lesion Morphology</h2>

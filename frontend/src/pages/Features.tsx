@@ -236,7 +236,7 @@ const Features: React.FC = () => {
         </motion.div>
 
         {/* ── ADVERTISEMENT BANNER ── */}
-        <AdSpace variant="banner" label="ADVERTISEMENT" className="my-10" />
+        <AdSpace variant="leaderboard" className="my-10" />
 
         {/* ── FEATURE CARDS ── */}
         <div className="mb-6">

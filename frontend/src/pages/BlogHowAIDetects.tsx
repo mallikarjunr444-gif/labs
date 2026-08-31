@@ -52,7 +52,7 @@ const BlogHowAIDetects: React.FC = () => (
             <p>Artificial Intelligence in dermatology has progressed rapidly over the past decade, driven by advances in computer vision algorithms and large-scale open dermoscopic archives such as the International Skin Imaging Collaboration (ISIC).</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

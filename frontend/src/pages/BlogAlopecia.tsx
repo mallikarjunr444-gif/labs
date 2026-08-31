@@ -52,7 +52,7 @@ const BlogAlopecia: React.FC = () => (
             <p>Alopecia Areata (AA) is an autoimmune non-scarring hair loss disorder affecting ~2% of the population worldwide. Anagen hair follicles normally express low MHC Class I molecules; breakdown of this immune privilege leads CD8+ NKG2D+ T-cells to swarm the bulb matrix.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

@@ -1,79 +1,157 @@
 import React, { useEffect, useRef } from 'react';
 
+/**
+ * AdSpace Component — Medicus Labs
+ * Renders Adsterra display banners by size variant.
+ *
+ * All Adsterra ad units are active (medicuslabs.app site ID: 6020615)
+ *
+ * Adsterra Banner Keys:
+ *   320×50  → 5bb38a3877be00921d1f6096f9c3f9f3  (mobile leaderboard)
+ *   468×60  → 73ef526d1c2f418a47836e899545d3a4  (standard banner)
+ *   160×300 → 0ee1c0bcce534edceeb794c3154bcfa5  (half page)
+ *   300×250 → e997ac116d226473ad86ae02134ed496  (medium rectangle — best RPM)
+ *   160×600 → 1c29220216959c0bcc7dcc831282e41c  (wide skyscraper)
+ *   728×90  → 372da341128f0211df6d8544c27ca92c  (leaderboard — desktop)
+ *
+ * Native Banner container: 29779f7044e37e17928797be20705afd
+ *
+ * Site-wide (in index.html body):
+ *   Popunder: pl31113087.profitableratecpmnetwork.com
+ *   Social Bar: pl31113092.profitableratecpmnetwork.com
+ */
+
 interface AdSpaceProps {
-  /** Google AdSense Ad Slot ID (optional) */
-  slot?: string;
-  /** Ad Format type: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical' */
-  format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical';
-  /** Responsive layout: true | false */
-  fullWidthResponsive?: boolean;
-  /** Layout variant for styling container space */
-  variant?: 'banner' | 'in-feed' | 'rectangle' | 'sidebar' | 'inline';
-  /** Optional custom CSS classes */
+  /**
+   * Which Adsterra banner size to render:
+   *   'leaderboard'   → 728×90  (desktop top/bottom)
+   *   'mobile'        → 320×50  (mobile)
+   *   'rectangle'     → 300×250 (mid-article — best earning)
+   *   'banner'        → 468×60
+   *   'halfpage'      → 160×300
+   *   'skyscraper'    → 160×600
+   *   'native'        → Native Banner (auto-sizes, looks editorial)
+   */
+  variant?: 'leaderboard' | 'mobile' | 'rectangle' | 'banner' | 'halfpage' | 'skyscraper' | 'native';
   className?: string;
-  /** Optional label, e.g. "ADVERTISEMENT" */
-  label?: string;
 }
 
-declare global {
-  interface Window {
-    adsbygoogle: Array<Record<string, unknown>>;
-  }
-}
+// Adsterra iframe banner configs
+const ADSTERRA_UNITS: Record<string, { key: string; width: number; height: number }> = {
+  leaderboard: { key: '372da341128f0211df6d8544c27ca92c', width: 728, height: 90 },
+  mobile:      { key: '5bb38a3877be00921d1f6096f9c3f9f3', width: 320, height: 50 },
+  rectangle:   { key: 'e997ac116d226473ad86ae02134ed496', width: 300, height: 250 },
+  banner:      { key: '73ef526d1c2f418a47836e899545d3a4', width: 468, height: 60 },
+  halfpage:    { key: '0ee1c0bcce534edceeb794c3154bcfa5', width: 160, height: 300 },
+  skyscraper:  { key: '1c29220216959c0bcc7dcc831282e41c', width: 160, height: 600 },
+};
+
+const NATIVE_KEY = '29779f7044e37e17928797be20705afd';
 
 /**
- * AdSpace Component
- * Clean, policy-compliant AdSense container for Medicus Labs.
- * Publisher Client ID: ca-pub-8305972358699914
+ * IframeAd — renders a single Adsterra banner via atOptions + invoke.js
+ * Each ad renders inside its own isolated <div> to avoid key reuse collisions.
  */
-export const AdSpace: React.FC<AdSpaceProps> = ({
-  slot,
-  format = 'auto',
-  fullWidthResponsive = true,
-  variant = 'banner',
-  className = '',
-  label = 'ADVERTISEMENT',
+const IframeAd: React.FC<{ adKey: string; width: number; height: number }> = ({
+  adKey,
+  width,
+  height,
 }) => {
-  const adRef = useRef<HTMLDivElement>(null);
-  const pushedRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const injected = useRef(false);
 
   useEffect(() => {
-    if (pushedRef.current) return;
+    if (injected.current || !containerRef.current) return;
+    injected.current = true;
 
-    try {
-      if (typeof window !== 'undefined') {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-        pushedRef.current = true;
-      }
-    } catch (err) {
-      console.warn('AdSense push notice:', err);
-    }
-  }, []);
+    const container = containerRef.current;
 
-  const variantStyles = {
-    banner: 'w-full min-h-[90px] sm:min-h-[120px] max-w-7xl mx-auto my-6',
-    'in-feed': 'w-full min-h-[120px] sm:min-h-[160px] my-8',
-    rectangle: 'w-full max-w-[336px] min-h-[280px] mx-auto my-6',
-    sidebar: 'w-full max-w-[300px] min-h-[600px] my-6',
-    inline: 'w-full min-h-[90px] my-4',
-  };
+    // Script 1: atOptions config
+    const configScript = document.createElement('script');
+    configScript.type = 'text/javascript';
+    configScript.text = `
+      atOptions = {
+        'key' : '${adKey}',
+        'format' : 'iframe',
+        'height' : ${height},
+        'width' : ${width},
+        'params' : {}
+      };
+    `;
+    container.appendChild(configScript);
+
+    // Script 2: invoke.js loader
+    const invokeScript = document.createElement('script');
+    invokeScript.type = 'text/javascript';
+    invokeScript.src = `https://www.highrevenueformat.com/${adKey}/invoke.js`;
+    invokeScript.async = true;
+    container.appendChild(invokeScript);
+  }, [adKey, width, height]);
 
   return (
     <div
-      ref={adRef}
-      aria-label="Advertisement space"
-      className={`overflow-hidden text-center my-4 ${className}`}
+      ref={containerRef}
+      style={{ width, height, overflow: 'hidden', display: 'inline-block' }}
+      aria-label="Advertisement"
+    />
+  );
+};
+
+/**
+ * NativeAd — renders the Adsterra Native Banner unit.
+ * Looks like an editorial content card — high CTR.
+ */
+const NativeAd: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const injected = useRef(false);
+
+  useEffect(() => {
+    if (injected.current || !containerRef.current) return;
+    injected.current = true;
+
+    const container = containerRef.current;
+
+    const invokeScript = document.createElement('script');
+    invokeScript.type = 'text/javascript';
+    invokeScript.src = `https://pl31113088.profitableratecpmnetwork.com/${NATIVE_KEY}/invoke.js`;
+    invokeScript.async = true;
+    invokeScript.setAttribute('data-cfasync', 'false');
+    container.appendChild(invokeScript);
+  }, []);
+
+  return (
+    <div aria-label="Advertisement" style={{ width: '100%' }}>
+      <div id={`container-${NATIVE_KEY}`} ref={containerRef} />
+    </div>
+  );
+};
+
+/**
+ * AdSpace — main exported component
+ * Auto-selects responsive size based on variant prop.
+ * On mobile screens, leaderboard falls back to 320×50 automatically.
+ */
+export const AdSpace: React.FC<AdSpaceProps> = ({
+  variant = 'rectangle',
+  className = '',
+}) => {
+  if (variant === 'native') {
+    return (
+      <div className={`my-6 text-center ${className}`}>
+        <NativeAd />
+      </div>
+    );
+  }
+
+  const unit = ADSTERRA_UNITS[variant];
+  if (!unit) return null;
+
+  return (
+    <div
+      className={`my-6 flex justify-center items-center ${className}`}
+      style={{ minHeight: unit.height }}
     >
-      {/* Google AdSense Unit Container - Expands dynamically only when ads are served */}
-      <ins
-        className="adsbygoogle block w-full text-center"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-8305972358699914"
-        {...(slot ? { 'data-ad-slot': slot } : {})}
-        data-ad-format={format}
-        data-full-width-responsive={fullWidthResponsive ? 'true' : 'false'}
-      />
+      <IframeAd adKey={unit.key} width={unit.width} height={unit.height} />
     </div>
   );
 };

@@ -52,7 +52,7 @@ const BlogOnychomycosis: React.FC = () => (
             <p>Onychomycosis accounts for 50% of all nail disorders. Subtypes include Distal Lateral Subungual Onychomycosis (DLSO), White Superficial Onychomycosis (WSO), Proximal Subungual Onychomycosis (PSO), and Total Dystrophic Onychomycosis.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

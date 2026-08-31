@@ -52,7 +52,7 @@ const BlogHidradenitis: React.FC = () => (
             <p>Hidradenitis Suppurativa (HS), also known as acne inversa, is a painful, chronic inflammatory skin condition affecting intertriginous skin of the axillae, groin, perineum, and inframammary regions. It affects approximately 1% of adults, with a 3:1 female predominance.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

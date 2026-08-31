@@ -52,7 +52,7 @@ const BlogTineaVersicolor: React.FC = () => (
             <p>Tinea Versicolor (Pityriasis Versicolor) is a common superficial fungal infection affecting the sebum-rich skin of the upper trunk, neck, and proximal arms in adolescents and young adults.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>

@@ -52,7 +52,7 @@ const BlogSkinTags: React.FC = () => (
             <p>Acrochordons (skin tags, fibroepithelial polyps) are ubiquitous benign cutaneous tumors occurring in approximately 46% of adults. While cosmetically bothersome, they carry zero malignant potential.</p>
           </section>
 
-          <AdSpace variant="in-feed" label="ADVERTISEMENT" className="my-8" />
+          <AdSpace variant="rectangle" className="my-8" />
 
           <section className="pt-8 border-t border-[#E5E2DA]">
             <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>
