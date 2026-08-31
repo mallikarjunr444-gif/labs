@@ -304,6 +304,8 @@ export const PremiumFooter: React.FC = () => {
           <a href="https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Clinical Resources</a>
           <span>•</span>
           <a href="https://poetrywishing.com/kqbjqhw770?key=744f7eb9899663a66a114fdbde11867f" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Dermatology Tools</a>
+          <span>•</span>
+          <a href="https://poetrywishing.com/c87skau1eu?key=d510b8e643bb203bddcc0f124e246e4d" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Wellness &amp; Health Programs</a>
         </div>
 
         {/* ── PUBLISHER POLICY &amp; TRANSPARENCY LINKS BAR (ADSENSE COMPLIANCE) ── */}

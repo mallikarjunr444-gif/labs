@@ -199,14 +199,20 @@ const SMARTLINKS = [
     desc: 'Explore top-rated dermatology tools and exclusive health deals.',
     emoji: '✨',
   },
+  {
+    href: 'https://poetrywishing.com/c87skau1eu?key=d510b8e643bb203bddcc0f124e246e4d',
+    label: 'Wellness & Vitality Guides',
+    desc: 'Explore trusted physician-approved health programs and benefits.',
+    emoji: '💊',
+  },
 ];
 
 export const SponsoredLinks: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`my-10 ${className}`} aria-label="Sponsored recommendations">
     <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A857A] mb-4 text-center">
-      Sponsored
+      Sponsored Recommendations
     </p>
-    <div className="grid sm:grid-cols-3 gap-4">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {SMARTLINKS.map((link) => (
         <a
           key={link.href}
