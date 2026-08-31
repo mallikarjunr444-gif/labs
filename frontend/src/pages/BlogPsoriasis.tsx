@@ -12,7 +12,8 @@ const BlogPsoriasis: React.FC = () => (
       description="Comprehensive clinical guide on Plaque Psoriasis: keratinocyte hyperproliferation, IL-23/IL-17 cytokine axis, PASI evaluation standards, phototherapy, biologics, and AI vision assessment."
     />
     <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
+        <article className="max-w-4xl w-full pb-20">
         {/* Header Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs font-semibold text-[#8A857A] mb-4">
           <Link to="/blog" className="hover:text-[#206E55]">Blog</Link>
@@ -204,6 +205,12 @@ const BlogPsoriasis: React.FC = () => (
           </Link>
         </div>
       </article>
+
+        {/* Desktop Sticky Skyscraper (160x600) */}
+        <aside className="hidden 2xl:block w-[160px] shrink-0 sticky top-36 h-fit pt-8">
+          <AdSpace variant="skyscraper" />
+        </aside>
+      </div>
 
       <PremiumFooter />
     </div>

@@ -408,6 +408,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* ── MID-PAGE BANNER 468x60 ── */}
+      <div className="px-4 sm:px-6 lg:px-8 py-4 flex justify-center">
+        <AdSpace variant="banner" />
+      </div>
+
       {/* ── CLINICAL ARTICLE SECTIONS (AUGUST STYLE) ── */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24 sm:space-y-36">
         

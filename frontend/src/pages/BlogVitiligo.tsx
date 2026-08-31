@@ -13,7 +13,8 @@ const BlogVitiligo: React.FC = () => (
       description="Clinical reference guide on Vitiligo: CD8+ T-cell auto-destruction of melanocytes, IFN-gamma/CXCL10 axis, topical JAK inhibitors (Ruxolitinib), narrow-band UVB, and AI vision pre-screening."
     />
     <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
+        <article className="max-w-4xl w-full pb-20">
         <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: 'Vitiligo & Depigmentation' }]} />
 
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
@@ -103,6 +104,12 @@ const BlogVitiligo: React.FC = () => (
           </Link>
         </div>
       </article>
+
+        {/* Desktop Sticky Skyscraper (160x600) */}
+        <aside className="hidden 2xl:block w-[160px] shrink-0 sticky top-36 h-fit pt-8">
+          <AdSpace variant="skyscraper" />
+        </aside>
+      </div>
 
       <PremiumFooter />
     </div>

@@ -253,7 +253,62 @@ const BlogIndex: React.FC = () => {
 
           {/* Grid of Articles */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredArticles.slice(1).map((article) => (
+            {filteredArticles.slice(1, 7).map((article) => (
+              <article
+                key={article.id}
+                className="bg-white border border-[#E5E2DA] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="relative h-48 overflow-hidden bg-slate-100">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    />
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#206E55] text-xs font-bold uppercase tracking-wider shadow-sm">
+                      {article.category}
+                    </span>
+                  </div>
+                  <div className="p-6">
+                    {article.icdCode && (
+                      <span className="text-[11px] font-mono bg-[#FAF9F5] text-[#5A554A] border border-[#E5E2DA] px-2 py-0.5 rounded font-semibold inline-block mb-3">
+                        {article.icdCode}
+                      </span>
+                    )}
+                    <h3 className="text-xl font-bold text-[#141515] mb-3 group-hover:text-[#206E55] transition leading-snug">
+                      <Link to={article.slug}>{article.title}</Link>
+                    </h3>
+                    <p className="text-[#5A554A] text-sm leading-relaxed line-clamp-3 mb-4">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-6 pb-6 pt-0 border-t border-[#FAF9F5] mt-auto">
+                  <div className="flex items-center justify-between text-xs text-[#8A857A] pt-4">
+                    <div className="flex items-center gap-1.5">
+                      <Clock size={13} />
+                      <span>{article.readTime}</span>
+                    </div>
+                    <Link
+                      to={article.slug}
+                      className="inline-flex items-center gap-1 font-bold text-[#206E55] hover:underline"
+                    >
+                      Read <ArrowRight size={13} />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+
+            {/* In-feed Native Banner (Adsterra NativeBanner_1) */}
+            {filteredArticles.length > 7 && (
+              <div className="md:col-span-2 lg:col-span-3 my-4">
+                <AdSpace variant="native" />
+              </div>
+            )}
+
+            {filteredArticles.slice(7).map((article) => (
               <article
                 key={article.id}
                 className="bg-white border border-[#E5E2DA] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group"
