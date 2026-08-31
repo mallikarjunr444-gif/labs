@@ -88,33 +88,36 @@ const GLOBAL_POPULAR_LOCATIONS = [
 ];
 
 // Helper to determine booking engine URL & Platform Name based on country & city
-function getLocalizedBookingDetails(city: string, country: string): { bookingUrl: string; platformName: string } {
+function getLocalizedBookingDetails(city: string, country: string, region: string = ''): { bookingUrl: string; platformName: string } {
   const c = country.toLowerCase();
-  const encCity = encodeURIComponent(city);
-  if (c.includes('india')) {
+  const searchAddress = region ? `${city}, ${region}` : city;
+  const encCity = encodeURIComponent(searchAddress);
+
+  if (c.includes('united states') || c.includes('usa') || c.includes('us') || c.includes('america')) {
+    // Zocdoc dynamic search across all 50 US States with specialty ID 153 (Dermatologist)
     return {
-      bookingUrl: `https://www.practo.com/search/doctors?results_type=doctor&q=%5B%7B%22word%22%3A%22Dermatologist%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=${encCity}`,
+      bookingUrl: `https://www.zocdoc.com/search?address=${encCity}&dr_specialty=153`,
+      platformName: 'Zocdoc (All 50 US States)'
+    };
+  } else if (c.includes('india')) {
+    return {
+      bookingUrl: `https://www.practo.com/search/doctors?results_type=doctor&q=%5B%7B%22word%22%3A%22Dermatologist%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=${encodeURIComponent(city)}`,
       platformName: 'Practo Dermatology'
     };
   } else if (c.includes('united kingdom') || c.includes('uk') || c.includes('britain')) {
     return {
-      bookingUrl: `https://www.doctify.com/en-gb/specialist/dermatologists?location=${encCity}`,
+      bookingUrl: `https://www.doctify.com/en-gb/specialist/dermatologists?location=${encodeURIComponent(city)}`,
       platformName: 'Doctify UK'
     };
   } else if (c.includes('canada')) {
     return {
-      bookingUrl: `https://www.luminohealth.sunlife.ca/s/find-health-care-provider?type=Dermatologist&location=${encCity}`,
+      bookingUrl: `https://www.luminohealth.sunlife.ca/s/find-health-care-provider?type=Dermatologist&location=${encodeURIComponent(city)}`,
       platformName: 'Lumino Health'
     };
   } else if (c.includes('australia')) {
     return {
-      bookingUrl: `https://www.hotdoc.com.au/search?search_type=specialty&specialty=dermatologist&where=${encCity}`,
+      bookingUrl: `https://www.hotdoc.com.au/search?search_type=specialty&specialty=dermatologist&where=${encodeURIComponent(city)}`,
       platformName: 'HotDoc Australia'
-    };
-  } else if (c.includes('united states') || c.includes('usa') || c.includes('us')) {
-    return {
-      bookingUrl: `https://www.zocdoc.com/search?address=${encCity}&dr_specialty=153`,
-      platformName: 'Zocdoc'
     };
   }
   return {
@@ -136,7 +139,7 @@ function generateDynamicDermatologistsForCity(
   const isAus = country.toLowerCase().includes('australia');
   const isUAE = country.toLowerCase().includes('united arab emirates') || country.toLowerCase().includes('uae');
 
-  const { bookingUrl, platformName } = getLocalizedBookingDetails(city, country);
+  const { bookingUrl, platformName } = getLocalizedBookingDetails(city, country, region);
 
   if (isIndia) {
     return [
@@ -361,7 +364,7 @@ function generateDynamicDermatologistsForCity(
       isVirtualAvailable: true,
       bookingUrl,
       platformName,
-      badge: 'FAAD Board-Certified Dermatologist'
+      badge: 'Zocdoc Verified • Available Across All 50 US States'
     },
     {
       id: `global-${city}-2`,
@@ -383,7 +386,7 @@ function generateDynamicDermatologistsForCity(
       isVirtualAvailable: true,
       bookingUrl,
       platformName,
-      badge: 'Hospital Affiliated Dermatologist'
+      badge: 'Zocdoc In-Network Dermatologist'
     },
     {
       id: `global-${city}-virt`,
