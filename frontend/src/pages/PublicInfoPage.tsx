@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { AlertTriangle, FileText, HeartPulse, Mail, Scale, ShieldCheck, Users } from 'lucide-react';
 import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
+import AdSpace from '../components/AdSpace';
 
 type PublicInfoPageType = 'about' | 'privacy' | 'terms' | 'disclaimer';
 
@@ -377,6 +378,11 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
                   </Link>
                 ))}
               </nav>
+
+              {/* Sidebar Ad Container */}
+              <div className="mt-6 pt-6 border-t border-slate-200 text-center flex justify-center">
+                <AdSpace variant="rectangle" />
+              </div>
             </aside>
           </div>
         </section>
