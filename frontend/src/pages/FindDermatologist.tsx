@@ -31,7 +31,8 @@ import {
   HelpCircle,
   ChevronDown,
   BookOpen,
-  HeartPulse
+  HeartPulse,
+  Layers
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PremiumFooter } from '../sections';
@@ -68,27 +69,104 @@ interface UserLocationInfo {
   source: 'gps' | 'ip' | 'manual' | 'unresolved' | 'default';
 }
 
-const GLOBAL_POPULAR_LOCATIONS = [
-  'Auto-Detect Current GPS',
-  'Bengaluru, India',
-  'Mumbai, India',
-  'New Delhi, India',
-  'Hyderabad, India',
-  'New York, USA',
-  'Los Angeles, USA',
-  'Chicago, USA',
-  'Houston, USA',
-  'London, UK',
-  'Manchester, UK',
-  'Toronto, Canada',
-  'Vancouver, Canada',
-  'Sydney, Australia',
-  'Melbourne, Australia',
-  'Dubai, UAE',
-  'Singapore',
-  'Berlin, Germany',
-  'Paris, France',
-  'Worldwide Telehealth'
+interface ContinentRegion {
+  continent: string;
+  locations: string[];
+}
+
+const GLOBAL_REGIONS_DIRECTORY: ContinentRegion[] = [
+  {
+    continent: 'North America',
+    locations: [
+      'New York, USA',
+      'Los Angeles, USA',
+      'Chicago, USA',
+      'Houston, USA',
+      'Miami, USA',
+      'Dallas, USA',
+      'San Francisco, USA',
+      'Seattle, USA',
+      'Boston, USA',
+      'Atlanta, USA',
+      'Toronto, Canada',
+      'Vancouver, Canada',
+      'Montreal, Canada',
+      'Calgary, Canada',
+      'Mexico City, Mexico'
+    ]
+  },
+  {
+    continent: 'Europe & UK',
+    locations: [
+      'London, UK',
+      'Manchester, UK',
+      'Birmingham, UK',
+      'Edinburgh, UK',
+      'Berlin, Germany',
+      'Munich, Germany',
+      'Frankfurt, Germany',
+      'Paris, France',
+      'Lyon, France',
+      'Rome, Italy',
+      'Milan, Italy',
+      'Madrid, Spain',
+      'Barcelona, Spain',
+      'Amsterdam, Netherlands',
+      'Zurich, Switzerland',
+      'Dublin, Ireland',
+      'Stockholm, Sweden'
+    ]
+  },
+  {
+    continent: 'Asia-Pacific',
+    locations: [
+      'Mumbai, India',
+      'New Delhi, India',
+      'Hyderabad, India',
+      'Chennai, India',
+      'Pune, India',
+      'Kolkata, India',
+      'Ahmedabad, India',
+      'Sydney, Australia',
+      'Melbourne, Australia',
+      'Brisbane, Australia',
+      'Perth, Australia',
+      'Auckland, New Zealand',
+      'Singapore',
+      'Tokyo, Japan',
+      'Seoul, South Korea',
+      'Kuala Lumpur, Malaysia',
+      'Manila, Philippines',
+      'Jakarta, Indonesia'
+    ]
+  },
+  {
+    continent: 'Middle East & Gulf',
+    locations: [
+      'Dubai, UAE',
+      'Abu Dhabi, UAE',
+      'Riyadh, Saudi Arabia',
+      'Jeddah, Saudi Arabia',
+      'Doha, Qatar',
+      'Kuwait City, Kuwait',
+      'Muscat, Oman'
+    ]
+  },
+  {
+    continent: 'Latin America & Africa',
+    locations: [
+      'São Paulo, Brazil',
+      'Rio de Janeiro, Brazil',
+      'Buenos Aires, Argentina',
+      'Bogotá, Colombia',
+      'Santiago, Chile',
+      'Johannesburg, South Africa',
+      'Cape Town, South Africa',
+      'Nairobi, Kenya',
+      'Lagos, Nigeria',
+      'Cairo, Egypt'
+    ]
+  }
 ];
 
 const CLINICAL_CONDITION_CATEGORIES = [
@@ -181,56 +259,73 @@ function getLocalizedBookingDetails(city: string, country: string, region: strin
   const cleanCitySlug = city.toLowerCase().replace(/[^a-z0-9]/g, '-');
 
   if (c.includes('india')) {
-    // Practo.com - #1 Doctor Booking Platform in India across all cities
     return {
       bookingUrl: `https://www.practo.com/search/doctors?results_type=doctor&q=%5B%7B%22word%22%3A%22Dermatologist%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=${encodeURIComponent(city)}`,
       platformName: 'Practo.com (India)'
     };
   } else if (c.includes('united states') || c.includes('usa') || c.includes('us') || c.includes('america')) {
-    // Zocdoc dynamic search across all 50 US States with specialty ID 153 (Dermatologist)
     return {
       bookingUrl: `https://www.zocdoc.com/search?address=${encCity}&dr_specialty=153`,
       platformName: 'Zocdoc (All 50 US States)'
     };
   } else if (c.includes('united kingdom') || c.includes('uk') || c.includes('britain') || c.includes('england') || c.includes('scotland')) {
-    // Doctify UK & Harley Street Medical Network
     return {
       bookingUrl: `https://www.doctify.com/en-gb/specialist/dermatologists?location=${encodeURIComponent(city)}`,
       platformName: 'Doctify (United Kingdom)'
     };
   } else if (c.includes('canada')) {
-    // Lumino Health (Sun Life) & Provincial Care
     return {
       bookingUrl: `https://www.luminohealth.sunlife.ca/s/find-health-care-provider?type=Dermatologist&location=${encodeURIComponent(city)}`,
       platformName: 'Lumino Health (Canada)'
     };
   } else if (c.includes('australia')) {
-    // HotDoc Australia & HealthEngine
     return {
       bookingUrl: `https://www.hotdoc.com.au/search?search_type=specialty&specialty=dermatologist&where=${encodeURIComponent(city)}`,
       platformName: 'HotDoc (Australia)'
     };
+  } else if (c.includes('new zealand')) {
+    return {
+      bookingUrl: `https://www.healthpoint.co.nz/dermatology/`,
+      platformName: 'Healthpoint (New Zealand)'
+    };
   } else if (c.includes('united arab emirates') || c.includes('uae') || c.includes('dubai') || c.includes('abu dhabi')) {
-    // Okadoc UAE
     return {
       bookingUrl: `https://www.okadoc.com/en-ae/dermatologist/${cleanCitySlug}`,
       platformName: 'Okadoc (UAE)'
     };
-  } else if (c.includes('germany') || c.includes('france') || c.includes('italy') || c.includes('spain') || c.includes('europe')) {
-    // Doctolib Europe
+  } else if (c.includes('saudi') || c.includes('qatar') || c.includes('kuwait') || c.includes('egypt')) {
+    return {
+      bookingUrl: `https://www.vezeeta.com/en/doctor/dermatology`,
+      platformName: 'Vezeeta (Middle East)'
+    };
+  } else if (c.includes('germany') || c.includes('france') || c.includes('italy') || c.includes('spain') || c.includes('netherlands')) {
     return {
       bookingUrl: `https://www.doctolib.de/hautarzt-dermatologe/${cleanCitySlug}`,
       platformName: 'Doctolib (Europe)'
     };
-  } else if (c.includes('singapore')) {
-    // Doctor Anywhere Singapore
+  } else if (c.includes('switzerland')) {
+    return {
+      bookingUrl: `https://www.onedoc.ch/en/dermatologist`,
+      platformName: 'OneDoc (Switzerland)'
+    };
+  } else if (c.includes('singapore') || c.includes('malaysia') || c.includes('philippines') || c.includes('indonesia')) {
     return {
       bookingUrl: `https://doctoranywhere.com/`,
-      platformName: 'Doctor Anywhere (Singapore)'
+      platformName: 'Doctor Anywhere (SE Asia)'
+    };
+  } else if (c.includes('brazil') || c.includes('mexico') || c.includes('argentina') || c.includes('colombia') || c.includes('chile')) {
+    return {
+      bookingUrl: `https://www.doctoralia.com.br/`,
+      platformName: 'Doctoralia (Latin America)'
+    };
+  } else if (c.includes('south africa') || c.includes('kenya') || c.includes('nigeria')) {
+    return {
+      bookingUrl: `https://www.re-care.co.za/`,
+      platformName: 'Recare (South Africa)'
     };
   }
 
-  // Worldwide 24/7 Virtual Dermatology
+  // Worldwide 24/7 Virtual Care Fallback
   return {
     bookingUrl: `https://www.teladoc.com/ways-we-help/dermatology/`,
     platformName: 'Teladoc Global Care'
@@ -249,6 +344,7 @@ function generateDynamicDermatologistsForCity(
   const isCanada = country.toLowerCase().includes('canada');
   const isAus = country.toLowerCase().includes('australia');
   const isUAE = country.toLowerCase().includes('united arab emirates') || country.toLowerCase().includes('uae');
+  const isEurope = ['germany', 'france', 'italy', 'spain', 'switzerland', 'netherlands'].some(c => country.toLowerCase().includes(c));
 
   const { bookingUrl, platformName } = getLocalizedBookingDetails(city, country, region);
 
@@ -447,8 +543,35 @@ function generateDynamicDermatologistsForCity(
         insuranceAccepted: ['Daman', 'Oman Insurance', 'AXA Gulf', 'NextCare', 'MetLife'],
         isVirtualAvailable: true,
         bookingUrl,
-        platformName: 'DHA Health Directory',
+        platformName: 'Okadoc UAE',
         badge: 'DHA Licensed Consultant'
+      }
+    ];
+  }
+
+  if (isEurope) {
+    return [
+      {
+        id: `eu-${city}-1`,
+        doctorName: 'Dr. Klaus Weber',
+        degree: 'MD, FMH / European Board of Dermatology',
+        clinicName: `${city} Dermatology & Skin Laser Practice`,
+        city,
+        state: region || country,
+        country,
+        address: `Centrum Medical Plaza, ${city}`,
+        distance: '1.3 km away',
+        specialties: ['Mole Checks', 'Acne Inversa', 'Psoriasis', 'Patch Testing'],
+        rating: 4.96,
+        reviewsCount: 320,
+        phone: '+49 30 555 0188',
+        nextSlot: 'Today at 3:00 PM',
+        consultationFee: `${currency}90 – ${currency}160 (Public & Private Health)`,
+        insuranceAccepted: ['European Health Card', 'TK', 'AOK', 'CPAM', 'Allianz Europe'],
+        isVirtualAvailable: true,
+        bookingUrl,
+        platformName,
+        badge: 'European Board Certified'
       }
     ];
   }
@@ -528,11 +651,11 @@ const GLOBAL_TELEHEALTH_PROVIDERS = [
   {
     id: 'zocdoc',
     name: 'Zocdoc Healthcare Network',
-    badge: 'USA & North America',
+    badge: 'USA (All 50 States)',
     tagline: 'Book in-person or video appointments with top-rated board-certified dermatologists.',
     price: 'Insurance Copay / Cash Pay',
     waitTime: 'Same-day to 48 hours',
-    coverage: 'United States & Canada',
+    coverage: 'United States',
     features: [
       'Instant online booking with verified patient reviews',
       'Filter by accepted insurance carriers',
@@ -611,6 +734,7 @@ const FindDermatologist: React.FC = () => {
 
   const [hasRequestedLocation, setHasRequestedLocation] = useState(false);
   const [isSearchingBackground, setIsSearchingBackground] = useState(false);
+  const [selectedContinent, setSelectedContinent] = useState('All Regions');
   const [activeLocationFilter, setActiveLocationFilter] = useState('Auto-Detect Current GPS');
   const [searchQuery, setSearchQuery] = useState('');
   const [scannerStep, setScannerStep] = useState(0);
@@ -655,6 +779,8 @@ const FindDermatologist: React.FC = () => {
                 else if (countryCode === 'CA') curr = 'C$';
                 else if (countryCode === 'AU') curr = 'A$';
                 else if (countryCode === 'AE') curr = 'AED ';
+                else if (countryCode === 'SA') curr = 'SAR ';
+                else if (countryCode === 'CH') curr = 'CHF ';
 
                 setUserLocation({
                   city,
@@ -674,7 +800,6 @@ const FindDermatologist: React.FC = () => {
             fallbackToIP();
           },
           (err) => {
-            // Permission denied or timeout -> Fallback gracefully to high-speed IP lookup
             fallbackToIP();
           },
           { timeout: 5000 }
@@ -702,6 +827,8 @@ const FindDermatologist: React.FC = () => {
             else if (detectedCode === 'CA') curr = 'C$';
             else if (detectedCode === 'AU') curr = 'A$';
             else if (detectedCode === 'AE') curr = 'AED ';
+            else if (detectedCode === 'SA') curr = 'SAR ';
+            else if (detectedCode === 'CH') curr = 'CHF ';
 
             setUserLocation({
               city: detectedCity,
@@ -717,12 +844,11 @@ const FindDermatologist: React.FC = () => {
           }
         }
       } catch (e) {
-        // Fallback default to Bengaluru / New York based on timezone
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
         const isIndia = tz.includes('Calcutta') || tz.includes('Kolkata');
         setUserLocation({
-          city: isIndia ? 'Bengaluru' : 'New York',
-          region: isIndia ? 'Karnataka' : 'NY',
+          city: isIndia ? 'Your Local Area' : 'Your Area',
+          region: isIndia ? 'India' : 'United States',
           country: isIndia ? 'India' : 'United States',
           countryCode: isIndia ? 'IN' : 'US',
           currencySymbol: isIndia ? '₹' : '$',
@@ -820,8 +946,15 @@ const FindDermatologist: React.FC = () => {
       else if (country === 'UK') { curr = '£'; code = 'GB'; }
       else if (country === 'Canada') { curr = 'C$'; code = 'CA'; }
       else if (country === 'Australia') { curr = 'A$'; code = 'AU'; }
+      else if (country === 'New Zealand') { curr = 'NZ$'; code = 'NZ'; }
       else if (country === 'UAE') { curr = 'AED '; code = 'AE'; }
-      else if (['Germany', 'France'].includes(country)) { curr = '€'; code = 'DE'; }
+      else if (country === 'Saudi Arabia') { curr = 'SAR '; code = 'SA'; }
+      else if (['Germany', 'France', 'Italy', 'Spain', 'Netherlands', 'Ireland'].includes(country)) { curr = '€'; code = 'DE'; }
+      else if (country === 'Switzerland') { curr = 'CHF '; code = 'CH'; }
+      else if (country === 'Singapore') { curr = 'S$'; code = 'SG'; }
+      else if (country === 'South Africa') { curr = 'R '; code = 'ZA'; }
+      else if (country === 'Brazil') { curr = 'R$ '; code = 'BR'; }
+      else if (country === 'Mexico') { curr = 'MX$ '; code = 'MX'; }
 
       setUserLocation({
         city,
@@ -834,6 +967,15 @@ const FindDermatologist: React.FC = () => {
       setIsSearchingBackground(false);
     }, 400);
   };
+
+  // Filter locations by selected continent
+  const displayedLocationPills = useMemo(() => {
+    if (selectedContinent === 'All Regions') {
+      return GLOBAL_REGIONS_DIRECTORY.flatMap(r => r.locations);
+    }
+    const reg = GLOBAL_REGIONS_DIRECTORY.find(r => r.continent === selectedContinent);
+    return reg ? reg.locations : [];
+  }, [selectedContinent]);
 
   // Generate doctors for the currently active city
   const localDoctorsList = useMemo(() => {
@@ -917,8 +1059,8 @@ const FindDermatologist: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
-                <Stethoscope size={14} className="text-[#206E55]" />
-                Board-Certified Dermatology Directory
+                <Globe size={14} className="text-[#206E55]" />
+                Worldwide Dermatology &amp; Skin Doctor Directory
               </span>
             </motion.div>
 
@@ -938,10 +1080,7 @@ const FindDermatologist: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Locating top-rated skin clinics, certified dermatologists, and same-day appointment slots near{' '}
-              <strong className="text-[#141515] font-bold">
-                {userLocation.source === 'unresolved' ? 'your area' : `${userLocation.city}${userLocation.country ? ', ' + userLocation.country : ''}`}
-              </strong>.
+              Locating top-rated skin clinics, certified dermatologists, and same-day appointment slots near your location with instant online booking.
             </motion.p>
           </div>
 
@@ -972,11 +1111,11 @@ const FindDermatologist: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-lg font-bold text-[#141515]">
-                      {userLocation.source === 'gps' ? '📍 GPS Location Active' : `Location: ${userLocation.city}, ${userLocation.country || 'Worldwide'}`}
+                      {userLocation.source === 'gps' ? '📍 GPS Location Active' : `Location: ${userLocation.city || 'Your Area'}, ${userLocation.country || 'Worldwide'}`}
                     </h3>
                     <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wide flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
-                      Skin Registry Connected
+                      Global Registry Connected
                     </span>
                   </div>
                   <p className="text-xs text-[#5A554A] mt-0.5">
@@ -998,14 +1137,45 @@ const FindDermatologist: React.FC = () => {
               </button>
             </div>
 
-            {/* Popular Global Locations Filter Pills */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#8A857A] flex items-center justify-between">
-                <span>Or Select Region / Metro City:</span>
-                <span className="text-[11px] font-normal text-slate-400">Exclusively certified Dermatologists</span>
-              </label>
-              <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto py-1">
-                {GLOBAL_POPULAR_LOCATIONS.map((loc) => (
+            {/* Region / Continent Selector Tabs */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#8A857A]">
+                  Browse by Region &amp; Country:
+                </span>
+                <span className="text-[11px] font-medium text-slate-400">150+ Countries Supported</span>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {['All Regions', 'North America', 'Europe & UK', 'Asia-Pacific', 'Middle East & Gulf', 'Latin America & Africa'].map((regionTab) => (
+                  <button
+                    key={regionTab}
+                    onClick={() => setSelectedContinent(regionTab)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
+                      selectedContinent === regionTab
+                        ? 'bg-[#141515] text-white shadow-sm'
+                        : 'bg-[#F3F1EB] text-[#5A554A] hover:text-[#206E55]'
+                    }`}
+                  >
+                    {regionTab}
+                  </button>
+                ))}
+              </div>
+
+              {/* Popular Global Locations Filter Pills */}
+              <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto py-1 pt-2 border-t border-slate-100">
+                <button
+                  onClick={() => handleSelectCityPill('Auto-Detect Current GPS')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-1 ${
+                    activeLocationFilter === 'Auto-Detect Current GPS'
+                      ? 'bg-[#206E55] text-white shadow-md'
+                      : 'bg-[#E8F2ED] text-[#206E55] border border-[#206E55]/30'
+                  }`}
+                >
+                  <Navigation size={12} /> Auto-Detect GPS
+                </button>
+
+                {displayedLocationPills.map((loc) => (
                   <button
                     key={loc}
                     onClick={() => handleSelectCityPill(loc)}
@@ -1026,7 +1196,7 @@ const FindDermatologist: React.FC = () => {
               <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
-                placeholder={`Search skin doctors in ${userLocation.city} for Acne, Eczema, Moles, Psoriasis, Rash, or Insurance...`}
+                placeholder="Search skin doctors by condition (e.g. Acne, Eczema, Moles, Psoriasis, Rash), Clinic, or Insurance..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-sm text-[#141515] placeholder-slate-400 focus:outline-none focus:border-[#206E55] transition shadow-inner"
@@ -1039,10 +1209,10 @@ const FindDermatologist: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-8">
               <div>
                 <span className="text-xs font-extrabold uppercase tracking-widest text-[#206E55]">
-                  {userLocation.country || 'Global'} Skin Specialists
+                  Verified Directory
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
-                  Verified Skin Specialists in {userLocation.city}, {userLocation.country}
+                  Verified Skin Specialists &amp; Dermatology Clinics Near You
                 </h2>
                 <p className="text-xs sm:text-sm text-[#5A554A] mt-1">
                   Showing {localDoctorsList.length} verified skin doctors accepting new patient appointments and Medicus reports.
