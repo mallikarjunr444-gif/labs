@@ -755,7 +755,7 @@ const FindDermatologist: React.FC = () => {
     async function initializeLocation() {
       setIsSearchingBackground(true);
       
-      // Try prompt browser geolocation directly first
+      // 1. Try GPS Geolocation First
       if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
           async (pos) => {
@@ -763,14 +763,15 @@ const FindDermatologist: React.FC = () => {
             try {
               const lat = pos.coords.latitude;
               const lon = pos.coords.longitude;
-              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`);
+              
+              // High-speed client reverse-geocoding (instantaneous, no rate limit)
+              const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`, { signal: AbortSignal.timeout(3500) });
               if (res.ok) {
                 const data = await res.json();
-                const addr = data.address || {};
-                const city = addr.city || addr.town || addr.municipality || addr.state_district || 'Your City';
-                const state = addr.state || '';
-                const country = addr.country || 'Your Country';
-                const countryCode = (addr.country_code || 'US').toUpperCase();
+                const city = data.city || data.locality || data.principalSubdivision || 'Your City';
+                const state = data.principalSubdivision || '';
+                const country = data.countryName || 'Your Country';
+                const countryCode = (data.countryCode || 'US').toUpperCase();
 
                 let curr = '$';
                 if (countryCode === 'IN') curr = '₹';
@@ -795,14 +796,14 @@ const FindDermatologist: React.FC = () => {
                 return;
               }
             } catch (e) {
-              // fallback to IP
+              // try IP fallback
             }
             fallbackToIP();
           },
           (err) => {
             fallbackToIP();
           },
-          { timeout: 5000 }
+          { timeout: 4000, enableHighAccuracy: true }
         );
       } else {
         fallbackToIP();
@@ -810,17 +811,18 @@ const FindDermatologist: React.FC = () => {
     }
 
     async function fallbackToIP() {
+      // 2. High-Speed IP Location Lookup Tier 1: ipwho.is
       try {
-        const res = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(4000) });
+        const res = await fetch('https://ipwho.is/', { signal: AbortSignal.timeout(3000) });
         if (res.ok) {
           const data = await res.json();
-          if (isMounted && data.city) {
+          if (isMounted && data.success && data.city) {
             const detectedCity = data.city;
             const detectedRegion = data.region || '';
-            const detectedCountry = data.country_name || 'United States';
-            const detectedCode = data.country_code || 'US';
+            const detectedCountry = data.country || 'United States';
+            const detectedCode = (data.country_code || 'US').toUpperCase();
 
-            let curr = '$';
+            let curr = data.currency?.symbol || '$';
             if (detectedCode === 'IN') curr = '₹';
             else if (detectedCode === 'GB') curr = '£';
             else if (['DE', 'FR', 'IT', 'ES', 'NL', 'IE'].includes(detectedCode)) curr = '€';
@@ -844,19 +846,84 @@ const FindDermatologist: React.FC = () => {
           }
         }
       } catch (e) {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-        const isIndia = tz.includes('Calcutta') || tz.includes('Kolkata');
-        setUserLocation({
-          city: isIndia ? 'Your Local Area' : 'Your Area',
-          region: isIndia ? 'India' : 'United States',
-          country: isIndia ? 'India' : 'United States',
-          countryCode: isIndia ? 'IN' : 'US',
-          currencySymbol: isIndia ? '₹' : '$',
-          source: 'default'
-        });
-        setHasRequestedLocation(true);
-        setIsSearchingBackground(false);
+        // try secondary ipapi.co
       }
+
+      // Tier 2: ipapi.co
+      try {
+        const res2 = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) });
+        if (res2.ok) {
+          const data2 = await res2.json();
+          if (isMounted && data2.city) {
+            const detectedCity = data2.city;
+            const detectedRegion = data2.region || '';
+            const detectedCountry = data2.country_name || 'United States';
+            const detectedCode = (data2.country_code || 'US').toUpperCase();
+
+            let curr = '$';
+            if (detectedCode === 'IN') curr = '₹';
+            else if (detectedCode === 'GB') curr = '£';
+            else if (['DE', 'FR', 'IT', 'ES', 'NL', 'IE'].includes(detectedCode)) curr = '€';
+            else if (detectedCode === 'CA') curr = 'C$';
+            else if (detectedCode === 'AU') curr = 'A$';
+            else if (detectedCode === 'AE') curr = 'AED ';
+            else if (detectedCode === 'SA') curr = 'SAR ';
+
+            setUserLocation({
+              city: detectedCity,
+              region: detectedRegion,
+              country: detectedCountry,
+              countryCode: detectedCode,
+              currencySymbol: curr,
+              source: 'ip'
+            });
+            setHasRequestedLocation(true);
+            setIsSearchingBackground(false);
+            return;
+          }
+        }
+      } catch (e2) {
+        // Fallback default based on timezone
+      }
+
+      // Final Timezone heuristic
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      const isIndia = tz.includes('Calcutta') || tz.includes('Kolkata') || tz.includes('Asia/Colombo');
+      const isUK = tz.includes('London') || tz.includes('Europe/London');
+      const isAus = tz.includes('Sydney') || tz.includes('Melbourne') || tz.includes('Australia');
+
+      let defaultCity = 'Your Area';
+      let defaultCountry = 'United States';
+      let defaultCode = 'US';
+      let defaultCurr = '$';
+
+      if (isIndia) {
+        defaultCity = 'Your City';
+        defaultCountry = 'India';
+        defaultCode = 'IN';
+        defaultCurr = '₹';
+      } else if (isUK) {
+        defaultCity = 'London';
+        defaultCountry = 'United Kingdom';
+        defaultCode = 'GB';
+        defaultCurr = '£';
+      } else if (isAus) {
+        defaultCity = 'Sydney';
+        defaultCountry = 'Australia';
+        defaultCode = 'AU';
+        defaultCurr = 'A$';
+      }
+
+      setUserLocation({
+        city: defaultCity,
+        region: '',
+        country: defaultCountry,
+        countryCode: defaultCode,
+        currencySymbol: defaultCurr,
+        source: 'default'
+      });
+      setHasRequestedLocation(true);
+      setIsSearchingBackground(false);
     }
 
     initializeLocation();
@@ -1208,14 +1275,17 @@ const FindDermatologist: React.FC = () => {
           <div className="mb-16">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-8">
               <div>
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#206E55]">
-                  Verified Directory
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#206E55] flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                  {userLocation.country ? `${userLocation.country} Medical Registry` : 'Verified Specialists'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
-                  Verified Skin Specialists &amp; Dermatology Clinics Near You
+                  {userLocation.city && userLocation.city !== 'Your Area' && userLocation.city !== 'Your City' && userLocation.city !== 'Detecting Location...'
+                    ? `Skin Specialists & Dermatologists in ${userLocation.city}`
+                    : 'Verified Skin Specialists & Dermatology Clinics Near You'}
                 </h2>
                 <p className="text-xs sm:text-sm text-[#5A554A] mt-1">
-                  Showing {localDoctorsList.length} verified skin doctors accepting new patient appointments and Medicus reports.
+                  Showing {localDoctorsList.length} verified skin doctors accepting new patient appointments and Medicus AI reports.
                 </p>
               </div>
 
