@@ -85,7 +85,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$35 Copay / $85 Direct Pay',
     insuranceAccepted: ['Aetna', 'Blue Cross Blue Shield', 'Cigna', 'UnitedHealthcare', 'Medicare'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76',
+    bookingUrl: 'https://www.zocdoc.com/search?address=New%20York%2C%20NY&dr_specialty=153',
     badge: 'Top Rated in Manhattan'
   },
   {
@@ -105,7 +105,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: 'Covered by Most Commercial PPO Plans',
     insuranceAccepted: ['Oxford', 'Empire BCBS', 'GHI', 'UnitedHealthcare'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/c87skau1eu?key=d510b8e643bb203bddcc0f124e246e4d',
+    bookingUrl: 'https://www.zocdoc.com/search?address=New%20York%2C%20NY&dr_specialty=153',
     badge: 'Hospital Affiliated'
   },
   // Los Angeles
@@ -126,7 +126,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$40 Copay / $90 Cash Pay',
     insuranceAccepted: ['Anthem Blue Cross', 'Kaiser Out-of-Network', 'Cigna', 'Aetna'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/myccy3c6?key=812b322764c0068e16258bf45e21d4e5',
+    bookingUrl: 'https://www.zocdoc.com/search?address=Los%20Angeles%2C%20CA&dr_specialty=153',
     badge: 'Same-Day Video Slots'
   },
   {
@@ -146,7 +146,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: 'Standard Specialist Copay with PPO',
     insuranceAccepted: ['Anthem', 'Blue Shield California', 'Medicare', 'Aetna PPO'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/kqbjqhw770?key=744f7eb9899663a66a114fdbde11867f',
+    bookingUrl: 'https://www.zocdoc.com/search?address=Los%20Angeles%2C%20CA&dr_specialty=153',
     badge: 'Cedars-Sinai Faculty'
   },
   // Chicago
@@ -167,7 +167,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$30 Copay / $79 Self-Pay',
     insuranceAccepted: ['BCBS Illinois', 'UnitedHealthcare', 'Humana', 'Cigna'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76',
+    bookingUrl: 'https://www.zocdoc.com/search?address=Chicago%2C%20IL&dr_specialty=153',
     badge: 'Popular in Downtown'
   },
   // Houston
@@ -188,7 +188,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$35 Copay / $75 Direct Pay',
     insuranceAccepted: ['BCBS Texas', 'Aetna', 'Memorial Hermann Choice', 'UnitedHealthcare'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/c87skau1eu?key=d510b8e643bb203bddcc0f124e246e4d',
+    bookingUrl: 'https://www.zocdoc.com/search?address=Houston%2C%20TX&dr_specialty=153',
     badge: 'Texas Med Center'
   },
   // Boston
@@ -209,7 +209,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$45 with insurance / $89 self-pay',
     insuranceAccepted: ['Mass General Brigham Health', 'Harvard Pilgrim', 'Blue Cross MA', 'Tufts'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76',
+    bookingUrl: 'https://www.zocdoc.com/search?address=Boston%2C%20MA&dr_specialty=153',
     badge: 'Accepts Medicus PDF Report'
   },
   // Miami
@@ -230,7 +230,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$35 Copay / $80 Self-Pay',
     insuranceAccepted: ['Florida Blue', 'AvMed', 'Cigna', 'Aetna Medicare'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/myccy3c6?key=812b322764c0068e16258bf45e21d4e5',
+    bookingUrl: 'https://www.zocdoc.com/search?address=Miami%2C%20FL&dr_specialty=153',
     badge: 'Sun Damage Expert'
   },
   // Nationwide Virtual
@@ -251,7 +251,7 @@ const LOCAL_CLINICS_DATABASE: LocalDoctorClinic[] = [
     consultationFee: '$0 Copay with most insurance / $49 Flat Fee',
     insuranceAccepted: ['All Major US Commercial Plans', 'FSA / HSA Eligible'],
     isVirtualAvailable: true,
-    bookingUrl: 'https://poetrywishing.com/kqbjqhw770?key=744f7eb9899663a66a114fdbde11867f',
+    bookingUrl: 'https://www.teladoc.com/ways-we-help/dermatology/',
     badge: '🟢 Instant Virtual Queue'
   }
 ];
@@ -271,7 +271,7 @@ const TELEHEALTH_PROVIDERS = [
       'In-person clinics and telehealth video visits',
       'Share your Medicus AI PDF intake report directly'
     ],
-    referralUrl: 'https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76',
+    referralUrl: 'https://www.zocdoc.com/dermatologists',
     rating: 4.9,
     reviewsCount: '240,000+ ratings'
   },
@@ -289,7 +289,7 @@ const TELEHEALTH_PROVIDERS = [
       'Follow-up messaging included for 7 days',
       'Ideal for acne, eczema, rashes, and prescription renewals'
     ],
-    referralUrl: 'https://poetrywishing.com/c87skau1eu?key=d510b8e643bb203bddcc0f124e246e4d',
+    referralUrl: 'https://www.teladoc.com/ways-we-help/dermatology/',
     rating: 4.8,
     reviewsCount: '180,000+ ratings'
   },
@@ -307,7 +307,7 @@ const TELEHEALTH_PROVIDERS = [
       'Same-day electronic Rx for topical & oral medications',
       'High-resolution photo review alongside live video consultation'
     ],
-    referralUrl: 'https://poetrywishing.com/myccy3c6?key=812b322764c0068e16258bf45e21d4e5',
+    referralUrl: 'https://sesamecare.com/services/dermatologist',
     rating: 4.9,
     reviewsCount: '95,000+ ratings'
   },
@@ -325,7 +325,7 @@ const TELEHEALTH_PROVIDERS = [
       'E-prescriptions, lab orders, and ongoing condition management',
       'Direct HIPAA-compliant record sharing'
     ],
-    referralUrl: 'https://poetrywishing.com/kqbjqhw770?key=744f7eb9899663a66a114fdbde11867f',
+    referralUrl: 'https://plushcare.com/dermatology/',
     rating: 4.8,
     reviewsCount: '110,000+ ratings'
   }
@@ -583,7 +583,7 @@ const FindDermatologist: React.FC = () => {
                     <a
                       href={clinic.bookingUrl}
                       target="_blank"
-                      rel="noopener noreferrer sponsored"
+                      rel="noopener noreferrer"
                       className="flex-1 py-3.5 rounded-2xl bg-[#206E55] hover:bg-[#408A6C] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition group-hover:scale-[1.01]"
                     >
                       <Calendar size={15} />
@@ -592,9 +592,7 @@ const FindDermatologist: React.FC = () => {
                     </a>
 
                     <a
-                      href={clinic.bookingUrl}
-                      target="_blank"
-                      rel="noopener noreferrer sponsored"
+                      href={`tel:${clinic.phone.replace(/[^0-9]/g, '')}`}
                       className="px-5 py-3.5 rounded-2xl bg-[#FAF9F5] hover:bg-[#E5E2DA] border border-[#E5E2DA] text-[#141515] font-bold text-xs flex items-center justify-center gap-2 transition"
                     >
                       <PhoneCall size={14} className="text-[#206E55]" />
@@ -670,7 +668,7 @@ const FindDermatologist: React.FC = () => {
                     <a
                       href={provider.referralUrl}
                       target="_blank"
-                      rel="noopener noreferrer sponsored"
+                      rel="noopener noreferrer"
                       className="w-full py-3.5 rounded-2xl bg-[#141515] hover:bg-slate-800 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
                     >
                       <span>Connect with {provider.name.split(' ')[0]} Specialist</span>
