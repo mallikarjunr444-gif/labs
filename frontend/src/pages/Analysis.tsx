@@ -1,10 +1,10 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { 
   User, UploadCloud, ShieldCheck, Cpu, Brain, FileText, Mail, 
   ChevronDown, AlertTriangle, ShieldAlert, CheckCircle, Download, RefreshCw,
-  Clock, ArrowRight, Shield, Camera, Heart, ExternalLink, Sparkles, HelpCircle, Check, X, Activity, Zap, Image
+  Clock, ArrowRight, Shield, Camera, Heart, ExternalLink, Sparkles, HelpCircle, Check, X, Activity, Zap, Image, Stethoscope
 } from 'lucide-react';
 import { PremiumFooter } from '../sections';
 import PhoneInputCustom from '../components/PhoneInputCustom';
@@ -2394,6 +2394,29 @@ function ResultCard({
             </a>
           ))}
         </div>
+      </div>
+
+      {/* ── HIGH-CONVERTING DOCTOR CONSULTATION & TELEHEALTH CALLOUT ── */}
+      <div className="bg-gradient-to-r from-[#1b5c47] via-[#206E55] to-[#2b8568] border border-[#206E55]/30 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
+        <div className="space-y-2 max-w-xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-bold uppercase tracking-wider text-emerald-200">
+            <Stethoscope size={13} /> Same-Day Virtual Consultations &amp; Rx
+          </div>
+          <h3 className="text-xl sm:text-2xl font-extrabold font-display leading-tight">
+            Consult a Board-Certified Dermatologist Online
+          </h3>
+          <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-medium">
+            Review your Medicus AI scan report with licensed US/UK dermatologists. Get official prescriptions, treatment plans, and second opinions within 2 to 24 hours.
+          </p>
+        </div>
+
+        <Link
+          to="/find-dermatologist"
+          className="w-full xl:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-emerald-50 text-[#1b5c47] font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all whitespace-nowrap group"
+        >
+          <span>Find Available Doctors</span>
+          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+        </Link>
       </div>
 
       {/* Download & Share card */}

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, ArrowRight, MessageCircle, Sparkles, User, Home, 
-  BookOpen, Cpu, Layers, Info, HelpCircle, Mail, ChevronRight 
+  BookOpen, Cpu, Layers, Info, HelpCircle, Mail, ChevronRight, Stethoscope 
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import BrandLogo from './BrandLogo';
@@ -13,6 +13,7 @@ import AuthModal from './AuthModal';
 const desktopNavItems = [
   { name: 'Home', href: '/' },
   { name: 'Blog', href: '/blog' },
+  { name: 'Find Doctors', href: '/find-dermatologist' },
   { name: 'AI Research', href: '/research' },
   { name: 'Analysis', href: '/analysis' },
   { name: 'Features', href: '/features' },
@@ -22,6 +23,7 @@ const desktopNavItems = [
 // Mobile Drawer Links with Icons
 const mobileNavItems = [
   { name: 'Home', href: '/', icon: Home },
+  { name: 'Find Doctors', href: '/find-dermatologist', icon: Stethoscope },
   { name: 'Blog & Articles', href: '/blog', icon: BookOpen },
   { name: 'AI Research', href: '/research', icon: Cpu },
   { name: 'Platform Features', href: '/features', icon: Layers },

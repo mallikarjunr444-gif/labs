@@ -17,6 +17,7 @@ const Disclaimer = lazy(() => import('./pages/Disclaimer'));
 const ReportIssue = lazy(() => import('./pages/ReportIssue'));
 const FounderPage = lazy(() => import('./pages/FounderPage'));
 const TeamPage = lazy(() => import('./pages/TeamPage'));
+const FindDermatologist = lazy(() => import('./pages/FindDermatologist'));
 
 /* Blog & Knowledge Library Pages */
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
@@ -81,6 +82,8 @@ const App = () => {
             <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
             <Route path="/founder" element={<FounderPage />} />
             <Route path="/team" element={<TeamPage />} />
+            <Route path="/find-dermatologist" element={<FindDermatologist />} />
+            <Route path="/book-doctor" element={<FindDermatologist />} />
 
             {/* Medical Library & Blog Pages */}
             <Route path="/blog" element={<BlogIndex />} />

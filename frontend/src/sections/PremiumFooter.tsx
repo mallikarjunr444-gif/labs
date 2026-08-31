@@ -313,6 +313,8 @@ export const PremiumFooter: React.FC = () => {
           <span className="text-[#141515] font-bold uppercase tracking-wider text-[11px]">Publisher Policies &amp; Governance:</span>
           <Link to="/about" className="hover:text-[#206E55] transition">About Us</Link>
           <span>•</span>
+          <Link to="/find-dermatologist" className="text-[#206E55] font-bold hover:underline">Find a Doctor</Link>
+          <span>•</span>
           <Link to="/contact" className="hover:text-[#206E55] transition">Contact Us</Link>
           <span>•</span>
           <Link to="/faq" className="hover:text-[#206E55] transition">FAQ</Link>
