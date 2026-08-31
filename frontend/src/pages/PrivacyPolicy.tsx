@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Eye, Lock, Database, Globe, Mail, ChevronDown, Check } from 'lucide-react';
 import { PremiumFooter } from '../sections';
+import AdSpace from '../components/AdSpace';
 
 const sections = [
   {
@@ -229,6 +230,11 @@ const PrivacyPolicy: React.FC = () => (
         <AccordionItem key={s.title} s={s} i={i} />
       ))}
       
+      {/* In-page Ad Banner */}
+      <div className="pt-10 text-center">
+        <AdSpace variant="leaderboard" />
+      </div>
+
       {/* HIPAA Compliance Spotlight */}
       <motion.div 
         className="p-6 rounded-3xl bg-[#E8F2ED]/40 border border-[#206E55]/15 space-y-3"

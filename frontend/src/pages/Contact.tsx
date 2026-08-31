@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { getApiBaseUrl } from '../lib/apiBase';
 import { PremiumFooter } from '../sections';
+import AdSpace from '../components/AdSpace';
 
 const contactOptions = [
   {
@@ -258,6 +259,11 @@ const Contact: React.FC = () => {
             </form>
           </motion.div>
 
+        </div>
+
+        {/* Ad Space */}
+        <div className="mt-16 text-center">
+          <AdSpace variant="leaderboard" />
         </div>
 
       </section>

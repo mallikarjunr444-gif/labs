@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import AdSpace from '../components/AdSpace';
 
 const ResearchPage: React.FC = () => (
   <>
@@ -53,6 +54,11 @@ const ResearchPage: React.FC = () => (
                 <span className="text-xs font-bold text-[#141515] uppercase tracking-wider">Training Samples</span>
               </div>
             </div>
+          </div>
+
+          {/* Ad Space */}
+          <div className="my-8 text-center">
+            <AdSpace variant="leaderboard" />
           </div>
 
           <section>

@@ -3,6 +3,7 @@ import { ShieldCheck, Stethoscope, FileText, CheckCircle2, User, Clock, AlertCir
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
+import AdSpace from '../components/AdSpace';
 
 const EditorialPolicy: React.FC = () => (
   <>
@@ -85,6 +86,11 @@ const EditorialPolicy: React.FC = () => (
               Medicus Labs is led by Founder &amp; CEO <strong>Mallikarjun R</strong>, alongside co-founders Nigam Patel H, Mallanagouda M, and Mohammed Adil. Our team combines expertise in computer vision, biomedical engineering, and software safety to ensure all public content meets high clinical utility standards.
             </p>
           </section>
+
+          {/* Ad Space */}
+          <div className="my-8 text-center">
+            <AdSpace variant="leaderboard" />
+          </div>
 
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">4. Corrections &amp; Content Revision Protocol</h2>

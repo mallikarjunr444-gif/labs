@@ -1,5 +1,6 @@
 import React from 'react';
 import { PremiumFooter } from '../sections';
+import AdSpace from '../components/AdSpace';
 import { FileText, Scale, AlertTriangle, Ban, CheckSquare } from 'lucide-react';
 
 const Section: React.FC<{ icon: React.ReactNode; title: string; children: React.ReactNode }> = ({ icon, title, children }) => (
@@ -72,6 +73,11 @@ const TermsConditions: React.FC = () => (
           <p>We reserve the right to update these Terms &amp; Conditions at any time. Changes will be posted on this page with an updated effective date. Continued use of the Service after changes constitutes acceptance of the updated terms.</p>
           <p>For questions, contact us at <strong>medicuslabs.com@gmail.com</strong>.</p>
         </Section>
+
+        {/* Ad Space */}
+        <div className="pt-6 text-center">
+          <AdSpace variant="leaderboard" />
+        </div>
       </div>
     </main>
     <PremiumFooter />

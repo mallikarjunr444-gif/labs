@@ -4,6 +4,7 @@ import { Sparkles, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
+import AdSpace from '../components/AdSpace';
 
 const faqCategories = ['All', 'Accuracy & Models', 'Privacy & HIPAA', 'Reports & PDF'];
 
@@ -145,6 +146,11 @@ const Faq: React.FC = () => {
               </AnimatePresence>
             </motion.div>
           ))}
+        </div>
+
+        {/* Ad Space */}
+        <div className="my-14 text-center">
+          <AdSpace variant="leaderboard" />
         </div>
 
         {/* Still have questions card */}

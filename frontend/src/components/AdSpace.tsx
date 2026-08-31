@@ -137,8 +137,27 @@ export const AdSpace: React.FC<AdSpaceProps> = ({
 }) => {
   if (variant === 'native') {
     return (
-      <div className={`my-6 text-center ${className}`}>
+      <div className={`my-6 text-center overflow-hidden ${className}`}>
         <NativeAd />
+      </div>
+    );
+  }
+
+  // If leaderboard, serve 728x90 on desktop and 320x50 on mobile screens
+  if (variant === 'leaderboard') {
+    const desktopUnit = ADSTERRA_UNITS.leaderboard;
+    const mobileUnit = ADSTERRA_UNITS.mobile;
+
+    return (
+      <div className={`my-6 text-center ${className}`}>
+        {/* Desktop: 728x90 */}
+        <div className="hidden sm:flex justify-center items-center" style={{ minHeight: desktopUnit.height }}>
+          <IframeAd adKey={desktopUnit.key} width={desktopUnit.width} height={desktopUnit.height} />
+        </div>
+        {/* Mobile: 320x50 */}
+        <div className="flex sm:hidden justify-center items-center" style={{ minHeight: mobileUnit.height }}>
+          <IframeAd adKey={mobileUnit.key} width={mobileUnit.width} height={mobileUnit.height} />
+        </div>
       </div>
     );
   }
