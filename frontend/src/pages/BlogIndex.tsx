@@ -302,6 +302,11 @@ const BlogIndex: React.FC = () => {
             ))}
           </div>
 
+          {/* Bottom Ad Container */}
+          <div className="my-12">
+            <AdSpace variant="leaderboard" />
+          </div>
+
           {/* Bottom Medical Disclaimer & Editorial Banner */}
           <div className="mt-16 bg-[#F3F1EB] border border-[#E5E2DA] rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-start gap-4">

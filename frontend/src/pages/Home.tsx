@@ -696,6 +696,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* ── LOWER ADVERTISEMENT BANNER SPACE ── */}
+      <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">
+        <AdSpace variant="leaderboard" />
+      </div>
+
       {/* ── VIDEO CALL TO ACTION ── */}
       <section className="relative z-10 border-t border-[#E5E2DA]">
         <VideoCtaSection />

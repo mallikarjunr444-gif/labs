@@ -196,6 +196,9 @@ const BlogAcne: React.FC = () => (
           </section>
         </div>
 
+        {/* Article Bottom Ad */}
+        <AdSpace variant="leaderboard" className="my-10" />
+
         {/* Call to Action CTA */}
         <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">
           <h3 className="text-2xl font-extrabold text-[#141515] mb-2">Analyze Your Skin Spot with Medicus AI</h3>

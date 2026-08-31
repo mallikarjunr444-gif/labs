@@ -71,6 +71,8 @@ const BlogShingles: React.FC = () => (
           </section>
         </div>
 
+        <AdSpace variant="leaderboard" className="my-10" />
+
         <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">
           <h3 className="text-2xl font-extrabold text-[#141515] mb-2">Check Unilateral Painful Rashes with AI</h3>
           <p className="text-sm text-[#5A554A] max-w-xl mx-auto mb-6">Upload photos of dermatomal blister clusters for immediate VZV assessment.</p>

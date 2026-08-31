@@ -9,6 +9,7 @@ import {
 import { PremiumFooter } from '../sections';
 import PhoneInputCustom from '../components/PhoneInputCustom';
 import CameraModal from '../components/CameraModal';
+import AdSpace from '../components/AdSpace';
 import { getApiBaseUrl } from '../lib/apiBase';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -484,6 +485,9 @@ const Analysis: React.FC = () => {
                 exit={{ opacity: 0 }}
               >
                 <ResultCard result={result} patient={form} imagePreview={imagePreview} onDownload={downloadPDF} />
+                <div className="my-8">
+                  <AdSpace variant="leaderboard" />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -659,6 +663,11 @@ const Analysis: React.FC = () => {
                   </>
                 )}
               </button>
+              </div>
+
+              {/* In-feed Ad Banner */}
+              <div className="lg:col-span-2 my-4">
+                <AdSpace variant="leaderboard" />
               </div>
 
               {/* Clinical AI Analysis Methodology & Guidelines */}
