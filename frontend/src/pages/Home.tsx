@@ -22,7 +22,7 @@ import { PremiumFooter } from '../sections';
 import { publicInfoLinks } from './PublicInfoPage';
 import AIChatModal from '../components/AIChatModal';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
+import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 
 // ── SAMPLE PRE-SET SYMPTOM PROMPTS ──
 const SAMPLE_PROMPTS = [
@@ -705,6 +705,11 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ── SPONSORED DEALS & RECOMMENDATIONS (SMARTLINKS) ── */}
+      <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <SponsoredLinks />
+      </div>
 
       {/* ── LOWER ADVERTISEMENT BANNER SPACE ── */}
       <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">

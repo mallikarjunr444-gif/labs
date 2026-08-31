@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, Search, Clock, BookOpen, User, ShieldCheck } from 'lucide-react';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
+import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 
 export interface ArticleMeta {
   id: string;
@@ -367,6 +367,9 @@ const BlogIndex: React.FC = () => {
           <div className="my-12">
             <AdSpace variant="leaderboard" />
           </div>
+
+          {/* ── SPONSORED DEALS & RECOMMENDATIONS (SMARTLINKS) ── */}
+          <SponsoredLinks className="my-10" />
 
           {/* Bottom Medical Disclaimer & Editorial Banner */}
           <div className="mt-16 bg-[#F3F1EB] border border-[#E5E2DA] rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
