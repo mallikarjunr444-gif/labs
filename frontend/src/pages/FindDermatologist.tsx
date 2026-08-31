@@ -27,7 +27,6 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PremiumFooter } from '../sections';
-import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 
 interface LocalDoctorClinic {
   id: string;
@@ -421,11 +420,6 @@ const FindDermatologist: React.FC = () => {
             </motion.p>
           </div>
 
-          {/* ── TOP LEADERBOARD AD BANNER ── */}
-          <div className="my-8 text-center">
-            <AdSpace variant="leaderboard" />
-          </div>
-
           {/* ── INTERACTIVE LOCATION & SEARCH RADAR TOOL ── */}
           <div className="bg-white border-2 border-[#206E55]/30 rounded-3xl p-6 sm:p-8 shadow-lg mb-16 space-y-6">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4 pb-6 border-b border-[#E5E2DA]">
@@ -604,11 +598,6 @@ const FindDermatologist: React.FC = () => {
             </div>
           </div>
 
-          {/* ── 300x250 IN-FEED RECTANGLE AD BANNER ── */}
-          <div className="my-12 flex justify-center">
-            <AdSpace variant="rectangle" />
-          </div>
-
           {/* ── TOP TELEHEALTH NETWORKS COMPARISON ── */}
           <div className="mb-16">
             <div className="mb-8">
@@ -678,19 +667,6 @@ const FindDermatologist: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* ── NATIVE EDITORIAL AD BANNER ── */}
-          <div className="my-12">
-            <AdSpace variant="native" />
-          </div>
-
-          {/* ── 4 SPONSORED SMARTLINKS RECOMMENDATIONS ── */}
-          <SponsoredLinks className="my-12" />
-
-          {/* ── BOTTOM LEADERBOARD AD BANNER ── */}
-          <div className="my-12 text-center">
-            <AdSpace variant="leaderboard" />
           </div>
 
         </div>
