@@ -27,7 +27,11 @@ import {
   Compass,
   AlertCircle,
   Activity,
-  UserCheck
+  UserCheck,
+  HelpCircle,
+  ChevronDown,
+  BookOpen,
+  HeartPulse
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PremiumFooter } from '../sections';
@@ -85,6 +89,88 @@ const GLOBAL_POPULAR_LOCATIONS = [
   'Berlin, Germany',
   'Paris, France',
   'Worldwide Telehealth'
+];
+
+const CLINICAL_CONDITION_CATEGORIES = [
+  {
+    name: 'Acne & Rosacea',
+    description: 'Cystic acne, hormonal breakouts, facial redness, rhinophyma',
+    articleLink: '/blog/acne',
+    subLink: '/blog/rosacea',
+    badge: 'High Intent'
+  },
+  {
+    name: 'Eczema & Dermatitis',
+    description: 'Atopic eczema, contact allergies, dyshidrotic flare-ups',
+    articleLink: '/blog/eczema',
+    subLink: '/blog/contact-dermatitis',
+    badge: 'Chronic Care'
+  },
+  {
+    name: 'Psoriasis & Biologics',
+    description: 'Plaque psoriasis, scalp scaling, systemic biologic therapy',
+    articleLink: '/blog/psoriasis',
+    subLink: '/blog/seborrheic-dermatitis',
+    badge: 'Specialist'
+  },
+  {
+    name: 'Mole Checks & Melanoma',
+    description: 'ABCDE dermoscopy, atypical nevi, biopsy & cancer excision',
+    articleLink: '/blog/melanoma',
+    subLink: '/blog/dysplastic-nevi',
+    badge: 'Urgent Screening'
+  },
+  {
+    name: 'Skin Cancers (BCC & SCC)',
+    description: 'Basal cell carcinoma, squamous cell carcinoma, actinic keratosis',
+    articleLink: '/blog/basal-cell',
+    subLink: '/blog/squamous-cell-carcinoma',
+    badge: 'Pathology'
+  },
+  {
+    name: 'Fungal & Bacterial Rashes',
+    description: 'Ringworm, tinea versicolor, folliculitis, shingles & impetigo',
+    articleLink: '/blog/ringworm',
+    subLink: '/blog/shingles',
+    badge: 'Acute Care'
+  },
+  {
+    name: 'Hair Loss & Alopecia',
+    description: 'Alopecia areata, androgenetic thinning, telogen effluvium',
+    articleLink: '/blog/alopecia',
+    subLink: '/blog/skincare-guide',
+    badge: 'Trichology'
+  },
+  {
+    name: 'Pigmentation & Vitiligo',
+    description: 'Melasma, post-inflammatory hyperpigmentation, vitiligo repigmentation',
+    articleLink: '/blog/vitiligo',
+    subLink: '/blog/melasma',
+    badge: 'Pigmentary'
+  }
+];
+
+const PATIENT_FAQS = [
+  {
+    q: 'When should I consult a board-certified dermatologist instead of a general doctor?',
+    a: 'You should consult a dermatologist for changing or irregularly shaped moles (ABCDE criteria), persistent cystic acne that does not respond to OTC treatments, chronic itching or scaling (eczema/psoriasis), unexplained blistering rashes, sudden hair thinning, or any non-healing skin lesion that bleeds or crusts for more than 3 weeks.'
+  },
+  {
+    q: 'How does an online teledermatology consultation work?',
+    a: 'During a virtual visit, you upload high-resolution photographs of your skin concern alongside your Medicus AI diagnostic summary report. A licensed dermatologist evaluates the lesion morphology, takes a clinical history via video or secure chat, diagnoses the condition, and sends electronic prescriptions directly to your local pharmacy.'
+  },
+  {
+    q: 'Can online dermatologists prescribe prescription medications?',
+    a: 'Yes. Board-certified dermatologists licensed in your country or US state can electronically prescribe topical retinoids (Tretinoin, Adapalene), oral antibiotics (Doxycycline), topical corticosteroids, antifungals, antihistamines, and non-controlled chronic maintenance therapies.'
+  },
+  {
+    q: 'How much does a dermatology visit cost with vs without health insurance?',
+    a: 'With health insurance, most patients pay a specialist copay between $25 and $50. For self-pay or uninsured patients, virtual consultations typically cost $39 to $85, while in-person specialist clinic evaluations range from $100 to $250 depending on whether skin biopsies or dermoscopy procedures are required.'
+  },
+  {
+    q: 'How do I share my Medicus Labs AI Scan Report with my doctor?',
+    a: 'After completing an AI skin scan on Medicus Labs, click "Download Verifiable Medical Report" on the analysis screen to generate a clinical PDF. You can upload this PDF to your Zocdoc, Practo, or Teladoc intake portal, or print it to hand directly to your physician.'
+  }
 ];
 
 // Helper to determine booking engine URL & Platform Name based on country & city
@@ -528,6 +614,7 @@ const FindDermatologist: React.FC = () => {
   const [activeLocationFilter, setActiveLocationFilter] = useState('Auto-Detect Current GPS');
   const [searchQuery, setSearchQuery] = useState('');
   const [scannerStep, setScannerStep] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   // Background radar scanner message cycles
   const SCAN_STEPS = [
@@ -770,11 +857,53 @@ const FindDermatologist: React.FC = () => {
     );
   }, [userLocation, searchQuery]);
 
+  // Google Schema.org Structured Data (MedicalWebPage + Physician + FAQPage)
+  const schemaStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'MedicalWebPage',
+        '@id': 'https://medicuslabs.app/find-dermatologist/#webpage',
+        url: 'https://medicuslabs.app/find-dermatologist',
+        name: 'Find a Board-Certified Dermatologist & Skin Doctor Near You',
+        description: 'Find verified skin doctors and board-certified dermatologists near your location with same-day appointment booking. Search in-person clinics and telehealth networks.',
+        specialty: 'Dermatology',
+        medicalAudience: 'Patient',
+        about: [
+          'Dermatology',
+          'Skin Disease Diagnosis',
+          'Acne Treatment',
+          'Eczema & Atopic Dermatitis',
+          'Psoriasis Management',
+          'Melanoma Screening'
+        ]
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://medicuslabs.app/find-dermatologist/#faq',
+        mainEntity: PATIENT_FAQS.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a
+          }
+        }))
+      }
+    ]
+  };
+
   return (
     <>
       <SEO
-        title="Find Skin Doctors & Dermatologists Near You Worldwide | Instant Appointments"
-        description="Find board-certified dermatologists and skin doctors near your current location. Background medical registry search, clinic addresses, in-network insurance, fees, and instant booking."
+        title="Find a Board-Certified Dermatologist Near You | Top Skin Doctors & Online Consultations"
+        description="Locate verified board-certified dermatologists and skin disease clinics near your location worldwide. Real-time GPS doctor radar, accepted health insurance, consultation fees, and same-day appointment booking."
+      />
+
+      {/* ── JSON-LD SCHEMA FOR #1 GOOGLE RANKING ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaStructuredData) }}
       />
 
       <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
@@ -789,7 +918,7 @@ const FindDermatologist: React.FC = () => {
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
                 <Stethoscope size={14} className="text-[#206E55]" />
-                Dermatology &amp; Skin Specialist Locator
+                Board-Certified Dermatology Directory
               </span>
             </motion.div>
 
@@ -913,7 +1042,7 @@ const FindDermatologist: React.FC = () => {
                   {userLocation.country || 'Global'} Skin Specialists
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
-                  Dermatologists in {userLocation.city}, {userLocation.country}
+                  Verified Skin Specialists in {userLocation.city}, {userLocation.country}
                 </h2>
                 <p className="text-xs sm:text-sm text-[#5A554A] mt-1">
                   Showing {localDoctorsList.length} verified skin doctors accepting new patient appointments and Medicus reports.
@@ -1032,6 +1161,85 @@ const FindDermatologist: React.FC = () => {
             </div>
           </div>
 
+          {/* ── CLINICAL CONDITIONS DIRECTORY (INTERNAL SEO ENGINE) ── */}
+          <div className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-12 mb-16 space-y-8">
+            <div className="max-w-3xl">
+              <span className="text-xs font-extrabold text-[#206E55] uppercase tracking-widest">
+                Condition-Specific Specialists
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
+                Explore Dermatologists by Skin Condition
+              </h2>
+              <p className="text-sm text-[#5A554A] mt-2 leading-relaxed">
+                Connect with specialists experienced in treating complex dermatological diseases. Review our peer-referenced clinical guides prior to your visit.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {CLINICAL_CONDITION_CATEGORIES.map((cat, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl bg-white border border-[#E5E2DA] p-5 shadow-sm flex flex-col justify-between space-y-3 hover:border-[#206E55]/40 transition"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#E8F2ED] text-[#206E55]">
+                        {cat.badge}
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-sm text-[#141515]">{cat.name}</h3>
+                    <p className="text-xs text-[#5A554A] leading-relaxed line-clamp-2">
+                      {cat.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#206E55]">
+                    <Link to={cat.articleLink} className="hover:underline flex items-center gap-1">
+                      <span>Clinical Guide</span>
+                      <ArrowRight size={12} />
+                    </Link>
+                    <Link to={cat.subLink} className="text-slate-400 hover:text-[#206E55] transition">
+                      Related ↗
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── MEDICAL E-E-A-T BOARD CERTIFICATION STANDARDS ── */}
+          <div className="rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#FAF9F5] border-2 border-[#206E55]/30 p-8 sm:p-12 mb-16 grid md:grid-cols-3 gap-8 items-start">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center shadow-md">
+                <Award size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#141515]">12+ Years of Medical Training</h3>
+              <p className="text-xs text-[#5A554A] leading-relaxed">
+                Board-certified dermatologists complete 4 years of undergraduate study, 4 years of medical school, a 1-year internship, and 3+ years of specialized dermatology residency.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center shadow-md">
+                <ShieldCheck size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#141515]">Certified Specialist Seals</h3>
+              <p className="text-xs text-[#5A554A] leading-relaxed">
+                Doctors listed feature verified credentials from national boards including FAAD (USA), MD/DNB (India), GMC/FRCP (UK), FRCPC (Canada), and FACD (Australia).
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center shadow-md">
+                <HeartPulse size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-[#141515]">Evidence-Based Protocols</h3>
+              <p className="text-xs text-[#5A554A] leading-relaxed">
+                Every listed clinic adheres to international clinical guidelines from the AAD, BAD, and WHO for skin pathology, dermoscopy, and safe prescription workflows.
+              </p>
+            </div>
+          </div>
+
           {/* ── GLOBAL TELEHEALTH PLATFORMS (FOR INSTANT CARE) ── */}
           <div className="mb-16">
             <div className="mb-8">
@@ -1103,48 +1311,55 @@ const FindDermatologist: React.FC = () => {
             </div>
           </div>
 
-          {/* ── HOW TO BRING YOUR MEDICUS AI SCAN TO YOUR VISIT ── */}
-          <div className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-12 mb-16 space-y-8">
-            <div className="max-w-2xl">
-              <span className="text-xs font-bold text-[#206E55] uppercase tracking-widest">Clinical Protocol</span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
-                How to Share Your Medicus AI Report with Your Skin Doctor
-              </h3>
+          {/* ── PATIENT FAQ ACCORDION (SEO POWERHOUSE) ── */}
+          <div className="rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-12 mb-16 space-y-8 shadow-sm">
+            <div className="max-w-3xl">
+              <span className="text-xs font-extrabold text-[#206E55] uppercase tracking-widest">
+                Frequently Asked Questions
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
+                Patient Guide to Finding a Dermatologist
+              </h2>
               <p className="text-sm text-[#5A554A] mt-2">
-                Medicus Labs produces a verified clinical summary report designed to accelerate physician intake worldwide.
+                Essential clinical answers to help you prepare for your in-person or virtual dermatology consultation.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-white border border-[#E5E2DA] space-y-3">
-                <div className="w-8 h-8 rounded-full bg-[#E8F2ED] text-[#206E55] font-extrabold flex items-center justify-center text-sm">
-                  1
-                </div>
-                <h4 className="font-bold text-sm text-[#141515]">Perform AI Skin Scan</h4>
-                <p className="text-xs text-[#5A554A] leading-relaxed">
-                  Take a clear photograph of your skin concern on Medicus Labs to receive differential diagnostic observations.
-                </p>
-              </div>
+            <div className="space-y-4">
+              {PATIENT_FAQS.map((faq, index) => (
+                <div
+                  key={index}
+                  className="rounded-2xl border border-[#E5E2DA] bg-[#FAF9F5] overflow-hidden transition"
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-[#141515] hover:text-[#206E55] transition"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      size={18}
+                      className={`text-[#206E55] shrink-0 transition-transform duration-200 ${
+                        openFaqIndex === index ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
 
-              <div className="p-6 rounded-2xl bg-white border border-[#E5E2DA] space-y-3">
-                <div className="w-8 h-8 rounded-full bg-[#E8F2ED] text-[#206E55] font-extrabold flex items-center justify-center text-sm">
-                  2
+                  <AnimatePresence>
+                    {openFaqIndex === index && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="px-5 pb-5 pt-1 text-xs text-[#5A554A] leading-relaxed border-t border-slate-200/50">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <h4 className="font-bold text-sm text-[#141515]">Download Clinical PDF</h4>
-                <p className="text-xs text-[#5A554A] leading-relaxed">
-                  Export the high-resolution clinical intake report containing ICD-11 classifications, severity grades, and QR code.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-white border border-[#E5E2DA] space-y-3">
-                <div className="w-8 h-8 rounded-full bg-[#E8F2ED] text-[#206E55] font-extrabold flex items-center justify-center text-sm">
-                  3
-                </div>
-                <h4 className="font-bold text-sm text-[#141515]">Share with Physician</h4>
-                <p className="text-xs text-[#5A554A] leading-relaxed">
-                  Present your PDF during your appointment or attach it to your telehealth portal for instant doctor review.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
