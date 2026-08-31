@@ -242,6 +242,8 @@ const BlogIndex: React.FC = () => {
                 <img
                   src={filteredArticles[0].image}
                   alt={filteredArticles[0].title}
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -263,6 +265,8 @@ const BlogIndex: React.FC = () => {
                     <img
                       src={article.image}
                       alt={article.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
                     <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#206E55] text-xs font-bold uppercase tracking-wider shadow-sm">
@@ -318,6 +322,8 @@ const BlogIndex: React.FC = () => {
                     <img
                       src={article.image}
                       alt={article.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
                     <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#206E55] text-xs font-bold uppercase tracking-wider shadow-sm">

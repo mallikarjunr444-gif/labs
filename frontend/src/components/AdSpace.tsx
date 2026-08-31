@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 /**
  * AdSpace Component — Medicus Labs
@@ -50,7 +50,8 @@ const NATIVE_KEY = '29779f7044e37e17928797be20705afd';
 
 /**
  * IframeAd — renders a single Adsterra banner via atOptions + invoke.js
- * Each ad renders inside its own isolated <div> to avoid key reuse collisions.
+ * Uses IntersectionObserver lazy loading with a 300px prefetch threshold so ads
+ * load effortlessly without blocking initial page render or freezing mobile threads.
  */
 const IframeAd: React.FC<{ adKey: string; width: number; height: number }> = ({
   adKey,
@@ -58,10 +59,31 @@ const IframeAd: React.FC<{ adKey: string; width: number; height: number }> = ({
   height,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const injected = useRef(false);
 
   useEffect(() => {
-    if (injected.current || !containerRef.current) return;
+    if (!containerRef.current || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '350px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || injected.current || !containerRef.current) return;
     injected.current = true;
 
     const container = containerRef.current;
@@ -86,7 +108,7 @@ const IframeAd: React.FC<{ adKey: string; width: number; height: number }> = ({
     invokeScript.src = `https://poetrywishing.com/${adKey}/invoke.js`;
     invokeScript.async = true;
     container.appendChild(invokeScript);
-  }, [adKey, width, height]);
+  }, [isVisible, adKey, width, height]);
 
   return (
     <div
@@ -98,15 +120,35 @@ const IframeAd: React.FC<{ adKey: string; width: number; height: number }> = ({
 };
 
 /**
- * NativeAd — renders the Adsterra Native Banner unit.
- * Looks like an editorial content card — high CTR.
+ * NativeAd — renders the Adsterra Native Banner unit with IntersectionObserver lazy loading.
  */
 const NativeAd: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const injected = useRef(false);
 
   useEffect(() => {
-    if (injected.current || !containerRef.current) return;
+    if (!containerRef.current || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '350px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || injected.current || !containerRef.current) return;
     injected.current = true;
 
     const container = containerRef.current;
@@ -117,10 +159,10 @@ const NativeAd: React.FC = () => {
     invokeScript.async = true;
     invokeScript.setAttribute('data-cfasync', 'false');
     container.appendChild(invokeScript);
-  }, []);
+  }, [isVisible]);
 
   return (
-    <div aria-label="Advertisement" style={{ width: '100%' }}>
+    <div aria-label="Advertisement" style={{ width: '100%', minHeight: 90 }}>
       <div id={`container-${NATIVE_KEY}`} ref={containerRef} />
     </div>
   );
