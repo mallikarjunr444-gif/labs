@@ -799,10 +799,8 @@ const FindDermatologist: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Find a Skin Doctor (Dermatologist) in{' '}
-              <span className="text-[#206E55]">
-                {userLocation.source === 'unresolved' ? 'Your Area' : userLocation.city}
-              </span>
+              Find a Board-Certified{' '}
+              <span className="text-[#206E55]">Dermatologist Near You</span>
             </motion.h1>
 
             <motion.p
@@ -811,7 +809,10 @@ const FindDermatologist: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Discover certified dermatology specialists, skin cancer screening centers, and teledermatology clinics near your location with direct appointment booking.
+              Locating top-rated skin clinics, certified dermatologists, and same-day appointment slots near{' '}
+              <strong className="text-[#141515] font-bold">
+                {userLocation.source === 'unresolved' ? 'your area' : `${userLocation.city}${userLocation.country ? ', ' + userLocation.country : ''}`}
+              </strong>.
             </motion.p>
           </div>
 
