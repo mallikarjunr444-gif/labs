@@ -83,7 +83,7 @@ const IframeAd: React.FC<{ adKey: string; width: number; height: number }> = ({
     // Script 2: invoke.js loader
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
-    invokeScript.src = `https://www.highrevenueformat.com/${adKey}/invoke.js`;
+    invokeScript.src = `https://poetrywishing.com/${adKey}/invoke.js`;
     invokeScript.async = true;
     container.appendChild(invokeScript);
   }, [adKey, width, height]);
@@ -113,7 +113,7 @@ const NativeAd: React.FC = () => {
 
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
-    invokeScript.src = `https://pl31113088.profitableratecpmnetwork.com/${NATIVE_KEY}/invoke.js`;
+    invokeScript.src = `https://poetrywishing.com/${NATIVE_KEY}/invoke.js`;
     invokeScript.async = true;
     invokeScript.setAttribute('data-cfasync', 'false');
     container.appendChild(invokeScript);
