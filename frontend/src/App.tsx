@@ -55,8 +55,7 @@ const BlogHowAIDetects = lazy(() => import('./pages/BlogHowAIDetects'));
 const BlogAcneVsRosacea = lazy(() => import('./pages/BlogAcneVsRosacea'));
 const BlogWhenToVisitDoctor = lazy(() => import('./pages/BlogWhenToVisitDoctor'));
 
-/* Condition Reference Library, Research & Editorial Policy */
-const ConditionLibrary = lazy(() => import('./pages/ConditionLibrary'));
+/* Research & Editorial Policy */
 const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const EditorialPolicy = lazy(() => import('./pages/EditorialPolicy'));
 
@@ -120,8 +119,7 @@ const App = () => {
             <Route path="/blog/acne-vs-rosacea" element={<BlogAcneVsRosacea />} />
             <Route path="/blog/when-to-visit-dermatologist" element={<BlogWhenToVisitDoctor />} />
 
-            {/* Condition Reference, Research & Editorial Policy */}
-            <Route path="/condition-library" element={<ConditionLibrary />} />
+            {/* Research & Editorial Policy */}
             <Route path="/research" element={<ResearchPage />} />
             <Route path="/editorial-policy" element={<EditorialPolicy />} />
 

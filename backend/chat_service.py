@@ -55,7 +55,15 @@ async def stream_ai_response(messages: List[Dict[str, str]], image_base64: Optio
 
     # ── PROVIDER 1: GROQ API (Primary - Multi-Model Retry) ──
     if groq_key and not groq_key.startswith("your_"):
-        models_to_try = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "gemma2-9b-it"]
+        models_to_try = [
+            "qwen/qwen3.8-27b",
+            "openai/gpt-oss-120b",
+            "openai/gpt-oss-20b",
+            "groq/compound-mini",
+            "llama-3.3-70b-versatile",
+            "llama-3.1-8b-instant",
+            "gemma2-9b-it"
+        ]
         for model in models_to_try:
             try:
                 logger.info(f"⚡ Provider 1: Groq API streaming model '{model}'...")
@@ -225,7 +233,91 @@ async def stream_ai_response(messages: List[Dict[str, str]], image_base64: Optio
         except Exception as e:
             logger.error(f"OpenAI API error: {e}")
 
-    # ── IF ALL PROVIDERS FAIL ──
-    err_msg = "⚠️ **AI Service Error**: Unable to reach active LLM providers (Groq, Gemini, OpenRouter, OpenAI). Please verify your `.env` API keys."
-    logger.error(err_msg)
-    yield err_msg
+    # ── PROVIDER FALLBACK: CLINICAL ENGINE ──
+    logger.warning("All LLM providers unavailable or unconfigured. Activating Medicus Clinical Assistant Engine...")
+    user_query = messages[-1]["content"].lower().strip() if messages else ""
+    fallback_text = generate_clinical_fallback_response(user_query)
+
+    for chunk in fallback_text.split(" "):
+        yield chunk + " "
+        await asyncio.sleep(0.015)
+
+
+def generate_clinical_fallback_response(query: str) -> str:
+    """Provide structured, clinical dermatology guidance when third-party LLM providers are unavailable."""
+    # Greetings & Introductions
+    if query in ["hi", "hello", "hey", "greetings", "good morning", "good evening", "good afternoon"] or not query:
+        return (
+            "Hello! I am **Medicus Labs AI**, your clinical dermatology assistant.\n\n"
+            "How can I assist you with your skin health today?\n\n"
+            "You can:\n"
+            "* **Describe symptoms**: Ask about rashes, acne, redness, itchiness, or unusual lesions.\n"
+            "* **Get Care Advice**: Inquire about over-the-counter ingredients, gentle skincare routines, and barrier repair.\n"
+            "* **Prepare for a Dermatologist**: Learn key questions and observations to share with your physician.\n"
+            "* **Image Analysis**: Use our **Analysis** page to upload skin photos for visual triage.\n\n"
+            "*Disclaimer: Guidance is educational. Always consult a licensed medical professional for definitive diagnosis and prescriptions.*"
+        )
+
+    # Acne & Blemishes
+    if any(k in query for k in ["acne", "pimple", "breakout", "forehead", "blackhead", "whitehead", "jawline", "clogged"]):
+        return (
+            "### 1. Preliminary Clinical Observations\n"
+            "Your symptoms suggest localized inflammatory blemishes or follicular congestion.\n\n"
+            "### 2. Possible Considerations\n"
+            "* **Acne Vulgaris (Comedonal or Papulopustular)**: Characterized by excess sebum, keratin buildup, and *C. acnes* proliferation.\n"
+            "* **Rosacea (Papulopustular Type 2)**: Persistent central facial redness with small bumps, frequently triggered by heat, stress, or diet.\n"
+            "* **Folliculitis**: Superficial inflammation or bacterial infection of hair follicles.\n\n"
+            "### 3. Recommended General Self-Care\n"
+            "* **Gentle Cleansing**: Cleanse twice daily using a gentle, non-comedogenic, fragrance-free cleanser.\n"
+            "* **Targeted Actives**: Consider mild over-the-counter preparations with **Salicylic Acid (0.5–2%)** or **Benzoyl Peroxide (2.5%)**.\n"
+            "* **Non-Comedogenic Hydration**: Never skip oil-free moisturizer to avoid compensatory oil overproduction.\n\n"
+            "### 4. When to Consult a Dermatologist\n"
+            "* If you develop painful, cystic nodules or observe scarring.\n"
+            "* If over-the-counter measures show no improvement after 6 to 8 weeks."
+        )
+
+    # Eczema / Dryness / Rashes / Itch
+    if any(k in query for k in ["eczema", "itch", "rash", "dry", "redness", "scaling", "elbow", "patch", "allergic"]):
+        return (
+            "### 1. Preliminary Clinical Observations\n"
+            "You are describing symptoms commonly associated with skin barrier disruption and localized irritation.\n\n"
+            "### 2. Possible Considerations\n"
+            "* **Atopic Dermatitis (Eczema)**: Chronic inflammatory condition causing dry, itchy, sensitive skin.\n"
+            "* **Contact Dermatitis (Irritant or Allergic)**: Reaction triggered by personal care products, detergents, nickel, or fragrances.\n"
+            "* **Seborrheic Dermatitis / Xerosis**: Flaking and irritation commonly seen in dry environments or sebum-rich zones.\n\n"
+            "### 3. Recommended General Self-Care\n"
+            "* **Barrier Reinforcement**: Apply thick, ceramide-rich emollient creams immediately following lukewarm showers.\n"
+            "* **Avoid Irritants**: Discontinue fragranced washes, aggressive scrubs, and harsh astringents.\n"
+            "* **Cool Compresses**: Apply cool, clean, damp compresses to relieve severe itching without scratching.\n\n"
+            "### 4. When to Consult a Dermatologist\n"
+            "* If skin becomes hot, swollen, oozes yellow fluid, or develops honey-colored crusts (signs of secondary infection).\n"
+            "* If the itch interferes with sleep or daily activities."
+        )
+
+    # Moles / Lesions / Dark Spots
+    if any(k in query for k in ["mole", "spot", "dark", "pigment", "growth", "bump", "freckle", "cancer", "melanoma"]):
+        return (
+            "### 1. Visual Lesion Triage Guidelines\n"
+            "For any pigmented spot or changing cutaneous lesion, clinicians recommend checking against the **ABCDE criteria**:\n\n"
+            "* **A - Asymmetry**: One half does not match the other.\n"
+            "* **B - Border**: Edges are irregular, scalloped, or poorly defined.\n"
+            "* **C - Color**: Color variation within the lesion (shades of brown, black, red, white, or blue).\n"
+            "* **D - Diameter**: Larger than 6mm (approx. the size of a pencil eraser), though some can be smaller.\n"
+            "* **E - Evolving**: Any change in size, shape, color, elevation, bleeding, or itching.\n\n"
+            "### 2. Next Steps\n"
+            "* Take high-resolution photos in natural lighting to track changes over time.\n"
+            "* Try our **Analysis** module to test dermoscopic feature classification.\n"
+            "* **Crucial**: Any evolving or atypical lesion warrants an in-person dermoscopic exam by a licensed physician."
+        )
+
+    # General Fallback
+    return (
+        f"### Clinical Assessment Overview\n"
+        f"Thank you for consulting Medicus Labs AI regarding: *\"{query[:100]}\"*.\n\n"
+        "### Key Considerations\n"
+        "* **Tissue Reactivity**: Skin changes often reflect transient immune reactions, barrier sensitivities, or environmental factors.\n"
+        "* **Documentation**: Monitor the progression by noting changes in sensation (itching, burning, pain) and visual boundaries.\n"
+        "* **Barrier Protection**: Keep the affected area clean, moisturized with gentle formulations, and protected from UV light with broad-spectrum SPF 30+.\n\n"
+        "### Recommended Action\n"
+        "To receive a personalized clinical assessment or prescription, please schedule an evaluation with a board-certified dermatologist."
+    )

@@ -51,7 +51,6 @@ const footerColumns = [
       { name: 'Atopic Dermatitis & Eczema', href: '/blog/eczema' },
       { name: 'Plaque Psoriasis Guide', href: '/blog/psoriasis' },
       { name: 'Rosacea Subtypes', href: '/blog/rosacea' },
-      { name: 'Condition Reference Hub', href: '/condition-library' },
     ],
   },
   {
