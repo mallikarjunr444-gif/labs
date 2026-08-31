@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { getApiBaseUrl } from '../lib/apiBase';
 import { PremiumFooter } from '../sections';
-import AdSpace from '../components/AdSpace';
+import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 
 const contactOptions = [
   {
@@ -133,6 +133,11 @@ const Contact: React.FC = () => {
           </motion.p>
         </div>
 
+        {/* ── TOP LEADERBOARD BANNER ── */}
+        <div className="my-8 text-center">
+          <AdSpace variant="leaderboard" />
+        </div>
+
         {/* Content Grid */}
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           
@@ -171,6 +176,11 @@ const Contact: React.FC = () => {
               <p>
                 <strong>Emergency Note:</strong> If you are experiencing a medical emergency or severe acute symptoms, please contact local emergency services immediately.
               </p>
+            </div>
+
+            {/* 300x250 Left Sidebar Ad */}
+            <div className="pt-2 flex justify-center">
+              <AdSpace variant="rectangle" />
             </div>
           </div>
 
@@ -257,12 +267,25 @@ const Contact: React.FC = () => {
               </button>
               {error && <p className="text-red-500 text-xs text-center pt-1">{error}</p>}
             </form>
+
+            {/* 468x60 Banner Inside Form Card */}
+            <div className="mt-6 pt-4 border-t border-slate-100 flex justify-center">
+              <AdSpace variant="banner" />
+            </div>
           </motion.div>
 
         </div>
 
-        {/* Ad Space */}
-        <div className="mt-16 text-center">
+        {/* ── NATIVE EDITORIAL AD ── */}
+        <div className="mt-14">
+          <AdSpace variant="native" />
+        </div>
+
+        {/* ── SPONSORED LINKS ── */}
+        <SponsoredLinks className="mt-8" />
+
+        {/* Bottom Leaderboard Ad Space */}
+        <div className="mt-12 text-center">
           <AdSpace variant="leaderboard" />
         </div>
 
