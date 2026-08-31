@@ -92,37 +92,62 @@ function getLocalizedBookingDetails(city: string, country: string, region: strin
   const c = country.toLowerCase();
   const searchAddress = region ? `${city}, ${region}` : city;
   const encCity = encodeURIComponent(searchAddress);
+  const cleanCitySlug = city.toLowerCase().replace(/[^a-z0-9]/g, '-');
 
-  if (c.includes('united states') || c.includes('usa') || c.includes('us') || c.includes('america')) {
+  if (c.includes('india')) {
+    // Practo.com - #1 Doctor Booking Platform in India across all cities
+    return {
+      bookingUrl: `https://www.practo.com/search/doctors?results_type=doctor&q=%5B%7B%22word%22%3A%22Dermatologist%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=${encodeURIComponent(city)}`,
+      platformName: 'Practo.com (India)'
+    };
+  } else if (c.includes('united states') || c.includes('usa') || c.includes('us') || c.includes('america')) {
     // Zocdoc dynamic search across all 50 US States with specialty ID 153 (Dermatologist)
     return {
       bookingUrl: `https://www.zocdoc.com/search?address=${encCity}&dr_specialty=153`,
       platformName: 'Zocdoc (All 50 US States)'
     };
-  } else if (c.includes('india')) {
-    return {
-      bookingUrl: `https://www.practo.com/search/doctors?results_type=doctor&q=%5B%7B%22word%22%3A%22Dermatologist%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=${encodeURIComponent(city)}`,
-      platformName: 'Practo Dermatology'
-    };
-  } else if (c.includes('united kingdom') || c.includes('uk') || c.includes('britain')) {
+  } else if (c.includes('united kingdom') || c.includes('uk') || c.includes('britain') || c.includes('england') || c.includes('scotland')) {
+    // Doctify UK & Harley Street Medical Network
     return {
       bookingUrl: `https://www.doctify.com/en-gb/specialist/dermatologists?location=${encodeURIComponent(city)}`,
-      platformName: 'Doctify UK'
+      platformName: 'Doctify (United Kingdom)'
     };
   } else if (c.includes('canada')) {
+    // Lumino Health (Sun Life) & Provincial Care
     return {
       bookingUrl: `https://www.luminohealth.sunlife.ca/s/find-health-care-provider?type=Dermatologist&location=${encodeURIComponent(city)}`,
-      platformName: 'Lumino Health'
+      platformName: 'Lumino Health (Canada)'
     };
   } else if (c.includes('australia')) {
+    // HotDoc Australia & HealthEngine
     return {
       bookingUrl: `https://www.hotdoc.com.au/search?search_type=specialty&specialty=dermatologist&where=${encodeURIComponent(city)}`,
-      platformName: 'HotDoc Australia'
+      platformName: 'HotDoc (Australia)'
+    };
+  } else if (c.includes('united arab emirates') || c.includes('uae') || c.includes('dubai') || c.includes('abu dhabi')) {
+    // Okadoc UAE
+    return {
+      bookingUrl: `https://www.okadoc.com/en-ae/dermatologist/${cleanCitySlug}`,
+      platformName: 'Okadoc (UAE)'
+    };
+  } else if (c.includes('germany') || c.includes('france') || c.includes('italy') || c.includes('spain') || c.includes('europe')) {
+    // Doctolib Europe
+    return {
+      bookingUrl: `https://www.doctolib.de/hautarzt-dermatologe/${cleanCitySlug}`,
+      platformName: 'Doctolib (Europe)'
+    };
+  } else if (c.includes('singapore')) {
+    // Doctor Anywhere Singapore
+    return {
+      bookingUrl: `https://doctoranywhere.com/`,
+      platformName: 'Doctor Anywhere (Singapore)'
     };
   }
+
+  // Worldwide 24/7 Virtual Dermatology
   return {
     bookingUrl: `https://www.teladoc.com/ways-we-help/dermatology/`,
-    platformName: 'Teladoc Health'
+    platformName: 'Teladoc Global Care'
   };
 }
 
