@@ -37,6 +37,11 @@ const BlogFolliculitis: React.FC = () => (
           </div>
         </div>
 
+        {/* Top In-Article Leaderboard (High Viewability Above-the-Fold) */}
+        <div className="mb-8 text-center">
+          <AdSpace variant="leaderboard" />
+        </div>
+
         <div className="prose prose-slate max-w-none text-[#5A554A] space-y-8 leading-relaxed">
           <div className="bg-[#E8F2ED]/60 border border-[#206E55]/20 rounded-3xl p-6 sm:p-8">
             <h3 className="text-lg font-bold text-[#206E55] mb-3 flex items-center gap-2"><Stethoscope size={20} /> Executive Clinical Summary</h3>
