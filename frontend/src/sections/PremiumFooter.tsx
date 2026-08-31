@@ -294,7 +294,19 @@ export const PremiumFooter: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* ── PUBLISHER POLICY & TRANSPARENCY LINKS BAR (ADSENSE COMPLIANCE) ── */}
+        {/* ── SPONSORED PARTNER LINKS (Adsterra Smartlinks) ── */}
+        <div className="py-5 border-t border-[#E5E2DA] flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-[#8A857A]">
+          <span className="font-bold uppercase tracking-wider text-[11px] text-[#5A554A]">Sponsored Partners:</span>
+          <a href="https://poetrywishing.com/h9y6sarf?key=9a9ef9f13d47097f39f48783a2c7cd69" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Health &amp; Wellness Deals</a>
+          <span>•</span>
+          <a href="https://poetrywishing.com/myccy3c6?key=812b322764c0068e16258bf45e21d4e5" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Skincare Offers</a>
+          <span>•</span>
+          <a href="https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Clinical Resources</a>
+          <span>•</span>
+          <a href="https://poetrywishing.com/kqbjqhw770?key=744f7eb9899663a66a114fdbde11867f" target="_blank" rel="noopener noreferrer sponsored" className="hover:text-[#206E55] transition font-semibold">Dermatology Tools</a>
+        </div>
+
+        {/* ── PUBLISHER POLICY &amp; TRANSPARENCY LINKS BAR (ADSENSE COMPLIANCE) ── */}
         <div className="pt-8 pb-4 border-t border-[#E5E2DA] flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-[#5A554A]">
           <span className="text-[#141515] font-bold uppercase tracking-wider text-[11px]">Publisher Policies &amp; Governance:</span>
           <Link to="/about" className="hover:text-[#206E55] transition">About Us</Link>
