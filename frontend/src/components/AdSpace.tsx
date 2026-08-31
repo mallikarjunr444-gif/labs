@@ -63,19 +63,9 @@ export const AdSpace: React.FC<AdSpaceProps> = ({
     <div
       ref={adRef}
       aria-label="Advertisement space"
-      className={`relative overflow-hidden rounded-2xl border border-[#E5E2DA]/60 bg-[#FAF9F5]/40 p-2 sm:p-3 text-center transition-all ${variantStyles[variant]} ${className}`}
+      className={`overflow-hidden text-center my-4 ${className}`}
     >
-      {label && (
-        <div className="mb-1.5 flex items-center justify-center gap-2">
-          <span className="h-[1px] w-6 bg-[#E5E2DA]" />
-          <span className="text-[9px] font-bold uppercase tracking-widest text-[#8A857A]">
-            {label}
-          </span>
-          <span className="h-[1px] w-6 bg-[#E5E2DA]" />
-        </div>
-      )}
-
-      {/* Google AdSense Unit Container */}
+      {/* Google AdSense Unit Container - Expands dynamically only when ads are served */}
       <ins
         className="adsbygoogle block w-full text-center"
         style={{ display: 'block' }}

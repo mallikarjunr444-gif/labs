@@ -95,6 +95,37 @@ const sections = [
     ),
   },
   {
+    icon: Globe,
+    title: 'Google AdSense, Advertising & Cookie Policy',
+    color: 'text-[#206E55]',
+    lightBg: 'bg-[#E8F2ED]',
+    content: (
+      <div className="text-[#5A554A] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
+        <p>
+          Medicus Labs™ partners with third-party advertising networks, including <strong>Google AdSense</strong> (Publisher ID: ca-pub-8305972358699914), to serve relevant advertisements when you visit our website.
+        </p>
+        <ul className="space-y-2">
+          <li className="flex gap-3">
+            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <span><strong>Use of Cookies:</strong> Third-party vendors, including Google, use cookies (such as the DoubleClick DART cookie) to serve ads based on a user's prior visits to this website or other websites on the Internet.</span>
+          </li>
+          <li className="flex gap-3">
+            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <span><strong>Personalized Advertising:</strong> Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visits to our site and other sites across the web.</span>
+          </li>
+          <li className="flex gap-3">
+            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <span><strong>User Opt-Out Rights:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-[#206E55] underline">Google Ads Settings</a>. Alternatively, you can opt out of third-party vendor use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-[#206E55] underline">aboutads.info</a>.</span>
+          </li>
+          <li className="flex gap-3">
+            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <span><strong>Health Data Safeguards:</strong> Under no circumstances are uploaded clinical skin images, patient intake details, or diagnostic outputs shared with advertising vendors or utilized for targeted ad profiling.</span>
+          </li>
+        </ul>
+      </div>
+    ),
+  },
+  {
     icon: ShieldCheck,
     title: 'Patient Data Rights (GDPR & CCPA)',
     color: 'text-[#206E55]',
