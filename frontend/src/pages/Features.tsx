@@ -337,11 +337,6 @@ const Features: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* ── NATIVE AD BANNER ── */}
-        <div className="my-14 text-center">
-          <AdSpace variant="native" />
-        </div>
-
         {/* ── MINI FAQ ── */}
         <div className="mb-20">
           <div className="text-center mb-10">

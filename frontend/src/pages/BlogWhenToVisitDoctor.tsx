@@ -13,7 +13,8 @@ const BlogWhenToVisitDoctor: React.FC = () => (
       description="Patient clinical triage guide: Red-flag skin signs requiring immediate dermatologist evaluation, evolving moles (ABCDE), rapidly spreading rashes, non-healing ulcers, and preparation for your appointment."
     />
     <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
+        <article className="max-w-4xl w-full pb-20">
         <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: 'When to Visit a Dermatologist' }]} />
 
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
@@ -80,6 +81,12 @@ const BlogWhenToVisitDoctor: React.FC = () => (
           <Link to="/analysis"><button className="px-8 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">Start Free Scan <ArrowRight size={16} /></button></Link>
         </div>
       </article>
+
+        {/* Desktop Sticky Skyscraper (160x600) */}
+        <aside className="hidden 2xl:block w-[160px] shrink-0 sticky top-36 h-fit pt-8">
+          <AdSpace variant="skyscraper" />
+        </aside>
+      </div>
       <PremiumFooter />
     </div>
   </>
