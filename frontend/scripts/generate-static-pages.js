@@ -23,6 +23,51 @@ const baseHtml = fs.readFileSync(baseHtmlPath, 'utf8');
 
 const pages = [
   {
+    path: '/find-dermatologist',
+    title: 'Find a Board-Certified Dermatologist Near You | Top Skin Doctors & Online Consultations | Medicus Labs',
+    description: 'Locate verified board-certified dermatologists, skin disease clinics, and online telehealth appointments near your location worldwide. In-network health insurance, consultation fees, and same-day booking.',
+    keywords: 'find dermatologist near me, skin doctor appointment, best dermatologist near me, online dermatologist consultation, board certified dermatologist, skin disease clinic, Practo dermatologist, Zocdoc dermatologist, acne doctor, eczema specialist',
+    category: 'Global Clinical Directory • Board-Certified Dermatologists',
+    heading: 'Find a Board-Certified Dermatologist & Skin Specialist Near You',
+    readTime: 'Instant Search & Booking',
+    content: `
+      <h2>1. Verified Global Dermatology Directory & Appointment Booking</h2>
+      <p>Medicus Labs provides an intelligent, location-first clinical directory connecting patients with verified, board-certified dermatologists (FAAD, MD Dermatology, GMC, FRCPC, FACD) across over 30 countries and 50+ major metropolitan healthcare centers worldwide.</p>
+      <p>Whether you require an urgent evaluation for suspected melanoma, chronic management for severe plaque psoriasis, specialized biologic prescriptions, or pediatric eczema care, our platform streamlines appointment scheduling with in-network insurance verification.</p>
+
+      <h2>2. Integrated Official Healthcare Booking Networks</h2>
+      <p>Patients are connected directly to certified local booking platforms based on their location:</p>
+      <ul>
+        <li><strong>United States (All 50 States):</strong> Direct integration with <strong>Zocdoc</strong> for in-person clinic visits and video telehealth appointments with full commercial insurance check (Aetna, Blue Cross, Cigna, UnitedHealthcare, Medicare).</li>
+        <li><strong>India & South Asia:</strong> Direct booking on <strong>Practo.com</strong> and Apollo 24/7 with verified MD dermatologists, instant digital prescriptions, and UPI payment support.</li>
+        <li><strong>United Kingdom & Europe:</strong> GMC-certified private consultants and NHS referrals via <strong>Doctify UK</strong> and <strong>Doctolib Europe</strong> (France, Germany, Italy, Spain).</li>
+        <li><strong>Canada & Australia:</strong> Direct specialist access via <strong>Lumino Health</strong> (Sun Life) and <strong>HotDoc Australia</strong> with Medicare rebate eligibility.</li>
+        <li><strong>Middle East & Gulf:</strong> Licensed consultants in Dubai Healthcare City and DHA via <strong>Okadoc UAE</strong> and <strong>Vezeeta</strong>.</li>
+        <li><strong>Worldwide 24/7 Telehealth:</strong> Virtual consultations and electronic prescription delivery across 150+ countries via <strong>Teladoc Global Health</strong>.</li>
+      </ul>
+
+      <h2>3. Specialized Care by Cutaneous Disease Category</h2>
+      <p>Consult with dermatologists possessing subspecialty expertise across all primary dermatological conditions:</p>
+      <ul>
+        <li><strong>Acne Vulgaris & Rosacea:</strong> Cystic nodular acne, hormonal adult breakouts, rhinophyma, topical retinoid protocols, oral isotretinoin therapy.</li>
+        <li><strong>Atopic Dermatitis & Eczema:</strong> Chronic pruritus, barrier dysfunction, topical calcineurin inhibitors, systemic JAK inhibitors and biologics (Dupilumab).</li>
+        <li><strong>Psoriasis & Scalp Plaques:</strong> PASI score tracking, phototherapy (narrowband UVB), systemic IL-17 and IL-23 targeted biologics.</li>
+        <li><strong>Pigmented Lesions & Melanoma Screening:</strong> Full-body dermoscopy, ABCDE clinical rule verification, dysplastic nevus biopsies, and early excision.</li>
+        <li><strong>Skin Cancers (BCC & SCC):</strong> Basal cell carcinoma, squamous cell carcinoma, actinic keratosis cryosurgery, Mohs micrographic surgery referrals.</li>
+        <li><strong>Alopecia & Scalp Disorders:</strong> Alopecia areata, androgenetic pattern hair loss, trichoscopy, and minoxidil/finasteride clinical protocols.</li>
+      </ul>
+
+      <h2>4. Bringing Your Medicus Labs AI Diagnostic Summary to Your Doctor</h2>
+      <p>Patients who complete a non-invasive pre-screening on Medicus Labs can generate and download a clinical PDF intake report. This verifiable medical report contains lesion morphology, differential diagnostic probabilities, and symptom chronicity, providing your dermatologist with high-value clinical intake data to expedite your consultation.</p>
+
+      <h2>5. Frequently Asked Questions (Patient Clinical FAQ)</h2>
+      <h3>When should I consult a dermatologist vs a general physician?</h3>
+      <p>You should consult a dermatologist for changing or irregularly shaped moles, chronic unresolved rashes, persistent cystic acne, severe scalp hair thinning, or any non-healing sore that bleeds or crusts for over three weeks.</p>
+      <h3>Can an online dermatologist prescribe medication?</h3>
+      <p>Yes. Board-certified dermatologists licensed in your state or country can prescribe topical retinoids, oral antibiotics, antifungals, corticosteroids, and chronic maintenance therapies directly to your local pharmacy.</p>
+    `
+  },
+  {
     path: '/blog/acne',
     title: 'Acne Vulgaris: Pathophysiology, Grading & Clinical Management | Medicus Labs',
     description: 'Comprehensive dermatological guide on Acne Vulgaris: pilosebaceous pathology, C. acnes etiology, Grade I–IV severity classification, topical retinoids, systemic treatments, and AI pre-screening.',
