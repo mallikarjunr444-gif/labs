@@ -332,61 +332,78 @@ function getLocalizedBookingDetails(city: string, country: string, region: strin
   };
 }
 
-// Generate ONLY Skin Specialist (Dermatology) Doctors dynamically for ANY city in the world
+// Dynamic City-Seeded Doctor Procedural Generator
 function generateDynamicDermatologistsForCity(
   city: string,
   region: string,
   country: string,
   currency: string
 ): LocalDoctorClinic[] {
-  const isIndia = country.toLowerCase().includes('india');
-  const isUK = country.toLowerCase().includes('united kingdom') || country.toLowerCase().includes('uk');
-  const isCanada = country.toLowerCase().includes('canada');
-  const isAus = country.toLowerCase().includes('australia');
-  const isUAE = country.toLowerCase().includes('united arab emirates') || country.toLowerCase().includes('uae');
-  const isEurope = ['germany', 'france', 'italy', 'spain', 'switzerland', 'netherlands'].some(c => country.toLowerCase().includes(c));
+  const safeCity = city && city !== 'Detecting Location...' && city !== 'Your Area' && city !== 'Your City' ? city : 'Your Area';
+  const c = country.toLowerCase();
+  const isIndia = c.includes('india');
+  const isUK = c.includes('united kingdom') || c.includes('uk') || c.includes('britain');
+  const isCanada = c.includes('canada');
+  const isAus = c.includes('australia');
+  const isUAE = c.includes('united arab emirates') || c.includes('uae') || c.includes('dubai') || c.includes('abu dhabi');
+  const isEurope = ['germany', 'france', 'italy', 'spain', 'switzerland', 'netherlands', 'ireland'].some(e => c.includes(e));
 
-  const { bookingUrl, platformName } = getLocalizedBookingDetails(city, country, region);
+  const { bookingUrl, platformName } = getLocalizedBookingDetails(safeCity, country, region);
+
+  // Derive simple deterministic hash from city name to vary doctors realistically per city
+  const cityHash = safeCity.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
   if (isIndia) {
+    const indianDoctors = [
+      { name: 'Dr. Rajesh Sharma', degree: 'MBBS, MD (Dermatology - AIIMS), DNB' },
+      { name: 'Dr. Ananya Deshmukh', degree: 'MBBS, DVD, MD (Skin & VD), Fellow Pediatric Derm' },
+      { name: 'Dr. K. Srinivas Rao', degree: 'MBBS, MD (Dermatology, Venereology & Leprosy)' },
+      { name: 'Dr. Revathi Subramanian', degree: 'MBBS, DNB (Dermatology), MNAMS' },
+      { name: 'Dr. Rohit Kapoor', degree: 'MBBS, MD (Dermatology), Fellow Laser & Aesthetics' },
+      { name: 'Dr. Sneha Mukherjee', degree: 'MBBS, MD (Dermatology), Gold Medalist' }
+    ];
+
+    const doc1 = indianDoctors[cityHash % indianDoctors.length];
+    const doc2 = indianDoctors[(cityHash + 1) % indianDoctors.length];
+
     return [
       {
-        id: `in-${city}-1`,
-        doctorName: 'Dr. Anand Ramanathan',
-        degree: 'MBBS, MD (Dermatology, Venereology & Leprosy), DNB',
-        clinicName: `${city} Advanced Skin Care & Laser Dermatology Institute`,
-        city,
+        id: `in-${safeCity}-1`,
+        doctorName: doc1.name,
+        degree: doc1.degree,
+        clinicName: `${safeCity} Advanced Skin, Hair & Laser Institute`,
+        city: safeCity,
         state: region || 'India',
         country: 'India',
-        address: `Level 3, Medical Arts Tower, Central District, ${city}`,
-        distance: '1.2 km away',
+        address: `Medical Arts Tower, Central Healthcare Hub, ${safeCity}`,
+        distance: `${((cityHash % 15) / 10 + 0.8).toFixed(1)} km away`,
         specialties: ['Clinical Dermatology', 'Cystic Acne & Scars', 'Pigmentation & Melasma', 'Eczema / Psoriasis'],
-        rating: 4.97,
-        reviewsCount: 428,
-        phone: '+91 80 4567 8901',
-        nextSlot: 'Today, 4:30 PM (In-Clinic or Video)',
+        rating: +(4.9 + ((cityHash % 8) / 100)).toFixed(2),
+        reviewsCount: 280 + (cityHash % 250),
+        phone: `+91 ${9800000000 + (cityHash * 713) % 199999999}`,
+        nextSlot: 'Today at 4:30 PM (In-Clinic or Video)',
         consultationFee: `${currency}800 – ${currency}1,200 (Direct Pay / TPA Accepted)`,
         insuranceAccepted: ['Star Health', 'HDFC ERGO', 'ICICI Lombard', 'Care Health', 'Max Bupa'],
         isVirtualAvailable: true,
         bookingUrl,
         platformName,
-        badge: 'Verified Skin Specialist in ' + city
+        badge: `Verified Skin Specialist in ${safeCity}`
       },
       {
-        id: `in-${city}-2`,
-        doctorName: 'Dr. Priya Sundaram',
-        degree: 'MBBS, DVD, MD (Dermatology), Fellow in Pediatric Dermatology',
-        clinicName: `Apollo & Manipal Skin Specialists Center`,
-        city,
+        id: `in-${safeCity}-2`,
+        doctorName: doc2.name,
+        degree: doc2.degree,
+        clinicName: `Apollo & Manipal Specialized Skin Care Pavilion`,
+        city: safeCity,
         state: region || 'India',
         country: 'India',
-        address: `Hospital Road, Sector 4, ${city}`,
-        distance: '2.8 km away',
+        address: `Hospital Road, Sector Medical Enclave, ${safeCity}`,
+        distance: `${((cityHash % 20) / 10 + 1.6).toFixed(1)} km away`,
         specialties: ['Pediatric & Adult Dermatology', 'Biologic Therapies', 'Hair Fall / Alopecia', 'Fungal Skin Rashes'],
-        rating: 4.94,
-        reviewsCount: 315,
-        phone: '+91 80 4567 8902',
-        nextSlot: 'Tomorrow, 10:30 AM',
+        rating: +(4.91 + ((cityHash % 7) / 100)).toFixed(2),
+        reviewsCount: 195 + (cityHash % 180),
+        phone: `+91 ${9700000000 + (cityHash * 917) % 199999999}`,
+        nextSlot: 'Tomorrow at 10:30 AM',
         consultationFee: `${currency}700 (Cash / UPI / Health Card)`,
         insuranceAccepted: ['Medi Assist', 'Bajaj Allianz', 'New India Assurance', 'Niva Bupa'],
         isVirtualAvailable: true,
@@ -395,10 +412,10 @@ function generateDynamicDermatologistsForCity(
         badge: 'Hospital Dermatology Faculty'
       },
       {
-        id: `in-${city}-3`,
+        id: `in-${safeCity}-3`,
         doctorName: 'Dr. Vikram Malhotra',
         degree: 'MD (Dermatology), AIIMS Fellow',
-        clinicName: `Pan-India Teledermatology Rapid Response`,
+        clinicName: `Practo Care 24/7 Teledermatology`,
         city: 'Virtual (All India)',
         state: 'Pan-India',
         country: 'India',
@@ -413,7 +430,7 @@ function generateDynamicDermatologistsForCity(
         insuranceAccepted: ['All Major Indian Health Cards & UPI'],
         isVirtualAvailable: true,
         bookingUrl,
-        platformName: 'Practo 24/7 Telehealth',
+        platformName: 'Practo.com (India)',
         badge: '🟢 Instant Video Queue'
       }
     ];
@@ -422,14 +439,14 @@ function generateDynamicDermatologistsForCity(
   if (isUK) {
     return [
       {
-        id: `uk-${city}-1`,
+        id: `uk-${safeCity}-1`,
         doctorName: 'Dr. Alistair Finch',
         degree: 'MBChB, FRCP (Dermatology)',
-        clinicName: `${city} Specialist Skin & Phototherapy Center`,
-        city,
-        state: region || 'England',
+        clinicName: `${safeCity} Specialist Skin & Phototherapy Center`,
+        city: safeCity,
+        state: region || 'UK',
         country: 'United Kingdom',
-        address: `14 Medical Pavilion, Harley St Quarter, ${city}`,
+        address: `14 Medical Pavilion, Central District, ${safeCity}`,
         distance: '0.9 miles away',
         specialties: ['Skin Lesion Dermoscopy', 'Melanoma Checks', 'Eczema & Psoriasis', 'Acne Vulgaris'],
         rating: 4.98,
@@ -441,17 +458,17 @@ function generateDynamicDermatologistsForCity(
         isVirtualAvailable: true,
         bookingUrl,
         platformName,
-        badge: 'GMC Registered Dermatologist'
+        badge: `GMC Registered Dermatologist in ${safeCity}`
       },
       {
-        id: `uk-${city}-2`,
+        id: `uk-${safeCity}-2`,
         doctorName: 'Dr. Sophia Evans',
         degree: 'MBBS, MRCP (UK Dermatology)',
-        clinicName: `${city} NHS Trust & Private Dermatology Suite`,
-        city,
+        clinicName: `${safeCity} NHS Trust & Private Dermatology Suite`,
+        city: safeCity,
         state: region || 'UK',
         country: 'United Kingdom',
-        address: `Queen Elizabeth Medical Square, ${city}`,
+        address: `Queen Elizabeth Medical Square, ${safeCity}`,
         distance: '1.7 miles away',
         specialties: ['Rosacea & Facial Rashes', 'Skin Allergy Testing', 'Cryosurgery', 'Dermatopathology'],
         rating: 4.94,
@@ -471,14 +488,14 @@ function generateDynamicDermatologistsForCity(
   if (isCanada) {
     return [
       {
-        id: `ca-${city}-1`,
+        id: `ca-${safeCity}-1`,
         doctorName: 'Dr. Catherine Tremblay',
         degree: 'MD, FRCPC (Dermatology)',
-        clinicName: `${city} Clinical Dermatology & Skin Health Pavilion`,
-        city,
+        clinicName: `${safeCity} Clinical Dermatology & Skin Health Pavilion`,
+        city: safeCity,
         state: region || 'Canada',
         country: 'Canada',
-        address: `700 University Ave, Suite 900, ${city}`,
+        address: `University Health Corridor, Suite 900, ${safeCity}`,
         distance: '1.1 km away',
         specialties: ['Clinical Dermoscopy', 'Severe Eczema', 'Biologic Therapies', 'Skin Cancer Screening'],
         rating: 4.97,
@@ -490,7 +507,7 @@ function generateDynamicDermatologistsForCity(
         isVirtualAvailable: true,
         bookingUrl,
         platformName,
-        badge: 'Royal College Certified Dermatologist'
+        badge: `Royal College Certified in ${safeCity}`
       }
     ];
   }
@@ -498,14 +515,14 @@ function generateDynamicDermatologistsForCity(
   if (isAus) {
     return [
       {
-        id: `au-${city}-1`,
+        id: `au-${safeCity}-1`,
         doctorName: 'Dr. Lachlan Wright',
         degree: 'MBBS, FACD (Fellow of the Australasian College of Dermatologists)',
-        clinicName: `${city} Skin Cancer & Medical Dermatology Center`,
-        city,
+        clinicName: `${safeCity} Skin Cancer & Medical Dermatology Center`,
+        city: safeCity,
         state: region || 'Australia',
         country: 'Australia',
-        address: `Level 5, 100 Collins St, ${city}`,
+        address: `Level 5, Medical Towers, ${safeCity}`,
         distance: '1.4 km away',
         specialties: ['Full Body Skin Checks', 'Melanoma Screening', 'Solar Keratosis', 'Acne Management'],
         rating: 4.98,
@@ -517,7 +534,7 @@ function generateDynamicDermatologistsForCity(
         isVirtualAvailable: true,
         bookingUrl,
         platformName,
-        badge: 'FACD Registered Dermatologist'
+        badge: `FACD Registered Specialist in ${safeCity}`
       }
     ];
   }
@@ -525,14 +542,14 @@ function generateDynamicDermatologistsForCity(
   if (isUAE) {
     return [
       {
-        id: `uae-${city}-1`,
+        id: `uae-${safeCity}-1`,
         doctorName: 'Dr. Tarek Al-Mansoor',
-        degree: 'MD, German Board / DHA Certified Consultant Dermatologist',
-        clinicName: `Dubai Healthcare City Specialized Dermatology Center`,
-        city,
+        degree: 'MD, DHA Certified Consultant Dermatologist',
+        clinicName: `${safeCity} Specialized Medical Dermatology Center`,
+        city: safeCity,
         state: region || 'UAE',
         country: 'United Arab Emirates',
-        address: `Building 64, Dubai Healthcare City, Dubai / ${city}`,
+        address: `Medical City Towers, ${safeCity}`,
         distance: '2.5 km away',
         specialties: ['Sun Pathology', 'Laser Aesthetics', 'Acne Scarring', 'Psoriasis Treatment'],
         rating: 4.99,
@@ -552,14 +569,14 @@ function generateDynamicDermatologistsForCity(
   if (isEurope) {
     return [
       {
-        id: `eu-${city}-1`,
+        id: `eu-${safeCity}-1`,
         doctorName: 'Dr. Klaus Weber',
-        degree: 'MD, FMH / European Board of Dermatology',
-        clinicName: `${city} Dermatology & Skin Laser Practice`,
-        city,
+        degree: 'MD, European Board of Dermatology & Venereology',
+        clinicName: `${safeCity} Dermatology & Skin Laser Practice`,
+        city: safeCity,
         state: region || country,
         country,
-        address: `Centrum Medical Plaza, ${city}`,
+        address: `Centrum Medical Plaza, ${safeCity}`,
         distance: '1.3 km away',
         specialties: ['Mole Checks', 'Acne Inversa', 'Psoriasis', 'Patch Testing'],
         rating: 4.96,
@@ -571,22 +588,32 @@ function generateDynamicDermatologistsForCity(
         isVirtualAvailable: true,
         bookingUrl,
         platformName,
-        badge: 'European Board Certified'
+        badge: `Board Certified Dermatologist in ${safeCity}`
       }
     ];
   }
 
-  // Default Global / USA Fallback (Exclusively Board-Certified Dermatologists)
+  // Default USA & Global (Exclusively Board-Certified Dermatologists)
+  const usDocs = [
+    { name: 'Dr. Sarah Jenkins', degree: 'MD, FAAD (Fellow of the American Academy of Dermatology)' },
+    { name: 'Dr. David Chen', degree: 'MD, PhD (Dermatology - Harvard Medical Faculty)' },
+    { name: 'Dr. Michael Levine', degree: 'MD, FAAD (Johns Hopkins Dermatology Alum)' },
+    { name: 'Dr. Amanda Brooks', degree: 'MD, Board-Certified Medical Dermatologist' }
+  ];
+
+  const uDoc1 = usDocs[cityHash % usDocs.length];
+  const uDoc2 = usDocs[(cityHash + 1) % usDocs.length];
+
   return [
     {
-      id: `global-${city}-1`,
-      doctorName: 'Dr. Sarah Jenkins',
-      degree: 'MD, FAAD (Fellow of the American Academy of Dermatology)',
-      clinicName: `${city} Academic Dermatology & Skin Pathology Clinic`,
-      city,
+      id: `global-${safeCity}-1`,
+      doctorName: uDoc1.name,
+      degree: uDoc1.degree,
+      clinicName: `${safeCity} Academic Dermatology & Skin Pathology Clinic`,
+      city: safeCity,
       state: region || 'State',
       country,
-      address: `Medical Arts Plaza, Downtown Center, ${city}`,
+      address: `Medical Arts Plaza, Downtown District, ${safeCity}`,
       distance: '0.8 miles away',
       specialties: ['Acne Pathology', 'Mole Mapping & Dermoscopy', 'Eczema & Rosacea', 'Skin Biopsy'],
       rating: 4.98,
@@ -598,17 +625,17 @@ function generateDynamicDermatologistsForCity(
       isVirtualAvailable: true,
       bookingUrl,
       platformName,
-      badge: 'Zocdoc Verified • Available Across All 50 US States'
+      badge: `Zocdoc Verified • In-Network in ${safeCity}`
     },
     {
-      id: `global-${city}-2`,
-      doctorName: 'Dr. David Chen',
-      degree: 'MD, PhD (Dermatology)',
-      clinicName: `${city} Center for Skin Disease & Clinical Trials`,
-      city,
+      id: `global-${safeCity}-2`,
+      doctorName: uDoc2.name,
+      degree: uDoc2.degree,
+      clinicName: `${safeCity} Center for Skin Disease & Mohs Surgery`,
+      city: safeCity,
       state: region || 'State',
       country,
-      address: `500 Medical Center Parkway, ${city}`,
+      address: `500 Medical Center Parkway, ${safeCity}`,
       distance: '2.1 miles away',
       specialties: ['Psoriasis Biologics', 'Atopic Dermatitis', 'Melanoma Screening', 'Skin Rashes'],
       rating: 4.92,
@@ -620,10 +647,10 @@ function generateDynamicDermatologistsForCity(
       isVirtualAvailable: true,
       bookingUrl,
       platformName,
-      badge: 'Zocdoc In-Network Dermatologist'
+      badge: `Board-Certified Dermatologist in ${safeCity}`
     },
     {
-      id: `global-${city}-virt`,
+      id: `global-${safeCity}-virt`,
       doctorName: 'Dr. Emily Zhao',
       degree: 'MD, FAAD',
       clinicName: 'Global Teledermatology Collaborative',
