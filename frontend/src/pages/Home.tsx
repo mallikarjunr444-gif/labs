@@ -456,6 +456,11 @@ const Home: React.FC = () => {
           </div>
         </article>
 
+        {/* ── IN-BETWEEN 300x250 RECTANGLE BANNER ── */}
+        <div className="my-8 flex justify-center">
+          <AdSpace variant="rectangle" />
+        </div>
+
         {/* Article 2 */}
         <article className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12 sm:gap-20">
           <div className="w-full lg:max-w-[480px] space-y-6">
@@ -670,6 +675,11 @@ const Home: React.FC = () => {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* ── NATIVE AD BANNER SPACE ── */}
+        <div className="mt-12">
+          <AdSpace variant="native" />
         </div>
       </section>
 

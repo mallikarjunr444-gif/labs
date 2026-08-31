@@ -114,6 +114,11 @@ const Faq: React.FC = () => {
           ))}
         </div>
 
+        {/* ── 468x60 CATEGORY BANNER ── */}
+        <div className="mb-10 flex justify-center">
+          <AdSpace variant="banner" />
+        </div>
+
         {/* Accordion Cards */}
         <div className="space-y-4">
           {filteredFaqs.map((faq, idx) => (

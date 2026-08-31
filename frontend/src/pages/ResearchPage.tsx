@@ -112,6 +112,11 @@ const ResearchPage: React.FC = () => (
             </ul>
           </section>
 
+          {/* ── 468x60 IN-CONTENT BANNER ── */}
+          <div className="my-8 flex justify-center">
+            <AdSpace variant="banner" />
+          </div>
+
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">3. Class-by-Class Validation Metrics</h2>
             <div className="overflow-x-auto mt-4">

@@ -379,9 +379,9 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
                 ))}
               </nav>
 
-              {/* Sidebar Ad Container */}
+              {/* Sidebar 160x300 Halfpage Ad */}
               <div className="mt-6 pt-6 border-t border-slate-200 text-center flex justify-center">
-                <AdSpace variant="rectangle" />
+                <AdSpace variant="halfpage" />
               </div>
             </aside>
           </div>

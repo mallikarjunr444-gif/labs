@@ -300,6 +300,11 @@ const Features: React.FC = () => {
           </div>
         </motion.div>
 
+        {/* ── NATIVE EDITORIAL AD BANNER ── */}
+        <div className="my-10">
+          <AdSpace variant="native" />
+        </div>
+
         {/* ── COMPARISON MATRIX ── */}
         <motion.div
           className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-12 shadow-sm space-y-8 mb-24"
@@ -336,6 +341,11 @@ const Features: React.FC = () => {
             </table>
           </div>
         </motion.div>
+
+        {/* ── IN-CONTENT 468x60 BANNER ── */}
+        <div className="my-10 flex justify-center">
+          <AdSpace variant="banner" />
+        </div>
 
         {/* ── MINI FAQ ── */}
         <div className="mb-20">

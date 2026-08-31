@@ -645,6 +645,11 @@ const Analysis: React.FC = () => {
                 onCapture={handleCameraCapture}
               />
 
+              {/* 300x250 In-Panel Rectangle Banner */}
+              <div className="my-4 flex justify-center">
+                <AdSpace variant="rectangle" />
+              </div>
+
               {/* Submit trigger */}
               <button
                 type="submit"
@@ -761,6 +766,11 @@ const Analysis: React.FC = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Native Editorial Ad Unit */}
+              <div className="lg:col-span-2 my-6">
+                <AdSpace variant="native" />
               </div>
 
               {/* Powered by partners badge */}
