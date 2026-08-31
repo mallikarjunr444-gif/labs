@@ -3,7 +3,7 @@ import { Sparkles, ArrowRight, ShieldCheck, Stethoscope, FileText, CheckCircle2,
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
+import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 const BlogRetinoidsGuide: React.FC = () => (
@@ -61,6 +61,8 @@ const BlogRetinoidsGuide: React.FC = () => (
             </ol>
           </section>
         </div>
+
+        <SponsoredLinks />
 
         <AdSpace variant="leaderboard" className="my-10" />
 

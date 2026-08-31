@@ -3,7 +3,7 @@ import { Sparkles, ArrowRight, ShieldCheck, Stethoscope, FileText, CheckCircle2,
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
+import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 
 const BlogEczema: React.FC = () => (
   <>
@@ -170,6 +170,8 @@ const BlogEczema: React.FC = () => (
         </div>
 
         {/* CTA */}
+        <SponsoredLinks />
+
         <AdSpace variant="leaderboard" className="my-10" />
 
         <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">

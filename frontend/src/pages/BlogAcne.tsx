@@ -3,7 +3,7 @@ import { Sparkles, ArrowRight, ShieldCheck, Stethoscope, AlertCircle, FileText, 
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
+import AdSpace, { SponsoredLinks } from '../components/AdSpace';
 
 const BlogAcne: React.FC = () => (
   <>
@@ -197,6 +197,8 @@ const BlogAcne: React.FC = () => (
         </div>
 
         {/* Article Bottom Ad */}
+        <SponsoredLinks />
+
         <AdSpace variant="leaderboard" className="my-10" />
 
         {/* Call to Action CTA */}

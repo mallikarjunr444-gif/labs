@@ -175,4 +175,58 @@ export const AdSpace: React.FC<AdSpaceProps> = ({
   );
 };
 
+/**
+ * SponsoredLinks — Renders 3 Adsterra Smartlink cards as a "Recommended for You" section.
+ * Place at the bottom of blog articles for maximum CTR.
+ * Each click earns money via Adsterra Smartlink (highest-paying offer per visitor country).
+ */
+const SMARTLINKS = [
+  {
+    href: 'https://poetrywishing.com/myccy3c6?key=812b322764c0068e16258bf45e21d4e5',
+    label: 'Best Skincare Products',
+    desc: 'Discover dermatologist-recommended skincare routines and products.',
+    emoji: '🧴',
+  },
+  {
+    href: 'https://poetrywishing.com/f9c6ta12?key=a1ae136c4aa6cdc05acfa2973e56ee76',
+    label: 'Clinical Health Resources',
+    desc: 'Access evidence-based health tools and clinical reference guides.',
+    emoji: '🩺',
+  },
+  {
+    href: 'https://poetrywishing.com/kqbjqhw770?key=744f7eb9899663a66a114fdbde11867f',
+    label: 'Dermatology Tools & Offers',
+    desc: 'Explore top-rated dermatology tools and exclusive health deals.',
+    emoji: '✨',
+  },
+];
+
+export const SponsoredLinks: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div className={`my-10 ${className}`} aria-label="Sponsored recommendations">
+    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A857A] mb-4 text-center">
+      Sponsored
+    </p>
+    <div className="grid sm:grid-cols-3 gap-4">
+      {SMARTLINKS.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="flex flex-col gap-2 p-5 rounded-2xl bg-white border border-[#E5E2DA] hover:border-[#206E55] hover:shadow-md transition-all group"
+        >
+          <span className="text-2xl">{link.emoji}</span>
+          <span className="text-sm font-bold text-[#141515] group-hover:text-[#206E55] transition-colors leading-snug">
+            {link.label}
+          </span>
+          <span className="text-xs text-[#5A554A] leading-relaxed">{link.desc}</span>
+          <span className="text-xs font-bold text-[#206E55] mt-auto">
+            Learn more →
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
 export default AdSpace;
