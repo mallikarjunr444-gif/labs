@@ -4,7 +4,6 @@ import { Sparkles, Plus, Minus, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
 
 const faqCategories = ['All', 'Accuracy & Models', 'Privacy & HIPAA', 'Reports & PDF'];
 
@@ -114,10 +113,7 @@ const Faq: React.FC = () => {
           ))}
         </div>
 
-        {/* ── 468x60 CATEGORY BANNER ── */}
-        <div className="mb-10 flex justify-center">
-          <AdSpace variant="banner" />
-        </div>
+
 
         {/* Accordion Cards */}
         <div className="space-y-4">
@@ -153,10 +149,7 @@ const Faq: React.FC = () => {
           ))}
         </div>
 
-        {/* Ad Space */}
-        <div className="my-14 text-center">
-          <AdSpace variant="leaderboard" />
-        </div>
+
 
         {/* Still have questions card */}
         <div className="mt-20 p-8 rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] text-center space-y-4">

@@ -23,7 +23,6 @@ import {
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
 
 /* ─── Feature Cards ─────────────────────────────────────────────── */
 const featureList = [
@@ -235,8 +234,7 @@ const Features: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* ── ADVERTISEMENT BANNER ── */}
-        <AdSpace variant="leaderboard" className="my-10" />
+
 
         {/* ── FEATURE CARDS ── */}
         <div className="mb-6">
@@ -300,10 +298,7 @@ const Features: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* ── NATIVE EDITORIAL AD BANNER ── */}
-        <div className="my-10">
-          <AdSpace variant="native" />
-        </div>
+
 
         {/* ── COMPARISON MATRIX ── */}
         <motion.div
@@ -342,10 +337,7 @@ const Features: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* ── IN-CONTENT 468x60 BANNER ── */}
-        <div className="my-10 flex justify-center">
-          <AdSpace variant="banner" />
-        </div>
+
 
         {/* ── MINI FAQ ── */}
         <div className="mb-20">

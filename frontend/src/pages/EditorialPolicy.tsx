@@ -3,7 +3,6 @@ import { ShieldCheck, Stethoscope, FileText, CheckCircle2, User, Clock, AlertCir
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
-import AdSpace from '../components/AdSpace';
 
 const EditorialPolicy: React.FC = () => (
   <>
@@ -87,10 +86,7 @@ const EditorialPolicy: React.FC = () => (
             </p>
           </section>
 
-          {/* Ad Space */}
-          <div className="my-8 text-center">
-            <AdSpace variant="leaderboard" />
-          </div>
+
 
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">4. Corrections &amp; Content Revision Protocol</h2>

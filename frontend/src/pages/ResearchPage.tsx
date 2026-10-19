@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import AdSpace from '../components/AdSpace';
 
 const ResearchPage: React.FC = () => (
   <>
@@ -56,10 +55,7 @@ const ResearchPage: React.FC = () => (
             </div>
           </div>
 
-          {/* Ad Space */}
-          <div className="my-8 text-center">
-            <AdSpace variant="leaderboard" />
-          </div>
+
 
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">1. Training Corpus &amp; Dataset Composition</h2>
@@ -112,10 +108,7 @@ const ResearchPage: React.FC = () => (
             </ul>
           </section>
 
-          {/* ── 468x60 IN-CONTENT BANNER ── */}
-          <div className="my-8 flex justify-center">
-            <AdSpace variant="banner" />
-          </div>
+
 
           <section>
             <h2 className="text-2xl font-bold text-[#141515] mb-4">3. Class-by-Class Validation Metrics</h2>
