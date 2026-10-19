@@ -9,7 +9,6 @@ import {
 import { PremiumFooter } from '../sections';
 import PhoneInputCustom from '../components/PhoneInputCustom';
 import CameraModal from '../components/CameraModal';
-import AdSpace from '../components/AdSpace';
 import { getApiBaseUrl } from '../lib/apiBase';
 
 import { useAuth } from '../contexts/AuthContext';
@@ -485,9 +484,6 @@ const Analysis: React.FC = () => {
                 exit={{ opacity: 0 }}
               >
                 <ResultCard result={result} patient={form} imagePreview={imagePreview} onDownload={downloadPDF} />
-                <div className="my-8">
-                  <AdSpace variant="leaderboard" />
-                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -645,10 +641,7 @@ const Analysis: React.FC = () => {
                 onCapture={handleCameraCapture}
               />
 
-              {/* 300x250 In-Panel Rectangle Banner */}
-              <div className="my-4 flex justify-center">
-                <AdSpace variant="rectangle" />
-              </div>
+
 
               {/* Submit trigger */}
               <button
@@ -670,10 +663,7 @@ const Analysis: React.FC = () => {
               </button>
               </div>
 
-              {/* In-feed Ad Banner */}
-              <div className="lg:col-span-2 my-4">
-                <AdSpace variant="leaderboard" />
-              </div>
+
 
               {/* Clinical AI Analysis Methodology & Guidelines */}
               <div className="lg:col-span-2 uiverse-card bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -768,10 +758,7 @@ const Analysis: React.FC = () => {
                 </div>
               </div>
 
-              {/* Native Editorial Ad Unit */}
-              <div className="lg:col-span-2 my-6">
-                <AdSpace variant="native" />
-              </div>
+
 
               {/* Powered by partners badge */}
               <div className="lg:col-span-2 rounded-2xl bg-white border border-slate-200/80 px-6 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 shadow-sm">

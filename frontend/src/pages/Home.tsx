@@ -22,7 +22,7 @@ import { PremiumFooter } from '../sections';
 import { publicInfoLinks } from './PublicInfoPage';
 import AIChatModal from '../components/AIChatModal';
 import SEO from '../components/SEO';
-import AdSpace, { SponsoredLinks } from '../components/AdSpace';
+import { SponsoredLinks } from '../components/AdSpace';
 
 // ── SAMPLE PRE-SET SYMPTOM PROMPTS ──
 const SAMPLE_PROMPTS = [
@@ -263,10 +263,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── TOP ADVERTISEMENT BANNER SPACE ── */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-8">
-        <AdSpace variant="leaderboard" />
-      </div>
+
 
       {/* ── SECOND HERO SECTION ("Hi, I'm Medicus Labs") ── */}
       <section ref={simulatorRef} className="relative px-4 sm:px-6 lg:px-8 pb-12 pt-16">
@@ -456,10 +453,7 @@ const Home: React.FC = () => {
           </div>
         </article>
 
-        {/* ── IN-BETWEEN 300x250 RECTANGLE BANNER ── */}
-        <div className="my-8 flex justify-center">
-          <AdSpace variant="rectangle" />
-        </div>
+
 
         {/* Article 2 */}
         <article className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12 sm:gap-20">
@@ -630,10 +624,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── MID-PAGE ADVERTISEMENT BANNER SPACE ── */}
-      <div className="px-4 sm:px-6 lg:px-8 py-4">
-        <AdSpace variant="leaderboard" />
-      </div>
+
 
       {/* ── PUBLIC INFORMATION SECTION ── */}
       <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -677,10 +668,7 @@ const Home: React.FC = () => {
           })}
         </div>
 
-        {/* ── NATIVE AD BANNER SPACE ── */}
-        <div className="mt-12">
-          <AdSpace variant="native" />
-        </div>
+
       </section>
 
       {/* ── FOUNDER SECTION ── */}
@@ -711,10 +699,7 @@ const Home: React.FC = () => {
         <SponsoredLinks />
       </div>
 
-      {/* ── LOWER ADVERTISEMENT BANNER SPACE ── */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">
-        <AdSpace variant="leaderboard" />
-      </div>
+
 
       {/* ── VIDEO CALL TO ACTION ── */}
       <section className="relative z-10 border-t border-[#E5E2DA]">
