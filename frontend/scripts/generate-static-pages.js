@@ -730,6 +730,378 @@ const pages = [
         <li><a href="/blog/psoriasis"><strong>Plaque Psoriasis:</strong> Autoimmune Cytokines & Therapeutics (ICD-11: EA90)</a></li>
         <li><a href="/blog/rosacea"><strong>Rosacea Subtypes:</strong> Neurovascular Reactivity & Management (ICD-11: ED90)</a></li>
         <li><a href="/blog/skincare-guide"><strong>Evidence-Based Skincare:</strong> Barrier Repair & Sun Protection</a></li>
+        <li><a href="/blog/seborrheic-keratosis"><strong>Seborrheic Keratosis:</strong> Stuck-On Barnacles of Aging & Benign Lesions</a></li>
+        <li><a href="/blog/skin-tags"><strong>Skin Tags (Acrochordons):</strong> Friction, Insulin Resistance & Safe Removal</a></li>
+        <li><a href="/blog/keratoacanthoma"><strong>Keratoacanthoma:</strong> Rapidly Growing Crateriform Tumors & SCC</a></li>
+        <li><a href="/blog/tinea-versicolor"><strong>Tinea Versicolor:</strong> Malassezia Fungal Spots & Discoloration</a></li>
+        <li><a href="/blog/onychomycosis"><strong>Onychomycosis:</strong> Fungal Nail Thickening & Therapeutics</a></li>
+        <li><a href="/blog/tinea-pedis"><strong>Tinea Pedis:</strong> Athlete's Foot Interdigital Fissures & Care</a></li>
+        <li><a href="/blog/molluscum-contagiosum"><strong>Molluscum Contagiosum:</strong> Poxvirus Umbilicated Papules</a></li>
+        <li><a href="/blog/folliculitis"><strong>Folliculitis:</strong> Bacterial vs Fungal Follicle Infections</a></li>
+        <li><a href="/blog/impetigo"><strong>Impetigo:</strong> Contagious School Sores & Honey Crusts</a></li>
+        <li><a href="/blog/post-inflammatory-hyperpigmentation"><strong>Post-Inflammatory Hyperpigmentation:</strong> Dark Marks & Fade Care</a></li>
+        <li><a href="/blog/skincare-oily-skin"><strong>Oily Skin Protocol:</strong> Sebum Regulation & Salicylic Acid</a></li>
+        <li><a href="/blog/acne-vs-rosacea"><strong>Acne vs Rosacea:</strong> Diagnostic Distinctions & Protocols</a></li>
+      </ul>
+    `
+  },
+  {
+    path: '/analysis',
+    title: 'Free AI Skin Disease Checker & Dermatology Lesion Analysis | Medicus Labs',
+    description: 'Analyze skin conditions, rashes, moles, acne, and suspicious lesions using clinical AI. Instant evidence-based pre-screening report with ICD-11 codes for doctor visits.',
+    keywords: 'skin condition checker, free AI skin scan, skin disease detection online, check my mole online, rash identifier AI, dermatology AI online, skin cancer checker, Medicus Labs skin scan, dermatology diagnostic assistant',
+    category: 'Clinical AI Diagnostic Tool • Non-Invasive Screening',
+    heading: 'Clinical AI Dermatology Scan & Lesion Pre-Screening Engine',
+    readTime: 'Instant Real-Time Inference',
+    content: `
+      <h2>1. AI-Powered Cutaneous Pathology Pre-Screening</h2>
+      <p>Medicus Labs provides an instant, non-invasive artificial intelligence skin scan designed to pre-screen suspicious lesions, inflammatory dermatoses, and pigmentary conditions. Powered by deep vision transformer and convolutional neural networks trained on multi-center clinical datasets (HAM10000, ISIC Archive, and DermNet), our model delivers probabilistic classification, severity estimation, and an exportable 1-page Clinical Intake Summary for doctor consultations.</p>
+      
+      <h2>2. What Conditions Can the AI Pre-Screen?</h2>
+      <ul>
+        <li><strong>Inflammatory Dermatoses:</strong> Acne Vulgaris (Grade I-IV), Atopic Dermatitis / Eczema, Rosacea, Seborrheic Dermatitis, Contact Dermatitis.</li>
+        <li><strong>Autoimmune & Chronic Conditions:</strong> Plaque Psoriasis, Alopecia Areata, Vitiligo.</li>
+        <li><strong>Cutaneous Oncology & Neoplasms:</strong> Melanoma pre-screening indicators (ABCDE criteria), Basal Cell Carcinoma (BCC), Squamous Cell Carcinoma (SCC), Actinic Keratosis (AK), Dysplastic Atypical Nevi.</li>
+        <li><strong>Infectious & Fungal Lesions:</strong> Tinea Corporis (Ringworm), Tinea Versicolor, Folliculitis, Impetigo, Herpes Zoster (Shingles).</li>
+      </ul>
+
+      <h2>3. How to Use the Medicus Labs AI Skin Scanner</h2>
+      <ol>
+        <li><strong>Capture High-Resolution Image:</strong> Take a well-lit, in-focus close-up photograph of the affected skin area under neutral white light.</li>
+        <li><strong>Enter Clinical Context:</strong> Provide basic information (approximate lesion duration, anatomical location, itch or pain symptoms) to refine classification.</li>
+        <li><strong>Review Differential Metrics:</strong> Inspect the probabilistic disease index, severity indicators, and ICD-11 classifications.</li>
+        <li><strong>Download Physician Intake PDF:</strong> Export a tamper-evident clinical report featuring secure cryptographic verification hashes to bring to your licensed dermatologist.</li>
+      </ol>
+
+      <h2>4. Clinical Boundaries & Emergency Notice</h2>
+      <p>Medicus Labs is an educational and triage pre-screening algorithm. It does not replace histopathological biopsy, in-person dermoscopy, or physical palpation by a licensed physician. If you experience rapidly spreading rashes with systemic fever, ulceration, or signs of anaphylaxis, seek emergency medical care immediately.</p>
+    `
+  },
+  {
+    path: '/book-doctor',
+    title: 'Book a Board-Certified Dermatologist Online | Same-Day Skin Doctor Appointments | Medicus Labs',
+    description: 'Book verified dermatologists, clinic consultations, and online video visits near you. Fast appointments, accepted insurance plans, and digital prescriptions worldwide.',
+    keywords: 'book dermatologist appointment, skin doctor near me, online dermatologist prescription, same day dermatologist visit, dermatology consultation fee, Zocdoc dermatologist, Practo skin doctor, find skin specialist',
+    category: 'Physician Booking Portal • In-Person & Telehealth',
+    heading: 'Book a Board-Certified Dermatologist & Skin Specialist Appointment',
+    readTime: 'Instant 24/7 Scheduling',
+    content: `
+      <h2>1. Direct Dermatology Appointment Booking</h2>
+      <p>Consult with top board-certified dermatologists across top hospital networks and private practices worldwide. Medicus Labs connects you with verified physicians specializing in clinical dermatology, pediatric skin care, cosmetic dermatology, and dermatologic Mohs surgery.</p>
+      
+      <h2>2. In-Person and Telehealth Video Consultations</h2>
+      <p>Choose between visiting a clinic near you or scheduling a secure HIPAA-compliant video appointment from home. Receive digital prescriptions, diagnostic requisition forms, and treatment plans directly on your mobile device.</p>
+      
+      <h2>3. Supported Global Healthcare Booking Networks</h2>
+      <ul>
+        <li><strong>United States:</strong> Verified providers via Zocdoc with real-time health insurance eligibility checks (Aetna, Cigna, BCBS, UnitedHealthcare, Medicare).</li>
+        <li><strong>India:</strong> MD Dermatologists via Practo and Apollo 24/7 with instant appointments and home prescription delivery.</li>
+        <li><strong>United Kingdom:</strong> GMC-registered private consultants via Doctify UK.</li>
+        <li><strong>Europe & International:</strong> Certified specialists via Doctolib Europe and Teladoc Global.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/seborrheic-keratosis',
+    title: 'Seborrheic Keratosis: Stuck-On Barnacles of Aging, Causes & Safe Removal | Medicus Labs',
+    description: 'Dermatological guide to Seborrheic Keratosis (ICD-11: 2F22): benign epidermal proliferation, stuck-on warty appearance, cryotherapy, curettage, and melanoma differentiation.',
+    keywords: 'seborrheic keratosis, stuck on skin lesions, barnacles of aging, benign skin growths, seborrheic keratosis vs melanoma, cryosurgery for keratosis, curettage, dermatosis papulosa nigra',
+    category: 'Benign Cutaneous Neoplasms • ICD-11: 2F22',
+    heading: 'Seborrheic Keratosis: Clinical Presentation, Differential Diagnosis & Removal',
+    readTime: '10 min read',
+    content: `
+      <h2>1. Clinical Overview of Seborrheic Keratosis</h2>
+      <p>Seborrheic keratoses (SKs) are the most common non-cancerous cutaneous neoplasms in adults over 40. Often referred to clinically as 'barnacles of aging' or wisdom spots, these benign epidermal proliferations arise from immature keratinocytes and clonal mutations in FGFR3 and PIK3CA genes.</p>
+
+      <h2>2. Lesion Morphology & Dermoscopic Signatures</h2>
+      <ul>
+        <li><strong>'Stuck-On' Appearance:</strong> Sharply demarcated, warty, greasy, or verrucous plaques that look as though they could be picked off the skin surface.</li>
+        <li><strong>Color Spectrum:</strong> Varies from pale flesh-toned, tan, to deep brownish-black, often prompting patient anxiety regarding cutaneous melanoma.</li>
+        <li><strong>Dermoscopic Features:</strong> Comedo-like openings (crypts), milia-like cysts, hairpin blood vessels with white halos, and brain-like (gyriform) ridges.</li>
+      </ul>
+
+      <h2>3. Differentiating Seborrheic Keratosis from Melanoma</h2>
+      <p>While SKs are completely benign and carry zero metastatic risk, darkly pigmented or irritated keratoses frequently mimic nodular melanoma or pigmented basal cell carcinoma. Any lesion exhibiting spontaneous bleeding, asymmetric peripheral expansion, or rapid color variegation requires dermoscopic evaluation and shave biopsy.</p>
+
+      <h2>4. Evidence-Based Removal Techniques</h2>
+      <ul>
+        <li><strong>Liquid Nitrogen Cryotherapy:</strong> Rapid freeze-thaw cycles using cotton-tipped applicator or spray device causing selective epidermal necrosis.</li>
+        <li><strong>Shave Excision & Curettage:</strong> Surgical debulking under local anesthesia followed by light electrodessication of the base.</li>
+        <li><strong>Topical High-Concentration Hydrogen Peroxide (40%):</strong> Clinically approved topical solution for non-surgical localized ablation.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/skin-tags',
+    title: 'Skin Tags (Acrochordons): Causes, Insulin Resistance & Removal | Medicus Labs',
+    description: 'Clinical guide to Skin Tags (Acrochordons): fibrovascular papillomas, friction etiology, metabolic syndrome and insulin resistance links, and sterile clinical excision.',
+    keywords: 'skin tags, acrochordons, remove skin tags, causes of skin tags, skin tags neck underarms, skin tags insulin resistance, diabetes skin signs, sterile skin tag removal, electrodessication',
+    category: 'Benign Cutaneous Papillomas • Clinical Guide',
+    heading: 'Skin Tags (Acrochordons): Pathogenesis, Metabolic Links & Clinical Removal',
+    readTime: '9 min read',
+    content: `
+      <h2>1. Pathophysiology of Acrochordons</h2>
+      <p>Acrochordons, commonly termed skin tags, are soft, pedunculated benign fibrovascular growths arising predominantly in intertriginous skin folds where skin rubs against skin or clothing — notably the neck, axillae, inframammary folds, and groin.</p>
+
+      <h2>2. Systemic Health & Metabolic Significance</h2>
+      <p>Emerging dermatological and endocrinological research demonstrates a direct correlation between multiple acrochordons and underlying metabolic syndrome:</p>
+      <ul>
+        <li><strong>Hyperinsulinemia & IGF-1 Signaling:</strong> Elevated serum insulin stimulates insulin-like growth factor 1 (IGF-1) receptors on dermal fibroblasts and epidermal keratinocytes, promoting cellular proliferation.</li>
+        <li><strong>Association with Acanthosis Nigricans:</strong> Skin tags frequently co-occur with velvety hyperpigmented plaques on the posterior neck, serving as an early cutaneous marker for pre-diabetes and Type 2 Diabetes Mellitus.</li>
+      </ul>
+
+      <h2>3. Safe In-Clinic Removal Options</h2>
+      <ul>
+        <li><strong>Sterile Scissor Excision (Snip Biopsy):</strong> Rapid removal of pedunculated lesions at the stalk base using sterile curved Iris scissors, with immediate aluminum chloride hemostasis.</li>
+        <li><strong>Cryosurgical Ablation:</strong> Application of liquid nitrogen causing ischemic necrosis of the fibrovascular stalk.</li>
+        <li><strong>Electrodessication:</strong> High-frequency electrical current destroying tag tissue with minimal patient downtime.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/keratoacanthoma',
+    title: 'Keratoacanthoma: Rapidly Growing Crateriform Skin Tumors & SCC | Medicus Labs',
+    description: 'Clinical evaluation of Keratoacanthoma (KA): rapid growth phases, central keratin plug, squamous cell carcinoma (cSCC) controversy, and surgical excision guidelines.',
+    keywords: 'keratoacanthoma, crateriform skin lesion, rapid growing bump skin, keratoacanthoma vs squamous cell carcinoma, central keratin crater, skin cancer excisional biopsy, Mohs surgery for KA',
+    category: 'Cutaneous Neoplasms • Pathology Guide',
+    heading: 'Keratoacanthoma: Rapid Evolution, Squamous Cell Carcinoma Links & Excision',
+    readTime: '11 min read',
+    content: `
+      <h2>1. The Clinical Paradox of Keratoacanthoma</h2>
+      <p>Keratoacanthoma (KA) is a distinctive cutaneous neoplasm characterized by startlingly rapid growth over 4–8 weeks, presenting as an erythematous, dome-shaped nodule with a central hyperkeratotic crateriform core. Occurring primarily on chronic sun-damaged skin in fair-skinned elderly adults, KA presents an ongoing diagnostic debate in dermatopathology.</p>
+
+      <h2>2. Distinctive Triphasic Life Cycle</h2>
+      <ol>
+        <li><strong>Proliferative Stage (Weeks 1–6):</strong> Explosive expansion from a smooth red papule into a large 1–2 cm crateriform tumor.</li>
+        <li><strong>Stationary / Mature Stage (Weeks 6–10):</strong> Stable dome shape with prominent central horn-like keratin plug.</li>
+        <li><strong>Involutional Stage (Months 3–6):</strong> Spontaneous regression via immunologic T-cell mediated apoptosis, leaving behind an irregular, hypopigmented atrophic scar.</li>
+      </ol>
+
+      <h2>3. The Keratoacanthoma vs. Squamous Cell Carcinoma (SCC) Dilemma</h2>
+      <p>Because the histopathologic architecture of keratoacanthoma closely mimics well-differentiated invasive squamous cell carcinoma, dermatologic oncology consensus treats all solitary keratoacanthomas as potential SCC variants (cSCC-KA). Shave biopsies often miss deep invasion at the tumor base; complete excisional biopsy or Mohs micrographic surgery is the definitive standard of care.</p>
+    `
+  },
+  {
+    path: '/blog/tinea-versicolor',
+    title: 'Tinea Versicolor: Malassezia Fungal Spots, Hypopigmentation & Care | Medicus Labs',
+    description: 'Comprehensive guide to Tinea Versicolor (Pityriasis Versicolor, ICD-11: 1F29): Malassezia yeast dimorphism, azelaic acid pigment inhibition, selenium sulfide, and topical azoles.',
+    keywords: 'tinea versicolor, pityriasis versicolor, fungal skin patches, white spots skin, hypopigmented skin fungus, selenium sulfide wash, ketoconazole shampoo for skin, Malassezia furfur',
+    category: 'Superficial Mycoses • ICD-11: 1F29',
+    heading: 'Tinea Versicolor: Malassezia Dimorphism, Discoloration & Antifungal Protocols',
+    readTime: '10 min read',
+    content: `
+      <h2>1. Pathophysiology & Fungal Overgrowth</h2>
+      <p>Tinea Versicolor (also termed Pityriasis Versicolor) is a superficial, non-contagious fungal infection caused by dimorphic lipophilic yeasts of the genus <em>Malassezia</em> (primarily <em>M. globosa</em> and <em>M. furfur</em>). Naturally inhabiting human sebaceous follicles, hot, humid weather and elevated perspiration trigger a transition from harmless yeast cells into invasive mycelial filaments.</p>
+
+      <h2>2. Mechanism of Hypo- and Hyperpigmentation</h2>
+      <ul>
+        <li><strong>Hypopigmentation (Light Spots):</strong> The fungal organism produces <strong>azelaic acid</strong>, which competitively inhibits tyrosinase — the key enzyme required for melanogenesis — preventing melanocytes from synthesizing pigment in response to UV exposure.</li>
+        <li><strong>Hyperpigmentation (Dark Spots):</strong> In deeper skin phototypes, localized inflammation and thickened stratum corneum produce hyperchromic macular patches.</li>
+      </ul>
+
+      <h2>3. Evidence-Based Antifungal Therapeutics</h2>
+      <ul>
+        <li><strong>Topical Selenium Sulfide 2.5% Lotion / Shampoo:</strong> Applied from neck to waist, left on for 10 minutes daily for 7 days.</li>
+        <li><strong>Topical Ketoconazole 2% Shampoo:</strong> Applied as a lathering wash in the shower daily for 5–10 days.</li>
+        <li><strong>Oral Fluconazole or Itraconazole:</strong> Reserved for extensive, recalcitrant, or frequent recurring infections under medical supervision.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/onychomycosis',
+    title: 'Onychomycosis: Fungal Nail Infections, Thickening & Pulse Antifungals | Medicus Labs',
+    description: 'Clinical guide to Onychomycosis (ICD-11: 1F28.2): dermatophyte nail invasion, subungual hyperkeratosis, terbinafine therapy, and recurrence prevention protocols.',
+    keywords: 'onychomycosis, fungal nail infection, yellow thick toenails, oral terbinafine for nail fungus, ciclopirox nail lacquer, laser nail treatment, dermatophyte toenail infection',
+    category: 'Dermatophyte Mycoses • ICD-11: 1F28.2',
+    heading: 'Onychomycosis: Subungual Hyperkeratosis, Nail Dystrophy & Therapeutics',
+    readTime: '11 min read',
+    content: `
+      <h2>1. Clinical Scope of Onychomycosis</h2>
+      <p>Onychomycosis accounts for over 50% of all nail disorders, predominantly affecting toenails in older adults, athletes, and diabetic patients. The primary etiologic agents are anthropophilic dermatophytes, predominantly <em>Trichophyton rubrum</em> and <em>Trichophyton mentagrophytes</em>.</p>
+
+      <h2>2. Subtypes & Morphological Features</h2>
+      <ul>
+        <li><strong>Distal Lateral Subungual Onychomycosis (DLSO):</strong> Most prevalent form; fungus enters via hyponychium causing yellow-white discoloration, subungual hyperkeratosis (crumbly debris under nail), and onycholysis.</li>
+        <li><strong>White Superficial Onychomycosis (WSO):</strong> Direct invasion of the dorsal nail plate resulting in powdery white, friable superficial patches.</li>
+        <li><strong>Proximal Subungual Onychomycosis (PSO):</strong> Rare; enters via proximal nail fold and serves as an important clinical herald sign of systemic immunosuppression.</li>
+      </ul>
+
+      <h2>3. Clinical Treatment Modalities</h2>
+      <ul>
+        <li><strong>Oral Terbinafine (250 mg daily):</strong> First-line systemic therapy (6 weeks for fingernails, 12 weeks for toenails). Requires baseline hepatic function enzyme monitoring.</li>
+        <li><strong>Topical Antifungal Lacquers (Ciclopirox 8%, Efinaconazole 10%):</strong> Indicated for superficial disease or when oral systemic agents are contraindicated.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/tinea-pedis',
+    title: 'Tinea Pedis (Athlete\'s Foot): Interdigital Fissures, Moccasin Tinea & Cure | Medicus Labs',
+    description: 'Clinical management of Tinea Pedis (Athlete\'s Foot, ICD-11: 1F28.1): interdigital maceration, moccasin distribution, topical allylamines, and foot hygiene protocols.',
+    keywords: 'tinea pedis, athletes foot, itchy peeling feet, interdigital foot fungus, moccasin tinea pedis, terbinafine cream foot, foot odor fungus, prevent athletes foot',
+    category: 'Cutaneous Dermatophytosis • ICD-11: 1F28.1',
+    heading: 'Tinea Pedis (Athlete\'s Foot): Clinical Presentations, Differential & Cure',
+    readTime: '9 min read',
+    content: `
+      <h2>1. Etiology of Tinea Pedis</h2>
+      <p>Tinea Pedis, widely known as Athlete\'s Foot, is a dermatophyte infection of the plantar and interdigital epidermis, affecting up to 15–20% of the population. Infection thrives in occlusive footwear where sweat, heat, and darkness foster fungal proliferation.</p>
+
+      <h2>2. Three Primary Clinical Presentations</h2>
+      <ul>
+        <li><strong>Interdigital Tinea Pedis:</strong> Erythema, scaling, maceration, and painful fissures situated between the lateral toe webs (most commonly the 4th and 5th interdigital spaces).</li>
+        <li><strong>Moccasin-Type (Chronic Hyperkeratotic):</strong> Fine, silvery scaling distributed symmetrically over the heels and soles in a 'moccasin' pattern, frequently misdiagnosed as xerosis (dry skin).</li>
+        <li><strong>Vesiculobullous Type:</strong> Acute inflammatory eruption of intensely pruritic vesicles on the sole or arch, often associated with a secondary bacterial infection.</li>
+      </ul>
+
+      <h2>3. Effective Treatment & Secondary Spread Prevention</h2>
+      <p>Topical allylamines (Terbinafine 1% cream) and imidazoles (Clotrimazole, Miconazole) applied twice daily for 2–4 weeks resolve the vast majority of infections. Patients should put on socks before underwear to prevent autoinoculation to the groin (tinea cruris).</p>
+    `
+  },
+  {
+    path: '/blog/molluscum-contagiosum',
+    title: 'Molluscum Contagiosum: Umbilicated Papules, Poxvirus & Pediatric Care | Medicus Labs',
+    description: 'Clinical guide to Molluscum Contagiosum (ICD-11: 1E70): poxvirus pathogenesis, central dell umbilication, autoinoculation prevention, and topical cantharidin therapy.',
+    keywords: 'molluscum contagiosum, umbilicated papules, skin bumps central dimple, pediatric molluscum, poxvirus skin, cantharidin treatment, molluscum contagious kids, cryotherapy molluscum',
+    category: 'Viral Cutaneous Infections • ICD-11: 1E70',
+    heading: 'Molluscum Contagiosum: Poxvirus Transmission, Morphology & Resolution',
+    readTime: '10 min read',
+    content: `
+      <h2>1. Viral Pathogenesis of Molluscum</h2>
+      <p>Molluscum Contagiosum is a benign viral infection of the cutaneous epithelium caused by a double-stranded DNA virus belonging to the <em>Poxviridae</em> family (Molluscum Contagiosum Virus [MCV-1 through MCV-4]). It spreads via direct skin-to-skin contact, sharing contaminated towels or gym gear (fomites), and sexual contact in adults.</p>
+
+      <h2>2. Distinctive Clinical Lesion Features</h2>
+      <ul>
+        <li><strong>Pearly Dome-Shaped Papules:</strong> Discrete, firm, smooth, skin-colored to pinkish papules ranging from 1 to 5 mm in diameter.</li>
+        <li><strong>Central Umbilication:</strong> A characteristic central dell or dimple containing a cheesy, curd-like core composed of millions of viral particles (molluscum bodies).</li>
+      </ul>
+
+      <h2>3. Clinical Course & Therapeutic Options</h2>
+      <p>In immunocompetent individuals, molluscum is self-limiting and resolves spontaneously within 6 to 18 months once cell-mediated immunity recognizes the viral proteins. Dermatologist-administered options include topical Cantharidin (0.7%), cryotherapy, and gentle curettage.</p>
+    `
+  },
+  {
+    path: '/blog/folliculitis',
+    title: 'Folliculitis: Bacterial vs Pityrosporum Fungal Follicle Infection | Medicus Labs',
+    description: 'Clinical differential for Folliculitis: Staphylococcus aureus bacterial infection vs. Malassezia fungal folliculitis, shave irritation, and tailored antimicrobial regimens.',
+    keywords: 'folliculitis, infected hair follicles, bacterial folliculitis, pityrosporum folliculitis, fungal acne, staph folliculitis treatment, benzoyl peroxide wash, oral fluconazole folliculitis',
+    category: 'Follicular Dermatoses • Clinical Guide',
+    heading: 'Folliculitis: Bacterial vs. Fungal Etiology, Differential & Therapy',
+    readTime: '10 min read',
+    content: `
+      <h2>1. Pathophysiology of Folliculitis</h2>
+      <p>Folliculitis is an inflammatory condition affecting the hair follicle, manifesting as small follicular-centered papules or pustules surrounded by an erythematous ring. It is crucial to clinically distinguish bacterial folliculitis from fungal (pityrosporum) folliculitis, as misdiagnosis often worsens symptoms.</p>
+
+      <h2>2. Bacterial vs. Fungal Folliculitis Differential</h2>
+      <ul>
+        <li><strong>Bacterial Folliculitis (Staphylococcal):</strong> Driven predominantly by <em>Staphylococcus aureus</em>. Lesions vary in size, contain purulent white exudate, and frequently occur in beard zones, legs, and buttocks following friction or shaving micro-trauma.</li>
+        <li><strong>Pityrosporum (Malassezia) Folliculitis:</strong> Driven by yeast proliferation. Manifests as remarkably monomorphic (uniform size), intensely itchy small papules on the upper chest, back, and shoulders, commonly mistaken for treatment-resistant acne.</li>
+      </ul>
+
+      <h2>3. Targeted Therapeutic Regimens</h2>
+      <ul>
+        <li><strong>For Bacterial Folliculitis:</strong> Antimicrobial washes (Chlorhexidine or Benzoyl Peroxide 4–10%), topical Mupirocin 2% ointment, or oral cephalexin for extensive outbreaks.</li>
+        <li><strong>For Fungal Folliculitis:</strong> Topical Ketoconazole 2% wash, and oral antifungal pulse therapy (Fluconazole 150 mg weekly). Note: traditional acne antibiotics (doxycycline) exacerbate fungal folliculitis.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/impetigo',
+    title: 'Impetigo: Contagious School Sores, Honey-Colored Crusts & Care | Medicus Labs',
+    description: 'Clinical guide to Impetigo (ICD-11: 1B70): Non-bullous and bullous subtypes, Streptococcus and Staphylococcus etiology, topical mupirocin, and school transmission safety.',
+    keywords: 'impetigo, honey colored crusts, school sores, contagious skin sores children, staph skin infection kids, mupirocin cream impetigo, bullous impetigo, oral cephalexin impetigo',
+    category: 'Superficial Pyodermas • ICD-11: 1B70',
+    heading: 'Impetigo: Pathophysiology, Honey Crust Morphology & Antimicrobials',
+    readTime: '9 min read',
+    content: `
+      <h2>1. Overview of Impetigo</h2>
+      <p>Impetigo is a highly contagious, superficial bacterial skin infection primarily affecting children aged 2 to 5 years, though adults in contact sports or crowded living settings are also susceptible. It is caused by <em>Staphylococcus aureus</em> and/or Group A beta-hemolytic <em>Streptococcus pyogenes</em> (GAS).</p>
+
+      <h2>2. Clinical Subtypes</h2>
+      <ul>
+        <li><strong>Non-Bullous Impetigo (70% of Cases):</strong> Begins as transient vesicles or pustules that rupture rapidly to leave an erosive base with pathognomonic <strong>honey-colored (amber) stuck-on crusts</strong>, predominantly situated around the nose and mouth.</li>
+        <li><strong>Bullous Impetigo (30% of Cases):</strong> Driven by Staphylococcal exfoliative toxins (ETA and ETB) that cleave desmoglein-1, producing flaccid blisters that rupture with a thin brown crust.</li>
+      </ul>
+
+      <h2>3. Clinical Treatment & Infection Control</h2>
+      <ul>
+        <li><strong>Localized Lesions:</strong> Gentle crust debridement with warm water compresses followed by topical prescription <strong>Mupirocin 2% ointment</strong> or Retapamulin twice daily for 5–7 days.</li>
+        <li><strong>Widespread / Outbreak Cases:</strong> Oral beta-lactamase resistant antibiotics (Cephalexin or Amoxicillin-Clavulanate).</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/post-inflammatory-hyperpigmentation',
+    title: 'Post-Inflammatory Hyperpigmentation (PIH): Dark Spots & Fade Care | Medicus Labs',
+    description: 'Clinical guide to Post-Inflammatory Hyperpigmentation (PIH): dermal vs epidermal melanin incontinence, tyrosinase inhibitors, azelaic acid, and SPF photoprotection.',
+    keywords: 'post inflammatory hyperpigmentation, PIH acne dark marks, fade dark spots skin, epidermal vs dermal PIH, azelaic acid for dark spots, tranexamic acid hyperpigmentation, chemical peels PIH',
+    category: 'Pigmentary Disorders • Clinical Guide',
+    heading: 'Post-Inflammatory Hyperpigmentation (PIH): Melanocyte Mechanisms & Fading',
+    readTime: '11 min read',
+    content: `
+      <h2>1. The Pathobiology of PIH</h2>
+      <p>Post-Inflammatory Hyperpigmentation (PIH) is an acquired reactive hypermelanosis developing secondary to cutaneous injury or inflammatory dermatoses (such as acne vulgaris, atopic eczema, psoriasis, or post-laser burns). It occurs with significantly higher frequency and prolonged chronicity in Fitzpatrick skin phototypes IV–VI.</p>
+
+      <h2>2. Epidermal vs. Dermal Melanin Incontinence</h2>
+      <ul>
+        <li><strong>Epidermal PIH:</strong> Excess melanin is synthesized and transferred to basal keratinocytes. Appears as tan, brown, or dark brown macules with sharp borders. Responds well to topical tyrosinase inhibitors over 3–6 months.</li>
+        <li><strong>Dermal PIH:</strong> Basal cell layer disruption allows melanin granules to drop into the papillary dermis ('pigment incontinence'), where they are phagocytosed by dermal melanophages. Appears as blue-gray or slate-colored patches that can persist for years.</li>
+      </ul>
+
+      <h2>3. Evidence-Based Topical Therapeutics</h2>
+      <ul>
+        <li><strong>Tyrosinase Inhibitors:</strong> Azelaic Acid (15–20%), Kojic Acid, and Arbutin suppress enzymatic conversion of tyrosine into dopaquinone.</li>
+        <li><strong>Melanosome Transfer Blockers:</strong> Niacinamide (4–5%) prevents transfer of melanin into surrounding keratinocytes.</li>
+        <li><strong>Cellular Turnover Accelerators:</strong> Topical retinoids (Tretinoin, Adapalene) accelerate shedding of pigment-laden epidermal cells.</li>
+        <li><strong>Daily Broad-Spectrum Sunscreen (SPF 50+ with Iron Oxides):</strong> Essential daily photoprotection against UV and high-energy visible light.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/skincare-oily-skin',
+    title: 'Oily & Blemish-Prone Skin: Sebum Regulation & Dermatologist Guide | Medicus Labs',
+    description: 'Evidence-based dermatology protocol for Oily Skin: sebaceous gland hyperactivity, 2% Salicylic Acid lipophilic pore clearance, Niacinamide, and non-comedogenic hydration.',
+    keywords: 'oily skin routine, excess sebum production, blemish prone skincare, salicylic acid 2 percent, niacinamide for oily skin, non-comedogenic moisturizer, prevent clogged pores, matte skin protocol',
+    category: 'Dermatological Skincare • Evidence-Based Protocols',
+    heading: 'Oily & Blemish-Prone Skin: Sebaceous Gland Regulation & Active Protocols',
+    readTime: '10 min read',
+    content: `
+      <h2>1. The Biology of Sebaceous Hyperactivity</h2>
+      <p>Oily skin (seborrhea) stems from hyperactive sebaceous glands situated in high densities across the face (T-zone), scalp, chest, and back. Sebum synthesis is primarily driven by androgenic hormones (dihydrotestosterone [DHT]) binding to androgen receptors on sebocytes, prompting lipid synthesis.</p>
+
+      <h2>2. Common Pitfalls: The Rebound Sebum Effect</h2>
+      <p>The most common clinical error patients make is aggressive stripping of the skin barrier with harsh alcohol-based toners or high-pH soaps. Stripping the stratum corneum triggers a compensatory feedback loop, exacerbating sebum production and driving micro-comedone formation.</p>
+
+      <h2>3. Core Dermatologist-Approved Active Ingredients</h2>
+      <ul>
+        <li><strong>Salicylic Acid (BHA 2%):</strong> Lipophilic beta-hydroxy acid that penetrates into lipid-rich follicular infundibula, exfoliating dead keratinocytes and clearing pore blockages.</li>
+        <li><strong>Niacinamide (Vitamin B3 3–5%):</strong> Clinically shown to reduce facial sebum excretion rates, suppress inflammatory cytokines, and diminish follicular pore appearance.</li>
+        <li><strong>Zinc PCA:</strong> Regulates 5-alpha reductase activity while providing mild antimicrobial benefits.</li>
+        <li><strong>Lightweight Gel Moisturizers:</strong> Hyaluronic acid, glycerin, and dimethicone supply hydration without adding occlusive oils.</li>
+      </ul>
+    `
+  },
+  {
+    path: '/blog/acne-vs-rosacea',
+    title: 'Acne Vulgaris vs. Rosacea: How to Tell the Difference & Treatments | Medicus Labs',
+    description: 'Clinical comparison between Acne Vulgaris and Papulopustular Rosacea: comedone diagnostic markers, Demodex triggers, flushing, and preventing steroid rebound.',
+    keywords: 'acne vs rosacea, difference between acne and rosacea, adult acne or rosacea, red flushing bumps cheeks, rosacea pustules, demodex mites, topical ivermectin rosacea',
+    category: 'Dermatological Differential Diagnosis • Clinical Guide',
+    heading: 'Acne Vulgaris vs. Rosacea: Diagnostic Distinctions, Morphology & Care',
+    readTime: '11 min read',
+    content: `
+      <h2>1. The Common Diagnostic Dilemma</h2>
+      <p>Because both Acne Vulgaris and Rosacea (specifically Subtype 2: Papulopustular Rosacea) present with red papules and pustules on the central face, clinical misdiagnosis is exceptionally common. Treating rosacea with aggressive acne therapeutics severely inflames the compromised rosacea barrier.</p>
+
+      <h2>2. Key Morphological Distinctions</h2>
+      <ul>
+        <li><strong>The Hallmark Comedone:</strong> If closed comedones (whiteheads) or open comedones (blackheads) are present, the diagnosis is <strong>Acne Vulgaris</strong>. Rosacea is fundamentally devoid of true comedones.</li>
+        <li><strong>Background Erythema & Flushing:</strong> Rosacea features persistent background centrofacial erythema, telangiectasias (spider veins), and episodic flushing triggered by spicy foods, alcohol, heat, or emotional stress. Acne lacks neurovascular flushing.</li>
+        <li><strong>Age of Onset:</strong> Acne typically begins in adolescence (12–24), whereas rosacea rarely manifests before age 30, peaking between ages 40 and 60.</li>
+      </ul>
+
+      <h2>3. Tailored Clinical Treatment Comparison</h2>
+      <ul>
+        <li><strong>Acne Vulgaris First-Line:</strong> Topical Adapalene/Tretinoin, Benzoyl Peroxide 2.5–5%, and oral Doxycycline or Isotretinoin for severe cystic cases.</li>
+        <li><strong>Papulopustular Rosacea First-Line:</strong> Topical Ivermectin 1% cream, Azelaic Acid 15%, and sub-antimicrobial dose Doxycycline (40 mg anti-inflammatory).</li>
       </ul>
     `
   }
@@ -743,6 +1115,9 @@ for (const page of pages) {
   fs.mkdirSync(targetDir, { recursive: true });
 
   const targetFile = path.join(targetDir, 'index.html');
+  const cleanHtmlFile = path.join(distDir, `${routePath}.html`);
+  fs.mkdirSync(path.dirname(cleanHtmlFile), { recursive: true });
+
   const canonicalUrl = `https://medicuslabs.app${routePath}`;
 
   // Replace Title
@@ -765,7 +1140,7 @@ for (const page of pages) {
     `<meta name="keywords" content="${page.keywords || 'Medicus Labs, AI dermatology, skin health, Mallikarjun R'}" />`
   );
 
-  // Replace Canonical Link
+  // Replace Canonical Link (Ensure self-referencing canonical URL)
   html = html.replace(
     /<link rel="canonical" href=".*?" \/>/i,
     `<link rel="canonical" href="${canonicalUrl}" />`
@@ -784,6 +1159,61 @@ for (const page of pages) {
     /<meta property="og:description" content=".*?" \/>/i,
     `<meta property="og:description" content="${page.description}" />`
   );
+
+  // Inject High-Authority Structured Data (Schema.org MedicalWebPage & BreadcrumbList)
+  const structuredData = `
+    <!-- High-Authority Medical Schema.org for Search Engine Indexing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "headline": ${JSON.stringify(page.title)},
+      "description": ${JSON.stringify(page.description)},
+      "url": ${JSON.stringify(canonicalUrl)},
+      "author": {
+        "@type": "Person",
+        "name": "Mallikarjun R",
+        "jobTitle": "Founder & CEO",
+        "url": "https://medicuslabs.app/founder",
+        "sameAs": [
+          "https://www.linkedin.com/in/mallikarjunr-com/",
+          "https://github.com/mallikarjunr444-gif"
+        ]
+      },
+      "publisher": {
+        "@type": "MedicalOrganization",
+        "name": "Medicus Labs",
+        "url": "https://medicuslabs.app/",
+        "logo": "https://medicuslabs.app/og-image.png"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://medicuslabs.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Medical Library",
+            "item": "https://medicuslabs.app/blog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": ${JSON.stringify(page.heading)},
+            "item": ${JSON.stringify(canonicalUrl)}
+          }
+        ]
+      }
+    }
+    </script>
+  </head>`;
+
+  html = html.replace('</head>', structuredData);
 
   // Inject Rich Semantic Body into <div id="root">
   const richSemanticBody = `
@@ -826,8 +1256,10 @@ for (const page of pages) {
     `<div id="root">${richSemanticBody}</div>`
   );
 
+  // Write both /route/index.html AND /route.html for complete universal compatibility
   fs.writeFileSync(targetFile, html, 'utf8');
+  fs.writeFileSync(cleanHtmlFile, html, 'utf8');
   generatedCount++;
 }
 
-console.log(`✅ Successfully generated ${generatedCount} static pre-rendered pages in dist/!`);
+console.log(`✅ Successfully generated ${generatedCount} static pre-rendered pages (with dual index.html and .html files and structured JSON-LD schemas) in dist/!`);
