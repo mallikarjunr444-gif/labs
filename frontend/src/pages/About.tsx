@@ -141,10 +141,7 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {/* ── IN-PAGE ADVERTISEMENT BANNER ── */}
-        <div className="mb-16 text-center">
-          <AdSpace variant="leaderboard" />
-        </div>
+
 
         {/* Founding Pillars Grid */}
         <div className="space-y-10 mb-24">
