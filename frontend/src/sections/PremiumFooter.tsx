@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo';
-import AdSpace from '../components/AdSpace';
 import { getApiBaseUrl } from '../lib/apiBase';
 
 const GithubIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
@@ -146,10 +145,7 @@ export const PremiumFooter: React.FC = () => {
     <footer className="relative z-10 bg-[#FAF9F5] text-[#141515] overflow-hidden pt-20 pb-12 border-t border-[#E5E2DA] font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* ── GLOBAL FOOTER ADVERTISEMENT SPACE ── */}
-        <div className="mb-14 text-center">
-          <AdSpace variant="leaderboard" />
-        </div>
+
 
         {/* ── NEWSLETTER BLOCK ── */}
         <motion.div

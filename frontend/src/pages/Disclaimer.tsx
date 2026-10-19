@@ -1,6 +1,5 @@
 import React from 'react';
 import { PremiumFooter } from '../sections';
-import AdSpace from '../components/AdSpace';
 import { AlertTriangle, ShieldAlert, Stethoscope, Info } from 'lucide-react';
 
 const Section: React.FC<{ icon: React.ReactNode; title: string; children: React.ReactNode }> = ({ icon, title, children }) => (
@@ -33,10 +32,7 @@ const Disclaimer: React.FC = () => (
         </div>
       </div>
 
-      {/* Ad Space */}
-      <div className="my-8 text-center">
-        <AdSpace variant="leaderboard" />
-      </div>
+
 
       <div className="space-y-6">
         <Section icon={<Info size={18} />} title="Purpose of This Platform">
