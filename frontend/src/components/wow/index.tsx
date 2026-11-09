@@ -256,9 +256,12 @@ const StoryScreen: React.FC<{ step: number }> = ({ step }) => (
     <div className="rounded-[46px] bg-[#2a2a2d] p-[10px] ring-1 ring-white/15">
       <div className="relative h-[480px] overflow-hidden rounded-[36px] bg-black sm:h-[540px]">
         <div className="absolute left-1/2 top-2.5 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-[#0b0b0c]" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-2 z-20 mx-auto h-1 w-28 rounded-full bg-white/70" aria-hidden="true" />
         <AnimatePresence mode="wait">
           <motion.div key={step} className="absolute inset-0 px-5 pt-14" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.4, ease: [0.28, 0.11, 0.32, 1] }}>
             {step === 0 && (
+              <>
+              <div className="absolute inset-x-4 bottom-8 flex h-11 items-center justify-between rounded-full bg-[#1c1c1e] pl-4 pr-1.5 text-[13px] text-[#86868b]" aria-hidden="true">Describe your symptom<span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0071e3] text-white">↑</span></div>
               <div className="space-y-3">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#86868b]">Medicus AI</p>
                 <motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="ml-auto w-fit max-w-[88%] rounded-[18px] rounded-br-md bg-[#0071e3] px-4 py-2.5 text-[14px] text-white">There is a red, scaly patch on my elbow. It itches at night.</motion.p>
@@ -267,6 +270,7 @@ const StoryScreen: React.FC<{ step: number }> = ({ step }) => (
                   {[0, 1, 2].map((i) => (<motion.span key={i} className="h-1.5 w-1.5 rounded-full bg-[#86868b]" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.18 }} />))}
                 </motion.div>
               </div>
+              </>
             )}
             {step === 1 && (
               <div>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Bot, Lock, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
-import { Aurora, CountUp, Marquee, ScanDevice, ScrollStory, SCAN_CASES, SpotlightCard } from '../components/wow';
+import { Aurora, CountUp, Marquee, ScrollStory, SpotlightCard } from '../components/wow';
 import AIChatModal from '../components/AIChatModal';
 import SEO from '../components/SEO';
 import { SponsoredLinks } from '../components/AdSpace';
@@ -37,14 +37,14 @@ const CARDS = [
 ];
 
 const CONDITIONS = [
-  { grad: ['#ff6b6b', '#ff9f6b'], name: 'Acne Vulgaris', accuracy: '96%', desc: 'Common inflammatory skin disease of the pilosebaceous unit.', category: 'Inflammatory', to: '/blog/acne' },
-  { grad: ['#1d1d1f', '#5b5b66'], name: 'Melanoma', accuracy: '94%', desc: 'Serious type of skin cancer developing from melanocytes.', category: 'Neoplastic', to: '/blog/melanoma' },
-  { grad: ['#30b8d5', '#0071e3'], name: 'Eczema', accuracy: '92%', desc: 'Condition that causes dry, red, itchy and irritated skin.', category: 'Inflammatory', to: '/blog/eczema' },
-  { grad: ['#7a5cff', '#bf5af2'], name: 'Psoriasis', accuracy: '93%', desc: 'Autoimmune disease producing patches of abnormal skin.', category: 'Autoimmune', to: '/blog/psoriasis' },
-  { grad: ['#ff5fa2', '#ff9f6b'], name: 'Rosacea', accuracy: '88%', desc: 'Facial condition causing redness and visible blood vessels.', category: 'Vascular', to: '/blog/rosacea' },
-  { grad: ['#34c759', '#30d5c8'], name: 'Vitiligo', accuracy: '90%', desc: 'Long-term condition causing pale patches on the skin.', category: 'Pigmentary', to: '/blog/vitiligo' },
-  { grad: ['#ff9f0a', '#ff6b6b'], name: 'Dermatitis', accuracy: '89%', desc: 'General term for skin irritation or allergic reactions.', category: 'Allergic', to: '/blog/contact-dermatitis' },
-  { grad: ['#5e5ce6', '#2997ff'], name: 'Fungal infections', accuracy: '91%', desc: 'Superficial skin irritation caused by fungi.', category: 'Infectious', to: '/blog/ringworm' },
+  { name: 'Acne Vulgaris', accuracy: '96%', desc: 'Common inflammatory skin disease of the pilosebaceous unit.', category: 'Inflammatory', to: '/blog/acne' },
+  { name: 'Melanoma', accuracy: '94%', desc: 'Serious type of skin cancer developing from melanocytes.', category: 'Neoplastic', to: '/blog/melanoma' },
+  { name: 'Eczema', accuracy: '92%', desc: 'Condition that causes dry, red, itchy and irritated skin.', category: 'Inflammatory', to: '/blog/eczema' },
+  { name: 'Psoriasis', accuracy: '93%', desc: 'Autoimmune disease producing patches of abnormal skin.', category: 'Autoimmune', to: '/blog/psoriasis' },
+  { name: 'Rosacea', accuracy: '88%', desc: 'Facial condition causing redness and visible blood vessels.', category: 'Vascular', to: '/blog/rosacea' },
+  { name: 'Vitiligo', accuracy: '90%', desc: 'Long-term condition causing pale patches on the skin.', category: 'Pigmentary', to: '/blog/vitiligo' },
+  { name: 'Dermatitis', accuracy: '89%', desc: 'General term for skin irritation or allergic reactions.', category: 'Allergic', to: '/blog/contact-dermatitis' },
+  { name: 'Fungal infections', accuracy: '91%', desc: 'Superficial skin irritation caused by fungi.', category: 'Infectious', to: '/blog/ringworm' },
 ];
 
 const H2 = 'text-[34px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#1d1d1f] sm:text-[48px] lg:text-[56px]';
@@ -67,7 +67,6 @@ const LOCAL_LINKS = [
 const Home: React.FC = () => {
   const [symptomText, setSymptomText] = useState('');
   const [active, setActive] = useState(0);
-  const [scanIdx, setScanIdx] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatQuery, setChatQuery] = useState('');
 
@@ -112,16 +111,7 @@ const Home: React.FC = () => {
             <p className="mt-5 text-[13px] text-[#6e6e73]">Free. No sign-up needed to start. Not a diagnosis.<sup className="ml-0.5">1</sup></p>
           </motion.div>
 
-          <motion.div {...reveal} className="mt-14 sm:mt-20">
-            <ScanDevice scanCase={SCAN_CASES[scanIdx]} />
-            <div role="tablist" aria-label="Try an example scan" className="mt-6 inline-flex gap-1 rounded-full bg-white/70 p-1 shadow-sm ring-1 ring-black/[0.06] backdrop-blur">
-              {SCAN_CASES.map((c, i) => (
-                <button key={c.id} type="button" role="tab" aria-selected={scanIdx === i} onClick={() => setScanIdx(i)} className={`rounded-full px-5 py-2 text-[14px] font-medium transition-colors ${FOCUS} ${scanIdx === i ? 'bg-[#1d1d1f] text-white' : 'text-[#1d1d1f] hover:bg-black/5'}`}>{c.label}</button>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div {...reveal} className="mx-auto mt-16 max-w-[980px] rounded-[28px] bg-[#f5f5f7] p-5 text-left sm:mt-20 sm:p-10">
+          <motion.div {...reveal} className="mx-auto mt-14 max-w-[980px] rounded-[28px] bg-[#f5f5f7] p-5 text-left sm:mt-20 sm:p-10">
             <form onSubmit={(e) => { e.preventDefault(); openChat(symptomText); }} className="mx-auto max-w-[760px]">
               <label htmlFor="symptom" className="text-[14px] font-semibold text-[#1d1d1f]">What would you like to check?</label>
               <textarea
@@ -192,15 +182,13 @@ const Home: React.FC = () => {
           <div className="mx-auto mt-12 grid max-w-[1080px] gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div role="tablist" aria-label="Conditions" className="grid grid-cols-2 gap-3">
               {CONDITIONS.map((c, i) => (
-                <button key={c.name} type="button" role="tab" aria-selected={active === i} onClick={() => setActive(i)} style={active === i ? { background: `linear-gradient(135deg, ${c.grad[0]}, ${c.grad[1]})` } : undefined} className={`rounded-[20px] p-4 text-left transition-all hover:-translate-y-0.5 ${FOCUS} ${active === i ? 'text-white shadow-lg' : 'bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed]'}`}>
+                <button key={c.name} type="button" role="tab" aria-selected={active === i} onClick={() => setActive(i)} className={`rounded-[20px] p-4 text-left transition-all hover:-translate-y-0.5 ${FOCUS} ${active === i ? 'bg-[#0071e3] text-white' : 'bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed]'}`}>
                   <span className={`block text-[12px] ${active === i ? 'text-white/80' : 'text-[#6e6e73]'}`}>{c.category}</span>
                   <span className="mt-1 block text-[17px] font-semibold leading-tight">{c.name}</span>
                 </button>
               ))}
             </div>
-            <div role="tabpanel" className="relative flex flex-col justify-between overflow-hidden rounded-[28px] p-8 text-white transition-[background] duration-700 sm:p-10" style={{ background: `linear-gradient(135deg, ${condition.grad[0]}, ${condition.grad[1]})` }}>
-              <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/25 blur-3xl" />
-              <div aria-hidden="true" className="pointer-events-none absolute -bottom-20 left-10 h-56 w-56 rounded-full bg-black/15 blur-3xl" />
+            <div role="tabpanel" className="relative flex flex-col justify-between overflow-hidden rounded-[28px] p-8 text-white transition-[background] duration-700 sm:p-10" style={{ background: '#1d1d1f' }}>
               <div>
                 <p className="text-[14px] font-semibold text-white/80">{condition.category}</p>
                 <h3 className="mt-2 text-[32px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[40px]">{condition.name}</h3>
@@ -250,19 +238,23 @@ const Home: React.FC = () => {
         <div className="bg-white px-5 pb-10"><div className="mx-auto max-w-[1080px]"><SponsoredLinks /></div></div>
 
         {/* Closing call to action */}
-        <section className="bg-white px-5 pb-16 pt-8 sm:pb-24">
-          <motion.div {...reveal} className="relative mx-auto max-w-[1080px] overflow-hidden rounded-[36px] bg-[#1d1d1f] px-6 py-20 text-center text-white sm:py-28">
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-              <div className="absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[#0071e3] opacity-70 blur-[90px]" />
-              <div className="absolute -right-16 top-10 h-96 w-96 rounded-full bg-[#bf5af2] opacity-60 blur-[90px]" />
-              <div className="absolute bottom-[-120px] left-1/3 h-96 w-96 rounded-full bg-[#ff6b6b] opacity-55 blur-[90px]" />
-              <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-[#ffb340] opacity-50 blur-[90px]" />
+        <section className="relative overflow-hidden bg-black px-5 py-28 text-center text-white sm:py-40" aria-label="Get started">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            <div className="absolute left-1/2 top-0 h-[420px] w-[900px] -translate-x-1/2 rounded-[100%] bg-white/[0.07] blur-[90px]" />
+            <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06]" />
+            <div className="absolute left-1/2 top-1/2 h-[860px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.04]" />
+          </div>
+          <motion.div {...reveal} className="relative mx-auto max-w-[900px]">
+            <p className="text-[15px] font-semibold text-[#2997ff]">Ready when you are</p>
+            <h2 className="mt-3 bg-gradient-to-b from-white to-[#8e8e93] bg-clip-text text-[48px] font-semibold leading-[1.02] tracking-[-0.04em] text-transparent sm:text-[96px]">Start with<br />a scan.</h2>
+            <p className="mx-auto mt-6 max-w-[480px] text-[19px] leading-[1.45] text-[#a1a1a6] sm:text-[21px]">Free, private, and ready in minutes. Bring the result to your doctor.</p>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+              <Link to="/analysis" className={`inline-flex h-12 items-center gap-2 rounded-full bg-[#0071e3] px-7 text-[17px] text-white transition-transform hover:scale-[1.04] hover:bg-[#0077ed] ${FOCUS}`}>Start free scan <ArrowRight size={18} /></Link>
+              <button type="button" onClick={() => openChat('')} className={`rounded text-[19px] text-[#2997ff] hover:underline ${FOCUS}`}>Ask Medicus AI <span aria-hidden="true">›</span></button>
             </div>
-            <div className="relative">
-              <h2 className="text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-[72px]">Start with a scan.</h2>
-              <p className="mx-auto mt-4 max-w-[480px] text-[19px] text-white/85 sm:text-[21px]">Free, private, and ready in minutes.</p>
-              <Link to="/analysis" className={`mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[17px] font-medium text-[#1d1d1f] transition-transform hover:scale-[1.04] ${FOCUS}`}>Start free scan <ArrowRight size={18} /></Link>
-            </div>
+            <ul className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[13px] text-[#86868b]">
+              <li>Free to start</li><li>No sign-up needed</li><li>Encrypted in transit</li><li>Not a diagnosis</li>
+            </ul>
           </motion.div>
         </section>
 
