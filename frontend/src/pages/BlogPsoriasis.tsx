@@ -11,29 +11,29 @@ const BlogPsoriasis: React.FC = () => (
       title="Plaque Psoriasis & Autoimmune Dermatology: Pathogenesis & Biologics | Medicus Labs"
       description="Comprehensive clinical guide on Plaque Psoriasis: keratinocyte hyperproliferation, IL-23/IL-17 cytokine axis, PASI evaluation standards, phototherapy, biologics, and AI vision assessment."
     />
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
         <article className="max-w-4xl w-full pb-20">
         {/* Header Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#8A857A] mb-4">
-          <Link to="/blog" className="hover:text-[#206E55]">Blog</Link>
+        <div className="flex items-center gap-2 text-xs font-semibold text-[#86868b] mb-4">
+          <Link to="/blog" className="hover:text-[#0071e3]">Blog</Link>
           <span>/</span>
-          <span className="text-[#206E55]">Psoriasis &amp; Autoimmune Dermatology</span>
+          <span className="text-[#0071e3]">Psoriasis &amp; Autoimmune Dermatology</span>
         </div>
 
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
           <Sparkles size={12} /> Clinical Dermatology Guide • ICD-11: EA90
         </span>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#141515] mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1d1d1f] mb-6 leading-tight">
           Plaque Psoriasis &amp; Autoimmune Dermatology: T-Cell Mediated Pathogenesis &amp; Biologic Therapies
         </h1>
 
         {/* Author Byline */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5E2DA] mb-10 text-xs text-[#5A554A]">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#d2d2d7] mb-10 text-xs text-[#6e6e73]">
           <div className="flex items-center gap-2">
-            <User size={15} className="text-[#206E55]" />
-            <span className="font-bold text-[#141515]">Authored by:</span> Mallikarjun R &amp; Medicus Clinical Review Team
+            <User size={15} className="text-[#0071e3]" />
+            <span className="font-bold text-[#1d1d1f]">Authored by:</span> Mallikarjun R &amp; Medicus Clinical Review Team
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
@@ -41,7 +41,7 @@ const BlogPsoriasis: React.FC = () => (
               <span>13 min read</span>
             </div>
             <span>•</span>
-            <div className="flex items-center gap-1 text-[#206E55] font-semibold">
+            <div className="flex items-center gap-1 text-[#0071e3] font-semibold">
               <ShieldCheck size={14} />
               <span>Peer-Referenced</span>
             </div>
@@ -54,35 +54,35 @@ const BlogPsoriasis: React.FC = () => (
         </div>
 
         {/* Main Content */}
-        <div className="prose prose-slate max-w-none text-[#5A554A] space-y-8 leading-relaxed">
+        <div className="prose prose-slate max-w-none text-[#6e6e73] space-y-8 leading-relaxed">
 
           {/* Key Clinical Summary */}
-          <div className="bg-[#E8F2ED]/60 border border-[#206E55]/20 rounded-3xl p-6 sm:p-8">
-            <h3 className="text-lg font-bold text-[#206E55] mb-3 flex items-center gap-2">
+          <div className="bg-[#eaf2fd]/60 border border-[#0071e3]/20 rounded-3xl p-6 sm:p-8">
+            <h3 className="text-lg font-bold text-[#0071e3] mb-3 flex items-center gap-2">
               <Stethoscope size={20} /> Executive Clinical Summary
             </h3>
-            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#141515]">
+            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#1d1d1f]">
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Pathology:</strong> Immune-mediated inflammatory disease driven by dendritic cell and T-cell activation.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Cytokine Axis:</strong> IL-23/IL-17 inflammatory signaling accelerates epidermal turnover from 28 to 4 days.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Clinical Signs:</strong> Well-demarcated erythematous plaques with silvery-white micaceous scales (Auspitz sign).</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Therapy:</strong> High-potency topical steroids, vitamin D analogues, narrow-band UVB phototherapy, and IL-17/IL-23 biologics.</span>
               </li>
             </ul>
           </div>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">1. Overview &amp; Immunopathogenesis</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">1. Overview &amp; Immunopathogenesis</h2>
             <p>
               Psoriasis is a chronic, non-communicable, systemic autoimmune dermatosis affecting approximately 2%–3% of the global population. While predominantly presenting as cutaneous plaques, psoriasis is increasingly recognized as a multi-system inflammatory condition associated with psoriatic arthritis (PsA), metabolic syndrome, and cardiovascular comorbidities.
             </p>
@@ -103,10 +103,10 @@ const BlogPsoriasis: React.FC = () => (
           <AdSpace variant="rectangle" className="my-8" />
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">2. Clinical Phenotypes &amp; Diagnostic Markers</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">2. Clinical Phenotypes &amp; Diagnostic Markers</h2>
             <div className="grid sm:grid-cols-2 gap-4 mt-4">
-              <div className="bg-white border border-[#E5E2DA] p-5 rounded-2xl">
-                <h4 className="font-bold text-[#206E55] text-base mb-2">Major Clinical Subtypes</h4>
+              <div className="bg-white border border-[#d2d2d7] p-5 rounded-2xl">
+                <h4 className="font-bold text-[#0071e3] text-base mb-2">Major Clinical Subtypes</h4>
                 <ul className="text-xs space-y-2">
                   <li><strong>Plaque Psoriasis (Psoriasis Vulgaris):</strong> Accounts for &gt;85% of cases; symmetrical erythematous plaques with thick silvery scales on elbows, knees, scalp, and lumbosacral region.</li>
                   <li><strong>Guttate Psoriasis:</strong> Sudden eruption of small drop-like papules, frequently triggered by preceding Group A Streptococcal pharyngitis.</li>
@@ -114,8 +114,8 @@ const BlogPsoriasis: React.FC = () => (
                   <li><strong>Pustular &amp; Erythrodermic Psoriasis:</strong> Life-threatening severe variants requiring urgent hospitalization and systemic monitoring.</li>
                 </ul>
               </div>
-              <div className="bg-white border border-[#E5E2DA] p-5 rounded-2xl">
-                <h4 className="font-bold text-[#206E55] text-base mb-2">Classic Physical Signs</h4>
+              <div className="bg-white border border-[#d2d2d7] p-5 rounded-2xl">
+                <h4 className="font-bold text-[#0071e3] text-base mb-2">Classic Physical Signs</h4>
                 <ul className="text-xs space-y-2">
                   <li><strong>Auspitz Sign:</strong> Pinpoint punctate bleeding observed after mechanical scraping or removal of micaceous scales, reflecting dilated dermal capillaries.</li>
                   <li><strong>Koebner Phenomenon:</strong> Development of new psoriatic plaques along sites of mechanical cutaneous trauma or friction.</li>
@@ -126,7 +126,7 @@ const BlogPsoriasis: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">3. PASI Scoring &amp; Severity Assessment</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">3. PASI Scoring &amp; Severity Assessment</h2>
             <p>
               The Psoriasis Area and Severity Index (PASI) combines evaluation of lesion erythema, induration (thickness), and desquamation (scaling) across four anatomical body regions (head, trunk, upper extremities, lower extremities):
             </p>
@@ -137,36 +137,36 @@ const BlogPsoriasis: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">4. Therapeutic Spectrum &amp; Biologic Breakthroughs</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">4. Therapeutic Spectrum &amp; Biologic Breakthroughs</h2>
             <div className="overflow-x-auto mt-4">
-              <table className="w-full text-xs text-left border-collapse border border-[#E5E2DA] rounded-2xl overflow-hidden">
-                <thead className="bg-[#F3F1EB] text-[#141515] font-bold">
+              <table className="w-full text-xs text-left border-collapse border border-[#d2d2d7] rounded-2xl overflow-hidden">
+                <thead className="bg-[#f5f5f7] text-[#1d1d1f] font-bold">
                   <tr>
-                    <th className="p-3 border border-[#E5E2DA]">Treatment Class</th>
-                    <th className="p-3 border border-[#E5E2DA]">Mechanism / Specific Agents</th>
-                    <th className="p-3 border border-[#E5E2DA]">Clinical Indication</th>
+                    <th className="p-3 border border-[#d2d2d7]">Treatment Class</th>
+                    <th className="p-3 border border-[#d2d2d7]">Mechanism / Specific Agents</th>
+                    <th className="p-3 border border-[#d2d2d7]">Clinical Indication</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E5E2DA] bg-white">
+                <tbody className="divide-y divide-[#d2d2d7] bg-white">
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Topical Therapy</td>
-                    <td className="p-3 border border-[#E5E2DA]">Clobetasol propionate + Calcipotriene (Vit D3 analogue), Tapinarof, Roflumilast.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Mild to moderate localized plaque psoriasis.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Topical Therapy</td>
+                    <td className="p-3 border border-[#d2d2d7]">Clobetasol propionate + Calcipotriene (Vit D3 analogue), Tapinarof, Roflumilast.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Mild to moderate localized plaque psoriasis.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Phototherapy</td>
-                    <td className="p-3 border border-[#E5E2DA]">Narrowband UVB (NB-UVB 311nm) or PUVA photochemotherapy.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Widespread moderate plaque &amp; guttate psoriasis.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Phototherapy</td>
+                    <td className="p-3 border border-[#d2d2d7]">Narrowband UVB (NB-UVB 311nm) or PUVA photochemotherapy.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Widespread moderate plaque &amp; guttate psoriasis.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Oral Systemics</td>
-                    <td className="p-3 border border-[#E5E2DA]">Methotrexate, Cyclosporine, Acitretin, Apremilast (PDE4 inhibitor), Deucravacitinib.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Moderate-to-severe disease refractor to topicals.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Oral Systemics</td>
+                    <td className="p-3 border border-[#d2d2d7]">Methotrexate, Cyclosporine, Acitretin, Apremilast (PDE4 inhibitor), Deucravacitinib.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Moderate-to-severe disease refractor to topicals.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">IL-17 / IL-23 Biologics</td>
-                    <td className="p-3 border border-[#E5E2DA]">Secukinumab, Ixekizumab, Bimekizumab (IL-17 inhibitors); Guselkumab, Risankizumab (IL-23 inhibitors).</td>
-                    <td className="p-3 border border-[#E5E2DA]">Severe psoriasis achieving PASI 90 to PASI 100 complete skin clearance.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">IL-17 / IL-23 Biologics</td>
+                    <td className="p-3 border border-[#d2d2d7]">Secukinumab, Ixekizumab, Bimekizumab (IL-17 inhibitors); Guselkumab, Risankizumab (IL-23 inhibitors).</td>
+                    <td className="p-3 border border-[#d2d2d7]">Severe psoriasis achieving PASI 90 to PASI 100 complete skin clearance.</td>
                   </tr>
                 </tbody>
               </table>
@@ -174,18 +174,18 @@ const BlogPsoriasis: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">5. Medicus AI Psoriasis Pattern Recognition</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">5. Medicus AI Psoriasis Pattern Recognition</h2>
             <p>
               Medicus AI isolates micaceous scaling reflections, plaque boundary sharpness, and erythema chroma index from smartphone photos. This yields an objective baseline reference to assist patients in tracking therapeutic responsiveness during topical or biologic treatment.
             </p>
           </section>
 
           {/* References */}
-          <section className="pt-8 border-t border-[#E5E2DA]">
-            <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2">
+          <section className="pt-8 border-t border-[#d2d2d7]">
+            <h3 className="text-lg font-bold text-[#1d1d1f] mb-3 flex items-center gap-2">
               <FileText size={18} /> Scientific Citations &amp; Clinical Sources
             </h3>
-            <ol className="list-decimal pl-6 text-xs text-[#8A857A] space-y-1.5 font-mono">
+            <ol className="list-decimal pl-6 text-xs text-[#86868b] space-y-1.5 font-mono">
               <li>Menter A, et al. Joint AAD-NPF guidelines of care for the management and treatment of psoriasis with biologics. <em>J Am Acad Dermatol.</em> 2019;80(4):1029-1072.</li>
               <li>Armstrong AW, Read C. Pathophysiology, Clinical Presentation, and Treatment of Psoriasis: A Review. <em>JAMA.</em> 2020;323(19):1945-1960.</li>
               <li>WHO ICD-11 Code EA90: Psoriasis. World Health Organization, 2024.</li>
@@ -198,13 +198,13 @@ const BlogPsoriasis: React.FC = () => (
 
         <AdSpace variant="leaderboard" className="my-10" />
 
-        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">
-          <h3 className="text-2xl font-extrabold text-[#141515] mb-2">Analyze Psoriasis Plaques with AI</h3>
-          <p className="text-sm text-[#5A554A] max-w-xl mx-auto mb-6">
+        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#eaf2fd] via-white to-[#f5f5f7] border border-[#0071e3]/30 text-center shadow-sm">
+          <h3 className="text-2xl font-extrabold text-[#1d1d1f] mb-2">Analyze Psoriasis Plaques with AI</h3>
+          <p className="text-sm text-[#6e6e73] max-w-xl mx-auto mb-6">
             Generate an instant visual plaque assessment report and share results with your rheumatologist or dermatologist.
           </p>
           <Link to="/analysis">
-            <button className="px-8 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">
+            <button className="px-8 py-3.5 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">
               Start Free Psoriasis Analysis <ArrowRight size={16} />
             </button>
           </Link>

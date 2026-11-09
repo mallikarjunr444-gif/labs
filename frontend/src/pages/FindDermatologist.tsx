@@ -1142,7 +1142,7 @@ const FindDermatologist: React.FC = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaStructuredData) }}
       />
 
-      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+      <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
 
           {/* ── HERO HEADER ── */}
@@ -1152,24 +1152,24 @@ const FindDermatologist: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
-                <Globe size={14} className="text-[#206E55]" />
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest">
+                <Globe size={14} className="text-[#0071e3]" />
                 Worldwide Dermatology &amp; Skin Doctor Directory
               </span>
             </motion.div>
 
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#141515] leading-tight font-display"
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#1d1d1f] leading-tight font-display"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               Find a Board-Certified{' '}
-              <span className="text-[#206E55]">Dermatologist Near You</span>
+              <span className="text-[#0071e3]">Dermatologist Near You</span>
             </motion.h1>
 
             <motion.p
-              className="text-[#5A554A] text-base sm:text-lg leading-relaxed"
+              className="text-[#6e6e73] text-base sm:text-lg leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -1179,32 +1179,32 @@ const FindDermatologist: React.FC = () => {
           </div>
 
           {/* ── LOCATION PERMISSION & BACKGROUND RADAR SEARCH BAR ── */}
-          <div className="bg-white border-2 border-[#206E55]/30 rounded-3xl p-6 sm:p-8 shadow-xl mb-14 space-y-6 relative overflow-hidden">
+          <div className="bg-white border-2 border-[#0071e3]/30 rounded-3xl p-6 sm:p-8 shadow-xl mb-14 space-y-6 relative overflow-hidden">
             
             {/* Background Radar Scanning Indicator */}
             {isSearchingBackground && (
               <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-20 flex flex-col items-center justify-center space-y-3 p-6 text-center">
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-full border-4 border-[#206E55]/20 border-t-[#206E55] animate-spin" />
-                  <Stethoscope size={24} className="text-[#206E55] absolute inset-0 m-auto" />
+                  <div className="w-16 h-16 rounded-full border-4 border-[#0071e3]/20 border-t-[#0071e3] animate-spin" />
+                  <Stethoscope size={24} className="text-[#0071e3] absolute inset-0 m-auto" />
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-[#141515] text-base">Searching Skin Specialists in Background...</h4>
-                  <p className="text-xs text-[#206E55] font-semibold mt-1 animate-pulse">
+                  <h4 className="font-extrabold text-[#1d1d1f] text-base">Searching Skin Specialists in Background...</h4>
+                  <p className="text-xs text-[#0071e3] font-semibold mt-1 animate-pulse">
                     {SCAN_STEPS[scannerStep]}
                   </p>
                 </div>
               </div>
             )}
 
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-4 pb-6 border-b border-[#E5E2DA]">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-4 pb-6 border-b border-[#d2d2d7]">
               <div className="flex items-center gap-3.5 w-full lg:w-auto">
-                <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                <div className="w-12 h-12 rounded-2xl bg-[#0071e3] text-white flex items-center justify-center flex-shrink-0 shadow-md">
                   <Navigation size={22} className="animate-pulse" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-[#141515]">
+                    <h3 className="text-lg font-bold text-[#1d1d1f]">
                       {userLocation.source === 'gps' ? '📍 GPS Location Active' : `Location: ${userLocation.city || 'Your Area'}, ${userLocation.country || 'Worldwide'}`}
                     </h3>
                     <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wide flex items-center gap-1">
@@ -1212,7 +1212,7 @@ const FindDermatologist: React.FC = () => {
                       Global Registry Connected
                     </span>
                   </div>
-                  <p className="text-xs text-[#5A554A] mt-0.5">
+                  <p className="text-xs text-[#6e6e73] mt-0.5">
                     {userLocation.source === 'gps'
                       ? 'Using high-accuracy device GPS to locate closest dermatology practices'
                       : 'Click "Turn On Current Location" to get precise walking/driving distances'}
@@ -1224,7 +1224,7 @@ const FindDermatologist: React.FC = () => {
               <button
                 onClick={handleEnableGPS}
                 disabled={isSearchingBackground}
-                className="w-full lg:w-auto px-6 py-3.5 rounded-2xl bg-[#206E55] hover:bg-[#1b5c47] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-[#206E55]/20 hover:scale-[1.02]"
+                className="w-full lg:w-auto px-6 py-3.5 rounded-2xl bg-[#0071e3] hover:bg-[#0058b0] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-[#0071e3]/20 hover:scale-[1.02]"
               >
                 <MapPin size={16} />
                 <span>Turn On Current Location (GPS)</span>
@@ -1234,10 +1234,10 @@ const FindDermatologist: React.FC = () => {
             {/* Region / Continent Selector Tabs */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#8A857A]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#86868b]">
                   Browse by Region &amp; Country:
                 </span>
-                <span className="text-[11px] font-medium text-slate-400">150+ Countries Supported</span>
+                <span className="text-[11px] font-medium text-[#86868b]">150+ Countries Supported</span>
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -1247,8 +1247,8 @@ const FindDermatologist: React.FC = () => {
                     onClick={() => setSelectedContinent(regionTab)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
                       selectedContinent === regionTab
-                        ? 'bg-[#141515] text-white shadow-sm'
-                        : 'bg-[#F3F1EB] text-[#5A554A] hover:text-[#206E55]'
+                        ? 'bg-[#1d1d1f] text-white shadow-sm'
+                        : 'bg-[#f5f5f7] text-[#6e6e73] hover:text-[#0071e3]'
                     }`}
                   >
                     {regionTab}
@@ -1257,13 +1257,13 @@ const FindDermatologist: React.FC = () => {
               </div>
 
               {/* Popular Global Locations Filter Pills */}
-              <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto py-1 pt-2 border-t border-slate-100">
+              <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto py-1 pt-2 border-t border-[#f5f5f7]">
                 <button
                   onClick={() => handleSelectCityPill('Auto-Detect Current GPS')}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-1 ${
                     activeLocationFilter === 'Auto-Detect Current GPS'
-                      ? 'bg-[#206E55] text-white shadow-md'
-                      : 'bg-[#E8F2ED] text-[#206E55] border border-[#206E55]/30'
+                      ? 'bg-[#0071e3] text-white shadow-md'
+                      : 'bg-[#eaf2fd] text-[#0071e3] border border-[#0071e3]/30'
                   }`}
                 >
                   <Navigation size={12} /> Auto-Detect GPS
@@ -1275,8 +1275,8 @@ const FindDermatologist: React.FC = () => {
                     onClick={() => handleSelectCityPill(loc)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${
                       activeLocationFilter === loc
-                        ? 'bg-[#206E55] text-white shadow-md'
-                        : 'bg-[#F3F1EB] border border-[#E5E2DA] text-[#5A554A] hover:border-[#206E55] hover:text-[#206E55]'
+                        ? 'bg-[#0071e3] text-white shadow-md'
+                        : 'bg-[#f5f5f7] border border-[#d2d2d7] text-[#6e6e73] hover:border-[#0071e3] hover:text-[#0071e3]'
                     }`}
                   >
                     {loc}
@@ -1287,13 +1287,13 @@ const FindDermatologist: React.FC = () => {
 
             {/* Keyword / Condition Search Bar */}
             <div className="relative">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#86868b]" />
               <input
                 type="text"
                 placeholder="Search skin doctors by condition (e.g. Acne, Eczema, Moles, Psoriasis, Rash), Clinic, or Insurance..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-sm text-[#141515] placeholder-slate-400 focus:outline-none focus:border-[#206E55] transition shadow-inner"
+                className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#fbfbfd] border border-[#d2d2d7] text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] transition shadow-inner"
               />
             </div>
           </div>
@@ -1302,16 +1302,16 @@ const FindDermatologist: React.FC = () => {
           <div className="mb-16">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-8">
               <div>
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#206E55] flex items-center gap-1.5">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#0071e3] flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                   {userLocation.country ? `${userLocation.country} Medical Registry` : 'Verified Specialists'}
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1d1f] mt-1">
                   {userLocation.city && userLocation.city !== 'Your Area' && userLocation.city !== 'Your City' && userLocation.city !== 'Detecting Location...'
                     ? `Skin Specialists & Dermatologists in ${userLocation.city}`
                     : 'Verified Skin Specialists & Dermatology Clinics Near You'}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#5A554A] mt-1">
+                <p className="text-xs sm:text-sm text-[#6e6e73] mt-1">
                   Showing {localDoctorsList.length} verified skin doctors accepting new patient appointments and Medicus AI reports.
                 </p>
               </div>
@@ -1328,22 +1328,22 @@ const FindDermatologist: React.FC = () => {
               {localDoctorsList.map((clinic) => (
                 <div
                   key={clinic.id}
-                  className="rounded-3xl bg-white border border-[#E5E2DA] p-7 shadow-sm hover:shadow-md hover:border-[#206E55]/50 transition-all flex flex-col justify-between space-y-6 group"
+                  className="rounded-3xl bg-white border border-[#d2d2d7] p-7 shadow-sm hover:shadow-md hover:border-[#0071e3]/50 transition-all flex flex-col justify-between space-y-6 group"
                 >
                   <div className="space-y-4">
                     {/* Header: Name, Badge, Rating */}
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         {clinic.badge && (
-                          <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-0.5 rounded-full bg-[#E8F2ED] text-[#206E55] mb-1.5">
+                          <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-0.5 rounded-full bg-[#f5f5f7] text-[#6e6e73] mb-1.5">
                             {clinic.badge}
                           </span>
                         )}
-                        <h3 className="text-xl font-bold text-[#141515] group-hover:text-[#206E55] transition-colors">
-                          {clinic.doctorName} <span className="text-xs font-normal text-slate-500">({clinic.degree})</span>
+                        <h3 className="text-xl font-bold text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors">
+                          {clinic.doctorName} <span className="text-xs font-normal text-[#6e6e73]">({clinic.degree})</span>
                         </h3>
-                        <p className="text-xs font-semibold text-[#5A554A] mt-0.5 flex items-center gap-1">
-                          <Building size={12} className="text-[#206E55]" />
+                        <p className="text-xs font-semibold text-[#6e6e73] mt-0.5 flex items-center gap-1">
+                          <Building size={12} className="text-[#0071e3]" />
                           {clinic.clinicName}
                         </p>
                       </div>
@@ -1353,18 +1353,18 @@ const FindDermatologist: React.FC = () => {
                           <Star size={13} className="fill-amber-500 text-amber-500" />
                           <span>{clinic.rating}</span>
                         </div>
-                        <span className="text-[10px] text-slate-400 mt-1 font-semibold">({clinic.reviewsCount} verified reviews)</span>
+                        <span className="text-[10px] text-[#86868b] mt-1 font-semibold">({clinic.reviewsCount} verified reviews)</span>
                       </div>
                     </div>
 
                     {/* Address & Distance */}
-                    <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] text-xs space-y-1.5">
-                      <div className="flex items-start gap-2 text-[#141515] font-semibold">
-                        <MapPin size={14} className="text-[#206E55] mt-0.5 shrink-0" />
+                    <div className="p-3.5 rounded-2xl bg-[#fbfbfd] border border-[#d2d2d7] text-xs space-y-1.5">
+                      <div className="flex items-start gap-2 text-[#1d1d1f] font-semibold">
+                        <MapPin size={14} className="text-[#0071e3] mt-0.5 shrink-0" />
                         <span>{clinic.address}</span>
                       </div>
-                      <div className="flex items-center justify-between text-[11px] text-[#8A857A] pl-5 font-semibold">
-                        <span className="text-[#206E55] font-bold">{clinic.distance}</span>
+                      <div className="flex items-center justify-between text-[11px] text-[#86868b] pl-5 font-semibold">
+                        <span className="text-[#0071e3] font-bold">{clinic.distance}</span>
                         <span>{clinic.isVirtualAvailable ? '✅ Telehealth & In-Person' : 'In-Person Clinic'}</span>
                       </div>
                     </div>
@@ -1377,10 +1377,10 @@ const FindDermatologist: React.FC = () => {
 
                     {/* Skin Specialties */}
                     <div className="space-y-1.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Dermatology Specialties:</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#86868b]">Dermatology Specialties:</span>
                       <div className="flex flex-wrap gap-1.5">
                         {clinic.specialties.map((spec, i) => (
-                          <span key={i} className="px-2.5 py-1 rounded-lg bg-[#F3F1EB] text-[#141515] text-[11px] font-semibold">
+                          <span key={i} className="px-2.5 py-1 rounded-lg bg-[#f5f5f7] text-[#1d1d1f] text-[11px] font-semibold">
                             {spec}
                           </span>
                         ))}
@@ -1389,13 +1389,13 @@ const FindDermatologist: React.FC = () => {
 
                     {/* Estimated Fee & Insurance */}
                     <div className="space-y-1.5 pt-1 text-xs">
-                      <div className="flex items-center justify-between text-[11px] font-semibold text-[#141515]">
-                        <span className="text-slate-500">Consultation Fee:</span>
-                        <span className="font-bold text-[#206E55]">{clinic.consultationFee}</span>
+                      <div className="flex items-center justify-between text-[11px] font-semibold text-[#1d1d1f]">
+                        <span className="text-[#6e6e73]">Consultation Fee:</span>
+                        <span className="font-bold text-[#0071e3]">{clinic.consultationFee}</span>
                       </div>
                       <div className="space-y-1">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Accepted Health Plans / Insurance:</span>
-                        <p className="text-[11px] text-[#5A554A] font-medium leading-relaxed">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#86868b]">Accepted Health Plans / Insurance:</span>
+                        <p className="text-[11px] text-[#6e6e73] font-medium leading-relaxed">
                           {clinic.insuranceAccepted.join(' • ')}
                         </p>
                       </div>
@@ -1403,12 +1403,12 @@ const FindDermatologist: React.FC = () => {
                   </div>
 
                   {/* Actions: Book Now (Redirects to Doctor Booking Portal) + Call */}
-                  <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+                  <div className="pt-4 border-t border-[#f5f5f7] flex flex-col sm:flex-row gap-3">
                     <a
                       href={clinic.bookingUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-3.5 rounded-2xl bg-[#206E55] hover:bg-[#1b5c47] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition group-hover:scale-[1.01]"
+                      className="flex-1 py-3.5 rounded-2xl bg-[#0071e3] hover:bg-[#0058b0] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition group-hover:scale-[1.01]"
                     >
                       <Calendar size={15} />
                       <span>Book on {clinic.platformName}</span>
@@ -1417,9 +1417,9 @@ const FindDermatologist: React.FC = () => {
 
                     <a
                       href={`tel:${clinic.phone.replace(/[^0-9+]/g, '')}`}
-                      className="px-5 py-3.5 rounded-2xl bg-[#FAF9F5] hover:bg-[#E5E2DA] border border-[#E5E2DA] text-[#141515] font-bold text-xs flex items-center justify-center gap-2 transition"
+                      className="px-5 py-3.5 rounded-2xl bg-[#fbfbfd] hover:bg-[#d2d2d7] border border-[#d2d2d7] text-[#1d1d1f] font-bold text-xs flex items-center justify-center gap-2 transition"
                     >
-                      <PhoneCall size={14} className="text-[#206E55]" />
+                      <PhoneCall size={14} className="text-[#0071e3]" />
                       <span>{clinic.phone}</span>
                     </a>
                   </div>
@@ -1429,15 +1429,15 @@ const FindDermatologist: React.FC = () => {
           </div>
 
           {/* ── CLINICAL CONDITIONS DIRECTORY (INTERNAL SEO ENGINE) ── */}
-          <div className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-12 mb-16 space-y-8">
+          <div className="rounded-3xl bg-[#f5f5f7] border border-[#d2d2d7] p-8 sm:p-12 mb-16 space-y-8">
             <div className="max-w-3xl">
-              <span className="text-xs font-extrabold text-[#206E55] uppercase tracking-widest">
+              <span className="text-xs font-extrabold text-[#0071e3] uppercase tracking-widest">
                 Condition-Specific Specialists
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1d1f] mt-1">
                 Explore Dermatologists by Skin Condition
               </h2>
-              <p className="text-sm text-[#5A554A] mt-2 leading-relaxed">
+              <p className="text-sm text-[#6e6e73] mt-2 leading-relaxed">
                 Connect with specialists experienced in treating complex dermatological diseases. Review our peer-referenced clinical guides prior to your visit.
               </p>
             </div>
@@ -1446,26 +1446,26 @@ const FindDermatologist: React.FC = () => {
               {CLINICAL_CONDITION_CATEGORIES.map((cat, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl bg-white border border-[#E5E2DA] p-5 shadow-sm flex flex-col justify-between space-y-3 hover:border-[#206E55]/40 transition"
+                  className="rounded-2xl bg-white border border-[#d2d2d7] p-5 shadow-sm flex flex-col justify-between space-y-3 hover:border-[#0071e3]/40 transition"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#E8F2ED] text-[#206E55]">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#eaf2fd] text-[#0071e3]">
                         {cat.badge}
                       </span>
                     </div>
-                    <h3 className="font-bold text-sm text-[#141515]">{cat.name}</h3>
-                    <p className="text-xs text-[#5A554A] leading-relaxed line-clamp-2">
+                    <h3 className="font-bold text-sm text-[#1d1d1f]">{cat.name}</h3>
+                    <p className="text-xs text-[#6e6e73] leading-relaxed line-clamp-2">
                       {cat.description}
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#206E55]">
+                  <div className="pt-2 border-t border-[#f5f5f7] flex items-center justify-between text-xs font-bold text-[#0071e3]">
                     <Link to={cat.articleLink} className="hover:underline flex items-center gap-1">
                       <span>Clinical Guide</span>
                       <ArrowRight size={12} />
                     </Link>
-                    <Link to={cat.subLink} className="text-slate-400 hover:text-[#206E55] transition">
+                    <Link to={cat.subLink} className="text-[#86868b] hover:text-[#0071e3] transition">
                       Related ↗
                     </Link>
                   </div>
@@ -1475,33 +1475,33 @@ const FindDermatologist: React.FC = () => {
           </div>
 
           {/* ── MEDICAL E-E-A-T BOARD CERTIFICATION STANDARDS ── */}
-          <div className="rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#FAF9F5] border-2 border-[#206E55]/30 p-8 sm:p-12 mb-16 grid md:grid-cols-3 gap-8 items-start">
+          <div className="rounded-3xl bg-gradient-to-br from-[#eaf2fd] via-white to-[#fbfbfd] border-2 border-[#0071e3]/30 p-8 sm:p-12 mb-16 grid md:grid-cols-3 gap-8 items-start">
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center shadow-md">
+              <div className="w-12 h-12 rounded-2xl bg-[#0071e3] text-white flex items-center justify-center shadow-md">
                 <Award size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#141515]">12+ Years of Medical Training</h3>
-              <p className="text-xs text-[#5A554A] leading-relaxed">
+              <h3 className="text-xl font-bold text-[#1d1d1f]">12+ Years of Medical Training</h3>
+              <p className="text-xs text-[#6e6e73] leading-relaxed">
                 Board-certified dermatologists complete 4 years of undergraduate study, 4 years of medical school, a 1-year internship, and 3+ years of specialized dermatology residency.
               </p>
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center shadow-md">
+              <div className="w-12 h-12 rounded-2xl bg-[#0071e3] text-white flex items-center justify-center shadow-md">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#141515]">Certified Specialist Seals</h3>
-              <p className="text-xs text-[#5A554A] leading-relaxed">
+              <h3 className="text-xl font-bold text-[#1d1d1f]">Certified Specialist Seals</h3>
+              <p className="text-xs text-[#6e6e73] leading-relaxed">
                 Doctors listed feature verified credentials from national boards including FAAD (USA), MD/DNB (India), GMC/FRCP (UK), FRCPC (Canada), and FACD (Australia).
               </p>
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#206E55] text-white flex items-center justify-center shadow-md">
+              <div className="w-12 h-12 rounded-2xl bg-[#0071e3] text-white flex items-center justify-center shadow-md">
                 <HeartPulse size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#141515]">Evidence-Based Protocols</h3>
-              <p className="text-xs text-[#5A554A] leading-relaxed">
+              <h3 className="text-xl font-bold text-[#1d1d1f]">Evidence-Based Protocols</h3>
+              <p className="text-xs text-[#6e6e73] leading-relaxed">
                 Every listed clinic adheres to international clinical guidelines from the AAD, BAD, and WHO for skin pathology, dermoscopy, and safe prescription workflows.
               </p>
             </div>
@@ -1510,11 +1510,11 @@ const FindDermatologist: React.FC = () => {
           {/* ── GLOBAL TELEHEALTH PLATFORMS (FOR INSTANT CARE) ── */}
           <div className="mb-16">
             <div className="mb-8">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-[#206E55]">Direct Virtual Care</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-[#0071e3]">Direct Virtual Care</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1d1f] mt-1">
                 Regional Telehealth Booking Networks
               </h2>
-              <p className="text-sm text-[#5A554A] mt-1">
+              <p className="text-sm text-[#6e6e73] mt-1">
                 For immediate video consultations, prescription refills, and second opinions from home.
               </p>
             </div>
@@ -1523,15 +1523,15 @@ const FindDermatologist: React.FC = () => {
               {GLOBAL_TELEHEALTH_PROVIDERS.map((provider) => (
                 <div
                   key={provider.id}
-                  className="rounded-3xl bg-white border border-[#E5E2DA] p-7 shadow-sm flex flex-col justify-between space-y-4"
+                  className="rounded-3xl bg-white border border-[#d2d2d7] p-7 shadow-sm flex flex-col justify-between space-y-4"
                 >
                   <div className="space-y-4">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-[#E8F2ED] text-[#206E55] mb-2">
+                        <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-[#f5f5f7] text-[#6e6e73] mb-2">
                           {provider.badge}
                         </span>
-                        <h3 className="text-xl font-bold text-[#141515]">{provider.name}</h3>
+                        <h3 className="text-xl font-bold text-[#1d1d1f]">{provider.name}</h3>
                       </div>
                       <div className="flex items-center gap-1 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-xl text-amber-800 text-xs font-bold">
                         <Star size={12} className="fill-amber-500 text-amber-500" />
@@ -1539,35 +1539,35 @@ const FindDermatologist: React.FC = () => {
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#5A554A] leading-relaxed">{provider.tagline}</p>
+                    <p className="text-xs text-[#6e6e73] leading-relaxed">{provider.tagline}</p>
 
                     <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="p-3 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA]">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Estimated Fee:</span>
-                        <span className="font-bold text-[#141515]">{provider.price}</span>
+                      <div className="p-3 rounded-2xl bg-[#fbfbfd] border border-[#d2d2d7]">
+                        <span className="text-[10px] font-bold text-[#86868b] uppercase tracking-wider block">Estimated Fee:</span>
+                        <span className="font-bold text-[#1d1d1f]">{provider.price}</span>
                       </div>
-                      <div className="p-3 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA]">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Turnaround:</span>
-                        <span className="font-bold text-[#206E55]">{provider.waitTime}</span>
+                      <div className="p-3 rounded-2xl bg-[#fbfbfd] border border-[#d2d2d7]">
+                        <span className="text-[10px] font-bold text-[#86868b] uppercase tracking-wider block">Turnaround:</span>
+                        <span className="font-bold text-[#0071e3]">{provider.waitTime}</span>
                       </div>
                     </div>
 
-                    <ul className="space-y-2 pt-2 text-xs text-[#5A554A]">
+                    <ul className="space-y-2 pt-2 text-xs text-[#6e6e73]">
                       {provider.features.map((feat, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <CheckCircle2 size={14} className="text-[#206E55] mt-0.5 shrink-0" />
+                          <CheckCircle2 size={14} className="text-[#0071e3] mt-0.5 shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-6 border-t border-[#FAF9F5]">
+                  <div className="pt-6 border-t border-[#fbfbfd]">
                     <a
                       href={provider.bookingUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 rounded-2xl bg-[#141515] hover:bg-slate-800 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
+                      className="w-full py-3.5 rounded-2xl bg-[#1d1d1f] hover:bg-[#1d1d1f] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
                     >
                       <span>Book on {provider.name.split(' ')[0]} Official Portal</span>
                       <ExternalLink size={15} />
@@ -1579,15 +1579,15 @@ const FindDermatologist: React.FC = () => {
           </div>
 
           {/* ── PATIENT FAQ ACCORDION (SEO POWERHOUSE) ── */}
-          <div className="rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-12 mb-16 space-y-8 shadow-sm">
+          <div className="rounded-3xl bg-white border border-[#d2d2d7] p-8 sm:p-12 mb-16 space-y-8 shadow-sm">
             <div className="max-w-3xl">
-              <span className="text-xs font-extrabold text-[#206E55] uppercase tracking-widest">
+              <span className="text-xs font-extrabold text-[#0071e3] uppercase tracking-widest">
                 Frequently Asked Questions
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1d1f] mt-1">
                 Patient Guide to Finding a Dermatologist
               </h2>
-              <p className="text-sm text-[#5A554A] mt-2">
+              <p className="text-sm text-[#6e6e73] mt-2">
                 Essential clinical answers to help you prepare for your in-person or virtual dermatology consultation.
               </p>
             </div>
@@ -1596,16 +1596,16 @@ const FindDermatologist: React.FC = () => {
               {PATIENT_FAQS.map((faq, index) => (
                 <div
                   key={index}
-                  className="rounded-2xl border border-[#E5E2DA] bg-[#FAF9F5] overflow-hidden transition"
+                  className="rounded-2xl border border-[#d2d2d7] bg-[#fbfbfd] overflow-hidden transition"
                 >
                   <button
                     onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-[#141515] hover:text-[#206E55] transition"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-[#1d1d1f] hover:text-[#0071e3] transition"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown
                       size={18}
-                      className={`text-[#206E55] shrink-0 transition-transform duration-200 ${
+                      className={`text-[#0071e3] shrink-0 transition-transform duration-200 ${
                         openFaqIndex === index ? 'rotate-180' : ''
                       }`}
                     />
@@ -1619,7 +1619,7 @@ const FindDermatologist: React.FC = () => {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div className="px-5 pb-5 pt-1 text-xs text-[#5A554A] leading-relaxed border-t border-slate-200/50">
+                        <div className="px-5 pb-5 pt-1 text-xs text-[#6e6e73] leading-relaxed border-t border-[#e8e8ed]/50">
                           {faq.a}
                         </div>
                       </motion.div>

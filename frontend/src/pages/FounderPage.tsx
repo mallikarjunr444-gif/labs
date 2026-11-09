@@ -42,7 +42,7 @@ const FounderPage: React.FC = () => {
         description="Mallikarjun R is the Founder & CEO of Medicus Labs (medicuslabs.app). Full-stack AI engineer and cloud architect building clinical-grade AI skin intelligence."
         canonical="https://medicuslabs.app/founder"
       />
-      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+      <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
         
         {/* ProfilePage & Person JSON-LD for Search Engine Dominance */}
         <script type="application/ld+json">
@@ -94,23 +94,23 @@ const FounderPage: React.FC = () => {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-6 mb-16">
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest">
                 <Sparkles size={12} />
                 Founder & CEO of Medicus Labs
               </span>
             </motion.div>
             
-            <motion.h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#141515] font-display"
+            <motion.h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#1d1d1f] font-display"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
               Mallikarjun R
             </motion.h1>
             
-            <motion.p className="text-[#206E55] text-lg font-bold"
+            <motion.p className="text-[#0071e3] text-lg font-bold"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
               Founder & CEO — Medicus Labs (medicuslabs.app)
             </motion.p>
             
-            <motion.p className="text-[#5A554A] text-base sm:text-lg leading-relaxed"
+            <motion.p className="text-[#6e6e73] text-base sm:text-lg leading-relaxed"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
               AI product builder, full-stack engineer, and cloud architect on a mission to democratize clinical-grade skin intelligence through ethical AI.
             </motion.p>
@@ -126,7 +126,7 @@ const FounderPage: React.FC = () => {
                 href="https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-black text-white hover:bg-slate-800 font-bold text-xs sm:text-sm shadow-md transition-all group"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-black text-white hover:bg-[#1d1d1f] font-bold text-xs sm:text-sm shadow-md transition-all group"
               >
                 <MediumIcon size={16} />
                 <span>Read Official Article: <strong>Introducing Medicus Labs 2.0 on Medium</strong></span>
@@ -136,34 +136,34 @@ const FounderPage: React.FC = () => {
           </div>
 
           {/* Profile Card */}
-          <div className="rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-12 shadow-sm mb-12">
+          <div className="rounded-3xl bg-white border border-[#d2d2d7] p-8 sm:p-12 shadow-sm mb-12">
             <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[#E8F2ED] to-[#206E55] text-white font-extrabold flex items-center justify-center text-5xl border-4 border-[#206E55]/20 shadow-lg flex-shrink-0 font-display">
+              <div className="w-36 h-36 rounded-full bg-gradient-to-br from-[#eaf2fd] to-[#0071e3] text-white font-extrabold flex items-center justify-center text-5xl border-4 border-[#0071e3]/20 shadow-lg flex-shrink-0 font-display">
                 MR
               </div>
               
               <div className="space-y-5 flex-1">
-                <h2 className="text-3xl font-bold text-[#141515]">Vision & Journey</h2>
+                <h2 className="text-3xl font-bold text-[#1d1d1f]">Vision & Journey</h2>
                 
-                <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                <p className="text-[#6e6e73] text-sm sm:text-base leading-relaxed">
                   <strong>Mallikarjun R</strong> is the <strong>Founder & CEO of Medicus Labs</strong> (medicuslabs.app). With deep expertise in AI product development, 
                   full-stack engineering, and cloud infrastructure, he identified a critical global health gap: over 3 billion people worldwide lack 
                   immediate access to dermatological specialists. Medicus Labs was founded by Mallikarjun R to bridge this gap.
                 </p>
                 
-                <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                <p className="text-[#6e6e73] text-sm sm:text-base leading-relaxed">
                   <strong>Medicus Labs</strong> was architected from the ground up by <strong>Mallikarjun R</strong>, combining Vision Transformer AI models, 
                   HIPAA-compliant privacy architecture, and physician-ready reporting into a single, accessible web platform.
                   As <strong>Founder & CEO</strong>, he leads overall product vision, AI model training, and technical engineering.
                 </p>
                 
-                <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed">
+                <p className="text-[#6e6e73] text-sm sm:text-base leading-relaxed">
                   Read Mallikarjun R's official founder launch post:{' '}
                   <a
                     href="https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-[#206E55] underline hover:text-[#408A6C]"
+                    className="font-bold text-[#0071e3] underline hover:text-[#2997ff]"
                   >
                     "Medicus Labs is Back: Introducing Medicus Labs 2.0" on Medium
                   </a>.
@@ -175,7 +175,7 @@ const FounderPage: React.FC = () => {
                     href="https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white hover:bg-slate-800 font-bold text-xs transition shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white hover:bg-[#1d1d1f] font-bold text-xs transition shadow-sm"
                   >
                     <MediumIcon size={14} /> Medium Launch Story
                   </a>
@@ -209,7 +209,7 @@ const FounderPage: React.FC = () => {
 
                   <a
                     href="mailto:medicuslabs.com@gmail.com"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#206E55] text-white hover:bg-[#408A6C] font-bold text-xs transition shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0071e3] text-white hover:bg-[#2997ff] font-bold text-xs transition shadow-sm"
                   >
                     <Mail size={14} /> Email
                   </a>
@@ -222,8 +222,8 @@ const FounderPage: React.FC = () => {
 
 
           {/* Why Medicus Labs was Created */}
-          <div className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-10 shadow-sm mb-12">
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">Why Mallikarjun R Founded Medicus Labs</h2>
+          <div className="rounded-3xl bg-[#f5f5f7] border border-[#d2d2d7] p-8 sm:p-10 shadow-sm mb-12">
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">Why Mallikarjun R Founded Medicus Labs</h2>
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { icon: BookOpen, title: 'The Problem', desc: 'Over 3 billion people lack access to dermatologists. Long wait times and high costs prevent early skin issue detection.' },
@@ -234,8 +234,8 @@ const FounderPage: React.FC = () => {
                 const Icon = item.icon;
                 return (
                   <div key={i} className="flex gap-4">
-                    <div className="w-10 h-10 rounded-2xl bg-white border border-[#E5E2DA] text-[#206E55] flex items-center justify-center flex-shrink-0"><Icon size={18} /></div>
-                    <div><h3 className="font-bold text-sm text-[#141515]">{item.title}</h3><p className="text-xs text-[#5A554A] mt-1">{item.desc}</p></div>
+                    <div className="w-10 h-10 rounded-2xl bg-white border border-[#d2d2d7] text-[#0071e3] flex items-center justify-center flex-shrink-0"><Icon size={18} /></div>
+                    <div><h3 className="font-bold text-sm text-[#1d1d1f]">{item.title}</h3><p className="text-xs text-[#6e6e73] mt-1">{item.desc}</p></div>
                   </div>
                 );
               })}
@@ -249,12 +249,12 @@ const FounderPage: React.FC = () => {
               { label: 'Full-Stack Development', items: ['React & TypeScript', 'Python & FastAPI', 'Node.js', 'PostgreSQL'] },
               { label: 'Cloud & DevOps', items: ['Docker & Kubernetes', 'AWS & GCP', 'CI/CD Pipelines', 'Infrastructure as Code'] },
             ].map((cat, idx) => (
-              <motion.div key={idx} className="p-6 rounded-3xl bg-white border border-[#E5E2DA] shadow-sm space-y-3"
+              <motion.div key={idx} className="p-6 rounded-3xl bg-white border border-[#d2d2d7] shadow-sm space-y-3"
                 initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} viewport={{ once: true }}>
-                <h3 className="font-bold text-sm text-[#141515]">{cat.label}</h3>
+                <h3 className="font-bold text-sm text-[#1d1d1f]">{cat.label}</h3>
                 <div className="flex flex-wrap gap-2">
                   {cat.items.map((item, i) => (
-                    <span key={i} className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#E8F2ED] text-[#206E55]">{item}</span>
+                    <span key={i} className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#eaf2fd] text-[#0071e3]">{item}</span>
                   ))}
                 </div>
               </motion.div>
@@ -262,11 +262,11 @@ const FounderPage: React.FC = () => {
           </div>
 
           {/* CTA */}
-          <div className="p-10 rounded-3xl bg-[#206E55] text-center text-white space-y-4 shadow-lg">
+          <div className="p-10 rounded-3xl bg-[#0071e3] text-center text-white space-y-4 shadow-lg">
             <h3 className="text-2xl font-bold font-display">Built by Mallikarjun R for everyone</h3>
             <p className="text-white/80 text-sm max-w-xl mx-auto">Experience the platform built by Mallikarjun R — no account needed, completely free.</p>
             <Link to="/analysis">
-              <button className="px-8 py-3.5 rounded-full bg-white text-[#206E55] font-extrabold text-sm hover:bg-[#E8F2ED] transition inline-flex items-center gap-2 shadow-md">
+              <button className="px-8 py-3.5 rounded-full bg-white text-[#0071e3] font-extrabold text-sm hover:bg-[#eaf2fd] transition inline-flex items-center gap-2 shadow-md">
                 Start Free Analysis <ArrowRight size={15} />
               </button>
             </Link>

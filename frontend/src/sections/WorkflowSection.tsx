@@ -14,7 +14,7 @@ export const WorkflowSection: React.FC = () => {
     <section id="workflow" className="relative py-24 bg-white overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-1/2 -right-60 w-[500px] h-[500px] bg-gradient-to-br from-blue-500/15 to-transparent rounded-full blur-3xl"
+          className="absolute top-1/2 -right-60 w-[500px] h-[500px] bg-gradient-to-br from-[#0071e3]/15 to-transparent rounded-full blur-3xl"
           animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -54,7 +54,7 @@ export const WorkflowSection: React.FC = () => {
                 {/* Step number circle */}
                 <motion.div
                   className="w-16 h-16 rounded-full bg-gradient-to-br from-accent-blue/30 to-cyan-glow/20 border border-accent-blue/50 flex items-center justify-center mb-6 mx-auto shadow-glow-md group hover:shadow-glow-lg transition-all duration-300"
-                  whileHover={{ scale: 1.1, boxShadow: '0 0 40px rgba(0, 240, 255, 0.5)' }}
+                  whileHover={{ scale: 1.1, boxShadow: '0 0 40px rgba(41, 151, 255, 0.5)' }}
                 >
                   <step.icon className="w-8 h-8 text-accent-blue" />
                 </motion.div>
@@ -62,7 +62,7 @@ export const WorkflowSection: React.FC = () => {
                 {/* Card content */}
                 <motion.div
                   className="rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-xl p-6 text-center h-full flex flex-col justify-between hover:border-accent-blue/30 transition-all duration-300"
-                  whileHover={{ translateY: -8, boxShadow: '0 0 30px rgba(0, 240, 255, 0.2)' }}
+                  whileHover={{ translateY: -8, boxShadow: '0 0 30px rgba(41, 151, 255, 0.2)' }}
                 >
                   <div>
                     <h3 className="text-xl font-bold text-text-primary mb-2">{step.label}</h3>

@@ -7,10 +7,10 @@ const sections = [
   {
     icon: Eye,
     title: 'Information We Collect',
-    color: 'text-[#206E55]',
-    lightBg: 'bg-[#E8F2ED]',
+    color: 'text-[#0071e3]',
+    lightBg: 'bg-[#eaf2fd]',
     content: (
-      <ul className="space-y-3 text-[#5A554A] text-xs sm:text-sm leading-relaxed font-semibold">
+      <ul className="space-y-3 text-[#6e6e73] text-xs sm:text-sm leading-relaxed font-semibold">
         {[
           ['Personal details', 'Name, age, gender, phone number, and email address submitted during patient intake.'],
           ['Uploaded photographs', 'High-resolution dermatological photos analyzed strictly in-memory.'],
@@ -18,9 +18,9 @@ const sections = [
           ['Email subscriptions', 'Contact parameters retained for newsletter and clinical reference guides.']
         ].map(([b, r]) => (
           <li key={b} className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span>
-              <strong className="text-[#141515]">{b}</strong> — {r}
+              <strong className="text-[#1d1d1f]">{b}</strong> — {r}
             </span>
           </li>
         ))}
@@ -30,10 +30,10 @@ const sections = [
   {
     icon: Database,
     title: 'How We Process Data',
-    color: 'text-[#206E55]',
-    lightBg: 'bg-[#E8F2ED]',
+    color: 'text-[#0071e3]',
+    lightBg: 'bg-[#eaf2fd]',
     content: (
-      <ul className="space-y-3 text-[#5A554A] text-xs sm:text-sm leading-relaxed font-semibold">
+      <ul className="space-y-3 text-[#6e6e73] text-xs sm:text-sm leading-relaxed font-semibold">
         {[
           'Running real-time automated AI inference models for skin classification.',
           'Generating clinical-grade 1-page PDF reports with verifiable secure hashes.',
@@ -41,7 +41,7 @@ const sections = [
           'Enforcing security policies and verifying HIPAA compliance auditing metrics.'
         ].map((t) => (
           <li key={t} className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span>{t}</span>
           </li>
         ))}
@@ -51,20 +51,20 @@ const sections = [
   {
     icon: Lock,
     title: 'Security & Encryption Standards',
-    color: 'text-[#206E55]',
-    lightBg: 'bg-[#E8F2ED]',
+    color: 'text-[#0071e3]',
+    lightBg: 'bg-[#eaf2fd]',
     content: (
-      <div className="text-[#5A554A] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
+      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
         <p>
           We employ strict administrative and technical measures to shield data from unauthorized access or exposure:
         </p>
         <ul className="space-y-2 pl-2">
           <li className="flex gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#206E55] mt-2 flex-shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] mt-2 flex-shrink-0" />
             <span><strong>Zero-Storage Scans:</strong> Images are processed instantly in volatile RAM and are automatically purged from memory.</span>
           </li>
           <li className="flex gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#206E55] mt-2 flex-shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] mt-2 flex-shrink-0" />
             <span><strong>End-to-End Encryption:</strong> All transactions transit over secure HTTPS channels using AES-256 encryption.</span>
           </li>
         </ul>
@@ -74,20 +74,20 @@ const sections = [
   {
     icon: Globe,
     title: 'Third-Party Processing',
-    color: 'text-[#206E55]',
-    lightBg: 'bg-[#E8F2ED]',
+    color: 'text-[#0071e3]',
+    lightBg: 'bg-[#eaf2fd]',
     content: (
-      <div className="text-[#5A554A] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
+      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
         <p>
           Medicus Labs™ does not sell or rent data. We only share diagnostic payloads with:
         </p>
         <ul className="space-y-2">
           <li className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span><strong>AI LLM Providers:</strong> (e.g. Groq/OpenAI) for real-time symptom diagnostic processing, bound by HIPAA-compliant APIs.</span>
           </li>
           <li className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span><strong>Legal Mandates:</strong> Solely if required by court order to protect personal safety.</span>
           </li>
         </ul>
@@ -97,28 +97,28 @@ const sections = [
   {
     icon: Globe,
     title: 'Google AdSense, Advertising & Cookie Policy',
-    color: 'text-[#206E55]',
-    lightBg: 'bg-[#E8F2ED]',
+    color: 'text-[#0071e3]',
+    lightBg: 'bg-[#eaf2fd]',
     content: (
-      <div className="text-[#5A554A] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
+      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
         <p>
           Medicus Labs™ partners with third-party advertising networks, including <strong>Google AdSense</strong> (Publisher ID: ca-pub-8305972358699914), to serve relevant advertisements when you visit our website.
         </p>
         <ul className="space-y-2">
           <li className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span><strong>Use of Cookies:</strong> Third-party vendors, including Google, use cookies (such as the DoubleClick DART cookie) to serve ads based on a user's prior visits to this website or other websites on the Internet.</span>
           </li>
           <li className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span><strong>Personalized Advertising:</strong> Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visits to our site and other sites across the web.</span>
           </li>
           <li className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
-            <span><strong>User Opt-Out Rights:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-[#206E55] underline">Google Ads Settings</a>. Alternatively, you can opt out of third-party vendor use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-[#206E55] underline">aboutads.info</a>.</span>
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
+            <span><strong>User Opt-Out Rights:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-[#0071e3] underline">Google Ads Settings</a>. Alternatively, you can opt out of third-party vendor use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-[#0071e3] underline">aboutads.info</a>.</span>
           </li>
           <li className="flex gap-3">
-            <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
             <span><strong>Health Data Safeguards:</strong> Under no circumstances are uploaded clinical skin images, patient intake details, or diagnostic outputs shared with advertising vendors or utilized for targeted ad profiling.</span>
           </li>
         </ul>
@@ -128,10 +128,10 @@ const sections = [
   {
     icon: ShieldCheck,
     title: 'Patient Data Rights (GDPR & CCPA)',
-    color: 'text-[#206E55]',
-    lightBg: 'bg-[#E8F2ED]',
+    color: 'text-[#0071e3]',
+    lightBg: 'bg-[#eaf2fd]',
     content: (
-      <div className="text-[#5A554A] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
+      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
         <p>You have full autonomy over your records, including the right to:</p>
         <ul className="space-y-2">
           {[
@@ -140,13 +140,13 @@ const sections = [
             'Download or transfer a complete transcript of your account data.'
           ].map((t) => (
             <li key={t} className="flex gap-3">
-              <Check className="text-[#206E55] mt-1 flex-shrink-0" size={16} />
+              <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
               <span>{t}</span>
             </li>
           ))}
         </ul>
         <p className="pt-2">
-          Send requests directly to <a href="mailto:support@medicuslabs.app" className="text-[#206E55] hover:underline font-bold">support@medicuslabs.app</a>.
+          Send requests directly to <a href="mailto:support@medicuslabs.app" className="text-[#0071e3] hover:underline font-bold">support@medicuslabs.app</a>.
         </p>
       </div>
     ),
@@ -158,7 +158,7 @@ const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i })
   const Icon = s.icon;
   return (
     <motion.div
-      className="bg-white border border-[#E5E2DA] rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-shadow duration-300"
+      className="bg-white border border-[#d2d2d7] rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-shadow duration-300"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: i * 0.05, duration: 0.5 }}
@@ -169,10 +169,10 @@ const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i })
         onClick={() => setOpen((o) => !o)}
       >
         <div className="flex items-center gap-4">
-          <div className={`w-10 h-10 rounded-2xl ${s.lightBg} ${s.color} flex items-center justify-center flex-shrink-0 border border-[#206E55]/10`}>
+          <div className={`w-10 h-10 rounded-2xl ${s.lightBg} ${s.color} flex items-center justify-center flex-shrink-0 border border-[#0071e3]/10`}>
             <Icon size={18} />
           </div>
-          <span className="font-bold text-base text-[#141515] group-hover:text-[#206E55] transition-colors font-display">
+          <span className="font-bold text-base text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors font-display">
             {s.title}
           </span>
         </div>
@@ -180,7 +180,7 @@ const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i })
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.25, ease: 'easeInOut' }}
         >
-          <ChevronDown size={18} className="text-slate-400" />
+          <ChevronDown size={18} className="text-[#86868b]" />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
@@ -192,7 +192,7 @@ const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i })
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-6 pt-0 border-t border-slate-50">
+            <div className="px-6 pb-6 pt-0 border-t border-[#fbfbfd]">
               <div className="pt-4">{s.content}</div>
             </div>
           </motion.div>
@@ -203,7 +203,7 @@ const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i })
 };
 
 const PrivacyPolicy: React.FC = () => (
-  <div className="min-h-screen bg-[#FAF9F5] text-[#141515] font-sans">
+  <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] font-sans">
     <section className="relative pt-36 pb-16 px-4 sm:px-6 text-center overflow-hidden">
       <motion.div
         className="relative z-10 max-w-2xl mx-auto"
@@ -211,14 +211,14 @@ const PrivacyPolicy: React.FC = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
           <ShieldCheck size={12} />
           Legal Integrity
         </span>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 font-display text-[#141515] leading-tight">
-          Privacy <span className="text-[#206E55]">Policy</span>
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 font-display text-[#1d1d1f] leading-tight">
+          Privacy <span className="text-[#0071e3]">Policy</span>
         </h1>
-        <p className="text-[#5A554A] text-sm sm:text-base font-semibold">
+        <p className="text-[#6e6e73] text-sm sm:text-base font-semibold">
           Last updated: July 20, 2026 · We operate under rigorous clinical compliance standards.
         </p>
       </motion.div>
@@ -233,16 +233,16 @@ const PrivacyPolicy: React.FC = () => (
 
       {/* HIPAA Compliance Spotlight */}
       <motion.div 
-        className="p-6 rounded-3xl bg-[#E8F2ED]/40 border border-[#206E55]/15 space-y-3"
+        className="p-6 rounded-3xl bg-[#eaf2fd]/40 border border-[#0071e3]/15 space-y-3"
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <h3 className="font-bold text-[#141515] text-base flex items-center gap-2 font-display">
-          <ShieldCheck className="text-[#206E55]" size={18} />
+        <h3 className="font-bold text-[#1d1d1f] text-base flex items-center gap-2 font-display">
+          <ShieldCheck className="text-[#0071e3]" size={18} />
           HIPAA & Clinical Data Safeguards
         </h3>
-        <p className="text-[#5A554A] text-xs sm:text-sm leading-relaxed font-semibold">
+        <p className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed font-semibold">
           Medicus Labs™ adheres to standard healthcare data protocols. Patient identifiers and uploaded pathology photographs are decrypted locally, analyzed in-memory, and immediately discarded. No visual health datasets are saved or repurposed for AI retraining.
         </p>
       </motion.div>

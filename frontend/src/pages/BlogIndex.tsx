@@ -149,33 +149,33 @@ const BlogIndex: React.FC = () => {
         title="Dermatology Medical Journal & Skin AI Research | Medicus Labs"
         description="Explore peer-referenced clinical guides, dermatological research articles, AI skin analysis breakthroughs, and skin disease prevention protocols. Edited by Mallikarjun R & Medicus Labs Medical Team."
       />
-      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] font-sans">
+      <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] font-sans">
         <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-4">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-4">
               <Sparkles size={14} /> Clinical Medical Library &amp; Blog
             </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#141515] mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1d1d1f] mb-4 leading-tight">
               Dermatological Insights &amp; AI Vision Research
             </h1>
-            <p className="text-[#5A554A] text-base sm:text-lg leading-relaxed">
+            <p className="text-[#6e6e73] text-base sm:text-lg leading-relaxed">
               Evidence-based medical guides, disease classification standards (ICD-11), skin barrier science, and AI diagnostic reference tools. Reviewed by our clinical engineering team.
             </p>
           </div>
 
           {/* Search & Category Filter Bar */}
-          <div className="bg-white border border-[#E5E2DA] rounded-3xl p-4 sm:p-6 mb-12 shadow-sm">
+          <div className="bg-white border border-[#d2d2d7] rounded-3xl p-4 sm:p-6 mb-12 shadow-sm">
             <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
               {/* Search Box */}
               <div className="relative w-full md:w-96">
-                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8A857A]" />
+                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#86868b]" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search articles, ICD codes, symptoms..."
-                  className="w-full pl-11 pr-4 py-3 rounded-full bg-[#FAF9F5] border border-[#E5E2DA] text-sm text-[#141515] focus:outline-none focus:border-[#206E55] transition"
+                  className="w-full pl-11 pr-4 py-3 rounded-full bg-[#fbfbfd] border border-[#d2d2d7] text-sm text-[#1d1d1f] focus:outline-none focus:border-[#0071e3] transition"
                 />
               </div>
 
@@ -187,8 +187,8 @@ const BlogIndex: React.FC = () => {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                       selectedCategory === cat
-                        ? 'bg-[#206E55] text-white shadow-sm'
-                        : 'bg-[#FAF9F5] text-[#5A554A] border border-[#E5E2DA] hover:border-[#206E55] hover:text-[#206E55]'
+                        ? 'bg-[#0071e3] text-white shadow-sm'
+                        : 'bg-[#fbfbfd] text-[#6e6e73] border border-[#d2d2d7] hover:border-[#0071e3] hover:text-[#0071e3]'
                     }`}
                   >
                     {cat}
@@ -200,39 +200,39 @@ const BlogIndex: React.FC = () => {
 
           {/* Featured Article Banner */}
           {filteredArticles.length > 0 && (
-            <div className="mb-14 rounded-3xl bg-white border border-[#E5E2DA] overflow-hidden shadow-sm hover:shadow-md transition grid lg:grid-cols-12">
+            <div className="mb-14 rounded-3xl bg-white border border-[#d2d2d7] overflow-hidden shadow-sm hover:shadow-md transition grid lg:grid-cols-12">
               <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-full bg-[#E8F2ED] text-[#206E55] text-xs font-bold uppercase tracking-wider">
+                    <span className="px-3 py-1 rounded-full bg-[#f5f5f7] text-[#6e6e73] text-xs font-bold uppercase tracking-wider">
                       Featured Guide
                     </span>
                     {filteredArticles[0].icdCode && (
-                      <span className="text-xs font-mono bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md font-semibold">
+                      <span className="text-xs font-mono bg-[#f5f5f7] text-[#424245] px-2.5 py-0.5 rounded-md font-semibold">
                         {filteredArticles[0].icdCode}
                       </span>
                     )}
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mb-4 leading-snug">
-                    <Link to={filteredArticles[0].slug} className="hover:text-[#206E55] transition">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1d1f] mb-4 leading-snug">
+                    <Link to={filteredArticles[0].slug} className="hover:text-[#0071e3] transition">
                       {filteredArticles[0].title}
                     </Link>
                   </h2>
-                  <p className="text-[#5A554A] text-sm sm:text-base leading-relaxed mb-6">
+                  <p className="text-[#6e6e73] text-sm sm:text-base leading-relaxed mb-6">
                     {filteredArticles[0].excerpt}
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#E5E2DA]">
-                  <div className="flex items-center gap-2 text-xs font-medium text-[#5A554A]">
-                    <User size={14} className="text-[#206E55]" />
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#d2d2d7]">
+                  <div className="flex items-center gap-2 text-xs font-medium text-[#6e6e73]">
+                    <User size={14} className="text-[#0071e3]" />
                     <span>{filteredArticles[0].author}</span>
                     <span>•</span>
-                    <Clock size={14} className="text-[#8A857A]" />
+                    <Clock size={14} className="text-[#86868b]" />
                     <span>{filteredArticles[0].readTime}</span>
                   </div>
                   <Link
                     to={filteredArticles[0].slug}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#206E55] hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0071e3] hover:underline"
                   >
                     Read Full Article <ArrowRight size={14} />
                   </Link>
@@ -258,10 +258,10 @@ const BlogIndex: React.FC = () => {
             {filteredArticles.slice(1, 7).map((article) => (
               <article
                 key={article.id}
-                className="bg-white border border-[#E5E2DA] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group"
+                className="bg-white border border-[#d2d2d7] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative h-48 overflow-hidden bg-slate-100">
+                  <div className="relative h-48 overflow-hidden bg-[#f5f5f7]">
                     <img
                       src={article.image}
                       alt={article.title}
@@ -269,34 +269,34 @@ const BlogIndex: React.FC = () => {
                       decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
-                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#206E55] text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0071e3] text-xs font-bold uppercase tracking-wider shadow-sm">
                       {article.category}
                     </span>
                   </div>
                   <div className="p-6">
                     {article.icdCode && (
-                      <span className="text-[11px] font-mono bg-[#FAF9F5] text-[#5A554A] border border-[#E5E2DA] px-2 py-0.5 rounded font-semibold inline-block mb-3">
+                      <span className="text-[11px] font-mono bg-[#fbfbfd] text-[#6e6e73] border border-[#d2d2d7] px-2 py-0.5 rounded font-semibold inline-block mb-3">
                         {article.icdCode}
                       </span>
                     )}
-                    <h3 className="text-xl font-bold text-[#141515] mb-3 group-hover:text-[#206E55] transition leading-snug">
+                    <h3 className="text-xl font-bold text-[#1d1d1f] mb-3 group-hover:text-[#0071e3] transition leading-snug">
                       <Link to={article.slug}>{article.title}</Link>
                     </h3>
-                    <p className="text-[#5A554A] text-sm leading-relaxed line-clamp-3 mb-4">
+                    <p className="text-[#6e6e73] text-sm leading-relaxed line-clamp-3 mb-4">
                       {article.excerpt}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-6 pb-6 pt-0 border-t border-[#FAF9F5] mt-auto">
-                  <div className="flex items-center justify-between text-xs text-[#8A857A] pt-4">
+                <div className="px-6 pb-6 pt-0 border-t border-[#fbfbfd] mt-auto">
+                  <div className="flex items-center justify-between text-xs text-[#86868b] pt-4">
                     <div className="flex items-center gap-1.5">
                       <Clock size={13} />
                       <span>{article.readTime}</span>
                     </div>
                     <Link
                       to={article.slug}
-                      className="inline-flex items-center gap-1 font-bold text-[#206E55] hover:underline"
+                      className="inline-flex items-center gap-1 font-bold text-[#0071e3] hover:underline"
                     >
                       Read <ArrowRight size={13} />
                     </Link>
@@ -315,10 +315,10 @@ const BlogIndex: React.FC = () => {
             {filteredArticles.slice(7).map((article) => (
               <article
                 key={article.id}
-                className="bg-white border border-[#E5E2DA] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group"
+                className="bg-white border border-[#d2d2d7] rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative h-48 overflow-hidden bg-slate-100">
+                  <div className="relative h-48 overflow-hidden bg-[#f5f5f7]">
                     <img
                       src={article.image}
                       alt={article.title}
@@ -326,34 +326,34 @@ const BlogIndex: React.FC = () => {
                       decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
-                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#206E55] text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#0071e3] text-xs font-bold uppercase tracking-wider shadow-sm">
                       {article.category}
                     </span>
                   </div>
                   <div className="p-6">
                     {article.icdCode && (
-                      <span className="text-[11px] font-mono bg-[#FAF9F5] text-[#5A554A] border border-[#E5E2DA] px-2 py-0.5 rounded font-semibold inline-block mb-3">
+                      <span className="text-[11px] font-mono bg-[#fbfbfd] text-[#6e6e73] border border-[#d2d2d7] px-2 py-0.5 rounded font-semibold inline-block mb-3">
                         {article.icdCode}
                       </span>
                     )}
-                    <h3 className="text-xl font-bold text-[#141515] mb-3 group-hover:text-[#206E55] transition leading-snug">
+                    <h3 className="text-xl font-bold text-[#1d1d1f] mb-3 group-hover:text-[#0071e3] transition leading-snug">
                       <Link to={article.slug}>{article.title}</Link>
                     </h3>
-                    <p className="text-[#5A554A] text-sm leading-relaxed line-clamp-3 mb-4">
+                    <p className="text-[#6e6e73] text-sm leading-relaxed line-clamp-3 mb-4">
                       {article.excerpt}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-6 pb-6 pt-0 border-t border-[#FAF9F5] mt-auto">
-                  <div className="flex items-center justify-between text-xs text-[#8A857A] pt-4">
+                <div className="px-6 pb-6 pt-0 border-t border-[#fbfbfd] mt-auto">
+                  <div className="flex items-center justify-between text-xs text-[#86868b] pt-4">
                     <div className="flex items-center gap-1.5">
                       <Clock size={13} />
                       <span>{article.readTime}</span>
                     </div>
                     <Link
                       to={article.slug}
-                      className="inline-flex items-center gap-1 font-bold text-[#206E55] hover:underline"
+                      className="inline-flex items-center gap-1 font-bold text-[#0071e3] hover:underline"
                     >
                       Read <ArrowRight size={13} />
                     </Link>
@@ -372,23 +372,23 @@ const BlogIndex: React.FC = () => {
           <SponsoredLinks className="my-10" />
 
           {/* Bottom Medical Disclaimer & Editorial Banner */}
-          <div className="mt-16 bg-[#F3F1EB] border border-[#E5E2DA] rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="mt-16 bg-[#f5f5f7] border border-[#d2d2d7] rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#206E55]/10 flex items-center justify-center text-[#206E55] flex-shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-[#0071e3]/10 flex items-center justify-center text-[#0071e3] flex-shrink-0">
                 <ShieldCheck size={24} />
               </div>
               <div>
-                <h4 className="font-extrabold text-[#141515] text-base mb-1">
+                <h4 className="font-extrabold text-[#1d1d1f] text-base mb-1">
                   Medical Editorial Integrity &amp; E-E-A-T Standards
                 </h4>
-                <p className="text-xs text-[#5A554A] leading-relaxed max-w-2xl">
+                <p className="text-xs text-[#6e6e73] leading-relaxed max-w-2xl">
                   All articles on Medicus Labs are authored and reviewed in accordance with clinical guidelines from ICD-11, ISIC Archive, and peer-reviewed dermatological research. Content is for educational reference and pre-screening support only.
                 </p>
               </div>
             </div>
             <Link
               to="/editorial-policy"
-              className="px-5 py-2.5 rounded-full bg-white border border-[#E5E2DA] text-[#206E55] font-bold text-xs hover:bg-[#E8F2ED] transition whitespace-nowrap shadow-sm"
+              className="px-5 py-2.5 rounded-full bg-white border border-[#d2d2d7] text-[#0071e3] font-bold text-xs hover:bg-[#eaf2fd] transition whitespace-nowrap shadow-sm"
             >
               Read Editorial Policy &rarr;
             </Link>

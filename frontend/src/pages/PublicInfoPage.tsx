@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AlertTriangle, FileText, HeartPulse, Mail, Scale, ShieldCheck, Users } from 'lucide-react';
-import PremiumNavbar from '../components/PremiumNavbar';
 import { PremiumFooter } from '../sections';
 
 type PublicInfoPageType = 'about' | 'privacy' | 'terms' | 'disclaimer';
@@ -305,12 +304,10 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
   const Icon = page.icon;
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <PremiumNavbar />
-
+    <div className="min-h-screen bg-white text-[#1d1d1f]">
       <main className="relative overflow-hidden break-words pt-24 sm:pt-28">
         <section className="relative px-4 pb-10 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8">
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#eff6ff_0%,#ffffff_70%)]" />
+          <div className="absolute inset-0 -z-10 bg-[#f5f5f7]" />
           <div className="mx-auto max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
@@ -318,17 +315,17 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
               transition={{ duration: 0.55 }}
               className="max-w-3xl"
             >
-              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-100 text-sky-700 sm:mb-6 sm:h-12 sm:w-12">
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eaf2fd] text-[#0071e3] sm:mb-6 sm:h-12 sm:w-12">
                 <Icon size={24} />
               </div>
-              <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-sky-700">{page.eyebrow}</p>
-              <h1 className="font-display text-3xl font-bold leading-tight text-slate-950 sm:text-4xl md:text-5xl">{page.title}</h1>
-              <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-5 md:text-lg md:leading-8">{page.summary}</p>
-              <p className="mt-5 text-sm font-semibold text-slate-500">Last updated: {page.updated}</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#0071e3]">{page.eyebrow}</p>
+              <h1 className="font-display text-3xl font-bold leading-tight text-[#1d1d1f] sm:text-4xl md:text-5xl">{page.title}</h1>
+              <p className="mt-4 text-base leading-7 text-[#6e6e73] sm:mt-5 md:text-lg md:leading-8">{page.summary}</p>
+              <p className="mt-5 text-sm font-semibold text-[#6e6e73]">Last updated: {page.updated}</p>
               <div className="mt-6 grid gap-3 md:mt-8 md:grid-cols-3">
                 {page.highlights.map((highlight) => (
-                  <div key={highlight} className="rounded-2xl border border-sky-100 bg-white/80 p-4 shadow-sm">
-                    <p className="text-sm font-semibold leading-6 text-slate-700">{highlight}</p>
+                  <div key={highlight} className="rounded-2xl border border-[#eaf2fd] bg-white/80 p-4 shadow-sm">
+                    <p className="text-sm font-semibold leading-6 text-[#424245]">{highlight}</p>
                   </div>
                 ))}
               </div>
@@ -346,15 +343,15 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.04, duration: 0.45 }}
-                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 md:p-8"
+                  className="rounded-2xl border border-[#e8e8ed] bg-white p-5 shadow-sm sm:p-6 md:p-8"
                 >
-                  <h2 className="text-xl font-bold text-slate-950">{section.title}</h2>
-                  <p className="mt-3 leading-7 text-slate-600">{section.body}</p>
+                  <h2 className="text-xl font-bold text-[#1d1d1f]">{section.title}</h2>
+                  <p className="mt-3 leading-7 text-[#6e6e73]">{section.body}</p>
                   {section.bullets && (
-                    <ul className="mt-4 space-y-3 text-slate-600">
+                    <ul className="mt-4 space-y-3 text-[#6e6e73]">
                       {section.bullets.map((bullet) => (
                         <li key={bullet} className="flex gap-3">
-                          <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-sky-500" />
+                          <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-[#0071e3]" />
                           <span className="leading-7" dangerouslySetInnerHTML={{ __html: bullet }}></span>
                         </li>
                       ))}
@@ -364,14 +361,14 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
               ))}
             </div>
 
-            <aside className="order-first h-fit rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:sticky lg:top-28 lg:order-none">
-              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-slate-500">Public Pages</h2>
+            <aside className="order-first h-fit rounded-2xl border border-[#e8e8ed] bg-[#fbfbfd] p-5 lg:sticky lg:top-28 lg:order-none">
+              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-[#6e6e73]">Public Pages</h2>
               <nav className="mt-4 grid gap-2">
                 {publicInfoLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-sky-700"
+                    className="rounded-xl px-3 py-2 text-sm font-semibold text-[#424245] transition hover:bg-white hover:text-[#0071e3]"
                   >
                     {link.label}
                   </Link>

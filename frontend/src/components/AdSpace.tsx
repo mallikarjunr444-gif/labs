@@ -80,7 +80,7 @@ const RECOMMENDED_RESOURCES = [
 
 export const SponsoredLinks: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`my-10 ${className}`} aria-label="Recommended Resources">
-    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A857A] mb-4 text-center">
+    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#86868b] mb-4 text-center">
       Recommended Resources &amp; Clinical Tools
     </p>
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -88,14 +88,14 @@ export const SponsoredLinks: React.FC<{ className?: string }> = ({ className = '
         <a
           key={item.href}
           href={item.href}
-          className="flex flex-col gap-2 p-5 rounded-2xl bg-white border border-[#E5E2DA] hover:border-[#206E55] hover:shadow-md transition-all group"
+          className="flex flex-col gap-2 p-5 rounded-2xl bg-white border border-[#d2d2d7] hover:border-[#0071e3] hover:shadow-md transition-all group"
         >
           <span className="text-2xl">{item.emoji}</span>
-          <span className="text-sm font-bold text-[#141515] group-hover:text-[#206E55] transition-colors leading-snug">
+          <span className="text-sm font-bold text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors leading-snug">
             {item.label}
           </span>
-          <span className="text-xs text-[#5A554A] leading-relaxed">{item.desc}</span>
-          <span className="text-xs font-bold text-[#206E55] mt-auto">
+          <span className="text-xs text-[#6e6e73] leading-relaxed">{item.desc}</span>
+          <span className="text-xs font-bold text-[#0071e3] mt-auto">
             Explore →
           </span>
         </a>

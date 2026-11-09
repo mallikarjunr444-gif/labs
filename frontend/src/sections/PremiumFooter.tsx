@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import {
-  Shield,
-  Lock,
-  Sparkles,
-  ArrowRight,
-  Mail,
-  Check,
-  Activity,
-  Heart,
-  FileText
-} from 'lucide-react';
+import { ArrowRight, Check, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import BrandLogo from '../components/BrandLogo';
 import { getApiBaseUrl } from '../lib/apiBase';
 
 const GithubIcon: React.FC<{ size?: number; className?: string }> = ({ size = 16, className = "" }) => (
@@ -39,7 +27,8 @@ const footerColumns = [
       { name: 'Medium Launch Article', href: 'https://medium.com/@mallikarjunr444/medicus-labs-is-back-introducing-medicus-labs-2-0-a748fcc53771', external: true },
       { name: 'Platform Features', href: '/features' },
       { name: 'Clinical AI Scan', href: '/analysis' },
-      { name: 'Careers & Contact', href: '/contact' },
+      { name: 'Contact', href: '/contact' },
+      { name: 'Sitemap', href: '/sitemap' },
     ],
   },
   {
@@ -60,9 +49,8 @@ const footerColumns = [
       { name: 'Editorial & E-E-A-T Policy', href: '/editorial-policy' },
       { name: 'Evidence Skincare Protocol', href: '/blog/skincare-guide' },
       { name: 'FAQ & User Guide', href: '/faq' },
-      { name: 'HIPAA & Data Security', href: '/privacy-policy' },
-      { name: 'System Status: 99.9%', href: '/contact' },
-    ],
+      { name: 'Data & Security', href: '/privacy-policy' },
+        ],
   },
   {
     title: 'Legal & Safety',
@@ -70,8 +58,6 @@ const footerColumns = [
       { name: 'Terms of Service', href: '/terms-conditions' },
       { name: 'Privacy Policy', href: '/privacy-policy' },
       { name: 'Medical Disclaimer', href: '/disclaimer' },
-      { name: 'Cookie Policy', href: '/privacy-policy' },
-      { name: 'GDPR Compliance', href: '/privacy-policy' },
     ],
   },
 ];
@@ -121,232 +107,74 @@ export const PremiumFooter: React.FC = () => {
   };
 
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
   return (
-    <footer className="relative z-10 bg-[#FAF9F5] text-[#141515] overflow-hidden pt-20 pb-12 border-t border-[#E5E2DA] font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-
-
-        {/* ── NEWSLETTER BLOCK ── */}
-        <motion.div
-          className="rounded-3xl bg-white border border-[#E5E2DA] p-8 sm:p-12 mb-16 shadow-[0_8px_30px_rgba(13,39,64,0.02)] relative overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8F2ED] text-[#206E55] text-xs font-bold uppercase tracking-wider">
-                <Sparkles size={12} />
-                Stay Informed
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#141515] tracking-tight">
-                Get clinical AI updates &amp; research insights
-              </h3>
-              <p className="text-[#5A554A] text-sm max-w-xl">
-                Subscribe to our monthly newsletter covering dermatological AI benchmarks, platform feature releases, and medical privacy standards.
-              </p>
+    <footer className="bg-[#f5f5f7] text-[#6e6e73]">
+      <div className="mx-auto max-w-[1080px] px-5 pb-8 pt-16 sm:pt-20">
+        <div className="rounded-[28px] bg-white p-7 sm:p-10">
+          <div className="grid gap-8 md:grid-cols-2 md:items-center">
+            <div>
+              <h3 className="text-[28px] font-semibold leading-[1.1] tracking-[-0.025em] text-[#1d1d1f] sm:text-[34px]">Stay informed.</h3>
+              <p className="mt-3 max-w-[420px] text-[17px] leading-[1.5]">A short monthly note on skin-health research, new features and privacy.</p>
             </div>
-
-            <div className="lg:col-span-5">
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
-                <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10" size={16} />
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your clinical email address"
-                    className="w-full pl-11 pr-4 py-3.5 rounded-full bg-[#FAF9F5] border border-[#E5E2DA] !text-[#141515] placeholder-slate-400 focus:outline-none focus:border-[#206E55] focus:ring-1 focus:ring-[#206E55] transition text-sm caret-[#206E55]"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isLoading || isSubscribed}
-                  className="px-7 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm flex items-center justify-center gap-2 flex-shrink-0 disabled:opacity-70"
-                >
-                  {isSubscribed ? (
-                    <>
-                      Subscribed! 🎉
-                      <Check size={16} />
-                    </>
-                  ) : isLoading ? (
-                    <>
-                      Sending...
-                      <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                    </>
-                  ) : (
-                    <>
-                      Subscribe
-                      <ArrowRight size={16} />
-                    </>
-                  )}
+            <div>
+              <form onSubmit={handleSubscribe} className="flex flex-col gap-3 sm:flex-row">
+                <label className="relative flex-1">
+                  <span className="sr-only">Email address</span>
+                  <Mail size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#86868b]" />
+                  <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" style={{ paddingLeft: 44 }} className="h-12 w-full rounded-full border border-[#d2d2d7] bg-white pl-11 pr-4 text-[17px] text-[#1d1d1f] placeholder:text-[#86868b] focus:border-[#0071e3] focus:outline-none focus:ring-4 focus:ring-[#0071e3]/20" />
+                </label>
+                <button type="submit" disabled={isLoading || isSubscribed} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#0071e3] px-6 text-[17px] text-white transition-colors hover:bg-[#0077ed] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0071e3]/30">
+                  {isSubscribed ? (<>Subscribed <Check size={16} /></>) : isLoading ? 'Sending…' : (<>Subscribe <ArrowRight size={16} /></>)}
                 </button>
               </form>
-              {subError && (
-                <p className="text-red-500 text-xs mt-2 text-center">{subError}</p>
-              )}
-              {isSubscribed && (
-                <p className="text-[#206E55] text-xs mt-2 text-center font-semibold">
-                  ✅ Welcome email sent to your inbox!
-                </p>
-              )}
+              {subError && <p role="alert" className="mt-3 text-[14px] text-[#c4281c]">{subError}</p>}
+              {isSubscribed && <p role="status" className="mt-3 text-[14px] text-[#1a7f37]">Thanks. Check your inbox for a welcome email.</p>}
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* ── STAGGERED FOUR COLUMNS ── */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#E5E2DA]"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {/* Brand Info Column */}
-          <motion.div className="lg:col-span-1 space-y-5" variants={itemVariants}>
-            <Link to="/" className="inline-block" aria-label="Medicus Labs home">
-              <BrandLogo tone="dark" />
-            </Link>
-            <p className="text-xs text-[#5A554A] leading-relaxed font-medium">
-              Clinical-grade AI dermatology assistant. Fast, encrypted, and built to empower patients and physicians worldwide.
-            </p>
-             <div className="flex items-center gap-3 pt-2">
-               {socialLinks.map((social, idx) => {
-                 const Icon = social.icon;
-                 return (
-                   <motion.a
-                     key={idx}
-                     href={social.href}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     aria-label={social.label}
-                     title={social.label}
-                     className="w-9 h-9 rounded-full border border-[#E5E2DA] bg-white flex items-center justify-center text-[#5A554A] hover:text-[#206E55] hover:border-[#206E55] transition-all duration-200 shadow-sm"
-                     whileHover={{ scale: 1.1, y: -2 }}
-                     whileTap={{ scale: 0.95 }}
-                   >
-                     <Icon size={16} />
-                   </motion.a>
-                 );
-               })}
-             </div>
-          </motion.div>
+        <ol className="mt-12 list-decimal space-y-2 border-b border-[#d2d2d7] pb-6 pl-4 text-[12px] leading-[1.6]">
+          <li>Medicus Labs provides AI-generated information for education and preliminary reference. It is not a medical diagnosis and does not replace a qualified dermatologist or physician.</li>
+          <li>Results can be incomplete or wrong. See a clinician for any skin change that is new, growing, bleeding or worrying, and seek urgent care in an emergency.</li>
+        </ol>
 
-          {/* 4 Responsive Columns */}
-          {footerColumns.map((col, idx) => (
-            <motion.div key={idx} className="space-y-4" variants={itemVariants}>
-              <h4 className="text-sm font-bold text-[#141515] uppercase tracking-wider">{col.title}</h4>
-              <ul className="space-y-2.5">
-                {col.links.map((link, linkIdx) => (
-                  <li key={linkIdx}>
-                    {(link as any).external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center text-xs text-[#5A554A] hover:text-[#206E55] font-medium transition-all duration-200"
-                      >
-                        <span className="group-hover:translate-x-0.5 transition-transform duration-200">
-                          {link.name} ↗
-                        </span>
-                      </a>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 py-8 md:grid-cols-4">
+          {footerColumns.map((col) => (
+            <div key={col.title}>
+              <h4 className="text-[12px] font-semibold text-[#1d1d1f]">{col.title}</h4>
+              <ul className="mt-3 space-y-2 text-[12px]">
+                {col.links.map((link: { name: string; href: string; external?: boolean }) => (
+                  <li key={link.name}>
+                    {link.external ? (
+                      <a href={link.href} target="_blank" rel="noopener noreferrer" className="hover:text-[#1d1d1f] hover:underline">{link.name}</a>
                     ) : (
-                      <Link
-                        to={link.href}
-                        className="group inline-flex items-center text-xs text-[#5A554A] hover:text-[#206E55] font-medium transition-all duration-200 relative"
-                      >
-                        <span className="group-hover:translate-x-0.5 transition-transform duration-200">
-                          {link.name}
-                        </span>
-                      </Link>
+                      <Link to={link.href} className="hover:text-[#1d1d1f] hover:underline">{link.name}</Link>
                     )}
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-
-
-        {/* ── PUBLISHER POLICY &amp; TRANSPARENCY LINKS BAR (ADSENSE COMPLIANCE) ── */}
-        <div className="pt-8 pb-4 border-t border-[#E5E2DA] flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold text-[#5A554A]">
-          <span className="text-[#141515] font-bold uppercase tracking-wider text-[11px]">Publisher Policies &amp; Governance:</span>
-          <Link to="/about" className="hover:text-[#206E55] transition">About Us</Link>
-          <span>•</span>
-          <Link to="/find-dermatologist" className="text-[#206E55] font-bold hover:underline">Find a Doctor</Link>
-          <span>•</span>
-          <Link to="/contact" className="hover:text-[#206E55] transition">Contact Us</Link>
-          <span>•</span>
-          <Link to="/faq" className="hover:text-[#206E55] transition">FAQ</Link>
-          <span>•</span>
-          <Link to="/privacy-policy" className="hover:text-[#206E55] transition">Privacy Policy</Link>
-          <span>•</span>
-          <Link to="/terms-conditions" className="hover:text-[#206E55] transition">Terms &amp; Conditions</Link>
-          <span>•</span>
-          <Link to="/disclaimer" className="hover:text-[#206E55] transition">Medical Disclaimer</Link>
-          <span>•</span>
-          <Link to="/editorial-policy" className="hover:text-[#206E55] transition">Editorial Policy</Link>
-          <span>•</span>
-          <Link to="/research" className="hover:text-[#206E55] transition">AI Research &amp; Data</Link>
         </div>
 
-        {/* ── TRUST BADGES & BOTTOM COPYRIGHT ROW ── */}
-        <motion.div
-          className="pt-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#5A554A]"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex flex-wrap items-center gap-6">
-            <span className="inline-flex items-center gap-1.5 font-bold text-[#141515]">
-              <Lock size={13} className="text-[#206E55]" />
-              HIPAA Compliant
-            </span>
-            <span className="inline-flex items-center gap-1.5 font-bold text-[#141515]">
-              <Shield size={13} className="text-[#206E55]" />
-              AES-256 Encrypted
-            </span>
-            <span className="inline-flex items-center gap-1.5 font-bold text-[#141515]">
-              <Activity size={13} className="text-[#206E55]" />
-              Clinical Vision AI
+        <div className="flex flex-col gap-4 border-t border-[#d2d2d7] pt-5 text-[12px] sm:flex-row sm:items-center sm:justify-between">
+          <p>Copyright © {new Date().getFullYear()} Medicus Labs. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link to="/privacy-policy" className="hover:text-[#1d1d1f] hover:underline">Privacy Policy</Link>
+            <Link to="/terms-conditions" className="hover:text-[#1d1d1f] hover:underline">Terms of Use</Link>
+            <Link to="/disclaimer" className="hover:text-[#1d1d1f] hover:underline">Medical Disclaimer</Link>
+            <Link to="/sitemap" className="hover:text-[#1d1d1f] hover:underline">Sitemap</Link>
+            <span className="flex items-center gap-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label} className="text-[#6e6e73] hover:text-[#1d1d1f]"><Icon size={16} /></a>
+                );
+              })}
             </span>
           </div>
-
-          <div className="text-center md:text-right space-y-1">
-            <p className="font-semibold">&copy; {new Date().getFullYear()} Medicus Labs™. All rights reserved.</p>
-            <p className="text-[10px] text-slate-400">
-              Designed for reference checking &amp; pre-screening support. Not a substitute for professional medical advice.
-            </p>
-          </div>
-        </motion.div>
-
+        </div>
       </div>
     </footer>
   );
 };
-
-export default PremiumFooter;

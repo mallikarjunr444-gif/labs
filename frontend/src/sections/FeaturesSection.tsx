@@ -8,7 +8,7 @@ export const FeaturesSection: React.FC = () => {
       icon: Cpu,
       title: 'Advanced AI Analysis',
       description: 'Cutting-edge machine learning for accurate dermatology assessment',
-      color: 'from-cyan-500',
+      color: 'from-[#0071e3]',
     },
     {
       icon: Lock,
@@ -20,7 +20,7 @@ export const FeaturesSection: React.FC = () => {
       icon: BarChart3,
       title: 'Clinical Insights',
       description: 'Detailed analytics and confidence scoring for every analysis',
-      color: 'from-blue-500',
+      color: 'from-[#0071e3]',
     },
     {
       icon: FileText,
@@ -46,7 +46,7 @@ export const FeaturesSection: React.FC = () => {
     <section id="features" className="relative py-24 bg-white overflow-hidden">
       <div className="absolute inset-0">
         <motion.div
-          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-blue-500/15 to-transparent rounded-full blur-3xl"
+          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-[#0071e3]/15 to-transparent rounded-full blur-3xl"
           animate={{ x: [50, -50, 50], y: [-30, 30, -30] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -75,7 +75,7 @@ export const FeaturesSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.6 }}
-              whileHover={{ y: -8, boxShadow: '0 0 30px rgba(0, 240, 255, 0.2)' }}
+              whileHover={{ y: -8, boxShadow: '0 0 30px rgba(41, 151, 255, 0.2)' }}
               viewport={{ once: true }}
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-white/0 to-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -83,7 +83,7 @@ export const FeaturesSection: React.FC = () => {
               <div className="relative z-10 space-y-4">
                 <motion.div
                   className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color}/30 to-transparent border border-white/10 flex items-center justify-center group-hover:border-white/20 transition-all duration-300`}
-                  whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 240, 255, 0.3)' }}
+                  whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(41, 151, 255, 0.3)' }}
                 >
                   <feature.icon className="w-7 h-7 text-accent-blue" />
                 </motion.div>

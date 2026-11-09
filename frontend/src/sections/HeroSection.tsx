@@ -29,7 +29,7 @@ export const HeroSection: React.FC = () => {
       {/* Subtle background accents */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent-light opacity-30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-0 w-80 h-80 bg-blue-100 opacity-20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-0 w-80 h-80 bg-[#eaf2fd] opacity-20 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
@@ -71,7 +71,7 @@ export const HeroSection: React.FC = () => {
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link to="/analysis">
                 <motion.button
-                  whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(3, 105, 161, 0.15)' }}
+                  whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(0, 113, 227, 0.15)' }}
                   whileTap={{ scale: 0.98 }}
                   className="px-8 py-3 bg-gradient-to-r from-accent-blue to-cyan-glow text-white rounded-lg font-semibold flex items-center gap-2 shadow-glow-md hover:shadow-glow-lg transition-all duration-300"
                 >
@@ -80,7 +80,7 @@ export const HeroSection: React.FC = () => {
                 </motion.button>
               </Link>
               <motion.button
-                whileHover={{ scale: 1.02, backgroundColor: '#F3F4F6', borderColor: '#0369A1' }}
+                whileHover={{ scale: 1.02, backgroundColor: '#F3F4F6', borderColor: '#0071e3' }}
                 whileTap={{ scale: 0.98 }}
                 className="px-8 py-3 border-2 border-text-secondary text-text-primary rounded-lg font-semibold hover:border-accent-blue transition-all duration-300"
               >
@@ -91,7 +91,7 @@ export const HeroSection: React.FC = () => {
             {/* Trust Badges */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-6 pt-8 border-t border-gray-200"
+              className="flex flex-col sm:flex-row gap-6 pt-8 border-t border-[#e8e8ed]"
             >
               {[
                 { icon: Activity, label: 'Clinical Grade AI' },
@@ -117,7 +117,7 @@ export const HeroSection: React.FC = () => {
           >
             {/* Clean Card - Floating */}
             <motion.div
-              className="absolute top-12 right-0 w-72 h-auto rounded-xl bg-white border border-gray-200 p-6 shadow-glow-md"
+              className="absolute top-12 right-0 w-72 h-auto rounded-xl bg-white border border-[#e8e8ed] p-6 shadow-glow-md"
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
@@ -130,7 +130,7 @@ export const HeroSection: React.FC = () => {
                 </div>
                 <div className="space-y-3">
                   <p className="text-text-primary text-sm font-semibold">Confidence Level</p>
-                  <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-full h-2 bg-[#e8e8ed] rounded-full overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-to-r from-accent-blue to-cyan-glow"
                       initial={{ width: '0%' }}
@@ -145,7 +145,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Center - Main Dashboard */}
             <motion.div
-              className="w-80 h-80 rounded-xl bg-white border border-gray-200 p-8 shadow-glow-lg"
+              className="w-80 h-80 rounded-xl bg-white border border-[#e8e8ed] p-8 shadow-glow-lg"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
             >
@@ -163,7 +163,7 @@ export const HeroSection: React.FC = () => {
                       <span className="text-text-secondary">Detection Status</span>
                       <span className="text-accent-blue font-semibold">Active</span>
                     </div>
-                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-[#e8e8ed] rounded-full overflow-hidden">
                       <motion.div
                         className="h-full bg-gradient-to-r from-accent-blue to-cyan-glow rounded-full"
                         initial={{ width: '0%' }}
@@ -173,7 +173,7 @@ export const HeroSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200">
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#e8e8ed]">
                     {[
                       { label: 'Accuracy', value: '99.2%' },
                       { label: 'Processing', value: '2.1s' },
@@ -190,7 +190,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Bottom Left Card */}
             <motion.div
-              className="absolute bottom-12 left-0 w-64 h-auto rounded-xl bg-white border border-gray-200 p-5 shadow-glow-md"
+              className="absolute bottom-12 left-0 w-64 h-auto rounded-xl bg-white border border-[#e8e8ed] p-5 shadow-glow-md"
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
             >

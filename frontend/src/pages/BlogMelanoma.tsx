@@ -11,29 +11,29 @@ const BlogMelanoma: React.FC = () => (
       title="Melanoma & Dysplastic Nevi: Early Detection, ABCDE Rule & AI Screening | Medicus Labs"
       description="Clinical reference guide on Melanoma skin cancer: ABCDE & EFG diagnostic rules, melanocyte transformation, dermoscopy criteria, Breslow depth staging, and AI early vision screening."
     />
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
         <article className="max-w-4xl w-full pb-20">
         {/* Header Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#8A857A] mb-4">
-          <Link to="/blog" className="hover:text-[#206E55]">Blog</Link>
+        <div className="flex items-center gap-2 text-xs font-semibold text-[#86868b] mb-4">
+          <Link to="/blog" className="hover:text-[#0071e3]">Blog</Link>
           <span>/</span>
-          <span className="text-[#206E55]">Melanoma Screening</span>
+          <span className="text-[#0071e3]">Melanoma Screening</span>
         </div>
 
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
           <Sparkles size={12} /> Clinical Oncology &amp; Dermatology • ICD-11: 2C30
         </span>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#141515] mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1d1d1f] mb-6 leading-tight">
           Melanoma &amp; Dysplastic Nevi: Diagnostic ABCDE Evaluation, Dermoscopy &amp; AI Early Warning
         </h1>
 
         {/* Author Byline */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5E2DA] mb-10 text-xs text-[#5A554A]">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#d2d2d7] mb-10 text-xs text-[#6e6e73]">
           <div className="flex items-center gap-2">
-            <User size={15} className="text-[#206E55]" />
-            <span className="font-bold text-[#141515]">Authored by:</span> Mallikarjun R &amp; Medicus Clinical Vision Team
+            <User size={15} className="text-[#0071e3]" />
+            <span className="font-bold text-[#1d1d1f]">Authored by:</span> Mallikarjun R &amp; Medicus Clinical Vision Team
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
@@ -41,7 +41,7 @@ const BlogMelanoma: React.FC = () => (
               <span>14 min read</span>
             </div>
             <span>•</span>
-            <div className="flex items-center gap-1 text-[#206E55] font-semibold">
+            <div className="flex items-center gap-1 text-[#0071e3] font-semibold">
               <ShieldCheck size={14} />
               <span>Peer-Referenced</span>
             </div>
@@ -54,7 +54,7 @@ const BlogMelanoma: React.FC = () => (
         </div>
 
         {/* Main Content */}
-        <div className="prose prose-slate max-w-none text-[#5A554A] space-y-8 leading-relaxed">
+        <div className="prose prose-slate max-w-none text-[#6e6e73] space-y-8 leading-relaxed">
 
           {/* Warning Banner */}
           <div className="bg-amber-50 border border-amber-200 rounded-3xl p-6 flex items-start gap-4 text-amber-900 text-sm">
@@ -68,32 +68,32 @@ const BlogMelanoma: React.FC = () => (
           </div>
 
           {/* Key Clinical Summary */}
-          <div className="bg-[#E8F2ED]/60 border border-[#206E55]/20 rounded-3xl p-6 sm:p-8">
-            <h3 className="text-lg font-bold text-[#206E55] mb-3 flex items-center gap-2">
+          <div className="bg-[#eaf2fd]/60 border border-[#0071e3]/20 rounded-3xl p-6 sm:p-8">
+            <h3 className="text-lg font-bold text-[#0071e3] mb-3 flex items-center gap-2">
               <Stethoscope size={20} /> Executive Clinical Summary
             </h3>
-            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#141515]">
+            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#1d1d1f]">
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Pathology:</strong> Malignant transformation of melanocytes driven by somatic mutations (BRAF V600E, NRAS, TERT promoter).</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Primary Screening:</strong> The ABCDE rule and "Ugly Duckling" sign for atypical nevi identification.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Prognostic Marker:</strong> Breslow tumor thickness (in millimeters) is the single most vital predictor of metastatic risk.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>AI Role:</strong> ISIC-trained vision models detect micro-asymmetry, pigment network disruption, and blue-white veils.</span>
               </li>
             </ul>
           </div>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">1. Introduction &amp; Oncogenic Mechanisms</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">1. Introduction &amp; Oncogenic Mechanisms</h2>
             <p>
               Cutaneous melanoma originates from the malignant transformation of pigment-producing melanocytes situated in the basal layer of the epidermis. Although accounting for under 5% of all skin cancer cases, melanoma is responsible for over 75% of skin cancer-related mortalities.
             </p>
@@ -111,13 +111,13 @@ const BlogMelanoma: React.FC = () => (
           <AdSpace variant="rectangle" className="my-8" />
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">2. The ABCDE &amp; EFG Screening Protocol</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">2. The ABCDE &amp; EFG Screening Protocol</h2>
             <p>
               Dermatologists utilize standardized visual criteria to distinguish common benign nevi from potential melanomas:
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mt-4">
-              <div className="bg-white border border-[#E5E2DA] p-5 rounded-2xl">
-                <h4 className="font-bold text-[#206E55] text-base mb-2">The ABCDE Criteria</h4>
+              <div className="bg-white border border-[#d2d2d7] p-5 rounded-2xl">
+                <h4 className="font-bold text-[#0071e3] text-base mb-2">The ABCDE Criteria</h4>
                 <ul className="text-xs space-y-2">
                   <li><strong>A — Asymmetry:</strong> One half of the lesion does not mirror the other half in contour or pattern.</li>
                   <li><strong>B — Border Irregularity:</strong> Edges are notched, scalloped, ragged, or poorly circumscribed.</li>
@@ -126,8 +126,8 @@ const BlogMelanoma: React.FC = () => (
                   <li><strong>E — Evolving:</strong> Significant change in size, shape, elevation, color, or new symptoms (itching, bleeding).</li>
                 </ul>
               </div>
-              <div className="bg-white border border-[#E5E2DA] p-5 rounded-2xl">
-                <h4 className="font-bold text-[#206E55] text-base mb-2">The Nodular EFG Criteria</h4>
+              <div className="bg-white border border-[#d2d2d7] p-5 rounded-2xl">
+                <h4 className="font-bold text-[#0071e3] text-base mb-2">The Nodular EFG Criteria</h4>
                 <p className="text-xs mb-3">Nodular melanoma often lacks classic ABCDE features and presents as:</p>
                 <ul className="text-xs space-y-2">
                   <li><strong>E — Elevated:</strong> Firm, raised bump above the skin plane.</li>
@@ -140,36 +140,36 @@ const BlogMelanoma: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">3. Major Histological Subtypes</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">3. Major Histological Subtypes</h2>
             <div className="overflow-x-auto mt-4">
-              <table className="w-full text-xs text-left border-collapse border border-[#E5E2DA] rounded-2xl overflow-hidden">
-                <thead className="bg-[#F3F1EB] text-[#141515] font-bold">
+              <table className="w-full text-xs text-left border-collapse border border-[#d2d2d7] rounded-2xl overflow-hidden">
+                <thead className="bg-[#f5f5f7] text-[#1d1d1f] font-bold">
                   <tr>
-                    <th className="p-3 border border-[#E5E2DA]">Subtype</th>
-                    <th className="p-3 border border-[#E5E2DA]">Prevalence</th>
-                    <th className="p-3 border border-[#E5E2DA]">Key Histopathological Features</th>
+                    <th className="p-3 border border-[#d2d2d7]">Subtype</th>
+                    <th className="p-3 border border-[#d2d2d7]">Prevalence</th>
+                    <th className="p-3 border border-[#d2d2d7]">Key Histopathological Features</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E5E2DA] bg-white">
+                <tbody className="divide-y divide-[#d2d2d7] bg-white">
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Superficial Spreading (SSM)</td>
-                    <td className="p-3 border border-[#E5E2DA]">~70% of cases</td>
-                    <td className="p-3 border border-[#E5E2DA]">Prominent radial growth phase; pagetoid melanocytic spread in epidermis.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Superficial Spreading (SSM)</td>
+                    <td className="p-3 border border-[#d2d2d7]">~70% of cases</td>
+                    <td className="p-3 border border-[#d2d2d7]">Prominent radial growth phase; pagetoid melanocytic spread in epidermis.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Nodular Melanoma (NM)</td>
-                    <td className="p-3 border border-[#E5E2DA]">~15% of cases</td>
-                    <td className="p-3 border border-[#E5E2DA]">Aggressive vertical growth from onset; rapid dermal invasion without radial phase.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Nodular Melanoma (NM)</td>
+                    <td className="p-3 border border-[#d2d2d7]">~15% of cases</td>
+                    <td className="p-3 border border-[#d2d2d7]">Aggressive vertical growth from onset; rapid dermal invasion without radial phase.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Lentigo Maligna (LMM)</td>
-                    <td className="p-3 border border-[#E5E2DA]">~10% of cases</td>
-                    <td className="p-3 border border-[#E5E2DA]">Arises on chronically sun-damaged facial skin of elderly patients; slow expansion.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Lentigo Maligna (LMM)</td>
+                    <td className="p-3 border border-[#d2d2d7]">~10% of cases</td>
+                    <td className="p-3 border border-[#d2d2d7]">Arises on chronically sun-damaged facial skin of elderly patients; slow expansion.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Acral Lentiginous (ALM)</td>
-                    <td className="p-3 border border-[#E5E2DA]">~5% of cases</td>
-                    <td className="p-3 border border-[#E5E2DA]">Occurs on palms, soles, subungual nail beds; independent of UV exposure.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Acral Lentiginous (ALM)</td>
+                    <td className="p-3 border border-[#d2d2d7]">~5% of cases</td>
+                    <td className="p-3 border border-[#d2d2d7]">Occurs on palms, soles, subungual nail beds; independent of UV exposure.</td>
                   </tr>
                 </tbody>
               </table>
@@ -177,7 +177,7 @@ const BlogMelanoma: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">4. Staging &amp; Surgical Referral Principles</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">4. Staging &amp; Surgical Referral Principles</h2>
             <p>
               Prognostic staging relies on the AJCC 8th Edition TNM classification system:
             </p>
@@ -189,7 +189,7 @@ const BlogMelanoma: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">5. Medicus Labs AI Early Detection Framework</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">5. Medicus Labs AI Early Detection Framework</h2>
             <p>
               Medicus AI incorporates deep convolutional neural networks trained on over 50,000 dermoscopic and clinical images from the International Skin Imaging Collaboration (ISIC) dataset.
             </p>
@@ -199,11 +199,11 @@ const BlogMelanoma: React.FC = () => (
           </section>
 
           {/* Scientific Citations */}
-          <section className="pt-8 border-t border-[#E5E2DA]">
-            <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2">
+          <section className="pt-8 border-t border-[#d2d2d7]">
+            <h3 className="text-lg font-bold text-[#1d1d1f] mb-3 flex items-center gap-2">
               <FileText size={18} /> Scientific Citations &amp; Clinical Sources
             </h3>
-            <ol className="list-decimal pl-6 text-xs text-[#8A857A] space-y-1.5 font-mono">
+            <ol className="list-decimal pl-6 text-xs text-[#86868b] space-y-1.5 font-mono">
               <li>Swetter SM, et al. Guidelines of care for the management of primary cutaneous melanoma. <em>J Am Acad Dermatol.</em> 2019;80(1):208-250.</li>
               <li>Gershenwald JE, et al. Melanoma staging: Evidence-based changes in the American Joint Committee on Cancer eighth edition cancer staging manual. <em>CA Cancer J Clin.</em> 2017;67(6):472-492.</li>
               <li>WHO ICD-11 Code 2C30: Melanoma of Skin. World Health Organization, 2024.</li>
@@ -216,13 +216,13 @@ const BlogMelanoma: React.FC = () => (
 
         <AdSpace variant="leaderboard" className="my-10" />
 
-        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">
-          <h3 className="text-2xl font-extrabold text-[#141515] mb-2">Perform an AI Pre-Screening Scan</h3>
-          <p className="text-sm text-[#5A554A] max-w-xl mx-auto mb-6">
+        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#eaf2fd] via-white to-[#f5f5f7] border border-[#0071e3]/30 text-center shadow-sm">
+          <h3 className="text-2xl font-extrabold text-[#1d1d1f] mb-2">Perform an AI Pre-Screening Scan</h3>
+          <p className="text-sm text-[#6e6e73] max-w-xl mx-auto mb-6">
             Scan suspicious moles or skin spots for early risk scores, visual symmetry maps, and clinical PDF exports.
           </p>
           <Link to="/analysis">
-            <button className="px-8 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">
+            <button className="px-8 py-3.5 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">
               Start Free Melanoma Scan <ArrowRight size={16} />
             </button>
           </Link>

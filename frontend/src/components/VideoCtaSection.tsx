@@ -126,7 +126,7 @@ export default function VideoCtaSection() {
 
         .overlay-gradient {
           background:
-            radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.18) 0%, rgba(14, 165, 233, 0.08) 18%, rgba(7, 21, 33, 0) 42%),
+            radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.18) 0%, rgba(0, 113, 227, 0.08) 18%, rgba(7, 21, 33, 0) 42%),
             linear-gradient(to bottom, rgba(7, 21, 33, 0.08) 0%, rgba(7, 21, 33, 0.52) 58%, rgba(7, 21, 33, 0.9) 100%);
         }
 

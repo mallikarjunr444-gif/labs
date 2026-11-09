@@ -192,7 +192,7 @@ export const ResultDashboard: React.FC = () => {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <section.icon className={`${index === 0 ? 'text-red-400' : 'text-blue-400'}`} size={20} />
+                  <section.icon className={`${index === 0 ? 'text-red-400' : 'text-[#0071e3]'}`} size={20} />
                   <span className="font-semibold text-text-primary">{section.label}</span>
                 </div>
                 <ul className="ml-8 space-y-1">
@@ -214,7 +214,7 @@ export const ResultDashboard: React.FC = () => {
           viewport={{ once: true }}
         >
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0, 240, 255, 0.6)' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(41, 151, 255, 0.6)' }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gradient-to-r from-accent-blue to-cyan-glow text-medical-blue rounded-lg font-bold flex items-center gap-2 shadow-glow-lg hover:shadow-glow-xl transition-all duration-300"
           >

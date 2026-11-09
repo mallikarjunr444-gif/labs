@@ -4,8 +4,8 @@
   "description": "AI-powered dermatology platform for clinical-grade skin analysis and instant diagnostic reference.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#00B289",
+  "background_color": "#ffffff",
+  "theme_color": "#0071e3",
   "icons": [
     {
       "src": "/favicon-16x16.png",

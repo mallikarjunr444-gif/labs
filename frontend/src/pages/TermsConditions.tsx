@@ -3,22 +3,22 @@ import { PremiumFooter } from '../sections';
 import { FileText, Scale, AlertTriangle, Ban, CheckSquare } from 'lucide-react';
 
 const Section: React.FC<{ icon: React.ReactNode; title: string; children: React.ReactNode }> = ({ icon, title, children }) => (
-  <div className="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-sm space-y-4">
-    <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-      <div className="w-9 h-9 rounded-xl bg-sky-50 flex items-center justify-center text-sky-500 flex-shrink-0">{icon}</div>
-      <h2 className="text-lg font-bold text-slate-800">{title}</h2>
+  <div className="bg-white border border-[#e8e8ed]/80 rounded-3xl p-8 shadow-sm space-y-4">
+    <div className="flex items-center gap-3 pb-3 border-b border-[#f5f5f7]">
+      <div className="w-9 h-9 rounded-xl bg-[#eaf2fd] flex items-center justify-center text-[#0071e3] flex-shrink-0">{icon}</div>
+      <h2 className="text-lg font-bold text-[#1d1d1f]">{title}</h2>
     </div>
-    <div className="text-slate-600 text-sm leading-relaxed space-y-3">{children}</div>
+    <div className="text-[#6e6e73] text-sm leading-relaxed space-y-3">{children}</div>
   </div>
 );
 
 const TermsConditions: React.FC = () => (
-  <div className="min-h-screen bg-slate-50/50">
+  <div className="min-h-screen bg-[#fbfbfd]/50">
     <main className="pt-32 pb-24 px-4 sm:px-6 max-w-4xl mx-auto">
       <div className="mb-10">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-xs font-bold text-sky-600 tracking-wider uppercase mb-4">Legal</span>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-3">Terms &amp; Conditions</h1>
-        <p className="text-slate-500 text-sm font-medium">Last updated: July 19, 2026 · By using Medicus Labs, you agree to these terms.</p>
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] border border-[#eaf2fd] text-xs font-bold text-[#6e6e73] tracking-wider uppercase mb-4">Legal</span>
+        <h1 className="text-4xl font-extrabold text-[#1d1d1f] tracking-tight mb-3">Terms &amp; Conditions</h1>
+        <p className="text-[#6e6e73] text-sm font-medium">Last updated: July 19, 2026 · By using Medicus Labs, you agree to these terms.</p>
       </div>
 
       <div className="space-y-6">

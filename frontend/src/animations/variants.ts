@@ -45,9 +45,9 @@ export const floatingAnimation = {
 export const glowAnimation = {
   glow: {
     boxShadow: [
-      '0 0 20px rgba(0, 240, 255, 0.3)',
-      '0 0 40px rgba(0, 240, 255, 0.6)',
-      '0 0 20px rgba(0, 240, 255, 0.3)',
+      '0 0 20px rgba(41, 151, 255, 0.3)',
+      '0 0 40px rgba(41, 151, 255, 0.6)',
+      '0 0 20px rgba(41, 151, 255, 0.3)',
     ],
     transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
   },

@@ -79,18 +79,18 @@ const TeamPage: React.FC = () => (
     {/* Injected Schema.org JSON-LD for Google Search Knowledge Graph */}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(teamSchema) }} />
 
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans" itemScope itemType="https://schema.org/Organization">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans" itemScope itemType="https://schema.org/Organization">
       <meta itemProp="name" content="Medicus Labs" />
       <meta itemProp="url" content="https://medicuslabs.app/" />
 
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 text-center">
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
           <Sparkles size={12} /> Leadership & Founding Team
         </span>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#141515] mb-4">
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#1d1d1f] mb-4">
           Co-Founders of Medicus Labs
         </h1>
-        <p className="text-[#5A554A] text-base sm:text-lg mb-16 max-w-2xl mx-auto">
+        <p className="text-[#6e6e73] text-base sm:text-lg mb-16 max-w-2xl mx-auto">
           Meet the engineers, AI researchers, and product visionaries behind Medicus Labs (medicuslabs.app).
         </p>
 
@@ -98,7 +98,7 @@ const TeamPage: React.FC = () => (
           {team.map((m, i) => (
             <motion.div
               key={i}
-              className="p-8 rounded-3xl bg-white border border-[#E5E2DA] text-left space-y-6 shadow-sm hover:border-[#206E55] transition-all"
+              className="p-8 rounded-3xl bg-white border border-[#d2d2d7] text-left space-y-6 shadow-sm hover:border-[#0071e3] transition-all"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
@@ -108,15 +108,15 @@ const TeamPage: React.FC = () => (
               itemType="https://schema.org/Person"
             >
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-[#E8F2ED] text-[#206E55] font-extrabold flex items-center justify-center text-xl border-2 border-[#206E55]/20">
+                <div className="w-16 h-16 rounded-full bg-[#eaf2fd] text-[#0071e3] font-extrabold flex items-center justify-center text-xl border-2 border-[#0071e3]/20">
                   {m.initials}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-[#141515]" itemProp="name">{m.name}</h2>
-                  <p className="text-xs font-bold text-[#206E55]" itemProp="jobTitle">{m.role}</p>
+                  <h2 className="text-xl font-bold text-[#1d1d1f]" itemProp="name">{m.name}</h2>
+                  <p className="text-xs font-bold text-[#0071e3]" itemProp="jobTitle">{m.role}</p>
                 </div>
               </div>
-              <p className="text-[#5A554A] text-xs leading-relaxed font-semibold pt-2 border-t border-slate-100">
+              <p className="text-[#6e6e73] text-xs leading-relaxed font-semibold pt-2 border-t border-[#f5f5f7]">
                 {m.focus}
               </p>
               <a
@@ -124,7 +124,7 @@ const TeamPage: React.FC = () => (
                 target="_blank"
                 rel="noopener noreferrer"
                 itemProp="sameAs"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E8F2ED] text-[#206E55] hover:bg-[#206E55] hover:text-white font-bold text-xs transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eaf2fd] text-[#0071e3] hover:bg-[#0071e3] hover:text-white font-bold text-xs transition"
               >
                 <LinkedinIcon size={14} /> LinkedIn Profile <ExternalLink size={12} />
               </a>
@@ -135,15 +135,15 @@ const TeamPage: React.FC = () => (
 
 
         {/* Structured SEO Q&A for Co-Founders Search Queries */}
-        <div className="mt-20 max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-3xl border border-[#E5E2DA] text-left">
+        <div className="mt-20 max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-3xl border border-[#d2d2d7] text-left">
           <div className="flex items-center gap-3 mb-4">
-            <ShieldCheck className="text-[#206E55]" size={24} />
-            <h3 className="text-xl font-bold text-[#141515]">About the Medicus Labs Founding Team</h3>
+            <ShieldCheck className="text-[#0071e3]" size={24} />
+            <h3 className="text-xl font-bold text-[#1d1d1f]">About the Medicus Labs Founding Team</h3>
           </div>
-          <p className="text-sm text-[#5A554A] leading-relaxed mb-4">
+          <p className="text-sm text-[#6e6e73] leading-relaxed mb-4">
             <strong>Medicus Labs</strong> was co-founded by <strong>Mallikarjun R</strong> (Founder & CEO), <strong>Nigam Patel H</strong> (Co-Founder), <strong>Mallanagouda M</strong> (Co-Founder), and <strong>Mohammed Adil</strong> (Co-Founder). Together, the team builds clinical-grade AI dermatology solutions empowering patients and healthcare professionals globally.
           </p>
-          <p className="text-xs text-[#8A857A]">
+          <p className="text-xs text-[#86868b]">
             Official leadership registry for Medicus Labs (medicuslabs.app). Verified on LinkedIn.
           </p>
         </div>

@@ -201,12 +201,12 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/^### (.*$)/gim, '<h3 class="text-sm font-bold text-[#141515] mt-3 mb-1">$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2 class="text-base font-bold text-[#141515] mt-3 mb-1">$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1 class="text-lg font-bold text-[#141515] mt-4 mb-2">$1</h1>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#141515]">$1</strong>')
-      .replace(/(?<!^\s*)\*([^\*\n]+)\*/g, '<em class="italic text-slate-600">$1</em>')
-      .replace(/^[\*\-] (.*$)/gim, '<div class="flex items-start gap-2 my-1"><span class="text-[#206E55] font-bold">•</span><span>$1</span></div>')
+      .replace(/^### (.*$)/gim, '<h3 class="text-sm font-bold text-[#1d1d1f] mt-3 mb-1">$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2 class="text-base font-bold text-[#1d1d1f] mt-3 mb-1">$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1 class="text-lg font-bold text-[#1d1d1f] mt-4 mb-2">$1</h1>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#1d1d1f]">$1</strong>')
+      .replace(/(?<!^\s*)\*([^\*\n]+)\*/g, '<em class="italic text-[#6e6e73]">$1</em>')
+      .replace(/^[\*\-] (.*$)/gim, '<div class="flex items-start gap-2 my-1"><span class="text-[#0071e3] font-bold">•</span><span>$1</span></div>')
       .replace(/\n\n/g, '<div class="h-2"></div>')
       .replace(/\n/g, '<br/>');
 
@@ -224,26 +224,26 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="w-full max-w-4xl h-[90dvh] sm:h-[85vh] rounded-3xl bg-[#FAF9F5] border border-[#E5E2DA] shadow-2xl flex flex-col overflow-hidden text-[#141515]"
+          className="w-full max-w-4xl h-[90dvh] sm:h-[85vh] rounded-3xl bg-[#fbfbfd] border border-[#d2d2d7] shadow-2xl flex flex-col overflow-hidden text-[#1d1d1f]"
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
         >
           {/* ── HEADER ── */}
-          <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-[#E5E2DA]">
+          <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-[#d2d2d7]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#E8F2ED] text-[#206E55] flex items-center justify-center border border-[#206E55]/20 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center border border-[#0071e3]/20 shadow-sm">
                 <Bot size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-base text-[#141515] flex items-center gap-2">
+                <h3 className="font-bold text-base text-[#1d1d1f] flex items-center gap-2">
                   Medicus Labs AI
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest bg-[#E8F2ED] text-[#206E55] px-2 py-0.5 rounded-md">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest bg-[#eaf2fd] text-[#0071e3] px-2 py-0.5 rounded-md">
                     Live LLM Stream
                   </span>
                 </h3>
-                <p className="text-xs text-[#5A554A] flex items-center gap-1">
-                  <Shield size={12} className="text-[#206E55]" />
+                <p className="text-xs text-[#6e6e73] flex items-center gap-1">
+                  <Shield size={12} className="text-[#0071e3]" />
                   HIPAA Enforced • Clinical Guidance Only
                 </p>
               </div>
@@ -251,7 +251,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
 
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-full bg-[#FAF9F5] border border-[#E5E2DA] text-[#5A554A] hover:bg-[#F3F1EB] hover:text-[#141515] flex items-center justify-center transition"
+              className="w-9 h-9 rounded-full bg-[#fbfbfd] border border-[#d2d2d7] text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#1d1d1f] flex items-center justify-center transition"
             >
               <X size={18} />
             </button>
@@ -261,11 +261,11 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center space-y-4 max-w-md mx-auto">
-                <div className="w-16 h-16 rounded-full bg-[#E8F2ED] text-[#206E55] flex items-center justify-center text-2xl border border-[#206E55]/20">
+                <div className="w-16 h-16 rounded-full bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center text-2xl border border-[#0071e3]/20">
                   <Sparkles size={28} />
                 </div>
-                <h4 className="text-xl font-bold text-[#141515]">How can Medicus AI assist your skin health today?</h4>
-                <p className="text-xs text-[#5A554A] leading-relaxed">
+                <h4 className="text-xl font-bold text-[#1d1d1f]">How can Medicus AI assist your skin health today?</h4>
+                <p className="text-xs text-[#6e6e73] leading-relaxed">
                   Describe symptoms, upload skin concern photos, or select a prompt below to launch an instant streaming reference check.
                 </p>
               </div>
@@ -278,14 +278,14 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
                   }`}
                 >
                   {msg.role === 'assistant' && (
-                    <div className="w-8 h-8 rounded-full bg-[#E8F2ED] text-[#206E55] flex items-center justify-center flex-shrink-0 border border-[#206E55]/20 mt-1">
+                    <div className="w-8 h-8 rounded-full bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center flex-shrink-0 border border-[#0071e3]/20 mt-1">
                       <Bot size={16} />
                     </div>
                   )}
 
                   <div className={`max-w-[85%] sm:max-w-[75%] space-y-2`}>
                     {msg.image && (
-                      <div className="rounded-2xl overflow-hidden border border-[#E5E2DA] max-w-xs mb-2 shadow-sm">
+                      <div className="rounded-2xl overflow-hidden border border-[#d2d2d7] max-w-xs mb-2 shadow-sm">
                         <img src={msg.image} alt="Uploaded Skin Concern" className="w-full h-auto object-cover" />
                       </div>
                     )}
@@ -293,13 +293,13 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
                     <div
                       className={`p-4 sm:p-5 rounded-3xl text-sm leading-relaxed ${
                         msg.role === 'user'
-                          ? 'bg-[#206E55] text-white rounded-br-none shadow-sm'
-                          : 'bg-white border border-[#E5E2DA] text-[#141515] rounded-bl-none shadow-sm'
+                          ? 'bg-[#0071e3] text-white rounded-br-none shadow-sm'
+                          : 'bg-white border border-[#d2d2d7] text-[#1d1d1f] rounded-bl-none shadow-sm'
                       }`}
                     >
                       {msg.role === 'assistant' ? (
                         <div
-                          className="prose prose-sm max-w-none text-[#141515]"
+                          className="prose prose-sm max-w-none text-[#1d1d1f]"
                           dangerouslySetInnerHTML={renderMarkdown(msg.content)}
                         />
                       ) : (
@@ -309,20 +309,20 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
 
                     {/* Action Bar for Assistant Messages */}
                     {msg.role === 'assistant' && msg.content && (
-                      <div className="flex items-center gap-3 text-xs text-[#5A554A] px-1 pt-1">
+                      <div className="flex items-center gap-3 text-xs text-[#6e6e73] px-1 pt-1">
                         <button
                           onClick={() => handleCopy(msg.id, msg.content)}
-                          className="flex items-center gap-1 hover:text-[#206E55] transition"
+                          className="flex items-center gap-1 hover:text-[#0071e3] transition"
                           title="Copy Response"
                         >
-                          {copiedId === msg.id ? <Check size={13} className="text-[#206E55]" /> : <Copy size={13} />}
+                          {copiedId === msg.id ? <Check size={13} className="text-[#0071e3]" /> : <Copy size={13} />}
                           <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
                         </button>
 
                         <button
                           onClick={handleRegenerate}
                           disabled={isStreaming}
-                          className="flex items-center gap-1 hover:text-[#206E55] transition disabled:opacity-40"
+                          className="flex items-center gap-1 hover:text-[#0071e3] transition disabled:opacity-40"
                           title="Regenerate Response"
                         >
                           <RotateCcw size={13} />
@@ -333,7 +333,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
                   </div>
 
                   {msg.role === 'user' && (
-                    <div className="w-8 h-8 rounded-full bg-[#F3F1EB] text-[#141515] flex items-center justify-center flex-shrink-0 border border-[#E5E2DA] mt-1 font-bold text-xs">
+                    <div className="w-8 h-8 rounded-full bg-[#f5f5f7] text-[#1d1d1f] flex items-center justify-center flex-shrink-0 border border-[#d2d2d7] mt-1 font-bold text-xs">
                       <User size={16} />
                     </div>
                   )}
@@ -343,14 +343,14 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
 
             {/* Follow-up Suggestion Chips */}
             {!isStreaming && messages.length > 0 && messages[messages.length - 1]?.role === 'assistant' && (
-              <div className="pt-4 space-y-2 border-t border-[#E5E2DA]/60">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Suggested follow-ups:</span>
+              <div className="pt-4 space-y-2 border-t border-[#d2d2d7]/60">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#86868b] block">Suggested follow-ups:</span>
                 <div className="flex flex-wrap gap-2">
                   {DEFAULT_FOLLOW_UPS.map((chip, i) => (
                     <button
                       key={i}
                       onClick={() => handleSend(chip)}
-                      className="text-xs px-3.5 py-2 rounded-full bg-white border border-[#E5E2DA] text-[#5A554A] hover:bg-[#E8F2ED] hover:border-[#206E55] hover:text-[#206E55] transition font-medium text-left"
+                      className="text-xs px-3.5 py-2 rounded-full bg-white border border-[#d2d2d7] text-[#6e6e73] hover:bg-[#eaf2fd] hover:border-[#0071e3] hover:text-[#0071e3] transition font-medium text-left"
                     >
                       {chip}
                     </button>
@@ -363,14 +363,14 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
           </div>
 
           {/* ── INPUT FOOTER ── */}
-          <div className="p-4 bg-white border-t border-[#E5E2DA] space-y-3">
+          <div className="p-4 bg-white border-t border-[#d2d2d7] space-y-3">
             {selectedImage && (
-              <div className="flex items-center justify-between p-2 bg-[#F3F1EB] rounded-2xl border border-[#E5E2DA] max-w-xs text-xs">
+              <div className="flex items-center justify-between p-2 bg-[#f5f5f7] rounded-2xl border border-[#d2d2d7] max-w-xs text-xs">
                 <div className="flex items-center gap-2 truncate">
-                  <ImageIcon size={14} className="text-[#206E55]" />
+                  <ImageIcon size={14} className="text-[#0071e3]" />
                   <span className="truncate font-semibold">Image attached</span>
                 </div>
-                <button onClick={() => setSelectedImage(null)} className="text-slate-400 hover:text-red-500">
+                <button onClick={() => setSelectedImage(null)} className="text-[#86868b] hover:text-red-500">
                   <X size={14} />
                 </button>
               </div>
@@ -388,7 +388,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-11 h-11 rounded-full bg-[#FAF9F5] border border-[#E5E2DA] text-[#5A554A] hover:bg-[#E8F2ED] hover:text-[#206E55] flex items-center justify-center transition flex-shrink-0"
+                className="w-11 h-11 rounded-full bg-[#fbfbfd] border border-[#d2d2d7] text-[#6e6e73] hover:bg-[#eaf2fd] hover:text-[#0071e3] flex items-center justify-center transition flex-shrink-0"
                 title="Attach skin image"
               >
                 <Paperclip size={18} />
@@ -400,7 +400,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask Medicus AI about skin symptoms..."
-                className="flex-1 px-5 py-3 rounded-full bg-[#FAF9F5] border border-[#E5E2DA] text-[#141515] placeholder-slate-400 text-sm focus:outline-none focus:border-[#206E55] transition"
+                className="flex-1 px-5 py-3 rounded-full bg-[#fbfbfd] border border-[#d2d2d7] text-[#1d1d1f] placeholder-[#86868b] text-sm focus:outline-none focus:border-[#0071e3] transition"
               />
 
               {isStreaming ? (
@@ -417,7 +417,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
                   type="button"
                   onClick={() => handleSend()}
                   disabled={!input.trim() && !selectedImage}
-                  className="w-11 h-11 rounded-full bg-[#206E55] text-white flex items-center justify-center shadow-sm hover:bg-[#408A6C] transition disabled:opacity-40 flex-shrink-0"
+                  className="w-11 h-11 rounded-full bg-[#0071e3] text-white flex items-center justify-center shadow-sm hover:bg-[#2997ff] transition disabled:opacity-40 flex-shrink-0"
                   title="Send Message"
                 >
                   <Send size={16} />

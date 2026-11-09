@@ -12,28 +12,28 @@ const BlogMelasma: React.FC = () => (
       title="Melasma: Hormonal Triggers, Tyrosinase Inhibitors & Triple Combination Cream | Medicus Labs"
       description="Clinical guide on Melasma: estrogen/progesterone triggers, UV/visible light melanogenesis, epidermal vs dermal pigment depth, Kligman's triple combination formula, tranexamic acid, and AI pre-screening."
     />
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
         <article className="max-w-4xl w-full pb-20">
         <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: 'Melasma & Pigmentation' }]} />
 
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
           <Sparkles size={12} /> Pigmentary Dermatology • ICD-11: ED61
         </span>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#141515] mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1d1d1f] mb-6 leading-tight">
           Melasma: Hormonal Hyper-Pigmentation, Tyrosinase Inhibition &amp; Triple Combination Therapies
         </h1>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5E2DA] mb-10 text-xs text-[#5A554A]">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#d2d2d7] mb-10 text-xs text-[#6e6e73]">
           <div className="flex items-center gap-2">
-            <User size={15} className="text-[#206E55]" />
-            <span className="font-bold text-[#141515]">Authored by:</span> Medicus Clinical Dermatology Group
+            <User size={15} className="text-[#0071e3]" />
+            <span className="font-bold text-[#1d1d1f]">Authored by:</span> Medicus Clinical Dermatology Group
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1"><Clock size={14} /><span>12 min read</span></div>
             <span>•</span>
-            <div className="flex items-center gap-1 text-[#206E55] font-semibold"><ShieldCheck size={14} /><span>Peer-Referenced</span></div>
+            <div className="flex items-center gap-1 text-[#0071e3] font-semibold"><ShieldCheck size={14} /><span>Peer-Referenced</span></div>
           </div>
         </div>
 
@@ -42,27 +42,27 @@ const BlogMelasma: React.FC = () => (
           <AdSpace variant="leaderboard" />
         </div>
 
-        <div className="prose prose-slate max-w-none text-[#5A554A] space-y-8 leading-relaxed">
-          <div className="bg-[#E8F2ED]/60 border border-[#206E55]/20 rounded-3xl p-6 sm:p-8">
-            <h3 className="text-lg font-bold text-[#206E55] mb-3 flex items-center gap-2"><Stethoscope size={20} /> Executive Clinical Summary</h3>
-            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#141515]">
-              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" /><span><strong>Pathology:</strong> Acquired facial hypermelanosis affecting sun-exposed facial areas with female predominance (9:1).</span></li>
-              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" /><span><strong>Triggers:</strong> Ultraviolet (UV) &amp; visible light exposure, pregnancy (chloasma), oral contraceptives, and genetic susceptibility.</span></li>
-              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" /><span><strong>Gold Standard Therapy:</strong> Kligman's Triple Combination Cream (Hydroquinone 4% + Tretinoin 0.05% + Fluocinolone acetonide 0.01%).</span></li>
-              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" /><span><strong>Systemic &amp; Photoprotection:</strong> Oral Tranexamic acid (250mg BID) + broad-spectrum tinted mineral sunscreen containing Iron Oxides.</span></li>
+        <div className="prose prose-slate max-w-none text-[#6e6e73] space-y-8 leading-relaxed">
+          <div className="bg-[#eaf2fd]/60 border border-[#0071e3]/20 rounded-3xl p-6 sm:p-8">
+            <h3 className="text-lg font-bold text-[#0071e3] mb-3 flex items-center gap-2"><Stethoscope size={20} /> Executive Clinical Summary</h3>
+            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#1d1d1f]">
+              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" /><span><strong>Pathology:</strong> Acquired facial hypermelanosis affecting sun-exposed facial areas with female predominance (9:1).</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" /><span><strong>Triggers:</strong> Ultraviolet (UV) &amp; visible light exposure, pregnancy (chloasma), oral contraceptives, and genetic susceptibility.</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" /><span><strong>Gold Standard Therapy:</strong> Kligman's Triple Combination Cream (Hydroquinone 4% + Tretinoin 0.05% + Fluocinolone acetonide 0.01%).</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" /><span><strong>Systemic &amp; Photoprotection:</strong> Oral Tranexamic acid (250mg BID) + broad-spectrum tinted mineral sunscreen containing Iron Oxides.</span></li>
             </ul>
           </div>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">1. Overview &amp; Melanocyte Hyper-Reactivity</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">1. Overview &amp; Melanocyte Hyper-Reactivity</h2>
             <p>Melasma is a chronic relapsing hyperpigmentary disorder characterised by symmetrical light-to-dark brown macules and patches on the face (centrofacial, malar, and mandibular patterns).</p>
           </section>
 
           <AdSpace variant="rectangle" className="my-8" />
 
-          <section className="pt-8 border-t border-[#E5E2DA]">
-            <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>
-            <ol className="list-decimal pl-6 text-xs text-[#8A857A] space-y-1.5 font-mono">
+          <section className="pt-8 border-t border-[#d2d2d7]">
+            <h3 className="text-lg font-bold text-[#1d1d1f] mb-3 flex items-center gap-2"><FileText size={18} /> Scientific References</h3>
+            <ol className="list-decimal pl-6 text-xs text-[#86868b] space-y-1.5 font-mono">
               <li>Passeron T, Picardo M. Melasma: a clinical and pathophysiological review. <em>J Eur Acad Dermatol Venereol.</em> 2018;32 Suppl 2:5-11.</li>
               <li>WHO ICD-11 Code ED61: Melasma. World Health Organization, 2024.</li>
             </ol>
@@ -73,10 +73,10 @@ const BlogMelasma: React.FC = () => (
 
         <AdSpace variant="leaderboard" className="my-10" />
 
-        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">
-          <h3 className="text-2xl font-extrabold text-[#141515] mb-2">Check Facial Pigmentation with AI</h3>
-          <p className="text-sm text-[#5A554A] max-w-xl mx-auto mb-6">Upload facial photos for melasma vs post-inflammatory hyperpigmentation score reporting.</p>
-          <Link to="/analysis"><button className="px-8 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">Start Free Melasma Scan <ArrowRight size={16} /></button></Link>
+        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#eaf2fd] via-white to-[#f5f5f7] border border-[#0071e3]/30 text-center shadow-sm">
+          <h3 className="text-2xl font-extrabold text-[#1d1d1f] mb-2">Check Facial Pigmentation with AI</h3>
+          <p className="text-sm text-[#6e6e73] max-w-xl mx-auto mb-6">Upload facial photos for melasma vs post-inflammatory hyperpigmentation score reporting.</p>
+          <Link to="/analysis"><button className="px-8 py-3.5 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">Start Free Melasma Scan <ArrowRight size={16} /></button></Link>
         </div>
       </article>
 

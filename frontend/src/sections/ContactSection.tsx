@@ -142,7 +142,7 @@ export const ContactSection: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your name"
-                  className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-gray-500 px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-[#6e6e73] px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
                   required
                 />
               </motion.div>
@@ -161,7 +161,7 @@ export const ContactSection: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-gray-500 px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-[#6e6e73] px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
                   required
                 />
               </motion.div>
@@ -180,7 +180,7 @@ export const ContactSection: React.FC = () => {
                   onChange={handleChange}
                   placeholder="Tell us how we can help..."
                   rows={4}
-                  className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-gray-500 px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300 resize-none"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-[#6e6e73] px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300 resize-none"
                   required
                 />
               </motion.div>
@@ -189,7 +189,7 @@ export const ContactSection: React.FC = () => {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0, 240, 255, 0.6)' }}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(41, 151, 255, 0.6)' }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full px-6 py-3 bg-gradient-to-r from-accent-blue to-cyan-glow text-medical-blue rounded-lg font-bold flex items-center justify-center gap-2 shadow-glow-lg hover:shadow-glow-xl transition-all duration-300 disabled:opacity-50"
               >

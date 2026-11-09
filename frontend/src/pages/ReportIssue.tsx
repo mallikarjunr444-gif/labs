@@ -28,12 +28,12 @@ const ReportIssue: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50">
+    <div className="min-h-screen bg-[#fbfbfd]/50">
       <main className="pt-32 pb-24 px-4 sm:px-6 max-w-2xl mx-auto">
         <div className="mb-10">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-xs font-bold text-red-500 tracking-wider uppercase mb-4">Support</span>
-          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-3">Report an Issue</h1>
-          <p className="text-slate-500 text-sm font-medium">Encountered a bug, incorrect diagnosis, or technical problem? Let us know and we'll investigate promptly.</p>
+          <h1 className="text-4xl font-extrabold text-[#1d1d1f] tracking-tight mb-3">Report an Issue</h1>
+          <p className="text-[#6e6e73] text-sm font-medium">Encountered a bug, incorrect diagnosis, or technical problem? Let us know and we'll investigate promptly.</p>
         </div>
 
         {status === 'success' ? (
@@ -44,29 +44,29 @@ const ReportIssue: React.FC = () => {
             <button onClick={() => setStatus('idle')} className="mt-2 px-6 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-sm hover:bg-emerald-600 transition">Submit Another</button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-white border border-slate-200/80 rounded-3xl p-8 shadow-sm space-y-5">
-            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+          <form onSubmit={handleSubmit} className="bg-white border border-[#e8e8ed]/80 rounded-3xl p-8 shadow-sm space-y-5">
+            <div className="flex items-center gap-3 pb-4 border-b border-[#f5f5f7]">
               <div className="w-9 h-9 rounded-xl bg-red-50 flex items-center justify-center text-red-500"><Bug size={18} /></div>
-              <h2 className="font-bold text-slate-800">Issue Details</h2>
+              <h2 className="font-bold text-[#1d1d1f]">Issue Details</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Your Name *</label>
+                <label className="block text-xs font-bold text-[#6e6e73] uppercase tracking-wider mb-1.5">Your Name *</label>
                 <input required name="name" value={form.name} onChange={handleChange} placeholder="John Doe"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-sky-400 transition" />
+                  className="w-full bg-[#fbfbfd] border border-[#e8e8ed] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] transition" />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Email Address *</label>
+                <label className="block text-xs font-bold text-[#6e6e73] uppercase tracking-wider mb-1.5">Email Address *</label>
                 <input required type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@example.com"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-sky-400 transition" />
+                  className="w-full bg-[#fbfbfd] border border-[#e8e8ed] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] transition" />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Issue Category *</label>
+              <label className="block text-xs font-bold text-[#6e6e73] uppercase tracking-wider mb-1.5">Issue Category *</label>
               <select required name="category" value={form.category} onChange={handleChange}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-sky-400 transition">
+                className="w-full bg-[#fbfbfd] border border-[#e8e8ed] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] focus:outline-none focus:border-[#0071e3] transition">
                 <option value="">Select a category...</option>
                 <option value="incorrect-diagnosis">Incorrect AI Diagnosis</option>
                 <option value="image-upload">Image Upload Problem</option>
@@ -79,14 +79,14 @@ const ReportIssue: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Description *</label>
+              <label className="block text-xs font-bold text-[#6e6e73] uppercase tracking-wider mb-1.5">Description *</label>
               <textarea required name="description" value={form.description} onChange={handleChange} rows={5}
                 placeholder="Please describe the issue in detail — what happened, what you expected, and any steps to reproduce it..."
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-sky-400 transition resize-none" />
+                className="w-full bg-[#fbfbfd] border border-[#e8e8ed] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] transition resize-none" />
             </div>
 
             <button type="submit" disabled={status === 'loading'}
-              className="w-full py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 disabled:opacity-60 text-white font-bold text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-sky-500/20">
+              className="w-full py-3.5 rounded-xl bg-[#0071e3] hover:bg-[#0071e3] disabled:opacity-60 text-white font-bold text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-[#0071e3]/20">
               <Send size={16} />
               {status === 'loading' ? 'Submitting...' : 'Submit Report'}
             </button>

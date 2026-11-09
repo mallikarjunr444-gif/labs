@@ -54,7 +54,7 @@ const Faq: React.FC = () => {
   return (
     <>
       <SEO title="FAQ - Frequently Asked Questions | Medicus Labs" description="Find answers to common questions about Medicus Labs AI dermatology: accuracy, privacy, HIPAA compliance, PDF reports, and supported skin conditions." />
-      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+      <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
       
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
@@ -65,33 +65,33 @@ const Faq: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest">
               <Sparkles size={12} />
               Help &amp; Knowledge Base
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-[#141515]"
+            className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-[#1d1d1f]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Frequently Asked{' '}
-            <span className="text-[#206E55]">
+            <span className="text-[#0071e3]">
               Questions
             </span>
           </motion.h1>
 
           {/* Search Box */}
           <div className="mt-2 relative max-w-xl mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#86868b] pointer-events-none" size={18} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions or keywords..."
-              className="w-full pl-11 pr-4 py-3.5 rounded-full bg-white border border-[#E5E2DA] text-[#141515] placeholder-slate-400 focus:outline-none focus:border-[#206E55] text-sm transition shadow-sm"
+              className="w-full pl-11 pr-4 py-3.5 rounded-full bg-white border border-[#d2d2d7] text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] text-sm transition shadow-sm"
             />
           </div>
         </div>
@@ -104,8 +104,8 @@ const Faq: React.FC = () => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-4.5 py-2 rounded-full text-xs font-bold transition whitespace-nowrap ${
                 selectedCategory === cat
-                  ? 'bg-[#206E55] text-white shadow-sm'
-                  : 'bg-[#F3F1EB] border border-[#E5E2DA] text-[#5A554A] hover:text-[#206E55]'
+                  ? 'bg-[#0071e3] text-white shadow-sm'
+                  : 'bg-[#f5f5f7] border border-[#d2d2d7] text-[#6e6e73] hover:text-[#0071e3]'
               }`}
             >
               {cat}
@@ -120,17 +120,17 @@ const Faq: React.FC = () => {
           {filteredFaqs.map((faq, idx) => (
             <motion.div
               key={idx}
-              className="rounded-3xl bg-white border border-[#E5E2DA] shadow-sm overflow-hidden transition-all"
+              className="rounded-3xl bg-white border border-[#d2d2d7] shadow-sm overflow-hidden transition-all"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
             >
               <button
                 onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                className="w-full p-6 text-left flex items-center justify-between font-bold text-base text-[#141515] hover:text-[#206E55] transition"
+                className="w-full p-6 text-left flex items-center justify-between font-bold text-base text-[#1d1d1f] hover:text-[#0071e3] transition"
               >
                 <span className="pr-4">{faq.q}</span>
-                {openIdx === idx ? <Minus size={18} className="text-[#206E55] flex-shrink-0" /> : <Plus size={18} className="text-slate-400 flex-shrink-0" />}
+                {openIdx === idx ? <Minus size={18} className="text-[#0071e3] flex-shrink-0" /> : <Plus size={18} className="text-[#86868b] flex-shrink-0" />}
               </button>
               <AnimatePresence>
                 {openIdx === idx && (
@@ -139,7 +139,7 @@ const Faq: React.FC = () => {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="px-6 pb-6 text-[#5A554A] text-sm leading-relaxed border-t border-slate-50 pt-2"
+                    className="px-6 pb-6 text-[#6e6e73] text-sm leading-relaxed border-t border-[#fbfbfd] pt-2"
                   >
                     {faq.a}
                   </motion.div>
@@ -152,12 +152,12 @@ const Faq: React.FC = () => {
 
 
         {/* Still have questions card */}
-        <div className="mt-20 p-8 rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] text-center space-y-4">
-          <h3 className="text-2xl font-bold text-[#141515]">Still have questions?</h3>
-          <p className="text-[#5A554A] text-xs sm:text-sm">Our medical support team is available 24/7 to assist with platform technical questions.</p>
+        <div className="mt-20 p-8 rounded-3xl bg-[#f5f5f7] border border-[#d2d2d7] text-center space-y-4">
+          <h3 className="text-2xl font-bold text-[#1d1d1f]">Still have questions?</h3>
+          <p className="text-[#6e6e73] text-xs sm:text-sm">Our medical support team is available 24/7 to assist with platform technical questions.</p>
           <div>
             <Link to="/contact">
-              <button className="px-6 py-3 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-xs shadow-sm transition">
+              <button className="px-6 py-3 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-xs shadow-sm transition">
                 Contact Clinical Support
               </button>
             </Link>

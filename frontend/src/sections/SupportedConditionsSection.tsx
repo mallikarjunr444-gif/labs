@@ -8,9 +8,9 @@ export const SupportedConditionsSection: React.FC = () => {
     { name: 'Eczema', IconComponent: Droplets, color: 'from-orange-500/30' },
     { name: 'Psoriasis', IconComponent: Layers, color: 'from-yellow-500/30' },
     { name: 'Rosacea', IconComponent: Heart, color: 'from-pink-500/30' },
-    { name: 'Melanoma', IconComponent: AlertTriangle, color: 'from-gray-500/30' },
-    { name: 'Vitiligo', IconComponent: Eye, color: 'from-slate-500/30' },
-    { name: 'Dermatitis', IconComponent: Zap, color: 'from-cyan-500/30' },
+    { name: 'Melanoma', IconComponent: AlertTriangle, color: 'from-[#6e6e73]/30' },
+    { name: 'Vitiligo', IconComponent: Eye, color: 'from-[#6e6e73]/30' },
+    { name: 'Dermatitis', IconComponent: Zap, color: 'from-[#0071e3]/30' },
     { name: 'Fungal Infection', IconComponent: Microscope, color: 'from-emerald-500/30' },
   ];
 
@@ -47,7 +47,7 @@ export const SupportedConditionsSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.6 }}
-              whileHover={{ scale: 1.05, y: -8, boxShadow: '0 0 30px rgba(0, 240, 255, 0.2)' }}
+              whileHover={{ scale: 1.05, y: -8, boxShadow: '0 0 30px rgba(41, 151, 255, 0.2)' }}
               viewport={{ once: true }}
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -13,8 +13,8 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-[#8A857A] font-medium">
-      <Link to="/" className="flex items-center gap-1 hover:text-[#206E55] transition">
+    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-[#86868b] font-medium">
+      <Link to="/" className="flex items-center gap-1 hover:text-[#0071e3] transition">
         <Home size={13} />
         <span>Home</span>
       </Link>
@@ -22,11 +22,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
         <React.Fragment key={index}>
           <ChevronRight size={12} className="text-[#C5C2B8]" />
           {item.href ? (
-            <Link to={item.href} className="hover:text-[#206E55] transition">
+            <Link to={item.href} className="hover:text-[#0071e3] transition">
               {item.label}
             </Link>
           ) : (
-            <span className="text-[#206E55] font-semibold">{item.label}</span>
+            <span className="text-[#0071e3] font-semibold">{item.label}</span>
           )}
         </React.Fragment>
       ))}

@@ -71,12 +71,12 @@ const PremiumHome: React.FC = () => {
               Ready to transform your{' '}
               <span className="gradient-text">dermatology care?</span>
             </h2>
-            <p className="text-gray-500 text-lg max-w-xl mx-auto">
+            <p className="text-[#6e6e73] text-lg max-w-xl mx-auto">
               Join thousands of patients and healthcare providers using Medicus Labs for advanced skin analysis.
             </p>
             <motion.button
               onClick={() => navigate('/analysis')}
-              className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-cyan-glow to-blue-500 text-[#020617] font-bold text-base shadow-glow-lg hover:shadow-glow-xl transition-all duration-300"
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-cyan-glow to-[#0071e3] text-[#020617] font-bold text-base shadow-glow-lg hover:shadow-glow-xl transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >

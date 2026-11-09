@@ -4,20 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        'medical-blue': '#206E55',
-        'cyan-glow': '#206E55',
-        'deep-blue': '#FAF9F5',
-        'light-cyan': '#E8F2ED',
+        'medical-blue': '#0071e3',
+        'cyan-glow': '#0071e3',
+        'deep-blue': '#fbfbfd',
+        'light-cyan': '#eaf2fd',
         'surface': '#FFFFFF',
-        'surface-2': '#F3F1EB',
-        'text-primary': '#141515',
-        'text-secondary': '#5A554A',
-        'accent-blue': '#206E55',
-        'accent-light': '#E8F2ED',
+        'surface-2': '#f5f5f7',
+        'text-primary': '#1d1d1f',
+        'text-secondary': '#6e6e73',
+        'accent-blue': '#0071e3',
+        'accent-light': '#eaf2fd',
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-        sans: ['Inter', 'sans-serif'],
+        display: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Inter"', 'system-ui', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Inter"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         'glow-sm': '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
@@ -26,7 +26,7 @@ export default {
         'glow-xl': '0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)',
         'glass': '0 4px 6px rgba(0, 0, 0, 0.07)',
         'premium': '0 10px 25px rgba(0, 0, 0, 0.08)',
-        'card-hover': '0 20px 25px rgba(0, 0, 0, 0.1), 0 0px 0px rgba(3, 105, 161, 0)',
+        'card-hover': '0 20px 25px rgba(0, 0, 0, 0.1), 0 0px 0px rgba(0, 113, 227, 0)',
         'inner-glow': 'inset 0 1px 0 rgba(255,255,255,0.5)',
       },
       borderRadius: {
@@ -69,8 +69,8 @@ export default {
           '50%': { 'box-shadow': '0 20px 25px rgba(0, 0, 0, 0.12)' },
         },
         'pulse-glow': {
-          '0%, 100%': { 'box-shadow': '0 0 0 0 rgba(3, 105, 161, 0.5)' },
-          '50%': { 'box-shadow': '0 0 0 10px rgba(3, 105, 161, 0)' },
+          '0%, 100%': { 'box-shadow': '0 0 0 0 rgba(0, 113, 227, 0.5)' },
+          '50%': { 'box-shadow': '0 0 0 10px rgba(0, 113, 227, 0)' },
         },
         'spin-slow': {
           from: { transform: 'rotate(0deg)' },
@@ -103,8 +103,8 @@ export default {
           to: { opacity: '1', transform: 'translateY(0)' },
         },
         'border-glow': {
-          '0%, 100%': { 'border-color': 'rgba(0, 240, 255, 0.2)' },
-          '50%': { 'border-color': 'rgba(0, 240, 255, 0.6)' },
+          '0%, 100%': { 'border-color': 'rgba(41, 151, 255, 0.2)' },
+          '50%': { 'border-color': 'rgba(41, 151, 255, 0.6)' },
         },
       },
     },

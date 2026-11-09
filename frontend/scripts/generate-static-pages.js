@@ -518,7 +518,7 @@ const pages = [
       <h2>Founding Story & Engineering Focus</h2>
       <p><strong>Mallikarjun R</strong> founded Medicus Labs™ with a singular vision: ensuring that anyone with an internet-connected smartphone can access high-precision clinical pre-screening for cutaneous conditions regardless of geographic location or income.</p>
       <p>Bridging deep learning architectures with clinical dermatology workflows, Mallikarjun led the design of our Vision Transformer classification pipeline, HIPAA-aligned in-memory processing engine, and evidence-based patient reporting system.</p>
-      <p>Connect on professional networks: <a href="https://www.linkedin.com/in/mallikarjunr-com/" target="_blank" rel="noopener noreferrer" style="color: #206E55; font-weight: bold;">Mallikarjun R on LinkedIn</a>.</p>
+      <p>Connect on professional networks: <a href="https://www.linkedin.com/in/mallikarjunr-com/" target="_blank" rel="noopener noreferrer" style="color: #0071e3; font-weight: bold;">Mallikarjun R on LinkedIn</a>.</p>
     `
   },
   {
@@ -1217,36 +1217,36 @@ for (const page of pages) {
 
   // Inject Rich Semantic Body into <div id="root">
   const richSemanticBody = `
-    <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px; font-family: system-ui, -apple-system, sans-serif; color: #141515; line-height: 1.7;">
-      <nav style="margin-bottom: 24px; font-size: 13px; color: #8A857A;">
-        <a href="/" style="color: #206E55; font-weight: 600; text-decoration: none;">Home</a> /
-        <a href="/blog" style="color: #206E55; font-weight: 600; text-decoration: none;">Medical Library</a> /
+    <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px; font-family: system-ui, -apple-system, sans-serif; color: #1d1d1f; line-height: 1.7;">
+      <nav style="margin-bottom: 24px; font-size: 13px; color: #86868b;">
+        <a href="/" style="color: #0071e3; font-weight: 600; text-decoration: none;">Home</a> /
+        <a href="/blog" style="color: #0071e3; font-weight: 600; text-decoration: none;">Medical Library</a> /
         <span>${page.heading}</span>
       </nav>
 
-      <span style="display: inline-block; padding: 4px 12px; background: #E8F2ED; border: 1px solid rgba(32,110,85,0.2); border-radius: 9999px; font-size: 12px; font-weight: 700; color: #206E55; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
+      <span style="display: inline-block; padding: 4px 12px; background: #eaf2fd; border: 1px solid rgba(0,113,227,0.2); border-radius: 9999px; font-size: 12px; font-weight: 700; color: #0071e3; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
         ${page.category}
       </span>
 
-      <h1 style="font-size: 36px; font-weight: 800; line-height: 1.25; margin-bottom: 16px; color: #141515;">
+      <h1 style="font-size: 36px; font-weight: 800; line-height: 1.25; margin-bottom: 16px; color: #1d1d1f;">
         ${page.heading}
       </h1>
 
-      <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: #FAF9F5; border: 1px solid #E5E2DA; border-radius: 12px; font-size: 13px; color: #5A554A; margin-bottom: 32px;">
+      <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: #fbfbfd; border: 1px solid #d2d2d7; border-radius: 12px; font-size: 13px; color: #6e6e73; margin-bottom: 32px;">
         <span><strong>Author:</strong> Mallikarjun R (Founder) &amp; Medicus Labs Medical Team</span>
         <span>•</span>
         <span><strong>Review:</strong> ${page.readTime}</span>
         <span>•</span>
-        <span style="color: #206E55; font-weight: 600;">✓ Peer-Referenced</span>
+        <span style="color: #0071e3; font-weight: 600;">✓ Peer-Referenced</span>
       </div>
 
-      <article style="font-size: 16px; color: #3A352A;">
+      <article style="font-size: 16px; color: #424245;">
         ${page.content}
       </article>
 
-      <footer style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #E5E2DA; font-size: 13px; color: #8A857A;">
+      <footer style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #d2d2d7; font-size: 13px; color: #86868b;">
         <p><strong>Clinical Disclaimer:</strong> Medicus Labs™ provides algorithmic pre-screening guidance for educational purposes. Consult a board-certified dermatologist for formal clinical diagnosis and prescriptions.</p>
-        <p style="margin-top: 8px;">Published by <a href="https://medicuslabs.app" style="color: #206E55;">Medicus Labs</a> • Founder: Mallikarjun R • <a href="/editorial-policy" style="color: #206E55;">Editorial Standards</a> • <a href="/privacy-policy" style="color: #206E55;">Privacy Policy</a></p>
+        <p style="margin-top: 8px;">Published by <a href="https://medicuslabs.app" style="color: #0071e3;">Medicus Labs</a> • Founder: Mallikarjun R • <a href="/editorial-policy" style="color: #0071e3;">Editorial Standards</a> • <a href="/privacy-policy" style="color: #0071e3;">Privacy Policy</a></p>
       </footer>
     </div>
   `;

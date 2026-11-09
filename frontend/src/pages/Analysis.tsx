@@ -69,7 +69,7 @@ const AnalysisInputField: React.FC<AnalysisInputFieldProps> = ({
   placeholder,
 }) => (
   <div className="flex flex-col gap-2">
-    <label className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+    <label className="text-xs font-bold uppercase tracking-wider text-[#6e6e73] flex items-center gap-1">
       {label} {required && <span className="text-red-500">*</span>}
     </label>
     {type === 'select' ? (
@@ -78,18 +78,18 @@ const AnalysisInputField: React.FC<AnalysisInputFieldProps> = ({
           value={form[name]}
           onChange={(e) => setForm((p) => ({ ...p, [name]: e.target.value }))}
           required={required}
-          className={`w-full px-4 py-3 rounded-xl bg-slate-50/50 border text-slate-900 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-500/5 transition font-semibold text-sm sm:text-base appearance-none outline-none cursor-pointer ${
-            errors[name] ? 'border-red-400' : 'border-slate-200'
-          } ${form[name] ? 'text-slate-900' : 'text-slate-400'}`}
+          className={`w-full px-4 py-3 rounded-xl bg-[#fbfbfd]/50 border text-[#1d1d1f] focus:bg-white focus:border-[#0071e3] focus:ring-4 focus:ring-[#0071e3]/5 transition font-semibold text-sm sm:text-base appearance-none outline-none cursor-pointer ${
+            errors[name] ? 'border-red-400' : 'border-[#e8e8ed]'
+          } ${form[name] ? 'text-[#1d1d1f]' : 'text-[#86868b]'}`}
         >
-          <option value="" className="text-slate-400">{placeholder || `Select ${label}`}</option>
+          <option value="" className="text-[#86868b]">{placeholder || `Select ${label}`}</option>
           {(options || []).map((opt) => (
-            <option key={opt.value} value={opt.value} className="text-slate-900 font-semibold">
+            <option key={opt.value} value={opt.value} className="text-[#1d1d1f] font-semibold">
               {opt.label}
             </option>
           ))}
         </select>
-        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
+        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-[#86868b] pointer-events-none" size={18} />
       </div>
     ) : (
       <input
@@ -98,8 +98,8 @@ const AnalysisInputField: React.FC<AnalysisInputFieldProps> = ({
         onChange={(e) => setForm((p) => ({ ...p, [name]: e.target.value }))}
         required={required}
         placeholder={placeholder}
-        className={`w-full px-4 py-3 rounded-xl bg-slate-50/50 border text-slate-900 focus:bg-white focus:border-sky-500 focus:ring-4 focus:ring-sky-500/5 transition font-semibold text-sm sm:text-base outline-none ${
-          errors[name] ? 'border-red-400' : 'border-slate-200'
+        className={`w-full px-4 py-3 rounded-xl bg-[#fbfbfd]/50 border text-[#1d1d1f] focus:bg-white focus:border-[#0071e3] focus:ring-4 focus:ring-[#0071e3]/5 transition font-semibold text-sm sm:text-base outline-none ${
+          errors[name] ? 'border-red-400' : 'border-[#e8e8ed]'
         }`}
       />
     )}
@@ -387,30 +387,30 @@ const Analysis: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] selection:bg-[#206E55]/20 font-sans">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] selection:bg-[#0071e3]/20 font-sans">
       <main className="relative pt-32 pb-24 px-4 sm:px-6">
         <div className="relative z-10 max-w-6xl mx-auto">
           {/* Header Banner */}
-          <div className="w-full rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] py-12 px-6 sm:px-12 text-center mb-10 shadow-sm">
+          <div className="w-full rounded-3xl bg-[#f5f5f7] border border-[#d2d2d7] py-12 px-6 sm:px-12 text-center mb-10 shadow-sm">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-xs font-semibold text-[#206E55] tracking-wider uppercase mb-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] border border-transparent text-xs font-semibold text-[#6e6e73] tracking-wider uppercase mb-4">
                 Clinical AI Workflow
               </span>
-              <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#141515] mb-4 tracking-tight leading-tight">
-                Clinical Dermatology <span className="text-[#206E55]">Analysis Engine</span>
+              <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1d1d1f] mb-4 tracking-tight leading-tight">
+                Clinical Dermatology <span className="text-[#0071e3]">Analysis Engine</span>
               </h1>
-              <p className="text-[#5A554A] text-base max-w-2xl mx-auto font-medium">
+              <p className="text-[#6e6e73] text-base max-w-2xl mx-auto font-medium">
                 Follow our secure pipeline for automated classifications, ISIC validation, and instant reporting.
               </p>
             </motion.div>
           </div>
 
           {/* Stepper Widget */}
-          <div className="bg-white border border-[#E5E2DA] p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="bg-white border border-[#d2d2d7] p-6 rounded-3xl shadow-sm mb-10 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             <div className="flex justify-between items-center min-w-[760px] px-4">
               {steps.map((s, i) => {
                 const Icon = s.icon;
@@ -423,17 +423,17 @@ const Analysis: React.FC = () => {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300 ${
                           isActive
-                            ? 'bg-[#206E55] border-[#206E55] text-white shadow-md scale-110'
+                            ? 'bg-[#0071e3] border-[#0071e3] text-white shadow-md scale-110'
                             : isDone
                             ? 'bg-emerald-600 border-emerald-600 text-white'
-                            : 'bg-[#FAF9F5] border-[#E5E2DA] text-slate-400'
+                            : 'bg-[#fbfbfd] border-[#d2d2d7] text-[#86868b]'
                         }`}
                       >
                         {isDone ? <CheckCircle size={16} /> : <Icon size={16} />}
                       </div>
                       <span
                         className={`text-[10px] sm:text-xs font-bold tracking-wide transition-colors ${
-                          isActive ? 'text-[#206E55]' : isDone ? 'text-emerald-700' : 'text-slate-400'
+                          isActive ? 'text-[#0071e3]' : isDone ? 'text-emerald-700' : 'text-[#86868b]'
                         }`}
                       >
                         {s.label}
@@ -443,7 +443,7 @@ const Analysis: React.FC = () => {
                     {i < steps.length - 1 && (
                       <div
                         className={`h-0.5 flex-1 mx-4 transition-colors duration-300 ${
-                          step > s.id ? 'bg-emerald-600' : 'bg-[#E5E2DA]'
+                          step > s.id ? 'bg-emerald-600' : 'bg-[#d2d2d7]'
                         }`}
                       />
                     )}
@@ -457,18 +457,18 @@ const Analysis: React.FC = () => {
           <AnimatePresence>
             {loading && (
               <motion.div
-                className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-[#FAF9F5]/90 backdrop-blur-sm"
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-[#fbfbfd]/90 backdrop-blur-sm"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-full border-4 border-[#E5E2DA] border-t-[#206E55] animate-spin" />
-                  <Clock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#206E55]" size={20} />
+                  <div className="w-16 h-16 rounded-full border-4 border-[#d2d2d7] border-t-[#0071e3] animate-spin" />
+                  <Clock className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#0071e3]" size={20} />
                 </div>
                 <div className="text-center px-4">
-                  <p className="text-lg font-bold text-[#141515] mb-1">Analyzing Patient Specimen</p>
-                  <p className="text-[#5A554A] text-sm font-semibold">{loadingStep}</p>
+                  <p className="text-lg font-bold text-[#1d1d1f] mb-1">Analyzing Patient Specimen</p>
+                  <p className="text-[#6e6e73] text-sm font-semibold">{loadingStep}</p>
                 </div>
               </motion.div>
             )}
@@ -492,10 +492,10 @@ const Analysis: React.FC = () => {
           {!result && !loading && (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               {/* Form panel */}
-              <div className="uiverse-card bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm space-y-6">
+              <div className="uiverse-card bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm space-y-6">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-800 mb-1">Patient Details</h2>
-                  <p className="text-slate-500 text-xs sm:text-sm font-medium">Input baseline clinical metadata required for diagnostics</p>
+                  <h2 className="text-lg font-bold text-[#1d1d1f] mb-1">Patient Details</h2>
+                  <p className="text-[#6e6e73] text-xs sm:text-sm font-medium">Input baseline clinical metadata required for diagnostics</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -518,7 +518,7 @@ const Analysis: React.FC = () => {
                   />
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#6e6e73] mb-2">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <PhoneInputCustom value={form.phone} onChange={(val) => setForm((p) => ({ ...p, phone: val }))} required />
@@ -555,8 +555,8 @@ const Analysis: React.FC = () => {
               {/* Upload panel */}
               <div className="flex flex-col gap-6">
                 {/* Upload box */}
-                <div className="uiverse-card bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-4">Patient Image</h3>
+                <div className="uiverse-card bg-white border border-[#e8e8ed]/80 p-6 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-4">Patient Image</h3>
 
                   {!imagePreview ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -565,14 +565,14 @@ const Analysis: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setShowCamera(true)}
-                        className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-sky-400 hover:bg-sky-50/50 hover:scale-[1.02] active:scale-[0.98]"
+                        className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-[#e8e8ed] bg-[#fbfbfd]/50 p-8 text-center transition-all duration-300 hover:border-[#0071e3] hover:bg-[#eaf2fd]/50 hover:scale-[1.02] active:scale-[0.98]"
                       >
-                        <div className="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center border border-sky-200 group-hover:scale-110 transition-transform">
+                        <div className="w-16 h-16 rounded-2xl bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center border border-[#eaf2fd] group-hover:scale-110 transition-transform">
                           <Camera size={32} />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-800 mb-1">Take Photo</p>
-                          <p className="text-slate-500 text-xs font-semibold">Use your device camera</p>
+                          <p className="text-sm font-bold text-[#1d1d1f] mb-1">Take Photo</p>
+                          <p className="text-[#6e6e73] text-xs font-semibold">Use your device camera</p>
                         </div>
                       </button>
 
@@ -580,21 +580,21 @@ const Analysis: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => fileRef.current?.click()}
-                        className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 p-8 text-center transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-50/50 hover:scale-[1.02] active:scale-[0.98]"
+                        className="group flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-[#e8e8ed] bg-[#fbfbfd]/50 p-8 text-center transition-all duration-300 hover:border-emerald-400 hover:bg-emerald-50/50 hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center border border-emerald-200 group-hover:scale-110 transition-transform">
                           <Image size={32} />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-800 mb-1">Upload from Gallery</p>
-                          <p className="text-slate-500 text-xs font-semibold">Choose an image from your device</p>
+                          <p className="text-sm font-bold text-[#1d1d1f] mb-1">Upload from Gallery</p>
+                          <p className="text-[#6e6e73] text-xs font-semibold">Choose an image from your device</p>
                         </div>
                       </button>
                     </div>
                   ) : (
                       <div className="space-y-4">
                         <div className="relative rounded-2xl border-2 border-emerald-300 bg-emerald-50/[0.05] p-4">
-                          <img src={imagePreview} alt="Preview" className="max-h-48 w-full rounded-xl object-cover shadow-sm border border-slate-100" />
+                          <img src={imagePreview} alt="Preview" className="max-h-48 w-full rounded-xl object-cover shadow-sm border border-[#f5f5f7]" />
                           <span className="absolute top-3 right-3 inline-block text-xs font-bold text-emerald-600 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full border border-emerald-200 shadow-sm">
                             ✓ Image Ready
                           </span>
@@ -603,7 +603,7 @@ const Analysis: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => fileRef.current?.click()}
-                            className="flex-1 px-4 py-2.5 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
+                            className="flex-1 px-4 py-2.5 rounded-xl border-2 border-[#e8e8ed] bg-white hover:bg-[#fbfbfd] text-[#424245] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition"
                           >
                             <Camera size={16} />
                             Retake Photo
@@ -647,7 +647,7 @@ const Analysis: React.FC = () => {
               <button
                 type="submit"
                 disabled={validating}
-                className="uiverse-btn w-full py-4 rounded-2xl bg-slate-900 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 disabled:opacity-75 disabled:cursor-not-allowed"
+                className="uiverse-btn w-full py-4 rounded-2xl bg-[#1d1d1f] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 disabled:opacity-75 disabled:cursor-not-allowed"
               >
                 {validating ? (
                   <>
@@ -666,27 +666,27 @@ const Analysis: React.FC = () => {
 
 
               {/* Clinical AI Analysis Methodology & Guidelines */}
-              <div className="lg:col-span-2 uiverse-card bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="lg:col-span-2 uiverse-card bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Method column */}
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                      <Brain className="text-sky-500" size={20} />
+                    <h3 className="text-lg font-bold text-[#1d1d1f] flex items-center gap-2">
+                      <Brain className="text-[#0071e3]" size={20} />
                       AI Dermatological Analysis Method
                     </h3>
-                    <p className="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+                    <p className="text-[#6e6e73] text-xs sm:text-sm font-medium mt-1">
                       Our advanced core architecture utilizes peer-reviewed computer vision standard methodologies:
                     </p>
                   </div>
                   
                   <div className="space-y-4">
                     <div className="flex gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center flex-shrink-0">
-                        <Cpu className="text-sky-600" size={18} />
+                      <div className="w-10 h-10 rounded-xl bg-[#eaf2fd] border border-[#eaf2fd] flex items-center justify-center flex-shrink-0">
+                        <Cpu className="text-[#0071e3]" size={18} />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-slate-800">Deep Machine Learning</h4>
-                        <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                        <h4 className="text-sm font-bold text-[#1d1d1f]">Deep Machine Learning</h4>
+                        <p className="text-xs text-[#6e6e73] font-semibold mt-0.5">
                           Medicus Labs leverages a neural network trained on a database of tens of thousands of dermoscopic images with verified clinical diagnoses from professional dermatologists.
                         </p>
                       </div>
@@ -697,8 +697,8 @@ const Analysis: React.FC = () => {
                         <ShieldCheck className="text-indigo-600" size={18} />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-slate-800">Advanced Feature Detection</h4>
-                        <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                        <h4 className="text-sm font-bold text-[#1d1d1f]">Advanced Feature Detection</h4>
+                        <p className="text-xs text-[#6e6e73] font-semibold mt-0.5">
                           While physicians typically rely on the manual ABCDE rule, the AI engine processes thousands of micro-features simultaneously to detect boundary, vascular, and pigment irregularities.
                         </p>
                       </div>
@@ -709,8 +709,8 @@ const Analysis: React.FC = () => {
                         <RefreshCw className="text-emerald-600 animate-spin" style={{ animationDuration: '4s' }} size={18} />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-slate-800">Continuous Improvement</h4>
-                        <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                        <h4 className="text-sm font-bold text-[#1d1d1f]">Continuous Improvement</h4>
+                        <p className="text-xs text-[#6e6e73] font-semibold mt-0.5">
                           Through clinical collaboration, the engine's neural weights are updated continuously to classify skin anomalies including acne subtypes, viral manifestations (HPV), and benign neoplasms.
                         </p>
                       </div>
@@ -719,39 +719,39 @@ const Analysis: React.FC = () => {
                 </div>
 
                 {/* Capture guidelines column */}
-                <div className="space-y-6 border-t md:border-t-0 md:border-l border-slate-100 pt-6 md:pt-0 md:pl-8">
+                <div className="space-y-6 border-t md:border-t-0 md:border-l border-[#f5f5f7] pt-6 md:pt-0 md:pl-8">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                      <Camera className="text-sky-500" size={20} />
+                    <h3 className="text-lg font-bold text-[#1d1d1f] flex items-center gap-2">
+                      <Camera className="text-[#0071e3]" size={20} />
                       Optimal Clinical Capture Guidelines
                     </h3>
-                    <p className="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+                    <p className="text-[#6e6e73] text-xs sm:text-sm font-medium mt-1">
                       To achieve maximum classification sensitivity and match reference dataset lighting conditions:
                     </p>
                   </div>
 
-                  <div className="bg-slate-50/50 rounded-2xl p-4 sm:p-5 border border-slate-100 space-y-4">
+                  <div className="bg-[#fbfbfd]/50 rounded-2xl p-4 sm:p-5 border border-[#f5f5f7] space-y-4">
                     <div className="flex gap-3">
-                      <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</div>
+                      <div className="w-6 h-6 rounded-full bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</div>
                       <div>
-                        <h5 className="text-xs sm:text-sm font-bold text-slate-700">Close Range Focus</h5>
-                        <p className="text-xs text-slate-500 font-semibold">Hold the camera lens less than 10 cm away from the skin lesion.</p>
+                        <h5 className="text-xs sm:text-sm font-bold text-[#424245]">Close Range Focus</h5>
+                        <p className="text-xs text-[#6e6e73] font-semibold">Hold the camera lens less than 10 cm away from the skin lesion.</p>
                       </div>
                     </div>
 
                     <div className="flex gap-3">
-                      <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</div>
+                      <div className="w-6 h-6 rounded-full bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</div>
                       <div>
-                        <h5 className="text-xs sm:text-sm font-bold text-slate-700">Centered & Stable Position</h5>
-                        <p className="text-xs text-slate-500 font-semibold">Align the active skin mark directly in the center of the frame and keep the lens completely still.</p>
+                        <h5 className="text-xs sm:text-sm font-bold text-[#424245]">Centered & Stable Position</h5>
+                        <p className="text-xs text-[#6e6e73] font-semibold">Align the active skin mark directly in the center of the frame and keep the lens completely still.</p>
                       </div>
                     </div>
 
                     <div className="flex gap-3">
-                      <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</div>
+                      <div className="w-6 h-6 rounded-full bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</div>
                       <div>
-                        <h5 className="text-xs sm:text-sm font-bold text-slate-700">Zero Obstructing Elements</h5>
-                        <p className="text-xs text-slate-500 font-semibold">Ensure there is no hair, shadows, ink markings, or deep skin folds/wrinkles obstructing the scan.</p>
+                        <h5 className="text-xs sm:text-sm font-bold text-[#424245]">Zero Obstructing Elements</h5>
+                        <p className="text-xs text-[#6e6e73] font-semibold">Ensure there is no hair, shadows, ink markings, or deep skin folds/wrinkles obstructing the scan.</p>
                       </div>
                     </div>
                   </div>
@@ -761,10 +761,10 @@ const Analysis: React.FC = () => {
 
 
               {/* Powered by partners badge */}
-              <div className="lg:col-span-2 rounded-2xl bg-white border border-slate-200/80 px-6 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 shadow-sm">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Integrated Standards:</span>
+              <div className="lg:col-span-2 rounded-2xl bg-white border border-[#e8e8ed]/80 px-6 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 shadow-sm">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#86868b]">Integrated Standards:</span>
                 {['ISIC Classification Standard', 'Grok Vision ML V3', 'HIPAA Secure DB'].map((t) => (
-                  <span key={t} className="text-xs sm:text-sm font-bold text-sky-600">
+                  <span key={t} className="text-xs sm:text-sm font-bold text-[#0071e3]">
                     {t}
                   </span>
                 ))}
@@ -1908,13 +1908,13 @@ function ResultCard({
         textColor: 'text-amber-500'
       }
     : {
-        bg: 'from-slate-900 to-slate-950 shadow-slate-900/10 border-slate-800',
-        badge: 'bg-sky-500/10 text-sky-300 border-sky-500/20',
-        text: 'text-slate-400',
-        glow: 'text-sky-400',
-        bar: 'bg-sky-500',
-        color: 'bg-sky-500',
-        textColor: 'text-sky-500'
+        bg: 'from-[#1d1d1f] to-[#1d1d1f] shadow-slate-900/10 border-[#1d1d1f]',
+        badge: 'bg-[#0071e3]/10 text-sky-300 border-[#0071e3]/20',
+        text: 'text-[#86868b]',
+        glow: 'text-[#0071e3]',
+        bar: 'bg-[#0071e3]',
+        color: 'bg-[#0071e3]',
+        textColor: 'text-[#0071e3]'
       };
 
   const handleDownload = async () => {
@@ -1926,7 +1926,7 @@ function ResultCard({
   const getSeverityMeterValue = (level: string) => {
     switch (level.toLowerCase()) {
       case 'none': return { pct: 15, label: 'Optimal / Healthy', color: 'bg-emerald-500', text: 'text-emerald-500' };
-      case 'low': return { pct: 40, label: 'Low / Mild Risk', color: 'bg-sky-500', text: 'text-sky-500' };
+      case 'low': return { pct: 40, label: 'Low / Mild Risk', color: 'bg-[#0071e3]', text: 'text-[#0071e3]' };
       case 'medium': return { pct: 70, label: 'Moderate / Medium Risk', color: 'bg-amber-500', text: 'text-amber-500' };
       case 'high': return { pct: 95, label: 'Critical / High Risk', color: 'bg-red-500', text: 'text-red-500' };
       default: return { pct: 50, label: 'Moderate Risk', color: 'bg-amber-500', text: 'text-amber-500' };
@@ -1977,7 +1977,7 @@ function ResultCard({
               cy="40"
               r="32"
               fill="none"
-              stroke="#0ea5e9"
+              stroke="#0071e3"
               strokeWidth="6.5"
               strokeLinecap="round"
               strokeDasharray={`${(confidence / 100) * 201} 201`}
@@ -1987,12 +1987,12 @@ function ResultCard({
           <div className="absolute top-9 text-center">
             <span className="text-lg font-extrabold text-white block leading-none">{confidence}%</span>
           </div>
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-300 mt-2.5 block">AI Confidence</span>
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#d2d2d7] mt-2.5 block">AI Confidence</span>
         </div>
       </div>
 
       {/* Tabs Navigation */}
-      <div className="flex border-b border-slate-200 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-2 bg-slate-100/55 p-1 rounded-2xl">
+      <div className="flex border-b border-[#e8e8ed] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-2 bg-[#f5f5f7]/55 p-1 rounded-2xl">
         {(['clinical', 'treatment', 'lifestyle', 'progress'] as const).map((tab) => {
           const labels = {
             clinical: { text: 'Diagnostic Metrics', icon: Cpu },
@@ -2007,8 +2007,8 @@ function ResultCard({
               onClick={() => setActiveTab(tab)}
               className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
                 activeTab === tab
-                  ? 'bg-white text-sky-600 shadow-md shadow-slate-200/50 scale-[1.02]'
-                  : 'text-slate-500 hover:text-slate-800 hover:bg-white/40'
+                  ? 'bg-white text-[#0071e3] shadow-md shadow-slate-200/50 scale-[1.02]'
+                  : 'text-[#6e6e73] hover:text-[#1d1d1f] hover:bg-white/40'
               }`}
             >
               <Icon size={16} />
@@ -2032,14 +2032,14 @@ function ResultCard({
           {activeTab === 'clinical' && (
             <>
               {/* Suspected Area Overlay Heatmap */}
-              <div className="lg:col-span-2 bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm flex flex-col">
-                <h3 className="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
-                  <Activity size={18} className="text-sky-500" />
+              <div className="lg:col-span-2 bg-white border border-[#e8e8ed]/80 p-6 rounded-3xl shadow-sm flex flex-col">
+                <h3 className="text-base font-bold text-[#1d1d1f] mb-4 pb-2 border-b border-[#f5f5f7] flex items-center gap-2">
+                  <Activity size={18} className="text-[#0071e3]" />
                   Affected Area Pathology & Heatmap Analysis
                 </h3>
                 
                 {imagePreview ? (
-                  <div className="relative overflow-hidden rounded-2xl border border-slate-200 shadow-inner bg-slate-50 flex items-center justify-center">
+                  <div className="relative overflow-hidden rounded-2xl border border-[#e8e8ed] shadow-inner bg-[#fbfbfd] flex items-center justify-center">
                     <img src={imagePreview} alt="Specimen Analysis" className="max-h-[360px] w-full object-cover" />
                     
                     {/* Render lesions heatmap if available */}
@@ -2066,7 +2066,7 @@ function ResultCard({
                           </div>
                         ))}
                         
-                        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-900/80 text-white text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
+                        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#1d1d1f]/80 text-white text-[10px] font-bold tracking-wider uppercase backdrop-blur-sm">
                           <Zap size={10} className="text-yellow-400 fill-yellow-400" />
                           AI SUSPECTED LESION HEATMAP BOUNDS
                         </span>
@@ -2074,12 +2074,12 @@ function ResultCard({
                     ) : null}
                   </div>
                 ) : (
-                  <div className="h-64 rounded-2xl bg-slate-50 border border-dashed border-slate-200 flex items-center justify-center text-slate-400 font-medium">
+                  <div className="h-64 rounded-2xl bg-[#fbfbfd] border border-dashed border-[#e8e8ed] flex items-center justify-center text-[#86868b] font-medium">
                     No specimen photograph submitted
                   </div>
                 )}
                 
-                <p className="text-slate-400 text-xs mt-3 leading-relaxed font-semibold">
+                <p className="text-[#86868b] text-xs mt-3 leading-relaxed font-semibold">
                   * Bounding box overlay isolates localized erythema, scaling borders, and vascular pigmentation deviations for classification model matching.
                 </p>
               </div>
@@ -2087,22 +2087,22 @@ function ResultCard({
               {/* Sidebar: AI Metrics & Reliability */}
               <div className="space-y-6">
                 {/* Severity Meter */}
-                <div className="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Disease Severity Index</h4>
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 rounded-3xl shadow-sm">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#86868b] mb-4">Disease Severity Index</h4>
                   
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-bold text-slate-700">Classification Level</span>
+                    <span className="text-sm font-bold text-[#424245]">Classification Level</span>
                     <span className={`text-sm font-extrabold ${severityMeter.text}`}>{severityMeter.label}</span>
                   </div>
 
-                  <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden mb-4 relative">
+                  <div className="w-full h-3 bg-[#f5f5f7] rounded-full overflow-hidden mb-4 relative">
                     <div 
                       className={`h-full ${severityMeter.color} rounded-full transition-all duration-1000`} 
                       style={{ width: `${severityMeter.pct}%` }} 
                     />
                   </div>
                   
-                  <div className="grid grid-cols-4 text-[9px] font-bold text-slate-400 text-center border-t border-slate-50 pt-2.5">
+                  <div className="grid grid-cols-4 text-[9px] font-bold text-[#86868b] text-center border-t border-[#fbfbfd] pt-2.5">
                     <span>Healthy</span>
                     <span>Mild</span>
                     <span>Moderate</span>
@@ -2112,29 +2112,29 @@ function ResultCard({
 
 
                 {/* Confidence & Reliability Card */}
-                <div className="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 pb-2 border-b border-slate-100">Analysis Metadata</h4>
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 rounded-3xl shadow-sm space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#86868b] pb-2 border-b border-[#f5f5f7]">Analysis Metadata</h4>
                   
-                  <div className="space-y-2 text-xs font-semibold text-slate-600">
+                  <div className="space-y-2 text-xs font-semibold text-[#6e6e73]">
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Quality Score:</span>
+                      <span className="text-[#86868b]">Quality Score:</span>
                       <span className={`font-bold ${result.qualityScore?.toLowerCase().includes('poor') ? 'text-red-500' : 'text-emerald-500'}`}>
                         {result.qualityScore || 'Good Quality / Acceptable'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">AI Model Version:</span>
-                      <span className="text-slate-700 font-bold">{result.modelVersion || 'Medicus-Net V2.6.4'}</span>
+                      <span className="text-[#86868b]">AI Model Version:</span>
+                      <span className="text-[#424245] font-bold">{result.modelVersion || 'Medicus-Net V2.6.4'}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Processing Time:</span>
-                      <span className="text-slate-700 font-bold">
+                      <span className="text-[#86868b]">Processing Time:</span>
+                      <span className="text-[#424245] font-bold">
                         {result.processingTimeMs ? `${(result.processingTimeMs / 1000).toFixed(2)} seconds` : '0.86 seconds'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Security Standard:</span>
-                      <span className="text-slate-700 font-bold">HIPAA Secure API Node</span>
+                      <span className="text-[#86868b]">Security Standard:</span>
+                      <span className="text-[#424245] font-bold">HIPAA Secure API Node</span>
                     </div>
                   </div>
                 </div>
@@ -2147,22 +2147,22 @@ function ResultCard({
             <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
               {/* Overview & remedies */}
               <div className="space-y-6">
-                <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
-                    <FileText size={18} className="text-sky-500" />
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-3 flex items-center gap-2">
+                    <FileText size={18} className="text-[#0071e3]" />
                     Disease Overview
                   </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed font-semibold mb-6">
+                  <p className="text-[#6e6e73] text-sm leading-relaxed font-semibold mb-6">
                     {catalog.overview}
                   </p>
 
-                  <h3 className="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
-                    <CheckCircle size={18} className="text-sky-500" />
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-3 flex items-center gap-2">
+                    <CheckCircle size={18} className="text-[#0071e3]" />
                     Recommended Home Remedies
                   </h3>
                   <div className="space-y-3">
                     {catalog.remedies.map((r, i) => (
-                      <div key={i} className="flex gap-2 text-sm font-medium text-slate-600 leading-relaxed">
+                      <div key={i} className="flex gap-2 text-sm font-medium text-[#6e6e73] leading-relaxed">
                         <Check className="text-emerald-500 mt-1 flex-shrink-0" size={16} />
                         <span>{r}</span>
                       </div>
@@ -2171,13 +2171,13 @@ function ResultCard({
                 </div>
 
                 {/* Do's & Don'ts */}
-                <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-4">Dos & Don'ts Checklist</h3>
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-4">Dos & Don'ts Checklist</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md uppercase tracking-wider block w-max mb-3">Do's</span>
                       {catalog.dos.map((d, i) => (
-                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
+                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-[#6e6e73] leading-relaxed">
                           <Check className="text-emerald-500 flex-shrink-0 mt-0.5" size={14} />
                           <span>{d}</span>
                         </div>
@@ -2186,7 +2186,7 @@ function ResultCard({
                     <div className="space-y-2">
                       <span className="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-md uppercase tracking-wider block w-max mb-3">Don'ts</span>
                       {catalog.donts.map((d, i) => (
-                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
+                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-[#6e6e73] leading-relaxed">
                           <X className="text-red-500 flex-shrink-0 mt-0.5" size={14} />
                           <span>{d}</span>
                         </div>
@@ -2198,16 +2198,16 @@ function ResultCard({
 
               {/* Treatments & Skincare */}
               <div className="space-y-6">
-                <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-4 flex items-center gap-2">
                     <ShieldAlert size={18} className="text-amber-500" />
                     Clinical Treatment Options
                   </h3>
                   
                   <div className="space-y-4">
                     {catalog.treatments.map((t, i) => (
-                      <div key={i} className="flex gap-3 text-sm font-semibold text-slate-600 leading-relaxed bg-slate-50/50 p-3.5 rounded-xl border border-slate-100">
-                        <span className="w-6 h-6 rounded-full bg-sky-50 text-sky-600 font-extrabold text-xs flex items-center justify-center flex-shrink-0">{i + 1}</span>
+                      <div key={i} className="flex gap-3 text-sm font-semibold text-[#6e6e73] leading-relaxed bg-[#fbfbfd]/50 p-3.5 rounded-xl border border-[#f5f5f7]">
+                        <span className="w-6 h-6 rounded-full bg-[#eaf2fd] text-[#0071e3] font-extrabold text-xs flex items-center justify-center flex-shrink-0">{i + 1}</span>
                         <span>{t}</span>
                       </div>
                     ))}
@@ -2217,16 +2217,16 @@ function ResultCard({
                   </span>
                 </div>
 
-                <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <Sparkles size={18} className="text-sky-500" />
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-4 flex items-center gap-2">
+                    <Sparkles size={18} className="text-[#0071e3]" />
                     Recommended Skincare Categories
                   </h3>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {catalog.products.map((p, i) => (
-                      <div key={i} className="p-3.5 rounded-xl border border-slate-100 bg-sky-50/15 text-center flex flex-col items-center justify-center min-h-[80px]">
-                        <span className="text-xs font-extrabold text-sky-700 leading-snug">{p}</span>
+                      <div key={i} className="p-3.5 rounded-xl border border-[#f5f5f7] bg-[#eaf2fd]/15 text-center flex flex-col items-center justify-center min-h-[80px]">
+                        <span className="text-xs font-extrabold text-[#0071e3] leading-snug">{p}</span>
                       </div>
                     ))}
                   </div>
@@ -2240,13 +2240,13 @@ function ResultCard({
             <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
               {/* Diet, Nutrition & Lifestyle */}
               <div className="space-y-6">
-                <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-4">Diet & Nutrition Guidance</h3>
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-4">Diet & Nutrition Guidance</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wider block w-max mb-2">Foods to Include</span>
                       {catalog.dietSupport.map((f, i) => (
-                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
+                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-[#6e6e73] leading-relaxed">
                           <Check className="text-emerald-500 flex-shrink-0 mt-0.5" size={14} />
                           <span>{f}</span>
                         </div>
@@ -2255,7 +2255,7 @@ function ResultCard({
                     <div className="space-y-2">
                       <span className="text-[10px] font-extrabold text-red-600 bg-red-50 px-2 py-0.5 rounded uppercase tracking-wider block w-max mb-2">Foods to Avoid</span>
                       {catalog.dietAvoid.map((f, i) => (
-                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
+                        <div key={i} className="flex gap-2 text-xs sm:text-sm font-semibold text-[#6e6e73] leading-relaxed">
                           <X className="text-red-500 flex-shrink-0 mt-0.5" size={14} />
                           <span>{f}</span>
                         </div>
@@ -2264,12 +2264,12 @@ function ResultCard({
                   </div>
                 </div>
 
-                <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                  <h3 className="text-base font-bold text-slate-800 mb-3">Lifestyle & Environmental Factors</h3>
+                <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-3">Lifestyle & Environmental Factors</h3>
                   <div className="space-y-3">
                     {catalog.lifestyle.map((l, i) => (
-                      <div key={i} className="flex gap-2 text-sm font-medium text-slate-600 leading-relaxed">
-                        <CheckCircle className="text-sky-500 mt-1 flex-shrink-0" size={15} />
+                      <div key={i} className="flex gap-2 text-sm font-medium text-[#6e6e73] leading-relaxed">
+                        <CheckCircle className="text-[#0071e3] mt-1 flex-shrink-0" size={15} />
                         <span>{l}</span>
                       </div>
                     ))}
@@ -2278,23 +2278,23 @@ function ResultCard({
               </div>
 
               {/* FAQs Accordion */}
-              <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-3xl shadow-sm">
-                <h3 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
-                  <HelpCircle size={18} className="text-sky-500" />
+              <div className="bg-white border border-[#e8e8ed]/80 p-6 sm:p-8 rounded-3xl shadow-sm">
+                <h3 className="text-base font-bold text-[#1d1d1f] mb-4 flex items-center gap-2">
+                  <HelpCircle size={18} className="text-[#0071e3]" />
                   Frequently Asked Questions
                 </h3>
                 
                 <div className="space-y-3">
                   {catalog.faqs.map((f, i) => (
-                    <div key={i} className="border border-slate-100 rounded-xl overflow-hidden text-left">
+                    <div key={i} className="border border-[#f5f5f7] rounded-xl overflow-hidden text-left">
                       <button
                         onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                        className="w-full p-4 text-left font-bold text-xs sm:text-sm text-slate-700 hover:bg-slate-50 transition flex justify-between items-center gap-3 font-display"
+                        className="w-full p-4 text-left font-bold text-xs sm:text-sm text-[#424245] hover:bg-[#fbfbfd] transition flex justify-between items-center gap-3 font-display"
                       >
                         <span>{f.q}</span>
                         <ChevronDown 
                           size={16} 
-                          className={`text-slate-400 transition-transform duration-300 ${openFaq === i ? 'rotate-180 text-sky-500' : ''}`} 
+                          className={`text-[#86868b] transition-transform duration-300 ${openFaq === i ? 'rotate-180 text-[#0071e3]' : ''}`} 
                         />
                       </button>
                       
@@ -2305,7 +2305,7 @@ function ResultCard({
                             animate={{ height: 'auto' }}
                             exit={{ height: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="bg-slate-50/50 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-50 overflow-hidden"
+                            className="bg-[#fbfbfd]/50 text-[#6e6e73] text-xs sm:text-sm leading-relaxed border-t border-[#fbfbfd] overflow-hidden"
                           >
                             <div className="p-4 font-medium">{f.a}</div>
                           </motion.div>
@@ -2322,11 +2322,11 @@ function ResultCard({
           {activeTab === 'progress' && (
             <div className="lg:col-span-3 flex items-center justify-center py-16 w-full">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-                  <Activity size={28} className="text-slate-400" />
+                <div className="w-16 h-16 rounded-full bg-[#f5f5f7] flex items-center justify-center mx-auto mb-4">
+                  <Activity size={28} className="text-[#86868b]" />
                 </div>
-                <h3 className="text-slate-700 font-bold text-base mb-1">Progress Tracking Coming Soon</h3>
-                <p className="text-slate-400 text-sm font-medium max-w-sm">Historical scan comparisons and healing trend analytics will be available after multiple scans are completed.</p>
+                <h3 className="text-[#424245] font-bold text-base mb-1">Progress Tracking Coming Soon</h3>
+                <p className="text-[#86868b] text-sm font-medium max-w-sm">Historical scan comparisons and healing trend analytics will be available after multiple scans are completed.</p>
               </div>
             </div>
           )}
@@ -2334,15 +2334,15 @@ function ResultCard({
       </AnimatePresence>
 
       {/* Patient demographics summary */}
-      <div className="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="bg-white border border-[#e8e8ed]/80 p-6 rounded-3xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Patient Demographics Profile</h4>
-          <p className="text-sm font-bold text-slate-700 mt-1">
-            {patient.fullName} — {patient.age} years old — {patient.gender} — Contact: <span className="font-mono text-slate-500 font-semibold">{patient.phone}</span>
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#86868b]">Patient Demographics Profile</h4>
+          <p className="text-sm font-bold text-[#424245] mt-1">
+            {patient.fullName} — {patient.age} years old — {patient.gender} — Contact: <span className="font-mono text-[#6e6e73] font-semibold">{patient.phone}</span>
           </p>
         </div>
-        <div className="text-slate-400 text-xs sm:text-right font-medium">
-          Clinical summary & report confirmation sent to <span className="font-bold text-slate-500">{patient.email}</span>.
+        <div className="text-[#86868b] text-xs sm:text-right font-medium">
+          Clinical summary & report confirmation sent to <span className="font-bold text-[#6e6e73]">{patient.email}</span>.
         </div>
       </div>
 
@@ -2365,8 +2365,8 @@ function ResultCard({
       </div>
 
       {/* Medical References list */}
-      <div className="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-sm">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 pb-1 border-b border-slate-50">Trusted Medical Citations & References</h4>
+      <div className="bg-white border border-[#e8e8ed]/80 p-6 rounded-3xl shadow-sm">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-[#86868b] mb-3 pb-1 border-b border-[#fbfbfd]">Trusted Medical Citations & References</h4>
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
           {catalog.references.map((r, i) => (
             <a
@@ -2374,7 +2374,7 @@ function ResultCard({
               href={r.url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-800 transition"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0071e3] hover:text-sky-800 transition"
             >
               <ExternalLink size={12} />
               {r.name}
@@ -2384,7 +2384,7 @@ function ResultCard({
       </div>
 
       {/* ── HIGH-CONVERTING DOCTOR CONSULTATION & TELEHEALTH CALLOUT ── */}
-      <div className="bg-gradient-to-r from-[#1b5c47] via-[#206E55] to-[#2b8568] border border-[#206E55]/30 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
+      <div className="bg-gradient-to-r from-[#0058b0] via-[#0071e3] to-[#2b8568] border border-[#0071e3]/30 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
         <div className="space-y-2 max-w-xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-bold uppercase tracking-wider text-emerald-200">
             <Stethoscope size={13} /> Same-Day Virtual Consultations &amp; Rx
@@ -2399,7 +2399,7 @@ function ResultCard({
 
         <Link
           to="/find-dermatologist"
-          className="w-full xl:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-emerald-50 text-[#1b5c47] font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all whitespace-nowrap group"
+          className="w-full xl:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-emerald-50 text-[#0058b0] font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all whitespace-nowrap group"
         >
           <span>Find Available Doctors</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -2407,13 +2407,13 @@ function ResultCard({
       </div>
 
       {/* Download & Share card */}
-      <div className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 overflow-hidden">
+      <div className="bg-[#1d1d1f] border border-[#1d1d1f] p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 overflow-hidden">
         <div className="space-y-1.5 max-w-xl">
           <h3 className="text-lg font-bold flex items-center gap-2 font-display">
-            <Download size={20} className="text-sky-400 animate-bounce flex-shrink-0" />
+            <Download size={20} className="text-[#0071e3] animate-bounce flex-shrink-0" />
             <span>Download Verifiable Medical Report</span>
           </h3>
-          <p className="text-xs text-slate-400 font-semibold leading-relaxed">
+          <p className="text-xs text-[#86868b] font-semibold leading-relaxed">
             Generates a high-resolution, secure clinical PDF document complete with QR Verification code to easily share with your primary care provider.
           </p>
         </div>
@@ -2422,7 +2422,7 @@ function ResultCard({
           <button 
             onClick={handleDownloadPDF} 
             disabled={downloading}
-            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 disabled:bg-sky-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-500/15 transition-all"
+            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl bg-[#0071e3] hover:bg-[#0071e3] disabled:bg-[#0071e3]/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#0071e3]/15 transition-all"
           >
             <Download size={16} />
             <span>{downloading ? 'Downloading...' : 'Download PDF Report'}</span>
@@ -2439,7 +2439,7 @@ function ResultCard({
           
           <button
             onClick={() => window.location.reload()}
-            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition"
+            className="w-full sm:w-auto px-4 sm:px-5 py-3.5 rounded-xl border border-[#1d1d1f] bg-[#1d1d1f] hover:bg-[#1d1d1f] text-[#d2d2d7] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition"
           >
             <RefreshCw size={16} />
             <span>New Scan</span>
@@ -2456,7 +2456,7 @@ function ResultCard({
       </div>
 
       {result.poweredBy && (
-        <p className="text-center text-[10px] font-extrabold uppercase tracking-wider text-slate-300 mt-2">
+        <p className="text-center text-[10px] font-extrabold uppercase tracking-wider text-[#d2d2d7] mt-2">
           Powered by {result.poweredBy}
         </p>
       )}

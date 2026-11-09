@@ -139,7 +139,7 @@ export const UploadDashboard: React.FC = () => {
                         <p className="text-text-secondary">or click to select from your computer</p>
                       </div>
 
-                      <p className="text-gray-500 text-sm">PNG, JPG up to 10MB</p>
+                      <p className="text-[#6e6e73] text-sm">PNG, JPG up to 10MB</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -158,7 +158,7 @@ export const UploadDashboard: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: isDragActive ? 0.3 : 0,
-                  boxShadow: isDragActive ? '0 0 40px rgba(0, 240, 255, 0.5)' : 'none',
+                  boxShadow: isDragActive ? '0 0 40px rgba(41, 151, 255, 0.5)' : 'none',
                 }}
                 transition={{ duration: 0.3 }}
               />
@@ -208,7 +208,7 @@ export const UploadDashboard: React.FC = () => {
                     value={formData[field.name as keyof typeof formData]}
                     onChange={handleFormChange}
                     placeholder={field.placeholder}
-                    className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-gray-500 px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
+                    className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-[#6e6e73] px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
                   />
                 </motion.div>
               ))}
@@ -255,7 +255,7 @@ export const UploadDashboard: React.FC = () => {
                     value={formData[field.name as keyof typeof formData]}
                     onChange={handleFormChange}
                     placeholder={field.placeholder}
-                    className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-gray-500 px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
+                    className="w-full rounded-lg bg-white/5 border border-white/10 text-text-primary placeholder-[#6e6e73] px-4 py-3 focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-cyan-glow/20 transition-all duration-300"
                   />
                 </motion.div>
               ))}
@@ -263,7 +263,7 @@ export const UploadDashboard: React.FC = () => {
               {/* Submit Button */}
               <motion.button
                 type="button"
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(0, 240, 255, 0.6)' }}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(41, 151, 255, 0.6)' }}
                 whileTap={{ scale: 0.95 }}
                 disabled={!uploadedImage || !formData.fullName || !formData.email}
                 className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-accent-blue to-cyan-glow text-medical-blue rounded-lg font-bold shadow-glow-lg hover:shadow-glow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"

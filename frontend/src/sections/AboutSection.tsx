@@ -63,7 +63,7 @@ export const AboutSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="absolute inset-0 rounded-2xl bg-white border border-gray-200 overflow-hidden shadow-glow-lg">
+            <div className="absolute inset-0 rounded-2xl bg-white border border-[#e8e8ed] overflow-hidden shadow-glow-lg">
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-accent-light/20" />
               <div className="h-full flex items-center justify-center">
                 <div className="text-center space-y-8">
@@ -74,7 +74,7 @@ export const AboutSection: React.FC = () => {
                       <motion.div
                         key={i}
                         className="px-4 py-2 rounded-lg bg-accent-light border border-cyan-glow/30 text-sm text-accent-blue font-medium"
-                        whileHover={{ backgroundColor: '#E0F2FE', borderColor: '#0369A1' }}
+                        whileHover={{ backgroundColor: '#E0F2FE', borderColor: '#0071e3' }}
                       >
                         {badge}
                       </motion.div>

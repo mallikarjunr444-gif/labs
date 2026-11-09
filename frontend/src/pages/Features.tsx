@@ -32,15 +32,15 @@ const featureList = [
     desc: 'Upload any skin photo and our Vision Transformer model instantly evaluates it across 8 major dermatological categories — Melanoma, Acne, Eczema, Psoriasis, Rosacea, Vitiligo, Dermatitis & Fungal.',
     tag: 'Core Feature',
     color: 'from-emerald-50 to-green-50',
-    accent: '#206E55',
+    accent: '#0071e3',
   },
   {
     icon: MessageCircle,
     title: 'Talk to Medicus AI Chat',
     desc: 'Ask any skin health question in natural language. Medicus AI provides contextual, medically-grounded responses with follow-up support and conversation history — like a doctor in your pocket.',
     tag: 'AI Chat',
-    color: 'from-sky-50 to-blue-50',
-    accent: '#0ea5e9',
+    color: 'from-[#eaf2fd] to-[#eaf2fd]',
+    accent: '#0071e3',
   },
   {
     icon: FileText,
@@ -79,7 +79,7 @@ const featureList = [
     title: 'Multi-Format Image Upload',
     desc: 'Supports JPG, PNG, WEBP, and HEIC. Smart pre-processing pipeline normalises lighting, removes artefacts, and prepares images for optimal AI analysis accuracy.',
     tag: 'Upload Engine',
-    color: 'from-teal-50 to-cyan-50',
+    color: 'from-teal-50 to-[#eaf2fd]',
     accent: '#0d9488',
   },
   {
@@ -87,7 +87,7 @@ const featureList = [
     title: 'Multi-Condition Cross-Reference',
     desc: 'Unlike single-label classifiers, Medicus AI simultaneously ranks multiple possible conditions with probability scores — giving you the full diagnostic picture, not just one guess.',
     tag: 'Comprehensive',
-    color: 'from-indigo-50 to-blue-50',
+    color: 'from-indigo-50 to-[#eaf2fd]',
     accent: '#4f46e5',
   },
   {
@@ -176,28 +176,28 @@ const Features: React.FC = () => {
   return (
     <>
       <SEO title="Features - Clinical AI Dermatology Platform" description="Explore all Medicus Labs features: AI skin analysis, physician-ready PDF reports, Vision Transformer engine, zero-knowledge privacy, and more." />
-      <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-28 selection:bg-[#206E55]/20 font-sans">
+      <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-28 selection:bg-[#0071e3]/20 font-sans">
 
       {/* ── HERO HEADER ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="text-center max-w-4xl mx-auto space-y-6 mb-16">
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest">
               <Sparkles size={12} />
               Everything Medicus Labs Offers
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#141515]"
+            className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#1d1d1f]"
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
           >
             Built for patients,{' '}
-            <span className="text-[#206E55]">trusted by clinicians</span>
+            <span className="text-[#0071e3]">trusted by clinicians</span>
           </motion.h1>
 
           <motion.p
-            className="text-[#5A554A] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto"
+            className="text-[#6e6e73] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
           >
             Medicus Labs combines clinical-grade AI, instant analysis, and physician-ready reports — all completely free, private, and encrypted.
@@ -208,13 +208,13 @@ const Features: React.FC = () => {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
           >
             <Link to="/analysis">
-              <button className="px-7 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm inline-flex items-center gap-2">
+              <button className="px-7 py-3.5 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-sm transition shadow-sm inline-flex items-center gap-2">
                 Try It Free — No Sign Up
                 <ArrowRight size={15} />
               </button>
             </Link>
             <Link to="/about">
-              <button className="px-7 py-3.5 rounded-full bg-white border border-[#E5E2DA] hover:border-[#206E55] text-[#141515] font-bold text-sm transition">
+              <button className="px-7 py-3.5 rounded-full bg-white border border-[#d2d2d7] hover:border-[#0071e3] text-[#1d1d1f] font-bold text-sm transition">
                 Learn About Our AI →
               </button>
             </Link>
@@ -227,9 +227,9 @@ const Features: React.FC = () => {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           {stats.map((s, i) => (
-            <div key={i} className="text-center p-5 rounded-2xl bg-white border border-[#E5E2DA] shadow-sm">
-              <p className="text-2xl sm:text-3xl font-extrabold text-[#206E55]">{s.value}</p>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#5A554A] mt-1">{s.label}</p>
+            <div key={i} className="text-center p-5 rounded-2xl bg-white border border-[#d2d2d7] shadow-sm">
+              <p className="text-2xl sm:text-3xl font-extrabold text-[#0071e3]">{s.value}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#6e6e73] mt-1">{s.label}</p>
             </div>
           ))}
         </motion.div>
@@ -238,8 +238,8 @@ const Features: React.FC = () => {
 
         {/* ── FEATURE CARDS ── */}
         <div className="mb-6">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#141515] mb-2">All Features</h2>
-          <p className="text-[#5A554A] text-sm">Everything included — free, forever.</p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1d1d1f] mb-2">All Features</h2>
+          <p className="text-[#6e6e73] text-sm">Everything included — free, forever.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           {featureList.map((feat, idx) => {
@@ -247,7 +247,7 @@ const Features: React.FC = () => {
             return (
               <motion.div
                 key={idx}
-                className="p-7 rounded-3xl bg-white border border-[#E5E2DA] space-y-4 shadow-sm hover:shadow-md hover:border-[#206E55]/40 transition-all duration-300 group cursor-default"
+                className="p-7 rounded-3xl bg-white border border-[#d2d2d7] space-y-4 shadow-sm hover:shadow-md hover:border-[#0071e3]/40 transition-all duration-300 group cursor-default"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.07 }}
@@ -257,12 +257,12 @@ const Features: React.FC = () => {
                   <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${feat.color} flex items-center justify-center border border-black/5`}>
                     <Icon size={20} style={{ color: feat.accent }} />
                   </div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full bg-[#E8F2ED] text-[#206E55]">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full bg-[#f5f5f7] text-[#6e6e73]">
                     {feat.tag}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-[#141515] group-hover:text-[#206E55] transition">{feat.title}</h3>
-                <p className="text-[#5A554A] text-xs leading-relaxed">{feat.desc}</p>
+                <h3 className="text-lg font-bold text-[#1d1d1f] group-hover:text-[#0071e3] transition">{feat.title}</h3>
+                <p className="text-[#6e6e73] text-xs leading-relaxed">{feat.desc}</p>
               </motion.div>
             );
           })}
@@ -274,8 +274,8 @@ const Features: React.FC = () => {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           <div className="text-center mb-12">
-            <span className="text-xs font-bold text-[#206E55] uppercase tracking-widest">Simple 4-Step Process</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#141515] mt-2">How Medicus Labs Works</h2>
+            <span className="text-xs font-bold text-[#0071e3] uppercase tracking-widest">Simple 4-Step Process</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1d1d1f] mt-2">How Medicus Labs Works</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step, idx) => {
@@ -283,15 +283,15 @@ const Features: React.FC = () => {
               return (
                 <motion.div
                   key={idx}
-                  className="p-7 rounded-3xl bg-white border border-[#E5E2DA] shadow-sm space-y-4 relative overflow-hidden"
+                  className="p-7 rounded-3xl bg-white border border-[#d2d2d7] shadow-sm space-y-4 relative overflow-hidden"
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }} viewport={{ once: true }}
                 >
-                  <div className="absolute top-5 right-5 text-5xl font-black text-[#E5E2DA] select-none">{step.num}</div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#E8F2ED] text-[#206E55] flex items-center justify-center border border-[#206E55]/10 relative z-10">
+                  <div className="absolute top-5 right-5 text-5xl font-black text-[#d2d2d7] select-none">{step.num}</div>
+                  <div className="w-12 h-12 rounded-2xl bg-[#eaf2fd] text-[#0071e3] flex items-center justify-center border border-[#0071e3]/10 relative z-10">
                     <Icon size={20} />
                   </div>
-                  <h3 className="font-bold text-[#141515] text-base relative z-10">{step.title}</h3>
-                  <p className="text-[#5A554A] text-xs leading-relaxed relative z-10">{step.desc}</p>
+                  <h3 className="font-bold text-[#1d1d1f] text-base relative z-10">{step.title}</h3>
+                  <p className="text-[#6e6e73] text-xs leading-relaxed relative z-10">{step.desc}</p>
                 </motion.div>
               );
             })}
@@ -302,34 +302,34 @@ const Features: React.FC = () => {
 
         {/* ── COMPARISON MATRIX ── */}
         <motion.div
-          className="rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA] p-8 sm:p-12 shadow-sm space-y-8 mb-24"
+          className="rounded-3xl bg-[#f5f5f7] border border-[#d2d2d7] p-8 sm:p-12 shadow-sm space-y-8 mb-24"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-bold text-[#206E55] uppercase tracking-widest">Benchmarking</span>
-            <h2 className="text-3xl font-extrabold text-[#141515]">Medicus Labs vs. Industry Average</h2>
-            <p className="text-[#5A554A] text-sm">See exactly how our platform stacks up against others.</p>
+            <span className="text-xs font-bold text-[#0071e3] uppercase tracking-widest">Benchmarking</span>
+            <h2 className="text-3xl font-extrabold text-[#1d1d1f]">Medicus Labs vs. Industry Average</h2>
+            <p className="text-[#6e6e73] text-sm">See exactly how our platform stacks up against others.</p>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-[#141515]">
+            <table className="w-full text-left text-sm text-[#1d1d1f]">
               <thead>
-                <tr className="border-b border-[#E5E2DA] text-xs font-bold text-[#5A554A] uppercase tracking-wider">
+                <tr className="border-b border-[#d2d2d7] text-xs font-bold text-[#6e6e73] uppercase tracking-wider">
                   <th className="pb-4 pl-4">Capability / Specification</th>
-                  <th className="pb-4 text-[#206E55]">✅ Medicus Labs AI</th>
-                  <th className="pb-4 text-slate-400">Industry Average</th>
+                  <th className="pb-4 text-[#0071e3]">✅ Medicus Labs AI</th>
+                  <th className="pb-4 text-[#86868b]">Industry Average</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E5E2DA]">
+              <tbody className="divide-y divide-[#d2d2d7]">
                 {specMatrix.map((row, idx) => (
                   <tr key={idx} className="hover:bg-white/50 transition">
-                    <td className="py-4 pl-4 font-semibold text-[#141515]">{row.spec}</td>
-                    <td className="py-4 font-extrabold text-[#206E55]">
+                    <td className="py-4 pl-4 font-semibold text-[#1d1d1f]">{row.spec}</td>
+                    <td className="py-4 font-extrabold text-[#0071e3]">
                       <span className="inline-flex items-center gap-1.5">
-                        <Check size={14} className="text-[#206E55] flex-shrink-0" />
+                        <Check size={14} className="text-[#0071e3] flex-shrink-0" />
                         {row.medicus}
                       </span>
                     </td>
-                    <td className="py-4 text-[#5A554A]">{row.industry}</td>
+                    <td className="py-4 text-[#6e6e73]">{row.industry}</td>
                   </tr>
                 ))}
               </tbody>
@@ -342,28 +342,28 @@ const Features: React.FC = () => {
         {/* ── MINI FAQ ── */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <span className="text-xs font-bold text-[#206E55] uppercase tracking-widest">Quick Answers</span>
-            <h2 className="text-3xl font-extrabold text-[#141515] mt-2">Frequently Asked Questions</h2>
+            <span className="text-xs font-bold text-[#0071e3] uppercase tracking-widest">Quick Answers</span>
+            <h2 className="text-3xl font-extrabold text-[#1d1d1f] mt-2">Frequently Asked Questions</h2>
           </div>
           <div className="max-w-3xl mx-auto space-y-3">
             {faqs.map((faq, idx) => (
               <motion.div
                 key={idx}
-                className="rounded-2xl bg-white border border-[#E5E2DA] shadow-sm overflow-hidden"
+                className="rounded-2xl bg-white border border-[#d2d2d7] shadow-sm overflow-hidden"
                 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.07 }} viewport={{ once: true }}
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between font-bold text-sm text-[#141515] hover:text-[#206E55] transition"
+                  className="w-full p-5 text-left flex items-center justify-between font-bold text-sm text-[#1d1d1f] hover:text-[#0071e3] transition"
                 >
                   <span>{faq.q}</span>
-                  <ChevronDown size={16} className={`flex-shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-[#206E55]' : 'text-slate-400'}`} />
+                  <ChevronDown size={16} className={`flex-shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-[#0071e3]' : 'text-[#86868b]'}`} />
                 </button>
                 <AnimatePresence>
                   {openFaq === idx && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}
-                      className="px-5 pb-5 text-[#5A554A] text-xs leading-relaxed border-t border-slate-50 pt-3"
+                      className="px-5 pb-5 text-[#6e6e73] text-xs leading-relaxed border-t border-[#fbfbfd] pt-3"
                     >
                       {faq.a}
                     </motion.div>
@@ -376,7 +376,7 @@ const Features: React.FC = () => {
 
         {/* ── CTA BANNER ── */}
         <motion.div
-          className="rounded-3xl bg-[#206E55] p-10 sm:p-14 text-center text-white space-y-6 shadow-lg"
+          className="rounded-3xl bg-[#0071e3] p-10 sm:p-14 text-center text-white space-y-6 shadow-lg"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-widest">
@@ -391,7 +391,7 @@ const Features: React.FC = () => {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link to="/analysis">
-              <button className="px-8 py-4 rounded-full bg-white text-[#206E55] font-extrabold text-sm hover:bg-[#E8F2ED] transition shadow-md inline-flex items-center gap-2">
+              <button className="px-8 py-4 rounded-full bg-white text-[#0071e3] font-extrabold text-sm hover:bg-[#eaf2fd] transition shadow-md inline-flex items-center gap-2">
                 Start Free Analysis
                 <ArrowRight size={15} />
               </button>

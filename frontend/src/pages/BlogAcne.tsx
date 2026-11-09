@@ -11,29 +11,29 @@ const BlogAcne: React.FC = () => (
       title="Acne Vulgaris: Pathophysiology, Grading & Clinical Care | Medicus Labs"
       description="Comprehensive dermatological guide on Acne Vulgaris: pilosebaceous pathology, C. acnes etiology, Grade I–IV severity classification, topical retinoids, systemic treatments, and AI pre-screening."
     />
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-10">
         <article className="max-w-4xl w-full pb-20">
         {/* Header Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#8A857A] mb-4">
-          <Link to="/blog" className="hover:text-[#206E55]">Blog</Link>
+        <div className="flex items-center gap-2 text-xs font-semibold text-[#86868b] mb-4">
+          <Link to="/blog" className="hover:text-[#0071e3]">Blog</Link>
           <span>/</span>
-          <span className="text-[#206E55]">Acne Vulgaris</span>
+          <span className="text-[#0071e3]">Acne Vulgaris</span>
         </div>
 
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] text-xs font-bold uppercase tracking-widest mb-6">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
           <Sparkles size={12} /> Clinical Dermatology Guide • ICD-11: 8A40 / DA01
         </span>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#141515] mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1d1d1f] mb-6 leading-tight">
           Acne Vulgaris: Pathophysiology, Grade I–IV Classification &amp; Evidence-Based Clinical Management
         </h1>
 
         {/* Byline / Author Details */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5E2DA] mb-10 text-xs text-[#5A554A]">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#d2d2d7] mb-10 text-xs text-[#6e6e73]">
           <div className="flex items-center gap-2">
-            <User size={15} className="text-[#206E55]" />
-            <span className="font-bold text-[#141515]">Authored by:</span> Mallikarjun R (Founder) &amp; Medicus Labs Medical Team
+            <User size={15} className="text-[#0071e3]" />
+            <span className="font-bold text-[#1d1d1f]">Authored by:</span> Mallikarjun R (Founder) &amp; Medicus Labs Medical Team
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
@@ -41,7 +41,7 @@ const BlogAcne: React.FC = () => (
               <span>12 min read</span>
             </div>
             <span>•</span>
-            <div className="flex items-center gap-1 text-[#206E55] font-semibold">
+            <div className="flex items-center gap-1 text-[#0071e3] font-semibold">
               <ShieldCheck size={14} />
               <span>Peer-Referenced</span>
             </div>
@@ -54,35 +54,35 @@ const BlogAcne: React.FC = () => (
         </div>
 
         {/* Article Body */}
-        <div className="prose prose-slate max-w-none text-[#5A554A] space-y-8 leading-relaxed">
+        <div className="prose prose-slate max-w-none text-[#6e6e73] space-y-8 leading-relaxed">
 
           {/* Key Clinical Summary Box */}
-          <div className="bg-[#E8F2ED]/60 border border-[#206E55]/20 rounded-3xl p-6 sm:p-8">
-            <h3 className="text-lg font-bold text-[#206E55] mb-3 flex items-center gap-2">
+          <div className="bg-[#eaf2fd]/60 border border-[#0071e3]/20 rounded-3xl p-6 sm:p-8">
+            <h3 className="text-lg font-bold text-[#0071e3] mb-3 flex items-center gap-2">
               <Stethoscope size={20} /> Executive Clinical Summary
             </h3>
-            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#141515]">
+            <ul className="grid sm:grid-cols-2 gap-3 text-sm text-[#1d1d1f]">
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Pathology:</strong> Chronic inflammation of pilosebaceous units driven by follicular hyperkeratinization and Cutibacterium acnes.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>Grading:</strong> Ranges from Grade I (Comedonal) to Grade IV (Nodulocystic &amp; Acne Conglobata).</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>First-Line Therapy:</strong> Topical benzoyl peroxide, adapalene/tretinoin, and fixed-dose combination agents.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#206E55] mt-1 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#0071e3] mt-1 shrink-0" />
                 <span><strong>AI Pre-Screening:</strong> Pattern recognition scores micro-comedones, inflammatory papules, and scarring potential.</span>
               </li>
             </ul>
           </div>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">1. Introduction &amp; Epidermal Pathophysiology</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">1. Introduction &amp; Epidermal Pathophysiology</h2>
             <p>
               Acne Vulgaris is a multifactorial inflammatory disease affecting the pilosebaceous units — complex cutaneous structures consisting of a hair follicle and its associated sebaceous gland. It represents one of the most prevalent skin conditions globally, affecting over 85% of adolescents aged 12–24 and persisting into adulthood for up to 50% of women and 40% of men.
             </p>
@@ -101,20 +101,20 @@ const BlogAcne: React.FC = () => (
           <AdSpace variant="rectangle" className="my-8" />
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">2. Clinical Classification &amp; Lesion Morphology</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">2. Clinical Classification &amp; Lesion Morphology</h2>
             <p>
               Dermatological evaluation categorizes acne lesions into non-inflammatory and inflammatory subtypes:
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mt-4">
-              <div className="bg-white border border-[#E5E2DA] p-5 rounded-2xl">
-                <h4 className="font-bold text-[#141515] text-base mb-2">Non-Inflammatory Lesions</h4>
+              <div className="bg-white border border-[#d2d2d7] p-5 rounded-2xl">
+                <h4 className="font-bold text-[#1d1d1f] text-base mb-2">Non-Inflammatory Lesions</h4>
                 <ul className="text-xs space-y-2">
                   <li><strong>Closed Comedones (Whiteheads):</strong> Small, pale skin-colored papules formed by completely obstructed follicular orifices containing sebum and keratin.</li>
                   <li><strong>Open Comedones (Blackheads):</strong> Dilated follicular openings with oxidized melanin and lipids producing dark central impactions.</li>
                 </ul>
               </div>
-              <div className="bg-white border border-[#E5E2DA] p-5 rounded-2xl">
-                <h4 className="font-bold text-[#141515] text-base mb-2">Inflammatory Lesions</h4>
+              <div className="bg-white border border-[#d2d2d7] p-5 rounded-2xl">
+                <h4 className="font-bold text-[#1d1d1f] text-base mb-2">Inflammatory Lesions</h4>
                 <ul className="text-xs space-y-2">
                   <li><strong>Papules:</strong> Raised erythematous bumps (&lt; 5mm) caused by localized perifollicular inflammation.</li>
                   <li><strong>Pustules:</strong> Superficial inflammatory lesions containing purulent exudate at the follicular apex.</li>
@@ -125,39 +125,39 @@ const BlogAcne: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">3. Dermatological Severity Grading (Grade I to IV)</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">3. Dermatological Severity Grading (Grade I to IV)</h2>
             <p>
               The Global Acne Severity Scale classifies severity to direct therapeutic decisions:
             </p>
             <div className="overflow-x-auto mt-4">
-              <table className="w-full text-xs text-left border-collapse border border-[#E5E2DA] rounded-2xl overflow-hidden">
-                <thead className="bg-[#F3F1EB] text-[#141515] font-bold">
+              <table className="w-full text-xs text-left border-collapse border border-[#d2d2d7] rounded-2xl overflow-hidden">
+                <thead className="bg-[#f5f5f7] text-[#1d1d1f] font-bold">
                   <tr>
-                    <th className="p-3 border border-[#E5E2DA]">Grade</th>
-                    <th className="p-3 border border-[#E5E2DA]">Clinical Presentation</th>
-                    <th className="p-3 border border-[#E5E2DA]">Primary Recommended Interventions</th>
+                    <th className="p-3 border border-[#d2d2d7]">Grade</th>
+                    <th className="p-3 border border-[#d2d2d7]">Clinical Presentation</th>
+                    <th className="p-3 border border-[#d2d2d7]">Primary Recommended Interventions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E5E2DA] bg-white">
+                <tbody className="divide-y divide-[#d2d2d7] bg-white">
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Grade I (Mild)</td>
-                    <td className="p-3 border border-[#E5E2DA]">Predominantly comedonal; few scattered papules; no nodules.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Topical Retinoid (Adapalene 0.1%) + Salicylic Acid 2% cleanser.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Grade I (Mild)</td>
+                    <td className="p-3 border border-[#d2d2d7]">Predominantly comedonal; few scattered papules; no nodules.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Topical Retinoid (Adapalene 0.1%) + Salicylic Acid 2% cleanser.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Grade II (Moderate)</td>
-                    <td className="p-3 border border-[#E5E2DA]">Multiple open/closed comedones, frequent papules, and mild pustules.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Fixed-dose combination Adapalene + Benzoyl Peroxide (BPO 2.5%).</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Grade II (Moderate)</td>
+                    <td className="p-3 border border-[#d2d2d7]">Multiple open/closed comedones, frequent papules, and mild pustules.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Fixed-dose combination Adapalene + Benzoyl Peroxide (BPO 2.5%).</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Grade III (Severe)</td>
-                    <td className="p-3 border border-[#E5E2DA]">Extensive papules, numerous pustules, and occasional painful nodules.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Oral antibiotic (Doxycycline/Lymecycline) + Topical BPO/Retinoid.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Grade III (Severe)</td>
+                    <td className="p-3 border border-[#d2d2d7]">Extensive papules, numerous pustules, and occasional painful nodules.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Oral antibiotic (Doxycycline/Lymecycline) + Topical BPO/Retinoid.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-bold border border-[#E5E2DA]">Grade IV (Very Severe)</td>
-                    <td className="p-3 border border-[#E5E2DA]">Widespread nodulocystic lesions, sinus tracts, severe erythema &amp; scarring.</td>
-                    <td className="p-3 border border-[#E5E2DA]">Oral Isotretinoin under strict specialist dermatological monitoring.</td>
+                    <td className="p-3 font-bold border border-[#d2d2d7]">Grade IV (Very Severe)</td>
+                    <td className="p-3 border border-[#d2d2d7]">Widespread nodulocystic lesions, sinus tracts, severe erythema &amp; scarring.</td>
+                    <td className="p-3 border border-[#d2d2d7]">Oral Isotretinoin under strict specialist dermatological monitoring.</td>
                   </tr>
                 </tbody>
               </table>
@@ -165,7 +165,7 @@ const BlogAcne: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">4. Evidence-Based Therapeutic Regimens</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">4. Evidence-Based Therapeutic Regimens</h2>
             <p>
               Modern clinical guidelines emphasize early intervention to prevent post-inflammatory hyperpigmentation (PIH) and permanent scarring. Key treatment pillars include:
             </p>
@@ -178,11 +178,11 @@ const BlogAcne: React.FC = () => (
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-[#141515] mb-4">5. The Role of Medicus Labs AI Vision Pre-Screening</h2>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">5. The Role of Medicus Labs AI Vision Pre-Screening</h2>
             <p>
               Medicus Labs employs multi-scale convolutional neural networks (CNNs) trained on dermatological archives (HAM10000, ISIC, DermNet) to analyze high-resolution facial imagery. The platform provides:
             </p>
-            <div className="bg-[#FAF9F5] border border-[#E5E2DA] p-6 rounded-2xl mt-4 space-y-3 text-sm">
+            <div className="bg-[#fbfbfd] border border-[#d2d2d7] p-6 rounded-2xl mt-4 space-y-3 text-sm">
               <p>✔ <strong>Lesion Density Scoring:</strong> Automatically quantifies comedonal vs. inflammatory papular lesion count.</p>
               <p>✔ <strong>Scarring Risk Profiling:</strong> Evaluates dermal erythema intensity to flag early risk of boxcar or rolling atrophic scars.</p>
               <p>✔ <strong>Clinical PDF Export:</strong> Generates structured summary reports containing visual confidence maps for physician review.</p>
@@ -190,11 +190,11 @@ const BlogAcne: React.FC = () => (
           </section>
 
           {/* References & Citations */}
-          <section className="pt-8 border-t border-[#E5E2DA]">
-            <h3 className="text-lg font-bold text-[#141515] mb-3 flex items-center gap-2">
+          <section className="pt-8 border-t border-[#d2d2d7]">
+            <h3 className="text-lg font-bold text-[#1d1d1f] mb-3 flex items-center gap-2">
               <FileText size={18} /> Peer-Reviewed References &amp; Scientific Sources
             </h3>
-            <ol className="list-decimal pl-6 text-xs text-[#8A857A] space-y-1.5 font-mono">
+            <ol className="list-decimal pl-6 text-xs text-[#86868b] space-y-1.5 font-mono">
               <li>Zaenglein AL, et al. Guidelines of care for the management of acne vulgaris. <em>J Am Acad Dermatol.</em> 2016;74(5):945-973.</li>
               <li>Thiboutot D, et al. Practical management of acne vulgaris: A consensus from the Global Alliance to Improve Outcomes in Acne. <em>J Am Acad Dermatol.</em> 2018;78(2S1):S1-S23.</li>
               <li>World Health Organization (WHO). International Classification of Diseases 11th Revision (ICD-11), Code 8A40 / DA01: Acne Vulgaris. 2024.</li>
@@ -208,13 +208,13 @@ const BlogAcne: React.FC = () => (
         <AdSpace variant="leaderboard" className="my-10" />
 
         {/* Call to Action CTA */}
-        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#E8F2ED] via-white to-[#F3F1EB] border border-[#206E55]/30 text-center shadow-sm">
-          <h3 className="text-2xl font-extrabold text-[#141515] mb-2">Analyze Your Skin Spot with Medicus AI</h3>
-          <p className="text-sm text-[#5A554A] max-w-xl mx-auto mb-6">
+        <div className="mt-14 p-8 rounded-3xl bg-gradient-to-br from-[#eaf2fd] via-white to-[#f5f5f7] border border-[#0071e3]/30 text-center shadow-sm">
+          <h3 className="text-2xl font-extrabold text-[#1d1d1f] mb-2">Analyze Your Skin Spot with Medicus AI</h3>
+          <p className="text-sm text-[#6e6e73] max-w-xl mx-auto mb-6">
             Upload a clear close-up photograph for instant clinical AI analysis, severity grading, and downloadable physician report.
           </p>
           <Link to="/analysis">
-            <button className="px-8 py-3.5 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">
+            <button className="px-8 py-3.5 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-sm shadow-md transition inline-flex items-center gap-2">
               Start Free AI Skin Scan <ArrowRight size={16} />
             </button>
           </Link>

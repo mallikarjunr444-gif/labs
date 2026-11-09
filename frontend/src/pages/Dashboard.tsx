@@ -14,10 +14,10 @@ const Dashboard: React.FC = () => {
   const [draftProfileName, setDraftProfileName] = useState('Dr. Alex Morgan');
 
   const stats = [
-    { label: 'Total Scans', value: 42, icon: Activity, color: 'text-[#206E55] bg-[#E8F2ED]' },
-    { label: 'Avg Accuracy', value: '94.2%', icon: TrendingUp, color: 'text-[#206E55] bg-[#E8F2ED]' },
-    { label: 'Reports Exported', value: 38, icon: BarChart3, color: 'text-[#206E55] bg-[#E8F2ED]' },
-    { label: 'Conditions Detected', value: 8, icon: CheckCircle, color: 'text-[#206E55] bg-[#E8F2ED]' },
+    { label: 'Total Scans', value: 42, icon: Activity, color: 'text-[#0071e3] bg-[#eaf2fd]' },
+    { label: 'Avg Accuracy', value: '94.2%', icon: TrendingUp, color: 'text-[#0071e3] bg-[#eaf2fd]' },
+    { label: 'Reports Exported', value: 38, icon: BarChart3, color: 'text-[#0071e3] bg-[#eaf2fd]' },
+    { label: 'Conditions Detected', value: 8, icon: CheckCircle, color: 'text-[#0071e3] bg-[#eaf2fd]' },
   ];
 
   const recentScans = [
@@ -34,37 +34,37 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141515] pt-32 selection:bg-[#206E55]/20 font-sans">
+    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] pt-32 selection:bg-[#0071e3]/20 font-sans">
       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
         {/* Profile Header Bar */}
-        <div className="rounded-3xl bg-white border border-[#E5E2DA] p-6 sm:p-8 shadow-sm mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="rounded-3xl bg-white border border-[#d2d2d7] p-6 sm:p-8 shadow-sm mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#206E55] text-white font-extrabold flex items-center justify-center text-2xl shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-[#0071e3] text-white font-extrabold flex items-center justify-center text-2xl shadow-sm">
               {profileName[0]}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-bold text-[#141515]">{profileName}</h1>
+                <h1 className="text-2xl font-bold text-[#1d1d1f]">{profileName}</h1>
                 <button
                   onClick={() => {
                     setDraftProfileName(profileName);
                     setIsEditProfileOpen(true);
                   }}
-                  className="text-slate-400 hover:text-[#206E55] transition"
+                  className="text-[#86868b] hover:text-[#0071e3] transition"
                   title="Edit Profile"
                 >
                   <Edit2 size={16} />
                 </button>
               </div>
-              <p className="text-xs text-[#5A554A] mt-0.5">Member since {memberSince} • HIPAA Account Active</p>
+              <p className="text-xs text-[#6e6e73] mt-0.5">Member since {memberSince} • HIPAA Account Active</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <Link to="/analysis">
-              <button className="px-6 py-3 rounded-full bg-[#206E55] hover:bg-[#408A6C] text-white font-bold text-sm transition shadow-sm flex items-center gap-2">
+              <button className="px-6 py-3 rounded-full bg-[#0071e3] hover:bg-[#2997ff] text-white font-bold text-sm transition shadow-sm flex items-center gap-2">
                 <Plus size={16} />
                 New Scan
               </button>
@@ -79,29 +79,29 @@ const Dashboard: React.FC = () => {
             return (
               <motion.div
                 key={idx}
-                className="p-6 rounded-3xl bg-[#F3F1EB] border border-[#E5E2DA]"
+                className="p-6 rounded-3xl bg-[#f5f5f7] border border-[#d2d2d7]"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.08 }}
               >
-                <div className={`w-10 h-10 rounded-2xl ${stat.color} flex items-center justify-center mb-4 border border-[#206E55]/10`}>
+                <div className={`w-10 h-10 rounded-2xl ${stat.color} flex items-center justify-center mb-4 border border-[#0071e3]/10`}>
                   <Icon size={18} />
                 </div>
-                <span className="text-3xl font-extrabold text-[#141515] block mb-1">{stat.value}</span>
-                <span className="text-xs text-[#5A554A] font-bold uppercase tracking-wider">{stat.label}</span>
+                <span className="text-3xl font-extrabold text-[#1d1d1f] block mb-1">{stat.value}</span>
+                <span className="text-xs text-[#6e6e73] font-bold uppercase tracking-wider">{stat.label}</span>
               </motion.div>
             );
           })}
         </div>
 
         {/* Scan History Table Card */}
-        <div className="rounded-3xl bg-white border border-[#E5E2DA] p-6 sm:p-8 shadow-sm">
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E5E2DA]">
+        <div className="rounded-3xl bg-white border border-[#d2d2d7] p-6 sm:p-8 shadow-sm">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#d2d2d7]">
             <div>
-              <h2 className="text-xl font-bold text-[#141515]">Recent Clinical Scans</h2>
-              <p className="text-xs text-[#5A554A]">View diagnostic risk summaries and download physician PDF exports</p>
+              <h2 className="text-xl font-bold text-[#1d1d1f]">Recent Clinical Scans</h2>
+              <p className="text-xs text-[#6e6e73]">View diagnostic risk summaries and download physician PDF exports</p>
             </div>
-            <span className="text-xs font-bold text-[#206E55] bg-[#E8F2ED] px-3 py-1 rounded-full border border-[#206E55]/20">
+            <span className="text-xs font-bold text-[#0071e3] bg-[#eaf2fd] px-3 py-1 rounded-full border border-[#0071e3]/20">
               {recentScans.length} Active Records
             </span>
           </div>
@@ -110,15 +110,15 @@ const Dashboard: React.FC = () => {
             {recentScans.map((scan) => (
               <div
                 key={scan.id}
-                className="p-4 rounded-2xl bg-[#FAF9F5] border border-[#E5E2DA] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-[#206E55] transition"
+                className="p-4 rounded-2xl bg-[#fbfbfd] border border-[#d2d2d7] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-[#0071e3] transition"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#E8F2ED] border border-[#206E55]/20 text-[#206E55] flex items-center justify-center font-bold text-xs">
+                  <div className="w-10 h-10 rounded-xl bg-[#eaf2fd] border border-[#0071e3]/20 text-[#0071e3] flex items-center justify-center font-bold text-xs">
                     #{scan.id}
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-[#141515]">{scan.condition}</h3>
-                    <p className="text-[11px] text-[#5A554A]">Date: {scan.date} • Index Confidence: {scan.confidence}%</p>
+                    <h3 className="text-sm font-bold text-[#1d1d1f]">{scan.condition}</h3>
+                    <p className="text-[11px] text-[#6e6e73]">Date: {scan.date} • Index Confidence: {scan.confidence}%</p>
                   </div>
                 </div>
 
@@ -127,7 +127,7 @@ const Dashboard: React.FC = () => {
                     {scan.status}
                   </span>
                   <Link to="/analysis">
-                    <button className="px-4 py-2 rounded-full bg-white border border-[#D1CDC2] hover:border-[#206E55] text-xs font-bold text-[#206E55] transition flex items-center gap-1.5">
+                    <button className="px-4 py-2 rounded-full bg-white border border-[#d2d2d7] hover:border-[#0071e3] text-xs font-bold text-[#0071e3] transition flex items-center gap-1.5">
                       <Download size={13} />
                       Export PDF
                     </button>
@@ -150,34 +150,34 @@ const Dashboard: React.FC = () => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="w-full max-w-md rounded-3xl bg-white border border-[#E5E2DA] p-6 shadow-2xl space-y-5"
+              className="w-full max-w-md rounded-3xl bg-white border border-[#d2d2d7] p-6 shadow-2xl space-y-5"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
             >
-              <h3 className="text-xl font-bold text-[#141515]">Edit Profile Details</h3>
+              <h3 className="text-xl font-bold text-[#1d1d1f]">Edit Profile Details</h3>
               <form onSubmit={handleSaveProfile} className="space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-[#5A554A] block mb-1">Full Name</label>
+                  <label className="text-xs font-bold text-[#6e6e73] block mb-1">Full Name</label>
                   <input
                     type="text"
                     required
                     value={draftProfileName}
                     onChange={(e) => setDraftProfileName(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-[#FAF9F5] border border-[#E5E2DA] text-[#141515] text-sm focus:outline-none focus:border-[#206E55]"
+                    className="w-full px-4 py-3 rounded-xl bg-[#fbfbfd] border border-[#d2d2d7] text-[#1d1d1f] text-sm focus:outline-none focus:border-[#0071e3]"
                   />
                 </div>
                 <div className="flex justify-end gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setIsEditProfileOpen(false)}
-                    className="px-5 py-2.5 rounded-full border border-[#D1CDC2] text-[#5A554A] text-xs font-bold hover:bg-[#FAF9F5] transition"
+                    className="px-5 py-2.5 rounded-full border border-[#d2d2d7] text-[#6e6e73] text-xs font-bold hover:bg-[#fbfbfd] transition"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2.5 rounded-full bg-[#206E55] text-white text-xs font-bold hover:bg-[#408A6C] transition"
+                    className="px-6 py-2.5 rounded-full bg-[#0071e3] text-white text-xs font-bold hover:bg-[#2997ff] transition"
                   >
                     Save Changes
                   </button>
