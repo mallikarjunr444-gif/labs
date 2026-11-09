@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Bot, Lock, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PremiumFooter } from '../sections';
@@ -14,6 +14,8 @@ const SAMPLE_PROMPTS = [
   "A scaly plaque on my scalp that won't clear",
   'A new dark spot on my arm with irregular borders',
 ];
+
+const ROTATING = ['skin', 'acne', 'eczema', 'moles', 'rash'];
 
 const STATS = [
   { to: 120, suffix: 'K+', decimals: 0, label: 'Images analyzed' },
@@ -67,6 +69,13 @@ const LOCAL_LINKS = [
 const Home: React.FC = () => {
   const [symptomText, setSymptomText] = useState('');
   const [active, setActive] = useState(0);
+  const [word, setWord] = useState(0);
+  const reduceMotion = useReducedMotion();
+  useEffect(() => {
+    if (reduceMotion) return;
+    const id = setInterval(() => setWord((w) => (w + 1) % ROTATING.length), 2400);
+    return () => clearInterval(id);
+  }, [reduceMotion]);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatQuery, setChatQuery] = useState('');
 
@@ -97,9 +106,24 @@ const Home: React.FC = () => {
         <section id="overview" className="relative scroll-mt-24 px-5 pb-16 pt-16 text-center sm:pt-24">
           <Aurora />
           <motion.div {...reveal}>
-            <p className="text-[17px] font-semibold text-[#6e6e73] sm:text-[21px]">Medicus Labs</p>
+            <Link to="/blog" className={`inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-1.5 text-[14px] text-[#1d1d1f] shadow-sm ring-1 ring-black/[0.06] backdrop-blur transition-colors hover:bg-white ${FOCUS}`}>New: the skin-health library <span aria-hidden="true" className="text-[#0071e3]">›</span></Link>
             <h1 className="mx-auto mt-3 max-w-[900px] text-[48px] font-semibold leading-[1.02] tracking-[-0.04em] sm:text-[80px] lg:text-[104px]">
-              Understand<br /><span className="bg-gradient-to-r from-[#0071e3] via-[#7a5cff] to-[#30b8d5] bg-clip-text text-transparent">your skin.</span>
+              Understand<br />
+              <span className="relative block h-[1.12em] overflow-hidden">
+                <span className="sr-only">your skin.</span>
+                {ROTATING.map((w, i) => (
+                  <motion.span
+                    key={w}
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 bg-gradient-to-r from-[#0071e3] via-[#7a5cff] to-[#30b8d5] bg-clip-text pb-[0.1em] text-transparent"
+                    initial={false}
+                    animate={word === i ? { y: '0%', opacity: 1 } : { y: word > i || (word === 0 && i === ROTATING.length - 1) ? '-110%' : '110%', opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 60, damping: 14 }}
+                  >
+                    your {w}.
+                  </motion.span>
+                ))}
+              </span>
             </h1>
             <p className="mx-auto mt-5 max-w-[620px] text-[19px] leading-[1.42] text-[#6e6e73] sm:text-[24px]">
               Describe a symptom or share a photo. Get a clear reference reading and a report to take to your doctor, in minutes.
@@ -236,27 +260,6 @@ const Home: React.FC = () => {
         </section>
 
         <div className="bg-white px-5 pb-10"><div className="mx-auto max-w-[1080px]"><SponsoredLinks /></div></div>
-
-        {/* Closing call to action */}
-        <section className="relative overflow-hidden bg-black px-5 py-28 text-center text-white sm:py-40" aria-label="Get started">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/2 top-0 h-[420px] w-[900px] -translate-x-1/2 rounded-[100%] bg-white/[0.07] blur-[90px]" />
-            <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06]" />
-            <div className="absolute left-1/2 top-1/2 h-[860px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.04]" />
-          </div>
-          <motion.div {...reveal} className="relative mx-auto max-w-[900px]">
-            <p className="text-[15px] font-semibold text-[#2997ff]">Ready when you are</p>
-            <h2 className="mt-3 bg-gradient-to-b from-white to-[#8e8e93] bg-clip-text text-[48px] font-semibold leading-[1.02] tracking-[-0.04em] text-transparent sm:text-[96px]">Start with<br />a scan.</h2>
-            <p className="mx-auto mt-6 max-w-[480px] text-[19px] leading-[1.45] text-[#a1a1a6] sm:text-[21px]">Free, private, and ready in minutes. Bring the result to your doctor.</p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-              <Link to="/analysis" className={`inline-flex h-12 items-center gap-2 rounded-full bg-[#0071e3] px-7 text-[17px] text-white transition-transform hover:scale-[1.04] hover:bg-[#0077ed] ${FOCUS}`}>Start free scan <ArrowRight size={18} /></Link>
-              <button type="button" onClick={() => openChat('')} className={`rounded text-[19px] text-[#2997ff] hover:underline ${FOCUS}`}>Ask Medicus AI <span aria-hidden="true">›</span></button>
-            </div>
-            <ul className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[13px] text-[#86868b]">
-              <li>Free to start</li><li>No sign-up needed</li><li>Encrypted in transit</li><li>Not a diagnosis</li>
-            </ul>
-          </motion.div>
-        </section>
 
         <PremiumFooter />
 
