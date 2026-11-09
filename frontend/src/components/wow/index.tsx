@@ -253,12 +253,24 @@ const STORY = [
 const StoryScreen: React.FC<{ step: number }> = ({ step }) => (
   <div className="relative mx-auto w-[280px] sm:w-[320px]">
     <div className="absolute -inset-8 -z-10 rounded-[72px] bg-[#2997ff]/25 blur-3xl" aria-hidden="true" />
-    <div className="rounded-[46px] bg-[#2a2a2d] p-[10px] ring-1 ring-white/15">
-      <div className="relative h-[480px] overflow-hidden rounded-[36px] bg-black sm:h-[540px]">
-        <div className="absolute left-1/2 top-2.5 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-[#0b0b0c]" aria-hidden="true" />
+    {/* side buttons */}
+    <span className="absolute -left-[3px] top-[84px] h-7 w-[3px] rounded-l bg-gradient-to-b from-[#c9cde8] to-[#8f95bd]" aria-hidden="true" />
+    <span className="absolute -left-[3px] top-[130px] h-12 w-[3px] rounded-l bg-gradient-to-b from-[#c9cde8] to-[#8f95bd]" aria-hidden="true" />
+    <span className="absolute -left-[3px] top-[190px] h-12 w-[3px] rounded-l bg-gradient-to-b from-[#c9cde8] to-[#8f95bd]" aria-hidden="true" />
+    <span className="absolute -right-[3px] top-[150px] h-20 w-[3px] rounded-r bg-gradient-to-b from-[#c9cde8] to-[#8f95bd]" aria-hidden="true" />
+    {/* titanium frame */}
+    <div className="rounded-[56px] bg-gradient-to-br from-[#e4e7f7] via-[#b4badf] to-[#8d93bb] p-[3px] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.7)]">
+      <div className="rounded-[53px] bg-black p-[7px]">
+      <div className="relative h-[480px] overflow-hidden rounded-[46px] bg-black sm:h-[540px]">
+        {/* dynamic island */}
+        <div className="absolute left-1/2 top-3 z-30 flex h-[30px] w-[104px] -translate-x-1/2 items-center justify-end rounded-full bg-black pr-3 ring-1 ring-white/[0.06]" aria-hidden="true">
+          <span className="h-3 w-3 rounded-full bg-[#0d1020] ring-1 ring-[#2a3358]"><span className="m-[3px] block h-1.5 w-1.5 rounded-full bg-[#27356b]/80" /></span>
+        </div>
+        {/* glass reflection */}
+        <div className="pointer-events-none absolute inset-0 z-20 rounded-[46px] bg-gradient-to-br from-white/[0.07] via-transparent to-transparent" aria-hidden="true" />
         <div className="absolute inset-x-0 bottom-2 z-20 mx-auto h-1 w-28 rounded-full bg-white/70" aria-hidden="true" />
         <AnimatePresence mode="wait">
-          <motion.div key={step} className="absolute inset-0 px-5 pt-14" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.4, ease: [0.28, 0.11, 0.32, 1] }}>
+          <motion.div key={step} className="absolute inset-0 px-5 pt-[68px]" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.4, ease: [0.28, 0.11, 0.32, 1] }}>
             {step === 0 && (
               <>
               <div className="absolute inset-x-4 bottom-8 flex h-11 items-center justify-between rounded-full bg-[#1c1c1e] pl-4 pr-1.5 text-[13px] text-[#86868b]" aria-hidden="true">Describe your symptom<span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0071e3] text-white">↑</span></div>
@@ -297,6 +309,7 @@ const StoryScreen: React.FC<{ step: number }> = ({ step }) => (
             )}
           </motion.div>
         </AnimatePresence>
+      </div>
       </div>
     </div>
   </div>
