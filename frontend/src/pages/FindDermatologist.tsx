@@ -431,7 +431,7 @@ function generateDynamicDermatologistsForCity(
         isVirtualAvailable: true,
         bookingUrl,
         platformName: 'Practo.com (India)',
-        badge: '🟢 Instant Video Queue'
+        badge: 'Instant Video Queue'
       }
     ];
   }
@@ -669,7 +669,7 @@ function generateDynamicDermatologistsForCity(
       isVirtualAvailable: true,
       bookingUrl: 'https://www.teladoc.com/ways-we-help/dermatology/',
       platformName: 'Teladoc Global Dermatology',
-      badge: '🟢 24/7 Global Telehealth'
+      badge: '24/7 Global Telehealth'
     }
   ];
 }
@@ -1205,7 +1205,7 @@ const FindDermatologist: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-lg font-bold text-[#1d1d1f]">
-                      {userLocation.source === 'gps' ? '📍 GPS Location Active' : `Location: ${userLocation.city || 'Your Area'}, ${userLocation.country || 'Worldwide'}`}
+                      {userLocation.source === 'gps' ? 'GPS Location Active' : `Location: ${userLocation.city || 'Your Area'}, ${userLocation.country || 'Worldwide'}`}
                     </h3>
                     <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wide flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
@@ -1365,7 +1365,7 @@ const FindDermatologist: React.FC = () => {
                       </div>
                       <div className="flex items-center justify-between text-[11px] text-[#86868b] pl-5 font-semibold">
                         <span className="text-[#0071e3] font-bold">{clinic.distance}</span>
-                        <span>{clinic.isVirtualAvailable ? '✅ Telehealth & In-Person' : 'In-Person Clinic'}</span>
+                        <span>{clinic.isVirtualAvailable ? 'Telehealth & In-Person' : 'In-Person Clinic'}</span>
                       </div>
                     </div>
 

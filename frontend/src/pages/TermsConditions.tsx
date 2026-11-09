@@ -1,82 +1,123 @@
 import React from 'react';
-import { PremiumFooter } from '../sections';
-import { FileText, Scale, AlertTriangle, Ban, CheckSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import LegalLayout, { LegalSection } from '../components/LegalLayout';
 
-const Section: React.FC<{ icon: React.ReactNode; title: string; children: React.ReactNode }> = ({ icon, title, children }) => (
-  <div className="bg-white border border-[#e8e8ed]/80 rounded-3xl p-8 shadow-sm space-y-4">
-    <div className="flex items-center gap-3 pb-3 border-b border-[#f5f5f7]">
-      <div className="w-9 h-9 rounded-xl bg-[#eaf2fd] flex items-center justify-center text-[#0071e3] flex-shrink-0">{icon}</div>
-      <h2 className="text-lg font-bold text-[#1d1d1f]">{title}</h2>
-    </div>
-    <div className="text-[#6e6e73] text-sm leading-relaxed space-y-3">{children}</div>
-  </div>
-);
+const sections: LegalSection[] = [
+  {
+    id: 'acceptance',
+    title: 'Agreeing to these terms',
+    body: (
+      <>
+        <p>These Terms &amp; Conditions govern your use of Medicus Labs, including the website at medicuslabs.app, the AI skin analysis, the symptom chat, reports and the health library (together, the "Service"). By using the Service you agree to these terms and to our <Link to="/privacy-policy">Privacy Policy</Link>. If you do not agree, please do not use the Service.</p>
+        <p>You must be at least 18 years old to use the Service. If you are younger, a parent or legal guardian must use it with you and accepts these terms on your behalf.</p>
+      </>
+    ),
+  },
+  {
+    id: 'not-medical-advice',
+    title: 'Not medical advice',
+    body: (
+      <>
+        <p>Medicus Labs provides <strong>information and a reference reading</strong> for education. It is not a medical device, it does not diagnose, treat or prevent any condition, and it does not create a doctor-patient relationship.</p>
+        <ul>
+          <li>Results are estimates produced by software and can be wrong, including missing a serious condition.</li>
+          <li>Never delay or skip professional care because of something you read or received here.</li>
+          <li>See a qualified doctor for any skin change that is new, growing, bleeding, painful, changing colour or shape, or that worries you.</li>
+          <li>In an emergency, contact your local emergency number or go to the nearest hospital.</li>
+        </ul>
+        <p>See also our <Link to="/disclaimer">Medical Disclaimer</Link>.</p>
+      </>
+    ),
+  },
+  {
+    id: 'your-use',
+    title: 'Your responsibilities',
+    body: (
+      <ul>
+        <li>Give accurate information and clear, well-lit images where asked.</li>
+        <li>Upload only images of yourself, or of a person who has given you clear permission (or a child you are the guardian of).</li>
+        <li>Do not upload unlawful, obscene or unrelated content.</li>
+        <li>Keep your sign-in details secure. You are responsible for activity on your account.</li>
+        <li>Use the Service only for lawful, personal, non-commercial purposes unless we agree otherwise in writing.</li>
+      </ul>
+    ),
+  },
+  {
+    id: 'prohibited',
+    title: 'What you may not do',
+    body: (
+      <ul>
+        <li>Present a Medicus Labs report as a medical record, prescription or certificate issued by a doctor.</li>
+        <li>Alter reports, or use the Service to create false or misleading medical documents.</li>
+        <li>Probe, scan or test the Service for weaknesses, or interfere with its security or availability.</li>
+        <li>Scrape, copy, reverse-engineer or use the Service to train another model.</li>
+        <li>Resell or redistribute the Service or its reports without written permission.</li>
+      </ul>
+    ),
+  },
+  {
+    id: 'content',
+    title: 'Your content and our content',
+    body: (
+      <>
+        <p>You keep ownership of what you submit. You give us a limited licence to process it only to provide the Service to you, as described in the Privacy Policy.</p>
+        <p>The Medicus Labs name, design, software, models and written content belong to Medicus Labs or its licensors and are protected by law. You may view and share pages for personal use, but you may not copy or reuse them commercially without permission.</p>
+      </>
+    ),
+  },
+  {
+    id: 'third-parties',
+    title: 'Third-party services and links',
+    body: (
+      <>
+        <p>The Service links to or relies on services we do not control, such as clinic listings, telehealth providers, advertising partners and AI model providers. We do not endorse them and are not responsible for their content, availability or practices. Any appointment or purchase you make is between you and that provider.</p>
+        <p>Some pages show advertisements or sponsored links, which are labelled as such. Advertising never influences an analysis result.</p>
+      </>
+    ),
+  },
+  {
+    id: 'availability',
+    title: 'Availability and changes',
+    body: (
+      <p>We work to keep the Service running but do not promise it will always be available or error-free. We may change, pause or stop any part of it, and we may suspend access if these terms are broken.</p>
+    ),
+  },
+  {
+    id: 'liability',
+    title: 'Disclaimers and limits of liability',
+    body: (
+      <>
+        <p>The Service is provided "as is" and "as available". To the fullest extent permitted by law, we do not give warranties of accuracy, completeness or fitness for a particular purpose.</p>
+        <p>To the fullest extent permitted by law, Medicus Labs and its team are not liable for indirect, incidental or consequential loss, for decisions or treatment based on a result, or for loss caused by third-party services. Nothing in these terms limits liability that cannot be limited by law.</p>
+      </>
+    ),
+  },
+  {
+    id: 'law',
+    title: 'Governing law',
+    body: (
+      <p>These terms are governed by the laws of India. Courts in Bengaluru, Karnataka have jurisdiction over disputes, subject to any rights you have under mandatory consumer law where you live.</p>
+    ),
+  },
+  {
+    id: 'changes',
+    title: 'Changes to these terms',
+    body: (
+      <p>We may update these terms as the Service changes. The date at the top shows the latest version. If a change is significant, we will say so on this page. Using the Service after a change means you accept it.</p>
+    ),
+  },
+];
 
 const TermsConditions: React.FC = () => (
-  <div className="min-h-screen bg-[#fbfbfd]/50">
-    <main className="pt-32 pb-24 px-4 sm:px-6 max-w-4xl mx-auto">
-      <div className="mb-10">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] border border-[#eaf2fd] text-xs font-bold text-[#6e6e73] tracking-wider uppercase mb-4">Legal</span>
-        <h1 className="text-4xl font-extrabold text-[#1d1d1f] tracking-tight mb-3">Terms &amp; Conditions</h1>
-        <p className="text-[#6e6e73] text-sm font-medium">Last updated: July 19, 2026 · By using Medicus Labs, you agree to these terms.</p>
-      </div>
-
-      <div className="space-y-6">
-        <Section icon={<FileText size={18} />} title="1. Acceptance of Terms">
-          <p>By accessing or using the Medicus Labs™ platform ("Service"), you agree to be bound by these Terms &amp; Conditions. If you do not agree to any part of these terms, you may not use the Service.</p>
-        </Section>
-
-        <Section icon={<Scale size={18} />} title="2. Nature of the Service">
-          <p>Medicus Labs™ provides AI-powered dermatological analysis for <strong>informational and educational purposes only</strong>. The Service is not a substitute for professional medical advice, diagnosis, or treatment.</p>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>Results generated by the AI model are probabilistic estimates and may not be accurate.</li>
-            <li>You must always consult a licensed dermatologist or qualified healthcare provider before making any medical decisions.</li>
-            <li>Medicus Labs™ does not guarantee the accuracy, completeness, or timeliness of any analysis results.</li>
-          </ul>
-        </Section>
-
-        <Section icon={<CheckSquare size={18} />} title="3. User Responsibilities">
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>You must be at least 18 years old, or have parental consent, to use this Service.</li>
-            <li>You are responsible for providing accurate patient information and quality images.</li>
-            <li>You must not upload images of individuals without their explicit consent.</li>
-            <li>You agree not to use the Service for any unlawful, fraudulent, or harmful purpose.</li>
-            <li>You must not attempt to reverse-engineer, scrape, or reproduce any part of the platform.</li>
-          </ul>
-        </Section>
-
-        <Section icon={<AlertTriangle size={18} />} title="4. Limitation of Liability">
-          <p>To the maximum extent permitted by applicable law, Medicus Labs™ and its operators shall not be liable for:</p>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>Any direct, indirect, incidental, special, or consequential damages arising from the use of the Service.</li>
-            <li>Medical decisions, treatments, or outcomes based on AI-generated reports.</li>
-            <li>Loss of data, service interruptions, or errors in AI analysis.</li>
-            <li>Third-party actions or content linked from the platform.</li>
-          </ul>
-        </Section>
-
-        <Section icon={<Ban size={18} />} title="5. Prohibited Uses">
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>Using the Service to generate fraudulent medical documents.</li>
-            <li>Uploading illegal, obscene, or inappropriate content.</li>
-            <li>Attempting to compromise the security or integrity of the platform.</li>
-            <li>Reselling or redistributing reports without written permission.</li>
-          </ul>
-        </Section>
-
-        <Section icon={<FileText size={18} />} title="6. Intellectual Property">
-          <p>All content, branding, AI models, and software on the Medicus Labs™ platform are the intellectual property of Medicus Labs™ and are protected by applicable copyright and trademark laws. You may not copy, reproduce, or distribute any part of the Service without prior written consent.</p>
-        </Section>
-
-        <Section icon={<FileText size={18} />} title="7. Modifications to Terms">
-          <p>We reserve the right to update these Terms &amp; Conditions at any time. Changes will be posted on this page with an updated effective date. Continued use of the Service after changes constitutes acceptance of the updated terms.</p>
-          <p>For questions, contact us at <strong>medicuslabs.com@gmail.com</strong>.</p>
-        </Section>
-
-      </div>
-    </main>
-    <PremiumFooter />
-  </div>
+  <LegalLayout
+    seoTitle="Terms & Conditions | Medicus Labs"
+    seoDescription="The terms for using Medicus Labs: what the service is and is not, your responsibilities, and how we limit liability."
+    title="Terms & Conditions"
+    updated="November 9, 2026"
+    intro="The ground rules for using Medicus Labs. The short version: it is a reference tool, not a doctor."
+    sections={sections}
+    sibling={{ to: '/privacy-policy', label: 'Read the Privacy Policy' }}
+  />
 );
 
 export default TermsConditions;

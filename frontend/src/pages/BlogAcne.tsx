@@ -183,9 +183,9 @@ const BlogAcne: React.FC = () => (
               Medicus Labs employs multi-scale convolutional neural networks (CNNs) trained on dermatological archives (HAM10000, ISIC, DermNet) to analyze high-resolution facial imagery. The platform provides:
             </p>
             <div className="bg-[#fbfbfd] border border-[#d2d2d7] p-6 rounded-2xl mt-4 space-y-3 text-sm">
-              <p>✔ <strong>Lesion Density Scoring:</strong> Automatically quantifies comedonal vs. inflammatory papular lesion count.</p>
-              <p>✔ <strong>Scarring Risk Profiling:</strong> Evaluates dermal erythema intensity to flag early risk of boxcar or rolling atrophic scars.</p>
-              <p>✔ <strong>Clinical PDF Export:</strong> Generates structured summary reports containing visual confidence maps for physician review.</p>
+              <p><strong>Lesion Density Scoring:</strong> Automatically quantifies comedonal vs. inflammatory papular lesion count.</p>
+              <p><strong>Scarring Risk Profiling:</strong> Evaluates dermal erythema intensity to flag early risk of boxcar or rolling atrophic scars.</p>
+              <p><strong>Clinical PDF Export:</strong> Generates structured summary reports containing visual confidence maps for physician review.</p>
             </div>
           </section>
 

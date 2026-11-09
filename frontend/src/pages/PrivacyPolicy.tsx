@@ -1,255 +1,154 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Eye, Lock, Database, Globe, Mail, ChevronDown, Check } from 'lucide-react';
-import { PremiumFooter } from '../sections';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import LegalLayout, { LegalSection } from '../components/LegalLayout';
 
-const sections = [
+const sections: LegalSection[] = [
   {
-    icon: Eye,
-    title: 'Information We Collect',
-    color: 'text-[#0071e3]',
-    lightBg: 'bg-[#eaf2fd]',
-    content: (
-      <ul className="space-y-3 text-[#6e6e73] text-xs sm:text-sm leading-relaxed font-semibold">
-        {[
-          ['Personal details', 'Name, age, gender, phone number, and email address submitted during patient intake.'],
-          ['Uploaded photographs', 'High-resolution dermatological photos analyzed strictly in-memory.'],
-          ['Metadata logs', 'Model parameters, processing speed metrics, and scan timestamps.'],
-          ['Email subscriptions', 'Contact parameters retained for newsletter and clinical reference guides.']
-        ].map(([b, r]) => (
-          <li key={b} className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span>
-              <strong className="text-[#1d1d1f]">{b}</strong> — {r}
-            </span>
-          </li>
-        ))}
+    id: 'summary',
+    title: 'The short version',
+    body: (
+      <ul>
+        <li>We collect only what is needed to give you a result and a report.</li>
+        <li>We do not sell your personal data.</li>
+        <li>Skin images and symptom text are never shared with advertisers or used to build ad profiles.</li>
+        <li>You can ask us to access, correct or delete your data at any time.</li>
       </ul>
     ),
   },
   {
-    icon: Database,
-    title: 'How We Process Data',
-    color: 'text-[#0071e3]',
-    lightBg: 'bg-[#eaf2fd]',
-    content: (
-      <ul className="space-y-3 text-[#6e6e73] text-xs sm:text-sm leading-relaxed font-semibold">
-        {[
-          'Running real-time automated AI inference models for skin classification.',
-          'Generating clinical-grade 1-page PDF reports with verifiable secure hashes.',
-          'Delivering requested platform updates and research publications to newsletter subscribers.',
-          'Enforcing security policies and verifying HIPAA compliance auditing metrics.'
-        ].map((t) => (
-          <li key={t} className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span>{t}</span>
-          </li>
-        ))}
+    id: 'collect',
+    title: 'What we collect',
+    body: (
+      <ul>
+        <li><strong>Information you give us:</strong> details you enter for an analysis (such as age, gender and symptoms), your name, email address and phone number if you sign in, subscribe or contact us, and messages you send.</li>
+        <li><strong>Photos you upload:</strong> skin images submitted for analysis.</li>
+        <li><strong>Technical information:</strong> device and browser type, approximate location from your network address, pages visited, scan time and processing metrics, collected through standard logs and cookies.</li>
+        <li><strong>Optional location:</strong> if you use "Find Doctors" and allow it, your device location to show nearby clinics. You can decline and search by city instead.</li>
       </ul>
     ),
   },
   {
-    icon: Lock,
-    title: 'Security & Encryption Standards',
-    color: 'text-[#0071e3]',
-    lightBg: 'bg-[#eaf2fd]',
-    content: (
-      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
-        <p>
-          We employ strict administrative and technical measures to shield data from unauthorized access or exposure:
-        </p>
-        <ul className="space-y-2 pl-2">
-          <li className="flex gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] mt-2 flex-shrink-0" />
-            <span><strong>Zero-Storage Scans:</strong> Images are processed instantly in volatile RAM and are automatically purged from memory.</span>
-          </li>
-          <li className="flex gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] mt-2 flex-shrink-0" />
-            <span><strong>End-to-End Encryption:</strong> All transactions transit over secure HTTPS channels using AES-256 encryption.</span>
-          </li>
-        </ul>
-      </div>
+    id: 'use',
+    title: 'How we use it',
+    body: (
+      <ul>
+        <li>To run the analysis and symptom chat and to produce your report.</li>
+        <li>To create and secure your account.</li>
+        <li>To send the newsletter or updates you asked for. You can unsubscribe at any time.</li>
+        <li>To keep the Service secure, fix problems and understand which pages are useful.</li>
+        <li>To meet legal obligations.</li>
+      </ul>
     ),
   },
   {
-    icon: Globe,
-    title: 'Third-Party Processing',
-    color: 'text-[#0071e3]',
-    lightBg: 'bg-[#eaf2fd]',
-    content: (
-      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
-        <p>
-          Medicus Labs™ does not sell or rent data. We only share diagnostic payloads with:
-        </p>
-        <ul className="space-y-2">
-          <li className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span><strong>AI LLM Providers:</strong> (e.g. Groq/OpenAI) for real-time symptom diagnostic processing, bound by HIPAA-compliant APIs.</span>
-          </li>
-          <li className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span><strong>Legal Mandates:</strong> Solely if required by court order to protect personal safety.</span>
-          </li>
-        </ul>
-      </div>
+    id: 'images',
+    title: 'How we handle your images',
+    body: (
+      <>
+        <p>Images are sent over an encrypted connection and processed to produce your result. Our design goal is not to keep your uploaded skin images after the analysis finishes, and we do not use them to train models or for advertising.</p>
+        <p>Text you type into the symptom chat is passed to our AI model provider to generate a reply. Please do not include information you would not want processed this way, such as government ID numbers.</p>
+      </>
     ),
   },
   {
-    icon: Globe,
-    title: 'Google AdSense, Advertising & Cookie Policy',
-    color: 'text-[#0071e3]',
-    lightBg: 'bg-[#eaf2fd]',
-    content: (
-      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
-        <p>
-          Medicus Labs™ partners with third-party advertising networks, including <strong>Google AdSense</strong> (Publisher ID: ca-pub-8305972358699914), to serve relevant advertisements when you visit our website.
-        </p>
-        <ul className="space-y-2">
-          <li className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span><strong>Use of Cookies:</strong> Third-party vendors, including Google, use cookies (such as the DoubleClick DART cookie) to serve ads based on a user's prior visits to this website or other websites on the Internet.</span>
-          </li>
-          <li className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span><strong>Personalized Advertising:</strong> Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visits to our site and other sites across the web.</span>
-          </li>
-          <li className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span><strong>User Opt-Out Rights:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-[#0071e3] underline">Google Ads Settings</a>. Alternatively, you can opt out of third-party vendor use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-[#0071e3] underline">aboutads.info</a>.</span>
-          </li>
-          <li className="flex gap-3">
-            <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-            <span><strong>Health Data Safeguards:</strong> Under no circumstances are uploaded clinical skin images, patient intake details, or diagnostic outputs shared with advertising vendors or utilized for targeted ad profiling.</span>
-          </li>
+    id: 'sharing',
+    title: 'Who we share data with',
+    body: (
+      <>
+        <p>We do not sell or rent personal data. We share it only with:</p>
+        <ul>
+          <li><strong>Service providers</strong> who help us run the Service, such as hosting, authentication and AI model providers, under terms that limit their use of your data to providing that service.</li>
+          <li><strong>Authorities</strong> where the law requires it, or to protect someone's safety.</li>
+          <li><strong>A new owner</strong> if the business is ever transferred, with the same protections.</li>
         </ul>
-      </div>
+      </>
     ),
   },
   {
-    icon: ShieldCheck,
-    title: 'Patient Data Rights (GDPR & CCPA)',
-    color: 'text-[#0071e3]',
-    lightBg: 'bg-[#eaf2fd]',
-    content: (
-      <div className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed space-y-3 font-semibold">
-        <p>You have full autonomy over your records, including the right to:</p>
-        <ul className="space-y-2">
-          {[
-            'Request immediate removal of subscription metadata records.',
-            'Opt-out of any marketing or research publications.',
-            'Download or transfer a complete transcript of your account data.'
-          ].map((t) => (
-            <li key={t} className="flex gap-3">
-              <Check className="text-[#0071e3] mt-1 flex-shrink-0" size={16} />
-              <span>{t}</span>
-            </li>
-          ))}
+    id: 'ads',
+    title: 'Advertising and cookies',
+    body: (
+      <>
+        <p>We use essential cookies to keep you signed in and the site working, and analytics to understand usage. Some pages show ads served by Google AdSense. Google and other vendors may use cookies to show ads based on your earlier visits to this and other sites.</p>
+        <ul>
+          <li>You can opt out of personalised ads at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</li>
+          <li>You can block or delete cookies in your browser settings. Some features may stop working.</li>
+          <li>Uploaded images, symptom text and analysis results are never shared with advertising vendors.</li>
         </ul>
-        <p className="pt-2">
-          Send requests directly to <a href="mailto:support@medicuslabs.app" className="text-[#0071e3] hover:underline font-bold">support@medicuslabs.app</a>.
-        </p>
-      </div>
+      </>
+    ),
+  },
+  {
+    id: 'security',
+    title: 'Security',
+    body: (
+      <p>We use encryption in transit (HTTPS), access controls and reputable infrastructure providers to protect your data. No online service can promise perfect security, so please use a strong, unique password and tell us straight away if you suspect misuse of your account.</p>
+    ),
+  },
+  {
+    id: 'retention',
+    title: 'How long we keep data',
+    body: (
+      <ul>
+        <li>Account and subscription details are kept while your account or subscription is active, then deleted or anonymised within a reasonable period after you close it or unsubscribe.</li>
+        <li>Basic server logs are kept for a short period for security and troubleshooting.</li>
+        <li>We may keep limited records longer where the law requires.</li>
+      </ul>
+    ),
+  },
+  {
+    id: 'rights',
+    title: 'Your rights and choices',
+    body: (
+      <>
+        <p>Under India's Digital Personal Data Protection Act, 2023, and similar laws such as the GDPR and CCPA where they apply, you can ask us to:</p>
+        <ul>
+          <li>Tell you what personal data we hold about you and give you a copy.</li>
+          <li>Correct inaccurate data.</li>
+          <li>Delete your data and close your account.</li>
+          <li>Withdraw consent, for example to marketing emails or location use.</li>
+          <li>Respond to a concern or complaint about how your data is handled.</li>
+        </ul>
+        <p>Email <a href="mailto:support@medicuslabs.app">support@medicuslabs.app</a> from the address linked to your account. We will reply within a reasonable time, and no later than the law requires.</p>
+      </>
+    ),
+  },
+  {
+    id: 'children',
+    title: "Children's privacy",
+    body: (
+      <p>The Service is for adults. We do not knowingly collect data from anyone under 18 without a parent or guardian's involvement. If you believe a child has used the Service on their own, contact us and we will delete the data.</p>
+    ),
+  },
+  {
+    id: 'transfers',
+    title: 'Where data is processed',
+    body: (
+      <p>Our providers may process data in countries other than your own. Where that happens, we rely on providers that protect data to a comparable standard.</p>
+    ),
+  },
+  {
+    id: 'changes',
+    title: 'Changes and contact',
+    body: (
+      <>
+        <p>We will update this policy when our practices change and show the new date at the top. For significant changes we will add a notice on the site.</p>
+        <p>Contact: <a href="mailto:support@medicuslabs.app">support@medicuslabs.app</a>. See also our <Link to="/terms-conditions">Terms &amp; Conditions</Link>.</p>
+      </>
     ),
   },
 ];
 
-const AccordionItem: React.FC<{ s: typeof sections[0]; i: number }> = ({ s, i }) => {
-  const [open, setOpen] = useState(i === 0);
-  const Icon = s.icon;
-  return (
-    <motion.div
-      className="bg-white border border-[#d2d2d7] rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-shadow duration-300"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: i * 0.05, duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <button
-        className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left group"
-        onClick={() => setOpen((o) => !o)}
-      >
-        <div className="flex items-center gap-4">
-          <div className={`w-10 h-10 rounded-2xl ${s.lightBg} ${s.color} flex items-center justify-center flex-shrink-0 border border-[#0071e3]/10`}>
-            <Icon size={18} />
-          </div>
-          <span className="font-bold text-base text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors font-display">
-            {s.title}
-          </span>
-        </div>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.25, ease: 'easeInOut' }}
-        >
-          <ChevronDown size={18} className="text-[#86868b]" />
-        </motion.div>
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <div className="px-6 pb-6 pt-0 border-t border-[#fbfbfd]">
-              <div className="pt-4">{s.content}</div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
-
 const PrivacyPolicy: React.FC = () => (
-  <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] font-sans">
-    <section className="relative pt-36 pb-16 px-4 sm:px-6 text-center overflow-hidden">
-      <motion.div
-        className="relative z-10 max-w-2xl mx-auto"
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f5f5f7] border border-transparent text-[#6e6e73] text-xs font-bold uppercase tracking-widest mb-6">
-          <ShieldCheck size={12} />
-          Legal Integrity
-        </span>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 font-display text-[#1d1d1f] leading-tight">
-          Privacy <span className="text-[#0071e3]">Policy</span>
-        </h1>
-        <p className="text-[#6e6e73] text-sm sm:text-base font-semibold">
-          Last updated: July 20, 2026 · We operate under rigorous clinical compliance standards.
-        </p>
-      </motion.div>
-    </section>
-
-    <main className="px-4 sm:px-6 pb-28 max-w-3xl mx-auto space-y-5">
-      {sections.map((s, i) => (
-        <AccordionItem key={s.title} s={s} i={i} />
-      ))}
-      
-
-
-      {/* HIPAA Compliance Spotlight */}
-      <motion.div 
-        className="p-6 rounded-3xl bg-[#eaf2fd]/40 border border-[#0071e3]/15 space-y-3"
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        <h3 className="font-bold text-[#1d1d1f] text-base flex items-center gap-2 font-display">
-          <ShieldCheck className="text-[#0071e3]" size={18} />
-          HIPAA & Clinical Data Safeguards
-        </h3>
-        <p className="text-[#6e6e73] text-xs sm:text-sm leading-relaxed font-semibold">
-          Medicus Labs™ adheres to standard healthcare data protocols. Patient identifiers and uploaded pathology photographs are decrypted locally, analyzed in-memory, and immediately discarded. No visual health datasets are saved or repurposed for AI retraining.
-        </p>
-      </motion.div>
-    </main>
-
-    <PremiumFooter />
-  </div>
+  <LegalLayout
+    seoTitle="Privacy Policy | Medicus Labs"
+    seoDescription="How Medicus Labs collects, uses and protects your information, including skin images, and the choices and rights you have."
+    title="Privacy Policy"
+    updated="November 9, 2026"
+    intro="What we collect, why, who sees it, and how you stay in control. Your skin images are never used for advertising."
+    sections={sections}
+    sibling={{ to: '/terms-conditions', label: 'Read the Terms & Conditions' }}
+  />
 );
 
 export default PrivacyPolicy;

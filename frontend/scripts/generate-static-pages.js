@@ -1237,7 +1237,7 @@ for (const page of pages) {
         <span>•</span>
         <span><strong>Review:</strong> ${page.readTime}</span>
         <span>•</span>
-        <span style="color: #0071e3; font-weight: 600;">✓ Peer-Referenced</span>
+        <span style="color: #0071e3; font-weight: 600;">Peer-Referenced</span>
       </div>
 
       <article style="font-size: 16px; color: #424245;">
@@ -1262,4 +1262,4 @@ for (const page of pages) {
   generatedCount++;
 }
 
-console.log(`✅ Successfully generated ${generatedCount} static pre-rendered pages (with dual index.html and .html files and structured JSON-LD schemas) in dist/!`);
+console.log(`Successfully generated ${generatedCount} static pre-rendered pages (with dual index.html and .html files and structured JSON-LD schemas) in dist/!`);

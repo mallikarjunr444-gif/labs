@@ -56,25 +56,21 @@ const RECOMMENDED_RESOURCES = [
     href: '/find-dermatologist',
     label: 'Verified Dermatologists',
     desc: 'Find licensed board-certified dermatologists and clinic appointments near you.',
-    emoji: '🩺',
   },
   {
     href: '/analysis',
     label: 'Clinical AI Skin Scan',
     desc: 'Instant non-invasive cutaneous lesion screening with evidence-based pathology models.',
-    emoji: '🔬',
   },
   {
     href: '/research',
     label: 'Dermatological Research',
     desc: 'Explore peer-reviewed clinical validation studies and diagnostic accuracy metrics.',
-    emoji: '📑',
   },
   {
     href: '/faq',
     label: 'Clinical FAQ & Guides',
     desc: 'Browse evidence-based answers regarding skin health, diagnosis, and medical intake.',
-    emoji: '💡',
   },
 ];
 
@@ -90,7 +86,7 @@ export const SponsoredLinks: React.FC<{ className?: string }> = ({ className = '
           href={item.href}
           className="flex flex-col gap-2 p-5 rounded-2xl bg-white border border-[#d2d2d7] hover:border-[#0071e3] hover:shadow-md transition-all group"
         >
-          <span className="text-2xl">{item.emoji}</span>
+          
           <span className="text-sm font-bold text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors leading-snug">
             {item.label}
           </span>

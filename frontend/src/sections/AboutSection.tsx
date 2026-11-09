@@ -48,7 +48,7 @@ export const AboutSection: React.FC = () => {
                   viewport={{ once: true }}
                 >
                   <div className="w-6 h-6 rounded-lg bg-accent-light flex items-center justify-center mt-1 flex-shrink-0">
-                    <span className="text-accent-blue font-bold">✓</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" />
                   </div>
                   <span className="text-text-secondary">{item}</span>
                 </motion.div>

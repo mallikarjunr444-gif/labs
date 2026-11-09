@@ -5,36 +5,36 @@ import type { CountryCode } from 'libphonenumber-js';
 import { motion } from 'framer-motion';
 
 const COUNTRIES = [
-  { code: 'IN', dial: '+91', flag: '🇮🇳', name: 'India' },
-  { code: 'US', dial: '+1', flag: '🇺🇸', name: 'United States' },
-  { code: 'GB', dial: '+44', flag: '🇬🇧', name: 'United Kingdom' },
-  { code: 'AU', dial: '+61', flag: '🇦🇺', name: 'Australia' },
-  { code: 'CA', dial: '+1', flag: '🇨🇦', name: 'Canada' },
-  { code: 'AE', dial: '+971', flag: '🇦🇪', name: 'UAE' },
-  { code: 'SG', dial: '+65', flag: '🇸🇬', name: 'Singapore' },
-  { code: 'DE', dial: '+49', flag: '🇩🇪', name: 'Germany' },
-  { code: 'FR', dial: '+33', flag: '🇫🇷', name: 'France' },
-  { code: 'JP', dial: '+81', flag: '🇯🇵', name: 'Japan' },
-  { code: 'CN', dial: '+86', flag: '🇨🇳', name: 'China' },
-  { code: 'BR', dial: '+55', flag: '🇧🇷', name: 'Brazil' },
-  { code: 'ZA', dial: '+27', flag: '🇿🇦', name: 'South Africa' },
-  { code: 'NG', dial: '+234', flag: '🇳🇬', name: 'Nigeria' },
-  { code: 'KE', dial: '+254', flag: '🇰🇪', name: 'Kenya' },
-  { code: 'PK', dial: '+92', flag: '🇵🇰', name: 'Pakistan' },
-  { code: 'BD', dial: '+880', flag: '🇧🇩', name: 'Bangladesh' },
-  { code: 'LK', dial: '+94', flag: '🇱🇰', name: 'Sri Lanka' },
-  { code: 'NP', dial: '+977', flag: '🇳🇵', name: 'Nepal' },
-  { code: 'MY', dial: '+60', flag: '🇲🇾', name: 'Malaysia' },
-  { code: 'ID', dial: '+62', flag: '🇮🇩', name: 'Indonesia' },
-  { code: 'TH', dial: '+66', flag: '🇹🇭', name: 'Thailand' },
-  { code: 'PH', dial: '+63', flag: '🇵🇭', name: 'Philippines' },
-  { code: 'KR', dial: '+82', flag: '🇰🇷', name: 'South Korea' },
-  { code: 'IT', dial: '+39', flag: '🇮🇹', name: 'Italy' },
-  { code: 'ES', dial: '+34', flag: '🇪🇸', name: 'Spain' },
-  { code: 'MX', dial: '+52', flag: '🇲🇽', name: 'Mexico' },
-  { code: 'AR', dial: '+54', flag: '🇦🇷', name: 'Argentina' },
-  { code: 'SA', dial: '+966', flag: '🇸🇦', name: 'Saudi Arabia' },
-  { code: 'TR', dial: '+90', flag: '🇹🇷', name: 'Turkey' },
+  { code: 'IN', dial: '+91', name: 'India' },
+  { code: 'US', dial: '+1', name: 'United States' },
+  { code: 'GB', dial: '+44', name: 'United Kingdom' },
+  { code: 'AU', dial: '+61', name: 'Australia' },
+  { code: 'CA', dial: '+1', name: 'Canada' },
+  { code: 'AE', dial: '+971', name: 'UAE' },
+  { code: 'SG', dial: '+65', name: 'Singapore' },
+  { code: 'DE', dial: '+49', name: 'Germany' },
+  { code: 'FR', dial: '+33', name: 'France' },
+  { code: 'JP', dial: '+81', name: 'Japan' },
+  { code: 'CN', dial: '+86', name: 'China' },
+  { code: 'BR', dial: '+55', name: 'Brazil' },
+  { code: 'ZA', dial: '+27', name: 'South Africa' },
+  { code: 'NG', dial: '+234', name: 'Nigeria' },
+  { code: 'KE', dial: '+254', name: 'Kenya' },
+  { code: 'PK', dial: '+92', name: 'Pakistan' },
+  { code: 'BD', dial: '+880', name: 'Bangladesh' },
+  { code: 'LK', dial: '+94', name: 'Sri Lanka' },
+  { code: 'NP', dial: '+977', name: 'Nepal' },
+  { code: 'MY', dial: '+60', name: 'Malaysia' },
+  { code: 'ID', dial: '+62', name: 'Indonesia' },
+  { code: 'TH', dial: '+66', name: 'Thailand' },
+  { code: 'PH', dial: '+63', name: 'Philippines' },
+  { code: 'KR', dial: '+82', name: 'South Korea' },
+  { code: 'IT', dial: '+39', name: 'Italy' },
+  { code: 'ES', dial: '+34', name: 'Spain' },
+  { code: 'MX', dial: '+52', name: 'Mexico' },
+  { code: 'AR', dial: '+54', name: 'Argentina' },
+  { code: 'SA', dial: '+966', name: 'Saudi Arabia' },
+  { code: 'TR', dial: '+90', name: 'Turkey' },
 ];
 
 type Country = (typeof COUNTRIES)[number];
@@ -192,7 +192,7 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
             minWidth: 76,
           }}
         >
-          <span style={{ fontSize: 20 }}>{selected.flag}</span>
+          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.04em' }}>{selected.code}</span>
           <span style={{ fontSize: 13, color: '#475569' }}>{selected.dial}</span>
           <span style={{ fontSize: 10, color: '#94a3b8', marginLeft: 2 }}>
             ▼
@@ -304,7 +304,7 @@ export default function PhoneInputCustom({ value = '', onChange, required }: Pro
                   borderBottom: '1px solid #f8fafc',
                 }}
               >
-                <span style={{ fontSize: 22, lineHeight: 1 }}>{c.flag}</span>
+                <span style={{ fontSize: 12, fontWeight: 600, width: 26, letterSpacing: '0.04em' }}>{c.code}</span>
                 <span style={{ flex: 1, fontSize: 14, color: '#1e293b', fontWeight: 500 }}>{c.name}</span>
                 <span style={{ fontSize: 13, color: '#64748b', fontWeight: 600, fontFamily: 'monospace' }}>{c.dial}</span>
               </div>

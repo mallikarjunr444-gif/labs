@@ -273,7 +273,7 @@ const StoryScreen: React.FC<{ step: number }> = ({ step }) => (
           <motion.div key={step} className="absolute inset-0 px-5 pt-[68px]" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.4, ease: [0.28, 0.11, 0.32, 1] }}>
             {step === 0 && (
               <>
-              <div className="absolute inset-x-4 bottom-8 flex h-11 items-center justify-between rounded-full bg-[#1c1c1e] pl-4 pr-1.5 text-[13px] text-[#86868b]" aria-hidden="true">Describe your symptom<span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0071e3] text-white">↑</span></div>
+              <div className="absolute inset-x-4 bottom-8 flex h-11 items-center justify-between rounded-full bg-[#1c1c1e] pl-4 pr-1.5 text-[13px] text-[#86868b]" aria-hidden="true">Describe your symptom<span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0071e3] text-white"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg></span></div>
               <div className="space-y-3">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#86868b]">Medicus AI</p>
                 <motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="ml-auto w-fit max-w-[88%] rounded-[18px] rounded-br-md bg-[#0071e3] px-4 py-2.5 text-[14px] text-white">There is a red, scaly patch on my elbow. It itches at night.</motion.p>

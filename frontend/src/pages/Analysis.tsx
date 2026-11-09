@@ -596,7 +596,7 @@ const Analysis: React.FC = () => {
                         <div className="relative rounded-2xl border-2 border-emerald-300 bg-emerald-50/[0.05] p-4">
                           <img src={imagePreview} alt="Preview" className="max-h-48 w-full rounded-xl object-cover shadow-sm border border-[#f5f5f7]" />
                           <span className="absolute top-3 right-3 inline-block text-xs font-bold text-emerald-600 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full border border-emerald-200 shadow-sm">
-                            ✓ Image Ready
+                            Image Ready
                           </span>
                         </div>
                         <div className="flex gap-2">

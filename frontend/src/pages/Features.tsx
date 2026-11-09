@@ -315,7 +315,7 @@ const Features: React.FC = () => {
               <thead>
                 <tr className="border-b border-[#d2d2d7] text-xs font-bold text-[#6e6e73] uppercase tracking-wider">
                   <th className="pb-4 pl-4">Capability / Specification</th>
-                  <th className="pb-4 text-[#0071e3]">✅ Medicus Labs AI</th>
+                  <th className="pb-4 text-[#0071e3]">Medicus Labs AI</th>
                   <th className="pb-4 text-[#86868b]">Industry Average</th>
                 </tr>
               </thead>

@@ -160,7 +160,7 @@ const AIChatModal: React.FC<AIChatModalProps> = ({ isOpen, onClose, initialQuery
                   ...msg,
                   content: msg.content
                     ? msg.content + `\n\n*(Stream interrupted: ${errorDetail})*`
-                    : `⚠️ **Connection Diagnostics**: ${errorDetail}\n\nPlease verify backend server is online at http://127.0.0.1:8000 and API credentials are valid.`
+                    : `**Connection Diagnostics**: ${errorDetail}\n\nPlease verify backend server is online at http://127.0.0.1:8000 and API credentials are valid.`
                 }
               : msg
           )
