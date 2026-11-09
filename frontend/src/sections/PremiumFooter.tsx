@@ -160,6 +160,7 @@ export const PremiumFooter: React.FC = () => {
         <div className="flex flex-col gap-4 border-t border-[#d2d2d7] pt-5 text-[12px] sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © {new Date().getFullYear()} Medicus Labs. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link to="/blog" className="hover:text-[#1d1d1f] hover:underline">Blog</Link>
             <Link to="/privacy-policy" className="hover:text-[#1d1d1f] hover:underline">Privacy Policy</Link>
             <Link to="/terms-conditions" className="hover:text-[#1d1d1f] hover:underline">Terms of Use</Link>
             <Link to="/disclaimer" className="hover:text-[#1d1d1f] hover:underline">Medical Disclaimer</Link>

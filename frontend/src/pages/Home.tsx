@@ -37,14 +37,14 @@ const CARDS = [
 ];
 
 const CONDITIONS = [
-  { name: 'Acne Vulgaris', accuracy: '96%', desc: 'Common inflammatory skin disease of the pilosebaceous unit.', category: 'Inflammatory', to: '/blog/acne' },
-  { name: 'Melanoma', accuracy: '94%', desc: 'Serious type of skin cancer developing from melanocytes.', category: 'Neoplastic', to: '/blog/melanoma' },
-  { name: 'Eczema', accuracy: '92%', desc: 'Condition that causes dry, red, itchy and irritated skin.', category: 'Inflammatory', to: '/blog/eczema' },
-  { name: 'Psoriasis', accuracy: '93%', desc: 'Autoimmune disease producing patches of abnormal skin.', category: 'Autoimmune', to: '/blog/psoriasis' },
-  { name: 'Rosacea', accuracy: '88%', desc: 'Facial condition causing redness and visible blood vessels.', category: 'Vascular', to: '/blog/rosacea' },
-  { name: 'Vitiligo', accuracy: '90%', desc: 'Long-term condition causing pale patches on the skin.', category: 'Pigmentary', to: '/blog/vitiligo' },
-  { name: 'Dermatitis', accuracy: '89%', desc: 'General term for skin irritation or allergic reactions.', category: 'Allergic', to: '/blog/contact-dermatitis' },
-  { name: 'Fungal infections', accuracy: '91%', desc: 'Superficial skin irritation caused by fungi.', category: 'Infectious', to: '/blog/ringworm' },
+  { grad: ['#ff6b6b', '#ff9f6b'], name: 'Acne Vulgaris', accuracy: '96%', desc: 'Common inflammatory skin disease of the pilosebaceous unit.', category: 'Inflammatory', to: '/blog/acne' },
+  { grad: ['#1d1d1f', '#5b5b66'], name: 'Melanoma', accuracy: '94%', desc: 'Serious type of skin cancer developing from melanocytes.', category: 'Neoplastic', to: '/blog/melanoma' },
+  { grad: ['#30b8d5', '#0071e3'], name: 'Eczema', accuracy: '92%', desc: 'Condition that causes dry, red, itchy and irritated skin.', category: 'Inflammatory', to: '/blog/eczema' },
+  { grad: ['#7a5cff', '#bf5af2'], name: 'Psoriasis', accuracy: '93%', desc: 'Autoimmune disease producing patches of abnormal skin.', category: 'Autoimmune', to: '/blog/psoriasis' },
+  { grad: ['#ff5fa2', '#ff9f6b'], name: 'Rosacea', accuracy: '88%', desc: 'Facial condition causing redness and visible blood vessels.', category: 'Vascular', to: '/blog/rosacea' },
+  { grad: ['#34c759', '#30d5c8'], name: 'Vitiligo', accuracy: '90%', desc: 'Long-term condition causing pale patches on the skin.', category: 'Pigmentary', to: '/blog/vitiligo' },
+  { grad: ['#ff9f0a', '#ff6b6b'], name: 'Dermatitis', accuracy: '89%', desc: 'General term for skin irritation or allergic reactions.', category: 'Allergic', to: '/blog/contact-dermatitis' },
+  { grad: ['#5e5ce6', '#2997ff'], name: 'Fungal infections', accuracy: '91%', desc: 'Superficial skin irritation caused by fungi.', category: 'Infectious', to: '/blog/ringworm' },
 ];
 
 const H2 = 'text-[34px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#1d1d1f] sm:text-[48px] lg:text-[56px]';
@@ -150,8 +150,8 @@ const Home: React.FC = () => {
         <ScrollStory />
 
         {/* Stats */}
-        <section className="bg-black px-5 py-20 sm:py-28" aria-label="Platform numbers">
-          <dl className="mx-auto grid max-w-[1080px] grid-cols-2 gap-y-12 text-center md:grid-cols-4">
+        <section className="relative overflow-hidden bg-black px-5 py-20 sm:py-28" aria-label="Platform numbers"><div aria-hidden="true" className="pointer-events-none absolute inset-0"><div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[#0071e3]/40 blur-[100px]" /><div className="absolute left-1/3 bottom-0 h-72 w-72 rounded-full bg-[#bf5af2]/35 blur-[100px]" /><div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-[#ff6b6b]/30 blur-[100px]" /></div>
+          <dl className="relative mx-auto grid max-w-[1080px] grid-cols-2 gap-y-12 text-center md:grid-cols-4">
             {STATS.map((s) => (
               <motion.div key={s.label} {...reveal}>
                 <dt className="order-2 mt-2 text-[15px] text-[#a1a1a6]">{s.label}</dt>
@@ -162,7 +162,7 @@ const Home: React.FC = () => {
         </section>
 
         {/* Comparison */}
-        <section className="bg-[#f5f5f7] px-5 py-20 sm:py-28">
+        <section className="bg-gradient-to-b from-[#f5f5f7] via-[#efe9ff] to-[#ffeede] px-5 py-20 sm:py-28">
           <motion.div {...reveal} className="mx-auto max-w-[900px] text-center">
             <h2 className={H2}>A better first step.</h2>
             <p className="mx-auto mt-4 max-w-[560px] text-[19px] leading-[1.4] text-[#6e6e73] sm:text-[21px]">Medicus helps you arrive informed. It does not replace your dermatologist.</p>
@@ -192,25 +192,27 @@ const Home: React.FC = () => {
           <div className="mx-auto mt-12 grid max-w-[1080px] gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div role="tablist" aria-label="Conditions" className="grid grid-cols-2 gap-3">
               {CONDITIONS.map((c, i) => (
-                <button key={c.name} type="button" role="tab" aria-selected={active === i} onClick={() => setActive(i)} className={`rounded-[20px] p-4 text-left transition-all hover:-translate-y-0.5 ${FOCUS} ${active === i ? 'bg-[#0071e3] text-white' : 'bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed]'}`}>
+                <button key={c.name} type="button" role="tab" aria-selected={active === i} onClick={() => setActive(i)} style={active === i ? { background: `linear-gradient(135deg, ${c.grad[0]}, ${c.grad[1]})` } : undefined} className={`rounded-[20px] p-4 text-left transition-all hover:-translate-y-0.5 ${FOCUS} ${active === i ? 'text-white shadow-lg' : 'bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed]'}`}>
                   <span className={`block text-[12px] ${active === i ? 'text-white/80' : 'text-[#6e6e73]'}`}>{c.category}</span>
                   <span className="mt-1 block text-[17px] font-semibold leading-tight">{c.name}</span>
                 </button>
               ))}
             </div>
-            <div role="tabpanel" className="flex flex-col justify-between rounded-[28px] bg-[#f5f5f7] p-8 sm:p-10">
+            <div role="tabpanel" className="relative flex flex-col justify-between overflow-hidden rounded-[28px] p-8 text-white transition-[background] duration-700 sm:p-10" style={{ background: `linear-gradient(135deg, ${condition.grad[0]}, ${condition.grad[1]})` }}>
+              <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/25 blur-3xl" />
+              <div aria-hidden="true" className="pointer-events-none absolute -bottom-20 left-10 h-56 w-56 rounded-full bg-black/15 blur-3xl" />
               <div>
-                <p className="text-[14px] font-semibold text-[#6e6e73]">{condition.category}</p>
+                <p className="text-[14px] font-semibold text-white/80">{condition.category}</p>
                 <h3 className="mt-2 text-[32px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[40px]">{condition.name}</h3>
-                <p className="mt-4 text-[19px] leading-[1.45] text-[#6e6e73]">{condition.desc}</p>
+                <p className="mt-4 text-[19px] leading-[1.45] text-white/80">{condition.desc}</p>
                 <div className="mt-8">
                   <div className="flex justify-between text-[14px]"><span>Match reliability</span><span className="font-semibold">{condition.accuracy}</span></div>
-                  <div className="mt-2 h-2 rounded-full bg-[#d2d2d7]"><div className="h-full rounded-full bg-[#0071e3] transition-all duration-700" style={{ width: condition.accuracy }} /></div>
+                  <div className="mt-2 h-2 rounded-full bg-white/30"><div className="h-full rounded-full bg-white transition-all duration-700" style={{ width: condition.accuracy }} /></div>
                 </div>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <Link to="/analysis" className={`inline-flex h-11 items-center rounded-full bg-[#0071e3] px-6 text-[17px] text-white hover:bg-[#0077ed] ${FOCUS}`}>Scan for {condition.name.toLowerCase()}</Link>
-                <Link to={condition.to} className={`rounded text-[17px] text-[#0071e3] hover:underline ${FOCUS}`}>Read the guide <span aria-hidden="true">›</span></Link>
+                <Link to="/analysis" className={`inline-flex h-11 items-center rounded-full bg-white px-6 text-[17px] font-medium text-[#1d1d1f] hover:bg-white/90 ${FOCUS}`}>Scan for {condition.name.toLowerCase()}</Link>
+                <Link to={condition.to} className={`rounded text-[17px] text-white hover:underline ${FOCUS}`}>Read the guide <span aria-hidden="true">›</span></Link>
               </div>
             </div>
           </div>
@@ -248,11 +250,19 @@ const Home: React.FC = () => {
         <div className="bg-white px-5 pb-10"><div className="mx-auto max-w-[1080px]"><SponsoredLinks /></div></div>
 
         {/* Closing call to action */}
-        <section className="bg-white px-5 pb-24 pt-8 text-center sm:pb-32">
-          <motion.div {...reveal}>
-            <h2 className={H2}>Start with a scan.</h2>
-            <p className="mx-auto mt-4 max-w-[480px] text-[19px] text-[#6e6e73] sm:text-[21px]">Free, private, and ready in minutes.</p>
-            <Link to="/analysis" className={`mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#0071e3] px-7 text-[17px] text-white hover:bg-[#0077ed] ${FOCUS}`}>Start free scan <ArrowRight size={18} /></Link>
+        <section className="bg-white px-5 pb-16 pt-8 sm:pb-24">
+          <motion.div {...reveal} className="relative mx-auto max-w-[1080px] overflow-hidden rounded-[36px] bg-[#1d1d1f] px-6 py-20 text-center text-white sm:py-28">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+              <div className="absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[#0071e3] opacity-70 blur-[90px]" />
+              <div className="absolute -right-16 top-10 h-96 w-96 rounded-full bg-[#bf5af2] opacity-60 blur-[90px]" />
+              <div className="absolute bottom-[-120px] left-1/3 h-96 w-96 rounded-full bg-[#ff6b6b] opacity-55 blur-[90px]" />
+              <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-[#ffb340] opacity-50 blur-[90px]" />
+            </div>
+            <div className="relative">
+              <h2 className="text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-[72px]">Start with a scan.</h2>
+              <p className="mx-auto mt-4 max-w-[480px] text-[19px] text-white/85 sm:text-[21px]">Free, private, and ready in minutes.</p>
+              <Link to="/analysis" className={`mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[17px] font-medium text-[#1d1d1f] transition-transform hover:scale-[1.04] ${FOCUS}`}>Start free scan <ArrowRight size={18} /></Link>
+            </div>
           </motion.div>
         </section>
 

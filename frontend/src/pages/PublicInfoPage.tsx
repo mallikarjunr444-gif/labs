@@ -307,7 +307,7 @@ const PublicInfoPage: React.FC<PublicInfoPageProps> = ({ type }) => {
     <div className="min-h-screen bg-white text-[#1d1d1f]">
       <main className="relative overflow-hidden break-words pt-24 sm:pt-28">
         <section className="relative px-4 pb-10 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8">
-          <div className="absolute inset-0 -z-10 bg-[#f5f5f7]" />
+          <div className="absolute inset-0 -z-10 overflow-hidden bg-[#f5f5f7]"><div className="absolute -left-20 -top-24 h-[320px] w-[320px] rounded-full bg-[#0071e3]/20 blur-[90px]" /><div className="absolute right-0 top-0 h-[300px] w-[300px] rounded-full bg-[#bf5af2]/20 blur-[90px]" /><div className="absolute bottom-[-120px] left-1/2 h-[280px] w-[280px] rounded-full bg-[#ff9f6b]/25 blur-[90px]" /></div>
           <div className="mx-auto max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 18 }}

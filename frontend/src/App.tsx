@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -62,6 +62,20 @@ const ResearchPage = lazy(() => import('./pages/ResearchPage'));
 const EditorialPolicy = lazy(() => import('./pages/EditorialPolicy'));
 
 import PremiumNavbar from './components/PremiumNavbar';
+
+/** Soft colour wash across the top of every inner page. */
+const PageWash: React.FC = () => {
+  const { pathname } = useLocation();
+  if (pathname === '/') return null;
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[620px] overflow-hidden mix-blend-multiply">
+      <div className="absolute -left-24 top-0 h-[380px] w-[380px] rounded-full bg-[#7cb8ff]/55 blur-[100px]" />
+      <div className="absolute left-1/3 -top-10 h-[320px] w-[320px] rounded-full bg-[#d8b4ff]/55 blur-[100px]" />
+      <div className="absolute -right-20 top-10 h-[380px] w-[380px] rounded-full bg-[#ffc9a8]/60 blur-[100px]" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white" style={{ mixBlendMode: 'normal' }} />
+    </div>
+  );
+};
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import PageLoader from './components/PageLoader';
@@ -71,6 +85,7 @@ const App = () => {
     <Router>
       <AuthProvider>
         <PremiumNavbar />
+        <PageWash />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />

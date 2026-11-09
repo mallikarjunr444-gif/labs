@@ -309,7 +309,8 @@ export const ScrollStory: React.FC = () => {
     <section ref={ref} id="how" className="relative h-[330vh] bg-black text-[#f5f5f7]" aria-label="How it works">
       <div className="sticky top-12 flex h-[calc(100vh-3rem)] items-center overflow-hidden">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="absolute left-1/2 top-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0071e3]/15 blur-[120px]" />
+          <motion.div className="absolute left-[8%] top-[10%] h-[460px] w-[460px] rounded-full blur-[120px]" animate={{ backgroundColor: ['#0071e3', '#bf5af2', '#ff6b6b'][step], opacity: 0.35 }} transition={{ duration: 0.9 }} />
+          <motion.div className="absolute bottom-[0%] right-[6%] h-[420px] w-[420px] rounded-full blur-[120px]" animate={{ backgroundColor: ['#30d5c8', '#0071e3', '#ffb340'][step], opacity: 0.3 }} transition={{ duration: 0.9 }} />
         </div>
         <div className="relative mx-auto grid w-full max-w-[1080px] items-center gap-6 px-5 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 lg:order-1">
